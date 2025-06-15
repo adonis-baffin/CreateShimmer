@@ -1,0 +1,8 @@
+{
+  "remove": [
+    "#minecraft:curse"
+  ],
+  "values": [
+    "#minecraft:treasure"
+  ]
+}

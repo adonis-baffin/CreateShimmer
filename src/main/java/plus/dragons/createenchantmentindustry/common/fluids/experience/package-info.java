@@ -1,0 +1,6 @@
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+package plus.dragons.createenchantmentindustry.common.fluids.experience;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;

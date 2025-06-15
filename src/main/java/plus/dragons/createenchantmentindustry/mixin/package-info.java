@@ -1,0 +1,8 @@
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@FieldsAreNonnullByDefault
+package plus.dragons.createenchantmentindustry.mixin;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;

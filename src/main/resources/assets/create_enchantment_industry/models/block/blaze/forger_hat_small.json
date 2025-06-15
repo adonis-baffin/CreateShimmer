@@ -1,0 +1,38 @@
+{
+  "credit": "By RaymondBlaze, made with Blockbench",
+  "render_type": "cutout_mipped",
+  "textures": {
+    "hat": "create_enchantment_industry:block/forger_hat_small"
+  },
+  "elements": [
+    {
+      "from": [-3.1, -2, 2],
+      "to": [3.1, 2, 3.1],
+      "faces": {
+        "east": {"uv": [7, 1, 8, 5], "texture": "#hat"},
+        "south": {"uv": [1, 1, 7, 5], "texture": "#hat"},
+        "west": {"uv": [0, 1, 1, 5], "texture": "#hat"},
+        "up": {"uv": [1, 0, 7, 1], "rotation": 180, "texture": "#hat"}
+      }
+    },
+    {
+      "from": [3.1, 2, 3.1],
+      "to": [-3.1, -2, 2.1],
+      "faces": {
+        "north": {"uv": [1, 5, 7, 1], "texture": "#hat"},
+        "east": {"uv": [0, 1, 1, 5], "texture": "#hat"},
+        "west": {"uv": [7, 1, 8, 5], "texture": "#hat"},
+        "down": {"uv": [1, 0, 7, 1], "rotation": 180, "texture": "#hat"}
+      }
+    },
+    {
+      "from": [-3.1, -6, -3.1],
+      "to": [3.1, 0, 2],
+      "faces": {
+        "north": {"uv": [0, 9, 6, 15], "texture": "#hat"},
+        "east": {"uv": [11, 9, 6, 15], "texture": "#hat"},
+        "west": {"uv": [6, 9, 11, 15], "texture": "#hat"}
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "credit": "By RaymondBlaze, made with Blockbench",
+  "render_type": "solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "hat": "create_enchantment_industry:block/enchanter_hat_small"
+  },
+  "elements": [
+    {
+      "from": [-4, -2, -4],
+      "to": [4, 4, 4],
+      "faces": {
+        "north": {"uv": [4, 7, 8, 10], "texture": "#hat"},
+        "east": {"uv": [0, 4, 4, 7], "texture": "#hat"},
+        "south": {"uv": [4, 4, 8, 7], "texture": "#hat"},
+        "west": {"uv": [0, 7, 4, 10], "texture": "#hat"},
+        "up": {"uv": [4, 0, 8, 4], "rotation": 180, "texture": "#hat"},
+        "down": {"uv": [0, 0, 4, 4], "rotation": 180, "texture": "#hat"}
+      }
+    }
+  ]
+}
