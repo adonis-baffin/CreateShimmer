@@ -1,5 +1,4 @@
 
-
 package com.adonis.createshimmer.common;
 
 import com.adonis.createshimmer.common.registry.*;

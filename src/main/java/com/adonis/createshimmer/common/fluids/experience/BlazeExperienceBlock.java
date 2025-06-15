@@ -1,5 +1,4 @@
 
-
 package com.adonis.createshimmer.common.fluids.experience;
 
 import com.simibubi.create.AllItems;
