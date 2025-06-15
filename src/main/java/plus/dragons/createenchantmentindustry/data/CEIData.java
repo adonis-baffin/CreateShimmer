@@ -25,9 +25,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
-import plus.dragons.createenchantmentindustry.client.ponder.CEIPonderPlugin;
+//import plus.dragons.createenchantmentindustry.client.ponder.CEIPonderPlugin;
 import plus.dragons.createenchantmentindustry.common.CEICommon;
-import plus.dragons.createenchantmentindustry.common.registry.CEIAdvancements;
+//import plus.dragons.createenchantmentindustry.common.registry.CEIAdvancements;
 
 @Mod(CEICommon.ID)
 public class CEIData {
@@ -36,8 +36,8 @@ public class CEIData {
             return;
         REGISTRATE.registerBuiltinLocalization("interface");
         REGISTRATE.registerForeignLocalization();
-        REGISTRATE.registerPonderLocalization(CEIPonderPlugin::new);
-        REGISTRATE.registerExtraLocalization(CEIAdvancements::provideLang);
+//        REGISTRATE.registerPonderLocalization(CEIPonderPlugin::new);
+//        REGISTRATE.registerExtraLocalization(CEIAdvancements::provideLang);
         modBus.register(this);
     }
 
@@ -50,6 +50,6 @@ public class CEIData {
         var client = event.includeClient();
         var server = event.includeServer();
         generator.addProvider(server, new CEIRecipeProvider(output, lookupProvider));
-        generator.addProvider(server, new CEIAdvancements(output, lookupProvider));
+//        generator.addProvider(server, new CEIAdvancements(output, lookupProvider));
     }
 }

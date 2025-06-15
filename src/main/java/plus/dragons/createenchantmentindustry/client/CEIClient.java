@@ -24,7 +24,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import plus.dragons.createenchantmentindustry.client.model.CEIPartialModels;
-import plus.dragons.createenchantmentindustry.client.ponder.CEIPonderPlugin;
+//import plus.dragons.createenchantmentindustry.client.ponder.CEIPonderPlugin;
 import plus.dragons.createenchantmentindustry.common.CEICommon;
 
 @Mod(value = CEICommon.ID, dist = Dist.CLIENT)
@@ -39,6 +39,6 @@ public class CEIClient {
     }
 
     public static void setup(final FMLClientSetupEvent event) {
-        PonderIndex.addPlugin(new CEIPonderPlugin());
+//        PonderIndex.addPlugin(new CEIPonderPlugin());
     }
 }

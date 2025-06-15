@@ -73,8 +73,8 @@ public class CEIItems {
                     .rarity(Rarity.RARE)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
             .register();
-    public static final DeferredItem<BucketItem> EXPERIENCE_BUCKET = DeferredItem
-            .createItem(CEICommon.asResource("experience_bucket"));
+//    public static final DeferredItem<BucketItem> EXPERIENCE_BUCKET = DeferredItem
+//            .createItem(CEICommon.asResource("experience_bucket"));
 
     public static void register(IEventBus modBus) {}
 }

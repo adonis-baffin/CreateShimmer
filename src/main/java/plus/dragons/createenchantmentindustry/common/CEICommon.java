@@ -33,7 +33,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import plus.dragons.createdragonsplus.common.CDPRegistrate;
 import plus.dragons.createenchantmentindustry.common.registry.*;
-import plus.dragons.createenchantmentindustry.common.registry.CEIAdvancements;
+//import plus.dragons.createenchantmentindustry.common.registry.CEIAdvancements;
 import plus.dragons.createenchantmentindustry.config.CEIConfig;
 
 @Mod(CEICommon.ID)
@@ -51,11 +51,11 @@ public class CEICommon {
         CEIItems.register(modBus);
         CEICreativeModeTabs.register(modBus);
         CEIRecipes.register(modBus);
-        CEIEnchantments.register(modBus);
-        CEIArmInterationPoints.register(modBus);
-        CEIDataMaps.register(modBus);
-        CEIStats.register(modBus);
-        CEIMountedStorageTypes.register(modBus);
+//        CEIEnchantments.register(modBus);
+//        CEIArmInterationPoints.register(modBus);
+//        CEIDataMaps.register(modBus);
+//        CEIStats.register(modBus);
+//        CEIMountedStorageTypes.register(modBus);
         modBus.register(this);
         modBus.register(new CEIConfig(modContainer));
     }
@@ -66,8 +66,8 @@ public class CEICommon {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void register(final RegisterEvent event) {
         if (event.getRegistry() == BuiltInRegistries.TRIGGER_TYPES) {
-            CEIAdvancements.register();
-            CEIAdvancements.BuiltinTriggersQuickDeploy.register();
+//            CEIAdvancements.register();
+//            CEIAdvancements.BuiltinTriggersQuickDeploy.register();
         }
     }
 

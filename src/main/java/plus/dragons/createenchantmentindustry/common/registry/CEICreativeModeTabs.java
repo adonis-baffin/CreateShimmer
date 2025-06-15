@@ -46,21 +46,21 @@ public class CEICreativeModeTabs {
     private static CreativeModeTab base(ResourceLocation id) {
         return CreativeModeTab.builder()
                 .title(CEILang.description("itemGroup", id).component())
-                .icon(BLAZE_ENCHANTER::asStack)
+                .icon(SUPER_EXPERIENCE_NUGGET::asStack)
                 .displayItems(CEICreativeModeTabs::buildBaseContents)
                 .withTabsBefore(ResourceLocation.fromNamespaceAndPath("create_dragons_plus", "base"))
                 .build();
     }
 
     private static void buildBaseContents(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
-        output.accept(MECHANICAL_GRINDSTONE);
-        output.accept(EXPERIENCE_HATCH);
-        output.accept(EXPERIENCE_LANTERN);
-        output.accept(PRINTER);
-        output.accept(BLAZE_ENCHANTER);
-        output.accept(BLAZE_FORGER);
+//        output.accept(MECHANICAL_GRINDSTONE);
+//        output.accept(EXPERIENCE_HATCH);
+//        output.accept(EXPERIENCE_LANTERN);
+//        output.accept(PRINTER);
+//        output.accept(BLAZE_ENCHANTER);
+//        output.accept(BLAZE_FORGER);
         output.accept(EXPERIENCE_BLOCK);
-        output.accept(SUPER_EXPERIENCE_BLOCK);
+//        output.accept(SUPER_EXPERIENCE_BLOCK);
         output.accept(EXP_NUGGET);
         output.accept(SUPER_EXPERIENCE_NUGGET);
         output.accept(ENCHANTING_TEMPLATE);
@@ -69,6 +69,6 @@ public class CEICreativeModeTabs {
         output.accept(EXPERIENCE_CAKE_BASE, TabVisibility.SEARCH_TAB_ONLY);
         output.accept(EXPERIENCE_CAKE);
         output.accept(EXPERIENCE_CAKE_SLICE);
-        output.accept(EXPERIENCE_BUCKET);
+//        output.accept(EXPERIENCE_BUCKET);
     }
 }
