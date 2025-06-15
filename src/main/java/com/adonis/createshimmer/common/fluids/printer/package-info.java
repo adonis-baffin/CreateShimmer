@@ -1,7 +1,7 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
-package plus.dragons.createenchantmentindustry.common.fluids.printer;
+package com.adonis.createshimmer.common.fluids.printer;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.FieldsAreNonnullByDefault;

@@ -1,7 +1,7 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
-package plus.dragons.createenchantmentindustry.common.kinetics.grindstone;
+package com.adonis.createshimmer.common.kinetics.grindstone;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.FieldsAreNonnullByDefault;

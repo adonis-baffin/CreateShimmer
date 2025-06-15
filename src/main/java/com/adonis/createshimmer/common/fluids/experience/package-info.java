@@ -1,6 +1,6 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package plus.dragons.createenchantmentindustry.common.fluids.experience;
+package com.adonis.createshimmer.common.fluids.experience;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
