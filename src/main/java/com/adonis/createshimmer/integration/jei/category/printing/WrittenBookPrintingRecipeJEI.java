@@ -18,18 +18,18 @@
 
 package com.adonis.createshimmer.integration.jei.category.printing;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
 import com.mojang.serialization.MapCodec;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import net.minecraft.world.item.Items;
 import plus.dragons.createdragonsplus.util.Pairs;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
 
 public enum WrittenBookPrintingRecipeJEI implements PrintingRecipeJEI {
     INSTANCE;
 
     public static final PrintingRecipeJEI.Type TYPE = PrintingRecipeJEI
-            .register(CEICommon.asResource("written_book"), MapCodec.unit(INSTANCE));
+            .register(CSCommon.asResource("written_book"), MapCodec.unit(INSTANCE));
 
     @Override
     public void setBase(IRecipeSlotBuilder slot) {
@@ -43,7 +43,7 @@ public enum WrittenBookPrintingRecipeJEI implements PrintingRecipeJEI {
 
     @Override
     public void setFluid(IRecipeSlotBuilder slot) {
-        CEIDataMaps.getSourceFluidEntries(CEIDataMaps.PRINTING_WRITTEN_BOOK_INGREDIENT)
+        CSDataMaps.getSourceFluidEntries(CSDataMaps.PRINTING_WRITTEN_BOOK_INGREDIENT)
                 .forEach(Pairs.accept(slot::addFluidStack));
     }
 

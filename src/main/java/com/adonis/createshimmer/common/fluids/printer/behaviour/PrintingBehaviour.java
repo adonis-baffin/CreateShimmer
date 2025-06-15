@@ -18,6 +18,8 @@
 
 package com.adonis.createshimmer.common.fluids.printer.behaviour;
 
+import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
+import com.adonis.createshimmer.config.CSConfig;
 import com.mojang.serialization.DataResult;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
@@ -30,18 +32,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
-import com.adonis.createshimmer.config.CEIConfig;
 
 public interface PrintingBehaviour extends IHaveGoggleInformation {
     @Internal
     List<Provider> PROVIDERS = Util.make(new ArrayList<>(), list -> {
-        if (CEIConfig.fluids().enablePackageAddressPrinting.get()) list.add(AddressPrintingBehaviour::create);
-        if (CEIConfig.fluids().enablePackagePatternPrinting.get()) list.add(PackagePatternPrintingBehaviour::create);
-        if (CEIConfig.fluids().enableCreateCopiableItemPrinting.get()) list.add(CopyPrintingBehaviour::create);
-        if (CEIConfig.fluids().enableCustomNamePrinting.get()) list.add(CustomNamePrintingBehaviour::create);
-        if (CEIConfig.fluids().enableEnchantedBookPrinting.get()) list.add(EnchantedBookPrintingBehaviour::create);
-        if (CEIConfig.fluids().enableWrittenBookPrinting.get()) list.add(WrittenBookPrintingBehaviour::create);
+        if (CSConfig.fluids().enablePackageAddressPrinting.get()) list.add(AddressPrintingBehaviour::create);
+        if (CSConfig.fluids().enablePackagePatternPrinting.get()) list.add(PackagePatternPrintingBehaviour::create);
+        if (CSConfig.fluids().enableCreateCopiableItemPrinting.get()) list.add(CopyPrintingBehaviour::create);
+        if (CSConfig.fluids().enableCustomNamePrinting.get()) list.add(CustomNamePrintingBehaviour::create);
+        if (CSConfig.fluids().enableEnchantedBookPrinting.get()) list.add(EnchantedBookPrintingBehaviour::create);
+        if (CSConfig.fluids().enableWrittenBookPrinting.get()) list.add(WrittenBookPrintingBehaviour::create);
     });
 
     static void register(Provider provider) {

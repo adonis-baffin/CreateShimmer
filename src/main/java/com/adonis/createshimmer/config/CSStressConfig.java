@@ -18,8 +18,8 @@
 
 package com.adonis.createshimmer.config;
 
-import plus.dragons.createdragonsplus.config.StressConfig;
 import com.adonis.createshimmer.common.CSCommon;
+import plus.dragons.createdragonsplus.config.StressConfig;
 
 public class CSStressConfig extends StressConfig {
     public CSStressConfig() {

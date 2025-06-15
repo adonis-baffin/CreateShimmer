@@ -18,6 +18,10 @@
 
 package com.adonis.createshimmer.integration.jei.category.printing;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.config.CSConfig;
+import com.adonis.createshimmer.util.CSLang;
 import com.mojang.serialization.MapCodec;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotDrawable;
@@ -29,21 +33,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.fluids.FluidStack;
 import plus.dragons.createdragonsplus.util.Pairs;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.config.CEIConfig;
-import com.adonis.createshimmer.util.CEILang;
 
 public enum CustomNamePrintingRecipeJEI implements PrintingRecipeJEI {
     INSTANCE;
 
     public static final PrintingRecipeJEI.Type TYPE = PrintingRecipeJEI
-            .register(CEICommon.asResource("custom_name"), MapCodec.unit(INSTANCE));
+            .register(CSCommon.asResource("custom_name"), MapCodec.unit(INSTANCE));
 
     @Override
     public void setBase(IRecipeSlotBuilder slot) {
         slot.addItemLike(Items.NAME_TAG);
-        slot.addRichTooltipCallback((view, tooltip) -> tooltip.add(CEILang
+        slot.addRichTooltipCallback((view, tooltip) -> tooltip.add(CSLang
                 .translate("recipe.printing.custom_name.base")
                 .style(ChatFormatting.GRAY)
                 .component()));
@@ -52,14 +52,14 @@ public enum CustomNamePrintingRecipeJEI implements PrintingRecipeJEI {
     @Override
     public void setTemplate(IRecipeSlotBuilder slot) {
         var stack = new ItemStack(Items.NAME_TAG);
-        var name = CEILang.translate("recipe.printing.custom_name.template").component();
+        var name = CSLang.translate("recipe.printing.custom_name.template").component();
         stack.set(DataComponents.CUSTOM_NAME, name);
         slot.addItemStack(stack);
     }
 
     @Override
     public void setFluid(IRecipeSlotBuilder slot) {
-        CEIDataMaps.getSourceFluidEntries(CEIDataMaps.PRINTING_CUSTOM_NAME_INGREDIENT)
+        CSDataMaps.getSourceFluidEntries(CSDataMaps.PRINTING_CUSTOM_NAME_INGREDIENT)
                 .forEach(Pairs.accept(slot::addFluidStack));
     }
 
@@ -75,13 +75,13 @@ public enum CustomNamePrintingRecipeJEI implements PrintingRecipeJEI {
 
     @Override
     public void onDisplayedIngredientsUpdate(IRecipeSlotDrawable baseSlot, IRecipeSlotDrawable templateSlot, IRecipeSlotDrawable fluidSlot, IRecipeSlotDrawable outputSlot, IFocusGroup focuses) {
-        var name = CEILang.translate("recipe.printing.custom_name.template").component();
+        var name = CSLang.translate("recipe.printing.custom_name.template").component();
         var fluidStack = fluidSlot.getDisplayedIngredient(NeoForgeTypes.FLUID_STACK).orElse(FluidStack.EMPTY);
-        var style = fluidStack.getFluidHolder().getData(CEIDataMaps.PRINTING_CUSTOM_NAME_STYLE);
+        var style = fluidStack.getFluidHolder().getData(CSDataMaps.PRINTING_CUSTOM_NAME_STYLE);
         if (style != null)
             name.withStyle(style);
         var stack = new ItemStack(Items.NAME_TAG);
-        if (CEIConfig.fluids().printingCustomNameAsItemName.get())
+        if (CSConfig.fluids().printingCustomNameAsItemName.get())
             stack.set(DataComponents.ITEM_NAME, name);
         else
             stack.set(DataComponents.CUSTOM_NAME, name);

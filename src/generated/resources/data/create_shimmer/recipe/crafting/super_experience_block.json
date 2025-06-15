@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "n": {
-      "item": "create_enchantment_industry:super_experience_nugget"
+      "item": "create_shimmer:super_experience_nugget"
     }
   },
   "pattern": [
@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "create_enchantment_industry:super_experience_block"
+    "id": "create_shimmer:super_experience_block"
   }
 }

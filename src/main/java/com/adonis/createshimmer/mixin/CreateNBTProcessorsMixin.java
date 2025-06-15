@@ -18,14 +18,14 @@
 
 package com.adonis.createshimmer.mixin;
 
+import com.adonis.createshimmer.common.fluids.printer.PrinterBehaviour;
+import com.adonis.createshimmer.common.processing.enchanter.EnchanterBehaviour;
 import com.simibubi.create.foundation.CreateNBTProcessors;
 import net.minecraft.nbt.CompoundTag;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import com.adonis.createshimmer.common.fluids.printer.PrinterBehaviour;
-import com.adonis.createshimmer.common.processing.enchanter.EnchanterBehaviour;
 
 @Mixin(CreateNBTProcessors.class)
 public class CreateNBTProcessorsMixin {

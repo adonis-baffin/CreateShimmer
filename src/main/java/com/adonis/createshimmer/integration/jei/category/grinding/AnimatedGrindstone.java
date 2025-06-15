@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.integration.jei.category.grinding;
 
+import com.adonis.createshimmer.common.registry.CSBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
@@ -25,12 +26,11 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
 
 public class AnimatedGrindstone extends AnimatedKinetics {
-    private final BlockState grindstone = CEIBlocks.MECHANICAL_GRINDSTONE.getDefaultState()
+    private final BlockState grindstone = CSBlocks.MECHANICAL_GRINDSTONE.getDefaultState()
             .setValue(BlockStateProperties.AXIS, Direction.Axis.Z);
-    private final BlockState drain = CEIBlocks.GRINDSTONE_DRAIN.getDefaultState()
+    private final BlockState drain = CSBlocks.GRINDSTONE_DRAIN.getDefaultState()
             .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH);
 
     @Override

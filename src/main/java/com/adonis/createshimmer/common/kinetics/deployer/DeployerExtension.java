@@ -18,6 +18,8 @@
 
 package com.adonis.createshimmer.common.kinetics.deployer;
 
+import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
+import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.kinetics.deployer.DeployerFakePlayer;
 import net.minecraft.util.Mth;
@@ -29,8 +31,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent.XpChange;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
-import com.adonis.createshimmer.config.CEIConfig;
 
 @EventBusSubscriber
 public class DeployerExtension {
@@ -38,9 +38,9 @@ public class DeployerExtension {
     public static void onLivingExperienceDrop(final LivingExperienceDropEvent event) {
         if (!(event.getAttackingPlayer() instanceof DeployerFakePlayer deployer))
             return;
-        int experience = Mth.ceil(event.getDroppedExperience() * CEIConfig.kinetics().deployerKillXpScale.getF());
+        int experience = Mth.ceil(event.getDroppedExperience() * CSConfig.kinetics().deployerKillXpScale.getF());
         event.setDroppedExperience(experience);
-        if (CEIConfig.kinetics().deployerCollectXp.get()) {
+        if (CSConfig.kinetics().deployerCollectXp.get()) {
             deployer.giveExperiencePoints(experience);
             event.setCanceled(true);
         }
@@ -50,9 +50,9 @@ public class DeployerExtension {
     public static void onBlockDrops(final BlockDropsEvent event) {
         if (!(event.getBreaker() instanceof DeployerFakePlayer deployer))
             return;
-        boolean dropXp = CEIConfig.kinetics().deployerMineDropXp.get();
-        int experience = Mth.ceil(event.getDroppedExperience() * CEIConfig.kinetics().deployerMineXpScale.getF());
-        if (CEIConfig.kinetics().deployerCollectXp.get()) {
+        boolean dropXp = CSConfig.kinetics().deployerMineDropXp.get();
+        int experience = Mth.ceil(event.getDroppedExperience() * CSConfig.kinetics().deployerMineXpScale.getF());
+        if (CSConfig.kinetics().deployerCollectXp.get()) {
             deployer.giveExperiencePoints(experience);
             dropXp = false;
         }
@@ -69,11 +69,11 @@ public class DeployerExtension {
     public static void onXpChange(final XpChange event) {
         if (!(event.getEntity() instanceof DeployerFakePlayer deployer))
             return;
-        if (!CEIConfig.kinetics().deployerCollectXp.get())
+        if (!CSConfig.kinetics().deployerCollectXp.get())
             return;
         int total = deployer.totalExperience + event.getAmount();
         int consumed = 0;
-        if (CEIConfig.kinetics().deployerMendItem.get()) {
+        if (CSConfig.kinetics().deployerMendItem.get()) {
             ItemStack heldItem = deployer.getMainHandItem();
             if (ExperienceHelper.canRepairItem(heldItem))
                 consumed = ExperienceHelper.repairItem(total, deployer.serverLevel(), heldItem, false);

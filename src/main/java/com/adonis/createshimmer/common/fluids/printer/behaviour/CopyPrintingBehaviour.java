@@ -18,6 +18,11 @@
 
 package com.adonis.createshimmer.common.fluids.printer.behaviour;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.config.CSConfig;
+import com.adonis.createshimmer.util.CSLang;
 import com.mojang.serialization.DataResult;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.recipe.ItemCopyingRecipe.SupportsItemCopying;
@@ -30,11 +35,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.config.CEIConfig;
-import com.adonis.createshimmer.util.CEILang;
 
 public class CopyPrintingBehaviour implements PrintingBehaviour {
     private final SupportsItemCopying itemCopying;
@@ -51,7 +51,7 @@ public class CopyPrintingBehaviour implements PrintingBehaviour {
         if (stack.getItem() instanceof SupportsItemCopying copiable)
             return Optional.of(copiable.canCopyFromItem(stack)
                     ? DataResult.success(new CopyPrintingBehaviour(copiable, stack, tank))
-                    : DataResult.error(() -> CEICommon.asLocalization("gui.printer.copy.invalid")));
+                    : DataResult.error(() -> CSCommon.asLocalization("gui.printer.copy.invalid")));
         return Optional.empty();
     }
 
@@ -64,7 +64,7 @@ public class CopyPrintingBehaviour implements PrintingBehaviour {
 
     @Override
     public int getRequiredFluidAmount(Level level, ItemStack stack, FluidStack fluidStack) {
-        var amount = fluidStack.getFluidHolder().getData(CEIDataMaps.PRINTING_COPY_INGREDIENT);
+        var amount = fluidStack.getFluidHolder().getData(CSDataMaps.PRINTING_COPY_INGREDIENT);
         return amount == null ? 0 : amount;
     }
 
@@ -81,19 +81,19 @@ public class CopyPrintingBehaviour implements PrintingBehaviour {
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        CEILang.translate("gui.goggles.printing.copy").forGoggles(tooltip);
-        CEILang.item(original).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
-        var amount = tank.getPrimaryHandler().getFluid().getFluidHolder().getData(CEIDataMaps.PRINTING_COPY_INGREDIENT);
+        CSLang.translate("gui.goggles.printing.copy").forGoggles(tooltip);
+        CSLang.item(original).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
+        var amount = tank.getPrimaryHandler().getFluid().getFluidHolder().getData(CSDataMaps.PRINTING_COPY_INGREDIENT);
         if (amount != null)
-            CEILang.translate("gui.goggles.printing.cost",
-                    CEILang.number(amount)
+            CSLang.translate("gui.goggles.printing.cost",
+                    CSLang.number(amount)
                             .add(CreateLang.translate("generic.unit.millibuckets"))
-                            .style(amount <= CEIConfig.fluids().printerFluidCapacity.get()
+                            .style(amount <= CSConfig.fluids().printerFluidCapacity.get()
                                     ? ChatFormatting.GREEN
                                     : ChatFormatting.RED))
                     .forGoggles(tooltip, 1);
         else if (!tank.getPrimaryHandler().getFluid().isEmpty()) {
-            CEILang.translate("gui.goggles.printing.incorrect_liquid").style(ChatFormatting.RED).forGoggles(tooltip);
+            CSLang.translate("gui.goggles.printing.incorrect_liquid").style(ChatFormatting.RED).forGoggles(tooltip);
         }
         return true;
     }

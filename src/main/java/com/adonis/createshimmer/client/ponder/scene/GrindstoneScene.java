@@ -18,6 +18,9 @@
 
 package com.adonis.createshimmer.client.ponder.scene;
 
+import com.adonis.createshimmer.client.ponder.CSPonderScenes;
+import com.adonis.createshimmer.common.kinetics.grindstone.GrindstoneDrainBlockEntity;
+import com.adonis.createshimmer.common.registry.CSBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
@@ -31,9 +34,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
-import com.adonis.createshimmer.client.ponder.CEIPonderScenes;
-import com.adonis.createshimmer.common.kinetics.grindstone.GrindstoneDrainBlockEntity;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
 
 public class GrindstoneScene {
     public static void basic(SceneBuilder builder, SceneBuildingUtil util) {
@@ -49,9 +49,9 @@ public class GrindstoneScene {
                 .placeNearTarget()
                 .pointAt(util.vector().centerOf(2, 1, 2));
         scene.idle(20);
-        scene.overlay().showControls(util.vector().centerOf(2, 2, 2), Pointing.DOWN, 50).rightClick().withItem(CEIBlocks.MECHANICAL_GRINDSTONE.asStack());
+        scene.overlay().showControls(util.vector().centerOf(2, 2, 2), Pointing.DOWN, 50).rightClick().withItem(CSBlocks.MECHANICAL_GRINDSTONE.asStack());
         scene.idle(20);
-        scene.world().setBlock(util.grid().at(2, 1, 2), CEIBlocks.GRINDSTONE_DRAIN.getDefaultState().setValue(HorizontalKineticBlock.HORIZONTAL_FACING, Direction.SOUTH), true);
+        scene.world().setBlock(util.grid().at(2, 1, 2), CSBlocks.GRINDSTONE_DRAIN.getDefaultState().setValue(HorizontalKineticBlock.HORIZONTAL_FACING, Direction.SOUTH), true);
         scene.world().modifyBlockEntity(util.grid().at(2, 1, 2), GrindstoneDrainBlockEntity.class, SmartBlockEntity::markVirtual);
         scene.idle(30);
         scene.overlay().showText(60)
@@ -93,7 +93,7 @@ public class GrindstoneScene {
         scene.world().setKineticSpeed(util.select().fromTo(0, 1, 0, 3, 1, 0).add(util.select().position(2, 2, 2)), -128);
         scene.idle(10);
         var sword = new ItemStack(Items.DIAMOND_SWORD);
-        CEIPonderScenes.enchant(scene, sword, Enchantments.SWEEPING_EDGE, 3);
+        CSPonderScenes.enchant(scene, sword, Enchantments.SWEEPING_EDGE, 3);
         scene.world().createItemOnBelt(util.grid().at(0, 1, 0), Direction.UP, sword);
         scene.idle(60);
 

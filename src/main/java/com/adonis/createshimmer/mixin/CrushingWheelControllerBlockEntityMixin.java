@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.mixin;
 
+import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.kinetics.crusher.CrushingWheelControllerBlock;
 import com.simibubi.create.content.kinetics.crusher.CrushingWheelControllerBlockEntity;
@@ -35,7 +36,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.adonis.createshimmer.config.CEIConfig;
 
 @Mixin(CrushingWheelControllerBlockEntity.class)
 public class CrushingWheelControllerBlockEntityMixin {
@@ -44,10 +44,10 @@ public class CrushingWheelControllerBlockEntityMixin {
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;setPos(DDD)V", shift = At.Shift.AFTER))
     private void injected(CallbackInfo ci) {
-        if (CEIConfig.kinetics().crushingWheelKillDropXp.get() && !processingEntity.isAlive() && processingEntity instanceof LivingEntity livingEntity) {
+        if (CSConfig.kinetics().crushingWheelKillDropXp.get() && !processingEntity.isAlive() && processingEntity instanceof LivingEntity livingEntity) {
             if (!(processingEntity.level() instanceof ServerLevel serverLevel)) return;
-            int reward = Math.max((int) Math.floor(livingEntity.getExperienceReward(serverLevel, processingEntity) * CEIConfig.kinetics().crushingWheelKillDropXpScale.get()), 1);
-            if (reward >= 1000 || Math.random() < CEIConfig.kinetics().crushingWheelKillDropXpChance.get()) {
+            int reward = Math.max((int) Math.floor(livingEntity.getExperienceReward(serverLevel, processingEntity) * CSConfig.kinetics().crushingWheelKillDropXpScale.get()), 1);
+            if (reward >= 1000 || Math.random() < CSConfig.kinetics().crushingWheelKillDropXpChance.get()) {
                 int count = reward / 3 + ((Math.random() < (reward % 3 / 3f)) ? 1 : 0);
                 if (count != 0) {
                     var self = (CrushingWheelControllerBlockEntity) (Object) this;

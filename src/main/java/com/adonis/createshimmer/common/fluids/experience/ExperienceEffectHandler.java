@@ -26,7 +26,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.fluids.FluidStack;
 import plus.dragons.createdragonsplus.common.fluids.pipe.ConsumingOpenPipeEffectHandler;
-import com.adonis.createshimmer.common.registry.CEIAdvancements;
 
 public class ExperienceEffectHandler implements ConsumingOpenPipeEffectHandler {
     @Override
@@ -40,7 +39,7 @@ public class ExperienceEffectHandler implements ConsumingOpenPipeEffectHandler {
         } else {
             ServerPlayer player = players.get(level.random.nextInt(players.size()));
             ExperienceHelper.award(amount, player);
-            CEIAdvancements.A_SHOWER_EXPERIENCE.awardTo(player);
+//            CSAdvancements.A_SHOWER_EXPERIENCE.awardTo(player);
         }
         return amount;
     }

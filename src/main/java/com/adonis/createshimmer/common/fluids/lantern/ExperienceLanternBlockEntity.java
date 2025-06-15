@@ -20,6 +20,9 @@ package com.adonis.createshimmer.common.fluids.lantern;
 
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
+import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
+import com.adonis.createshimmer.common.registry.CSFluids;
+import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -41,9 +44,6 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createdragonsplus.common.fluids.tank.ConfigurableFluidTank;
 import plus.dragons.createdragonsplus.common.fluids.tank.FluidTankBehaviour;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
-import com.adonis.createshimmer.common.registry.CEIFluids;
-import com.adonis.createshimmer.config.CEIConfig;
 
 public class ExperienceLanternBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
     protected FluidTankBehaviour tank;
@@ -53,12 +53,12 @@ public class ExperienceLanternBlockEntity extends SmartBlockEntity implements IH
     public ExperienceLanternBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         effectiveAABB = new AABB(getBlockPos()).inflate(0.5);
-        rate = CEIConfig.fluids().experienceLanternDrainRate.get();
+        rate = CSConfig.fluids().experienceLanternDrainRate.get();
     }
 
     protected ConfigurableFluidTank createTank(Consumer<FluidStack> fluidUpdateCallback) {
-        return new ConfigurableFluidTank(CEIConfig.fluids().experienceLanternFluidCapacity.get(), fluidUpdateCallback.andThen(this::onFluidStackChanged))
-                .allowInsertion(fluidStack -> fluidStack.is(CEIFluids.EXPERIENCE));
+        return new ConfigurableFluidTank(CSConfig.fluids().experienceLanternFluidCapacity.get(), fluidUpdateCallback.andThen(this::onFluidStackChanged))
+                .allowInsertion(fluidStack -> fluidStack.is(CSFluids.EXPERIENCE));
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ExperienceLanternBlockEntity extends SmartBlockEntity implements IH
         if (!level.isClientSide && level.getGameTime() % 10 == 0) {
             drainExp();
         }
-        if (!level.isClientSide && CEIConfig.fluids().experienceLanternPullToggle.get()) {
+        if (!level.isClientSide && CSConfig.fluids().experienceLanternPullToggle.get()) {
             pullExp();
         }
     }
@@ -86,7 +86,7 @@ public class ExperienceLanternBlockEntity extends SmartBlockEntity implements IH
                 else if (playerExp != 0) sum.addAndGet(playerExp);
             });
             if (sum.get() != 0) {
-                var inserted = tank.getPrimaryHandler().fill(new FluidStack(CEIFluids.EXPERIENCE, sum.get()), IFluidHandler.FluidAction.EXECUTE);
+                var inserted = tank.getPrimaryHandler().fill(new FluidStack(CSFluids.EXPERIENCE, sum.get()), IFluidHandler.FluidAction.EXECUTE);
                 if (inserted != 0) {
                     for (var player : players) {
                         var total = ExperienceHelper.getExperienceForPlayer(player);
@@ -117,7 +117,7 @@ public class ExperienceLanternBlockEntity extends SmartBlockEntity implements IH
         if (!experienceOrbs.isEmpty()) {
             for (var orb : experienceOrbs) {
                 var amount = orb.value;
-                var fluidStack = new FluidStack(CEIFluids.EXPERIENCE.get(), amount);
+                var fluidStack = new FluidStack(CSFluids.EXPERIENCE.get(), amount);
                 var inserted = tank.getPrimaryHandler().fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
                 if (inserted == amount) {
                     orb.remove(Entity.RemovalReason.DISCARDED);
@@ -132,11 +132,11 @@ public class ExperienceLanternBlockEntity extends SmartBlockEntity implements IH
     }
 
     protected void pullExp() {
-        List<ExperienceOrb> experienceOrbs = level.getEntitiesOfClass(ExperienceOrb.class, effectiveAABB.inflate(CEIConfig.fluids().experienceLanternPullRadius.get()));
+        List<ExperienceOrb> experienceOrbs = level.getEntitiesOfClass(ExperienceOrb.class, effectiveAABB.inflate(CSConfig.fluids().experienceLanternPullRadius.get()));
         if (!experienceOrbs.isEmpty()) {
             for (var orb : experienceOrbs) {
                 if (orb.getDeltaMovement().length() <= .5) {
-                    var pushForce = CEIConfig.fluids().experienceLanternPullForceMultiplier.get() * 1 / orb.position().distanceTo(getBlockPos().getCenter());
+                    var pushForce = CSConfig.fluids().experienceLanternPullForceMultiplier.get() * 1 / orb.position().distanceTo(getBlockPos().getCenter());
                     var directionToLantern = getBlockPos().getCenter().subtract(orb.position()).normalize().multiply(pushForce, pushForce, pushForce);
                     orb.push(directionToLantern);
                 }

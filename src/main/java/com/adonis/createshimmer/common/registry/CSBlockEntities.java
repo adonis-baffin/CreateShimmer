@@ -18,9 +18,9 @@
 
 package com.adonis.createshimmer.common.registry;
 
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
+
+import com.adonis.createshimmer.client.model.CSPartialModels;
 import com.adonis.createshimmer.common.fluids.experience.ExperienceHatchBlockEntity;
 import com.adonis.createshimmer.common.fluids.lantern.ExperienceLanternBlockEntity;
 import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
@@ -31,45 +31,55 @@ import com.adonis.createshimmer.common.processing.enchanter.BlazeEnchanterBlockE
 import com.adonis.createshimmer.common.processing.enchanter.BlazeEnchanterRenderer;
 import com.adonis.createshimmer.common.processing.forger.BlazeForgerBlockEntity;
 import com.adonis.createshimmer.common.processing.forger.BlazeForgerRenderer;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
+import com.simibubi.create.content.kinetics.base.SingleAxisRotatingVisual;
+import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
+import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import plus.dragons.createdragonsplus.common.processing.blaze.BlazeBlockVisual;
 
 public class CSBlockEntities {
     public static final BlockEntityEntry<KineticBlockEntity> MECHANICAL_GRINDSTONE = REGISTRATE
             .blockEntity("mechanical_grindstone", KineticBlockEntity::new)
-            .visual(() -> SingleAxisRotatingVisual.of(CEIPartialModels.MECHANICAL_GRINDSTONE), false)
+            .visual(() -> SingleAxisRotatingVisual.of(CSPartialModels.MECHANICAL_GRINDSTONE), false)
             .renderer(() -> KineticBlockEntityRenderer::new)
-            .validBlock(CEIBlocks.MECHANICAL_GRINDSTONE)
+            .validBlock(CSBlocks.MECHANICAL_GRINDSTONE)
             .register();
     public static final BlockEntityEntry<GrindstoneDrainBlockEntity> GRINDSTONE_DRAIN = REGISTRATE
             .blockEntity("grindstone_drain", GrindstoneDrainBlockEntity::new)
-            .visual(() -> SingleAxisRotatingVisual.of(CEIPartialModels.MECHANICAL_GRINDSTONE), true)
+            .visual(() -> SingleAxisRotatingVisual.of(CSPartialModels.MECHANICAL_GRINDSTONE), true)
             .renderer(() -> GrindstoneDrainRenderer::new)
-            .validBlock(CEIBlocks.GRINDSTONE_DRAIN)
+            .validBlock(CSBlocks.GRINDSTONE_DRAIN)
             .register();
     public static final BlockEntityEntry<ExperienceHatchBlockEntity> EXPERIENCE_HATCH = REGISTRATE
             .blockEntity("experience_hatch", ExperienceHatchBlockEntity::new)
             .renderer(() -> SmartBlockEntityRenderer::new)
-            .validBlock(CEIBlocks.EXPERIENCE_HATCH)
+            .validBlock(CSBlocks.EXPERIENCE_HATCH)
             .register();
     public static final BlockEntityEntry<PrinterBlockEntity> PRINTER = REGISTRATE
             .blockEntity("printer", PrinterBlockEntity::new)
             .renderer(() -> PrinterRenderer::new)
-            .validBlock(CEIBlocks.PRINTER)
+            .validBlock(CSBlocks.PRINTER)
             .register();
     public static final BlockEntityEntry<BlazeEnchanterBlockEntity> BLAZE_ENCHANTER = REGISTRATE
             .blockEntity("blaze_enchanter", BlazeEnchanterBlockEntity::new)
             .visual(() -> BlazeBlockVisual::new)
             .renderer(() -> BlazeEnchanterRenderer::new)
-            .validBlock(CEIBlocks.BLAZE_ENCHANTER)
+            .validBlock(CSBlocks.BLAZE_ENCHANTER)
             .register();
     public static final BlockEntityEntry<BlazeForgerBlockEntity> BLAZE_FORGER = REGISTRATE
             .blockEntity("blaze_forger", BlazeForgerBlockEntity::new)
             .visual(() -> BlazeBlockVisual::new)
             .renderer(() -> BlazeForgerRenderer::new)
-            .validBlock(CEIBlocks.BLAZE_FORGER)
+            .validBlock(CSBlocks.BLAZE_FORGER)
             .register();
     public static final BlockEntityEntry<ExperienceLanternBlockEntity> EXPERIENCE_LANTERN = REGISTRATE
             .blockEntity("experience_lantern", ExperienceLanternBlockEntity::new)
-            .validBlock(CEIBlocks.EXPERIENCE_LANTERN)
+            .validBlock(CSBlocks.EXPERIENCE_LANTERN)
             .register();
 
     public static void register(IEventBus modBus) {

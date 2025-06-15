@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.util;
 
+import com.adonis.createshimmer.common.CSCommon;
 import net.createmod.catnip.lang.LangBuilder;
 import net.createmod.catnip.lang.LangNumberFormat;
 import net.minecraft.Util;
@@ -27,7 +28,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.common.CSCommon;
 
 public class CSLang {
     public static LangBuilder builder() {

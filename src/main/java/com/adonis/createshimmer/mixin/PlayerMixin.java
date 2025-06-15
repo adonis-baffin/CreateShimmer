@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.mixin;
 
+import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.content.kinetics.deployer.DeployerFakePlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,7 +29,6 @@ import net.neoforged.neoforge.event.entity.player.SweepAttackEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import com.adonis.createshimmer.config.CEIConfig;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity {
@@ -42,7 +42,7 @@ public abstract class PlayerMixin extends LivingEntity {
     @ModifyArg(method = "attack", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/common/CommonHooks;fireSweepAttack(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/Entity;Z)Lnet/neoforged/neoforge/event/entity/player/SweepAttackEvent;"))
     private boolean attack$allowDeployerSweepAttack(boolean flag) {
         //noinspection ConstantValue
-        if (((Object) this) instanceof DeployerFakePlayer && CEIConfig.kinetics().deployerSweepAttack.get()) {
+        if (((Object) this) instanceof DeployerFakePlayer && CSConfig.kinetics().deployerSweepAttack.get()) {
             return this.getMainHandItem().canPerformAction(ItemAbilities.SWORD_SWEEP);
         }
         return flag;

@@ -20,14 +20,13 @@ package com.adonis.createshimmer.data;
 
 import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
 
+import com.adonis.createshimmer.client.ponder.CSPonderPlugin;
+import com.adonis.createshimmer.common.CSCommon;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
-//import plus.dragons.createenchantmentindustry.client.ponder.CEIPonderPlugin;
-import com.adonis.createshimmer.common.CSCommon;
-//import plus.dragons.createenchantmentindustry.common.registry.CEIAdvancements;
 
 @Mod(CSCommon.ID)
 public class CSData {
@@ -36,8 +35,7 @@ public class CSData {
             return;
         REGISTRATE.registerBuiltinLocalization("interface");
         REGISTRATE.registerForeignLocalization();
-//        REGISTRATE.registerPonderLocalization(CEIPonderPlugin::new);
-//        REGISTRATE.registerExtraLocalization(CEIAdvancements::provideLang);
+        REGISTRATE.registerPonderLocalization(CSPonderPlugin::new);
         modBus.register(this);
     }
 
@@ -50,6 +48,5 @@ public class CSData {
         var client = event.includeClient();
         var server = event.includeServer();
         generator.addProvider(server, new CSRecipeProvider(output, lookupProvider));
-//        generator.addProvider(server, new CEIAdvancements(output, lookupProvider));
     }
 }

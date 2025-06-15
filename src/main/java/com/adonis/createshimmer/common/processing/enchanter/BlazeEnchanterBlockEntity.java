@@ -18,6 +18,11 @@
 
 package com.adonis.createshimmer.common.processing.enchanter;
 
+import com.adonis.createshimmer.client.model.CSPartialModels;
+import com.adonis.createshimmer.common.fluids.experience.BlazeExperienceBlockEntity;
+import com.adonis.createshimmer.common.registry.CSFluids;
+import com.adonis.createshimmer.common.registry.CSStats;
+import com.adonis.createshimmer.config.CSConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel;
@@ -55,12 +60,6 @@ import org.jetbrains.annotations.Nullable;
 import plus.dragons.createdragonsplus.common.advancements.AdvancementBehaviour;
 import plus.dragons.createdragonsplus.common.fluids.tank.ConfigurableFluidTank;
 import plus.dragons.createdragonsplus.util.FieldsNullabilityUnknownByDefault;
-import com.adonis.createshimmer.client.model.CEIPartialModels;
-import com.adonis.createshimmer.common.fluids.experience.BlazeExperienceBlockEntity;
-import com.adonis.createshimmer.common.registry.CEIAdvancements;
-import com.adonis.createshimmer.common.registry.CEIFluids;
-import com.adonis.createshimmer.common.registry.CEIStats;
-import com.adonis.createshimmer.config.CEIConfig;
 
 @FieldsNullabilityUnknownByDefault
 public class BlazeEnchanterBlockEntity extends BlazeExperienceBlockEntity {
@@ -94,13 +93,13 @@ public class BlazeEnchanterBlockEntity extends BlazeExperienceBlockEntity {
 
     @Override
     protected ConfigurableFluidTank createNormalTank(Consumer<FluidStack> fluidUpdateCallback) {
-        return new ConfigurableFluidTank(CEIConfig.fluids().blazeEnchanterFluidCapacity.get(), fluidUpdateCallback)
-                .allowInsertion(fluidStack -> fluidStack.is(CEIFluids.EXPERIENCE));
+        return new ConfigurableFluidTank(CSConfig.fluids().blazeEnchanterFluidCapacity.get(), fluidUpdateCallback)
+                .allowInsertion(fluidStack -> fluidStack.is(CSFluids.EXPERIENCE));
     }
 
     @Override
     protected ConfigurableFluidTank createSpecialTank(Consumer<FluidStack> fluidUpdateCallback) {
-        return new ConfigurableFluidTank(CEIConfig.fluids().blazeEnchanterFluidCapacity.get(), fluidUpdateCallback)
+        return new ConfigurableFluidTank(CSConfig.fluids().blazeEnchanterFluidCapacity.get(), fluidUpdateCallback)
                 .forbidInsertion();
     }
 
@@ -113,8 +112,8 @@ public class BlazeEnchanterBlockEntity extends BlazeExperienceBlockEntity {
     @OnlyIn(Dist.CLIENT)
     protected @Nullable PartialModel getHatModel(HeatLevel heatLevel) {
         return heatLevel.isAtLeast(HeatLevel.FADING)
-                ? CEIPartialModels.BLAZE_ENCHANTER_HAT
-                : CEIPartialModels.BLAZE_ENCHANTER_HAT_SMALL;
+                ? CSPartialModels.BLAZE_ENCHANTER_HAT
+                : CSPartialModels.BLAZE_ENCHANTER_HAT_SMALL;
     }
 
     @Override
@@ -202,7 +201,7 @@ public class BlazeEnchanterBlockEntity extends BlazeExperienceBlockEntity {
                     return;
                 }
                 if (special && !cursed && strikeLightning(serverLevel, strikePos)) {
-                    advancement.trigger(CEIAdvancements.OSHA_VIOLATION.builtinTrigger());
+//                    advancement.trigger(CSAdvancements.OSHA_VIOLATION.builtinTrigger());
                     serverLevel.destroyBlock(worldPosition, false);
                     serverLevel.setBlockAndUpdate(worldPosition, AllBlocks.LIT_BLAZE_BURNER.getDefaultState());
                     this.setRemoved();
@@ -210,18 +209,18 @@ public class BlazeEnchanterBlockEntity extends BlazeExperienceBlockEntity {
                 }
                 processingTime = -1;
                 heldItem = enchanter.getResult(heldItem);
-                advancement.awardStat(CEIStats.ENCHANT.get(), 1);
+                advancement.awardStat(CSStats.ENCHANT.get(), 1);
 
                 if (heldItem.getItem() instanceof EnchantingTemplateItem) {
-                    advancement.trigger(CEIAdvancements.SIGIL_FORGING.builtinTrigger());
+//                    advancement.trigger(CSAdvancements.SIGIL_FORGING.builtinTrigger());
                 } else {
-                    advancement.trigger(CEIAdvancements.BLAZING_ENCHANTMENT.builtinTrigger());
+//                    advancement.trigger(CSAdvancements.BLAZING_ENCHANTMENT.builtinTrigger());
                 }
                 if (special) {
-                    advancement.awardStat(CEIStats.SUPER_ENCHANT.get(), 1);
+                    advancement.awardStat(CSStats.SUPER_ENCHANT.get(), 1);
                     boolean treasure = EnchantmentHelper.getEnchantmentsForCrafting(heldItem).keySet().stream().anyMatch(h -> h.is(EnchantmentTags.TREASURE));
-                    if (treasure)
-                        advancement.trigger(CEIAdvancements.PROBABILITY_SPIKE.builtinTrigger());
+//                    if (treasure)
+//                        advancement.trigger(CSAdvancements.PROBABILITY_SPIKE.builtinTrigger());
                 }
 
                 consumeExperience(cost, special, false);
@@ -254,8 +253,8 @@ public class BlazeEnchanterBlockEntity extends BlazeExperienceBlockEntity {
     }
 
     public int getMaxEnchantLevel(boolean special) {
-        int max = CEIConfig.enchantments().blazeEnchanterMaxEnchantLevel.get();
-        int maxSuper = CEIConfig.enchantments().blazeEnchanterMaxSuperEnchantLevel.get();
+        int max = CSConfig.enchantments().blazeEnchanterMaxEnchantLevel.get();
+        int maxSuper = CSConfig.enchantments().blazeEnchanterMaxSuperEnchantLevel.get();
         return special ? Math.max(max, maxSuper) : Math.clamp(max, 0, maxSuper);
     }
 

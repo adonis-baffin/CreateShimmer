@@ -18,21 +18,20 @@
 
 package com.adonis.createshimmer.integration.jei.category.printing;
 
+import com.adonis.createshimmer.client.model.CSPartialModels;
+import com.adonis.createshimmer.common.fluids.printer.PrinterRenderer;
+import com.adonis.createshimmer.common.registry.CSBlocks;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
-import com.simibubi.create.foundation.fluid.FluidRenderer;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.gui.UIRenderHelper;
 import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.LightTexture;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.client.model.CEIPartialModels;
-import com.adonis.createshimmer.common.fluids.printer.PrinterRenderer;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
 
 public class AnimatedPrinter extends AnimatedKinetics {
     private FluidStack fluid = FluidStack.EMPTY;
@@ -51,7 +50,7 @@ public class AnimatedPrinter extends AnimatedKinetics {
         poseStack.mulPose(Axis.YP.rotationDegrees(22.5f));
         int scale = 20;
 
-        blockElement(CEIBlocks.PRINTER.getDefaultState())
+        blockElement(CSBlocks.PRINTER.getDefaultState())
                 .scale(scale)
                 .render(graphics);
 
@@ -61,18 +60,18 @@ public class AnimatedPrinter extends AnimatedKinetics {
 
         poseStack.pushPose();
         poseStack.translate(0, 3 * progress / 32f, 0);
-        blockElement(CEIPartialModels.PRINTER_NOZZLE_TOP)
+        blockElement(CSPartialModels.PRINTER_NOZZLE_TOP)
                 .scale(scale)
                 .render(graphics);
         poseStack.translate(0, 3 * progress / 32f, 0);
-        blockElement(CEIPartialModels.PRINTER_NOZZLE_BOTTOM)
+        blockElement(CSPartialModels.PRINTER_NOZZLE_BOTTOM)
                 .scale(scale)
                 .render(graphics);
         poseStack.popPose();
 
         poseStack.pushPose();
         poseStack.translate(0, -progress / 2f, 0);
-        blockElement(CEIPartialModels.PRINTER_PISTON)
+        blockElement(CSPartialModels.PRINTER_PISTON)
                 .scale(scale)
                 .render(graphics);
         poseStack.popPose();

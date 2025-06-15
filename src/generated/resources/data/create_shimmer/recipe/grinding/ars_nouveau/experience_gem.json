@@ -5,7 +5,7 @@
       "modid": "ars_nouveau"
     }
   ],
-  "type": "create_enchantment_industry:grinding",
+  "type": "create_shimmer:grinding",
   "ingredients": [
     {
       "item": "ars_nouveau:experience_gem"
@@ -14,7 +14,7 @@
   "results": [
     {
       "amount": 3,
-      "id": "create_enchantment_industry:experience"
+      "id": "create_shimmer:experience"
     }
   ]
 }

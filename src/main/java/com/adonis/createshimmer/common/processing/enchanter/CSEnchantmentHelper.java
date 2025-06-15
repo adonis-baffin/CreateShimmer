@@ -18,6 +18,9 @@
 
 package com.adonis.createshimmer.common.processing.enchanter;
 
+import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.config.CSConfig;
 import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.function.Function;
@@ -32,11 +35,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.config.CEIConfig;
 
-public class CEIEnchantmentHelper {
+public class CSEnchantmentHelper {
     @Nullable
     public static Function<Holder<Enchantment>, Integer> alternativeMaxLevel;
 
@@ -83,7 +83,7 @@ public class CEIEnchantmentHelper {
         WeightedRandom.getRandomItem(random, available).ifPresent(list::add);
         while (random.nextInt(50) <= adjustedLevel) {
             if (!list.isEmpty())
-                if (special && CEIConfig.enchantments().ignoreEnchantmentCompatibility.get()) {
+                if (special && CSConfig.enchantments().ignoreEnchantmentCompatibility.get()) {
                     available.removeIf(instance -> instance.enchantment.equals(list.getLast().enchantment));
                 } else {
                     EnchantmentHelper.filterCompatibleEnchantments(available, list.getLast());
@@ -102,7 +102,7 @@ public class CEIEnchantmentHelper {
     }
 
     public static int levelExtension(Holder<Enchantment> enchantment) {
-        var result = enchantment.getData(CEIDataMaps.SUPER_ENCHANTING_LEVEL_EXTENSION);
-        return result != null ? result.intValue() : CEIConfig.enchantments().enchantmentMaxLevelExtension.get();
+        var result = enchantment.getData(CSDataMaps.SUPER_ENCHANTING_LEVEL_EXTENSION);
+        return result != null ? result.intValue() : CSConfig.enchantments().enchantmentMaxLevelExtension.get();
     }
 }

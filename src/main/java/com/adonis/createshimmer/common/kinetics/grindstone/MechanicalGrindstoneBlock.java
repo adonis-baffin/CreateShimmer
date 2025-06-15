@@ -18,6 +18,9 @@
 
 package com.adonis.createshimmer.common.kinetics.grindstone;
 
+import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
+import com.adonis.createshimmer.common.registry.CSBlockEntities;
+import com.adonis.createshimmer.common.registry.CSStats;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.equipment.sandPaper.SandPaperItem;
@@ -46,10 +49,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.util.FakePlayer;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
-import com.adonis.createshimmer.common.registry.CEIAdvancements;
-import com.adonis.createshimmer.common.registry.CEIBlockEntities;
-import com.adonis.createshimmer.common.registry.CEIStats;
 
 public class MechanicalGrindstoneBlock extends RotatedPillarKineticBlock implements IBE<KineticBlockEntity> {
     protected static VoxelShaper SHAPE = new AllShapes.Builder(Block.box(3, 3, 3, 13, 13, 13))
@@ -81,7 +80,7 @@ public class MechanicalGrindstoneBlock extends RotatedPillarKineticBlock impleme
             SandPaperItem.spawnParticles(location, stack, level);
             AllSoundEvents.SANDING_SHORT.play(level, player, pos, 1, 1);
             stack.shrink(1);
-            CEIAdvancements.GRIND_TO_POLISH.awardTo(player);
+//            CSAdvancements.GRIND_TO_POLISH.awardTo(player);
             if (stack.isEmpty()) {
                 player.setItemInHand(hand, polished);
             } else {
@@ -102,8 +101,8 @@ public class MechanicalGrindstoneBlock extends RotatedPillarKineticBlock impleme
                 player.getInventory().placeItemBackInInventory(result.output());
             }
             player.setItemInHand(otherHand, result.bottom());
-            CEIAdvancements.GONE_WITH_THE_FOIL.awardTo(player);
-            player.awardStat(CEIStats.GRINDSTONE_EXPERIENCE.get(), result.experience());
+//            CSAdvancements.GONE_WITH_THE_FOIL.awardTo(player);
+            player.awardStat(CSStats.GRINDSTONE_EXPERIENCE.get(), result.experience());
             if (player instanceof ServerPlayer serverPlayer)
                 ExperienceHelper.award(result.experience(), serverPlayer);
             level.levelEvent(1042, pos, 0);
@@ -133,7 +132,7 @@ public class MechanicalGrindstoneBlock extends RotatedPillarKineticBlock impleme
 
     @Override
     public BlockEntityType<? extends KineticBlockEntity> getBlockEntityType() {
-        return CEIBlockEntities.MECHANICAL_GRINDSTONE.get();
+        return CSBlockEntities.MECHANICAL_GRINDSTONE.get();
     }
 
     @Override

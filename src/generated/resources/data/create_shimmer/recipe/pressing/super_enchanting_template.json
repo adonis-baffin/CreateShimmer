@@ -2,12 +2,12 @@
   "type": "create:pressing",
   "ingredients": [
     {
-      "item": "create_enchantment_industry:super_experience_block"
+      "item": "create_shimmer:super_experience_block"
     }
   ],
   "results": [
     {
-      "id": "create_enchantment_industry:super_enchanting_template"
+      "id": "create_shimmer:super_enchanting_template"
     }
   ]
 }

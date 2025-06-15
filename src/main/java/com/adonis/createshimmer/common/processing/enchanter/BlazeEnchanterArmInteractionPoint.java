@@ -18,6 +18,8 @@
 
 package com.adonis.createshimmer.common.processing.enchanter;
 
+import com.adonis.createshimmer.common.fluids.experience.BlazeExperienceBlock;
+import com.adonis.createshimmer.common.registry.CSBlocks;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmBlockEntity;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
@@ -29,8 +31,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import com.adonis.createshimmer.common.fluids.experience.BlazeExperienceBlock;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
 
 public class BlazeEnchanterArmInteractionPoint extends ArmInteractionPoint {
     public BlazeEnchanterArmInteractionPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
@@ -75,7 +75,7 @@ public class BlazeEnchanterArmInteractionPoint extends ArmInteractionPoint {
     public static class Type extends ArmInteractionPointType {
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
-            return CEIBlocks.BLAZE_ENCHANTER.has(state);
+            return CSBlocks.BLAZE_ENCHANTER.has(state);
         }
 
         @Nullable

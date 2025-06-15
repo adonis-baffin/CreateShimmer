@@ -18,9 +18,11 @@
 
 package com.adonis.createshimmer.common.registry;
 
+import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
+import static com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType.mountedFluidStorage;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
-import net.neoforged.bus.api.IEventBus;
 import com.adonis.createshimmer.common.fluids.experience.ExperienceHatchBlock;
 import com.adonis.createshimmer.common.fluids.lantern.ExperienceLanternBlock;
 import com.adonis.createshimmer.common.fluids.lantern.ExperienceLanternMovementBehavior;
@@ -30,14 +32,38 @@ import com.adonis.createshimmer.common.kinetics.grindstone.MechanicalGrindStoneI
 import com.adonis.createshimmer.common.kinetics.grindstone.MechanicalGrindstoneBlock;
 import com.adonis.createshimmer.common.processing.enchanter.BlazeEnchanterBlock;
 import com.adonis.createshimmer.common.processing.forger.BlazeForgerBlock;
-
+import com.adonis.createshimmer.config.CSConfig;
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
+import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
+import com.simibubi.create.content.materials.ExperienceBlock;
+import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
+import com.simibubi.create.foundation.data.AssetLookup;
+import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.SharedProperties;
+import com.tterrag.registrate.util.entry.BlockEntry;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.util.DeferredSoundType;
+import plus.dragons.createdragonsplus.common.processing.blaze.BlazeBlock;
+import plus.dragons.createdragonsplus.common.processing.blaze.BlazeMovementBehaviour;
 
 @SuppressWarnings("removal")
 public class CSBlocks {
     public static final BlockEntry<MechanicalGrindstoneBlock> MECHANICAL_GRINDSTONE = REGISTRATE
             .block("mechanical_grindstone", MechanicalGrindstoneBlock::new)
             .initialProperties(SharedProperties::stone)
-            .transform(CEIConfig.stress().setImpact(4.0))
+            .transform(CSConfig.stress().setImpact(4.0))
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.axisBlockProvider(false))
             .item(MechanicalGrindStoneItem::new)
@@ -46,7 +72,7 @@ public class CSBlocks {
     public static final BlockEntry<GrindstoneDrainBlock> GRINDSTONE_DRAIN = REGISTRATE
             .block("grindstone_drain", prop -> new GrindstoneDrainBlock(MECHANICAL_GRINDSTONE.get(), prop))
             .initialProperties(SharedProperties::copperMetal)
-            .transform(CEIConfig.stress().setImpact(4.0))
+            .transform(CSConfig.stress().setImpact(4.0))
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.horizontalBlockProvider(true))
             .item()
@@ -82,7 +108,7 @@ public class CSBlocks {
             .transform(pickaxeOnly())
             .addLayer(() -> RenderType::cutoutMipped)
             .onRegister(block -> MovementBehaviour.REGISTRY.register(block, new BlazeMovementBehaviour()))
-            .tag(AllBlockTags.FAN_TRANSPARENT.tag, AllBlockTags.FAN_PROCESSING_CATALYSTS_SMOKING.tag)
+            .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag, AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SMOKING.tag)
             .blockstate((ctx, prov) -> prov.horizontalBlock(
                     ctx.getEntry(),
                     prov.models().getExistingFile(Create.asResource("block/blaze_burner/block"))))
@@ -98,7 +124,7 @@ public class CSBlocks {
             .transform(pickaxeOnly())
             .addLayer(() -> RenderType::cutoutMipped)
             .onRegister(block -> MovementBehaviour.REGISTRY.register(block, new BlazeMovementBehaviour()))
-            .tag(AllBlockTags.FAN_TRANSPARENT.tag, AllBlockTags.FAN_PROCESSING_CATALYSTS_SMOKING.tag)
+            .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag, AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SMOKING.tag)
             .blockstate((ctx, prov) -> prov.horizontalBlock(
                     ctx.getEntry(),
                     prov.models().getExistingFile(Create.asResource("block/blaze_burner/block"))))
@@ -134,7 +160,7 @@ public class CSBlocks {
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GREEN))
             .transform(pickaxeOnly())
-            .transform(mountedFluidStorage(CEIMountedStorageTypes.EXPERIENCE_LANTERN))
+            .transform(mountedFluidStorage(CSMountedStorageTypes.EXPERIENCE_LANTERN))
             .onRegister(block -> MovementBehaviour.REGISTRY.register(block, new ExperienceLanternMovementBehavior()))
             .addLayer(() -> RenderType::cutoutMipped)
             .blockstate((ctx, prov) -> prov.directionalBlock(ctx.get(), AssetLookup.standardModel(ctx, prov)))

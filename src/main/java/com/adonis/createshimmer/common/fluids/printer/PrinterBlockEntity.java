@@ -21,6 +21,8 @@ package com.adonis.createshimmer.common.fluids.printer;
 import static com.simibubi.create.content.kinetics.belt.behaviour.BeltProcessingBehaviour.ProcessingResult.HOLD;
 import static com.simibubi.create.content.kinetics.belt.behaviour.BeltProcessingBehaviour.ProcessingResult.PASS;
 
+import com.adonis.createshimmer.common.registry.CSStats;
+import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.belt.behaviour.BeltProcessingBehaviour;
@@ -42,7 +44,6 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -53,12 +54,6 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createdragonsplus.common.advancements.AdvancementBehaviour;
 import plus.dragons.createdragonsplus.util.FieldsNullabilityUnknownByDefault;
-import com.adonis.createshimmer.common.fluids.printer.behaviour.AddressPrintingBehaviour;
-import com.adonis.createshimmer.common.fluids.printer.behaviour.CustomNamePrintingBehaviour;
-import com.adonis.createshimmer.common.fluids.printer.behaviour.PackagePatternPrintingBehaviour;
-import com.adonis.createshimmer.common.registry.CEIAdvancements;
-import com.adonis.createshimmer.common.registry.CEIStats;
-import com.adonis.createshimmer.config.CEIConfig;
 
 @FieldsNullabilityUnknownByDefault
 public class PrinterBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
@@ -74,7 +69,7 @@ public class PrinterBlockEntity extends SmartBlockEntity implements IHaveGoggleI
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        tank = SmartFluidTankBehaviour.single(this, CEIConfig.fluids().printerFluidCapacity.get());
+        tank = SmartFluidTankBehaviour.single(this, CSConfig.fluids().printerFluidCapacity.get());
         printer = new PrinterBehaviour(this, tank, new CenteredSideValueBoxTransform(
                 (state, direction) -> state.getValue(PrinterBlock.FACING) == direction));
         BeltProcessingBehaviour processing = new BeltProcessingBehaviour(this)
@@ -164,17 +159,17 @@ public class PrinterBlockEntity extends SmartBlockEntity implements IHaveGoggleI
             List<TransportedItemStack> resultList = new ArrayList<>();
             resultList.add(result);
             handler.handleProcessingOnItem(transported, TransportedResult.convertToAndLeaveHeld(resultList, held));
-            if (printer.getPrintingBehaviour() instanceof CustomNamePrintingBehaviour) advancement.trigger(CEIAdvancements.BRAND_REGISTRY.builtinTrigger());
-            else if (resultItem.is(Items.WRITTEN_BOOK)) advancement.trigger(CEIAdvancements.COPIABLE_MASTERPIECE.builtinTrigger());
-            else if (resultItem.is(Items.ENCHANTED_BOOK)) advancement.trigger(CEIAdvancements.COPIABLE_MYSTERY.builtinTrigger());
-            else if (printer.getPrintingBehaviour() instanceof PackagePatternPrintingBehaviour) advancement.trigger(CEIAdvancements.ASSEMBLY_AESTHETICS.builtinTrigger());
-            else if (printer.getPrintingBehaviour() instanceof AddressPrintingBehaviour) advancement.trigger(CEIAdvancements.SUPPLY_CHAIN_REFACTOR.builtinTrigger());
+//            if (printer.getPrintingBehaviour() instanceof CustomNamePrintingBehaviour) advancement.trigger(CSAdvancements.BRAND_REGISTRY.builtinTrigger());
+//            else if (resultItem.is(Items.WRITTEN_BOOK)) advancement.trigger(CSAdvancements.COPIABLE_MASTERPIECE.builtinTrigger());
+//            else if (resultItem.is(Items.ENCHANTED_BOOK)) advancement.trigger(CSAdvancements.COPIABLE_MYSTERY.builtinTrigger());
+//            else if (printer.getPrintingBehaviour() instanceof PackagePatternPrintingBehaviour) advancement.trigger(CSAdvancements.ASSEMBLY_AESTHETICS.builtinTrigger());
+//            else if (printer.getPrintingBehaviour() instanceof AddressPrintingBehaviour) advancement.trigger(CSAdvancements.SUPPLY_CHAIN_REFACTOR.builtinTrigger());
         }
         fluidStack.shrink(requiredFluid);
         setFluidInTank(fluidStack);
         notifyUpdate();
         printing.onFinished(level, worldPosition, this);
-        advancement.awardStat(CEIStats.PRINT.get(), 1);
+        advancement.awardStat(CSStats.PRINT.get(), 1);
         return HOLD;
     }
 

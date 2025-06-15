@@ -18,6 +18,8 @@
 
 package com.adonis.createshimmer.integration.jei.category.printing;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
@@ -29,14 +31,12 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.world.item.ItemStack;
 import plus.dragons.createdragonsplus.util.Pairs;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
 
 public enum PatternPrintingRecipeJEI implements PrintingRecipeJEI {
     INSTANCE;
 
     public static final Type TYPE = PrintingRecipeJEI
-            .register(CEICommon.asResource("pattern"), MapCodec.unit(INSTANCE));
+            .register(CSCommon.asResource("pattern"), MapCodec.unit(INSTANCE));
 
     @Override
     public void setBase(IRecipeSlotBuilder slot) {
@@ -53,7 +53,7 @@ public enum PatternPrintingRecipeJEI implements PrintingRecipeJEI {
 
     @Override
     public void setFluid(IRecipeSlotBuilder slot) {
-        CEIDataMaps.getSourceFluidEntries(CEIDataMaps.PRINTING_PATTERN_INGREDIENT)
+        CSDataMaps.getSourceFluidEntries(CSDataMaps.PRINTING_PATTERN_INGREDIENT)
                 .forEach(Pairs.accept(slot::addFluidStack));
     }
 

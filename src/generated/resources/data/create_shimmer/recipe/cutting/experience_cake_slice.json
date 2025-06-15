@@ -2,13 +2,13 @@
   "type": "create:cutting",
   "ingredients": [
     {
-      "item": "create_enchantment_industry:experience_cake"
+      "item": "create_shimmer:experience_cake"
     }
   ],
   "results": [
     {
       "count": 4,
-      "id": "create_enchantment_industry:experience_cake_slice"
+      "id": "create_shimmer:experience_cake_slice"
     }
   ]
 }

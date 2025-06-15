@@ -18,6 +18,15 @@
 
 package com.adonis.createshimmer.common.fluids.printer.behaviour;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
+import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
+import com.adonis.createshimmer.common.processing.enchanter.CSEnchantmentHelper;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.common.registry.CSEnchantments;
+import com.adonis.createshimmer.config.CSConfig;
+import com.adonis.createshimmer.util.CSIntIntPair;
+import com.adonis.createshimmer.util.CSLang;
 import com.mojang.serialization.DataResult;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.utility.CreateLang;
@@ -44,15 +53,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
-import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
-import com.adonis.createshimmer.common.processing.enchanter.CEIEnchantmentHelper;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.common.registry.CEIEnchantments;
-import com.adonis.createshimmer.config.CEIConfig;
-import com.adonis.createshimmer.util.CEIIntIntPair;
-import com.adonis.createshimmer.util.CEILang;
 
 public class EnchantedBookPrintingBehaviour implements PrintingBehaviour {
     private final Level level;
@@ -68,13 +68,12 @@ public class EnchantedBookPrintingBehaviour implements PrintingBehaviour {
         this.enchantments = enchantments;
         AtomicInteger result = new AtomicInteger(0);
         enchantments.entrySet().forEach(entry -> {
-            Optional<CEIIntIntPair> optional = Optional.empty();
-            var customCost = entry.getKey().getData(CEIDataMaps.PRINTING_ENCHANTED_BOOK_COST);
+            Optional<CSIntIntPair> optional = Optional.empty();
+            var customCost = entry.getKey().getData(CSDataMaps.PRINTING_ENCHANTED_BOOK_COST);
             if (customCost != null) {
                 optional = customCost.stream().filter(pair -> pair.level() == entry.getIntValue()).findFirst();
             }
-            result.addAndGet(optional.map(CEIIntIntPair::value).orElseGet(() ->
-                    (int) (CEIEnchantmentHelper.getEnchantmentCost(entry.getKey(), entry.getIntValue()) * CEIConfig.fluids().printingEnchantedBookCostMultiplier.get())));
+            result.addAndGet(optional.map(CSIntIntPair::value).orElseGet(() -> (int) (CSEnchantmentHelper.getEnchantmentCost(entry.getKey(), entry.getIntValue()) * CSConfig.fluids().printingEnchantedBookCostMultiplier.get())));
         });
         this.cost = result.get();
     }
@@ -84,14 +83,14 @@ public class EnchantedBookPrintingBehaviour implements PrintingBehaviour {
             return Optional.empty();
         var enchantments = EnchantmentHelper.getEnchantmentsForCrafting(stack);
         if (enchantments.isEmpty())
-            return Optional.of(DataResult.error(() -> CEICommon.asLocalization("gui.printer.enchanted_book.invalid")));
-        if (enchantments.keySet().stream().anyMatch(enchantment -> enchantment.is(CEIEnchantments.MOD_TAGS.printingDeny))) {
-            if (CEIConfig.fluids().printingEnchantedBookDenylistStopCopying.get()) {
-                return Optional.of(DataResult.error(() -> CEICommon.asLocalization("gui.printer.enchanted_book.denied")));
+            return Optional.of(DataResult.error(() -> CSCommon.asLocalization("gui.printer.enchanted_book.invalid")));
+        if (enchantments.keySet().stream().anyMatch(enchantment -> enchantment.is(CSEnchantments.MOD_TAGS.printingDeny))) {
+            if (CSConfig.fluids().printingEnchantedBookDenylistStopCopying.get()) {
+                return Optional.of(DataResult.error(() -> CSCommon.asLocalization("gui.printer.enchanted_book.denied")));
             } else {
-                var rest = enchantments.keySet().stream().filter(enchantment -> !enchantment.is(CEIEnchantments.MOD_TAGS.printingDeny)).toList();
+                var rest = enchantments.keySet().stream().filter(enchantment -> !enchantment.is(CSEnchantments.MOD_TAGS.printingDeny)).toList();
                 if (rest.isEmpty())
-                    return Optional.of(DataResult.error(() -> CEICommon.asLocalization("gui.printer.enchanted_book.all_denied")));
+                    return Optional.of(DataResult.error(() -> CSCommon.asLocalization("gui.printer.enchanted_book.all_denied")));
                 else {
                     var result = new ItemEnchantments.Mutable(enchantments);
                     result.removeIf(rest::contains);
@@ -118,7 +117,7 @@ public class EnchantedBookPrintingBehaviour implements PrintingBehaviour {
         if (fluid.isEmpty())
             return true;
         var cost = getCost(fluid);
-        return cost.isPresent() && cost.getAsInt() <= CEIConfig.fluids().printerFluidCapacity.get();
+        return cost.isPresent() && cost.getAsInt() <= CSConfig.fluids().printerFluidCapacity.get();
     }
 
     @Override
@@ -153,12 +152,12 @@ public class EnchantedBookPrintingBehaviour implements PrintingBehaviour {
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        CEILang.translate("gui.goggles.printing").forGoggles(tooltip);
-        CEILang.item(original).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
-        getCost(tank.getPrimaryHandler().getFluid()).ifPresent(cost -> CEILang.translate("gui.goggles.printing.cost",
-                CEILang.number(cost)
+        CSLang.translate("gui.goggles.printing").forGoggles(tooltip);
+        CSLang.item(original).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
+        getCost(tank.getPrimaryHandler().getFluid()).ifPresent(cost -> CSLang.translate("gui.goggles.printing.cost",
+                CSLang.number(cost)
                         .add(CreateLang.translate("generic.unit.millibuckets"))
-                        .style(cost <= CEIConfig.fluids().printerFluidCapacity.get()
+                        .style(cost <= CSConfig.fluids().printerFluidCapacity.get()
                                 ? ChatFormatting.GREEN
                                 : ChatFormatting.RED))
                 .style(ChatFormatting.GRAY).forGoggles(tooltip));
@@ -171,14 +170,14 @@ public class EnchantedBookPrintingBehaviour implements PrintingBehaviour {
         for (Holder<Enchantment> ordered : order) {
             int level = enchantments.getLevel(ordered);
             if (level > 0) {
-                CEILang.builder().add(Enchantment.getFullname(ordered, level)).forGoggles(tooltip, 1);
+                CSLang.builder().add(Enchantment.getFullname(ordered, level)).forGoggles(tooltip, 1);
             }
         }
         for (Entry<Holder<Enchantment>> entry : enchantments.entrySet()) {
             Holder<Enchantment> unordered = entry.getKey();
             int level = entry.getIntValue();
             if (level > 0 && !order.contains(unordered)) {
-                CEILang.builder().add(Enchantment.getFullname(unordered, level)).forGoggles(tooltip, 1);
+                CSLang.builder().add(Enchantment.getFullname(unordered, level)).forGoggles(tooltip, 1);
             }
         }
         return true;

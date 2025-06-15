@@ -4,8 +4,8 @@
   "render_type": "cutout_mipped",
   "textures": {
     "top": "create:block/item_drain_top",
-    "front": "create_enchantment_industry:block/mechanical_grinder_front",
-    "back": "create_enchantment_industry:block/mechanical_grinder_back",
+    "front": "create_shimmer:block/mechanical_grinder_front",
+    "back": "create_shimmer:block/mechanical_grinder_back",
     "particle": "create:block/item_drain_side",
     "side": "create:block/item_drain_side",
     "bottom": "create:block/copper_underside",

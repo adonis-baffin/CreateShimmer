@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.common.fluids.experience;
 
+import com.adonis.createshimmer.config.CSConfig;
 import com.tterrag.registrate.builders.FluidBuilder.FluidTypeFactory;
 import java.util.function.Supplier;
 import net.createmod.catnip.theme.Color;
@@ -33,7 +34,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import plus.dragons.createdragonsplus.common.fluids.SolidRenderFluidType;
-import com.adonis.createshimmer.config.CEIConfig;
 
 public class ExperienceFluidType extends SolidRenderFluidType {
     protected ExperienceFluidType(Properties properties, ResourceLocation stillTexture, ResourceLocation flowingTexture, int tintColor, Vector3f fogColor, Supplier<Float> fogDistanceModifier) {
@@ -51,12 +51,12 @@ public class ExperienceFluidType extends SolidRenderFluidType {
     }
 
     private static float getExperienceFluidVisibility() {
-        return CEIConfig.client().experienceVisionMultiplier.getF() / 32f;
+        return CSConfig.client().experienceVisionMultiplier.getF() / 32f;
     }
 
     @Override
     public boolean isVaporizedOnPlacement(Level level, BlockPos pos, FluidStack stack) {
-        return CEIConfig.server().fluids.experienceVaporizeOnPlacement.get();
+        return CSConfig.server().fluids.experienceVaporizeOnPlacement.get();
     }
 
     @Override

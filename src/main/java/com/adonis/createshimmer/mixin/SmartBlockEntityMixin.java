@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.mixin;
 
+import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
 import com.simibubi.create.foundation.blockEntity.CachedRenderBBBlockEntity;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
@@ -36,7 +37,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import plus.dragons.createdragonsplus.common.fluids.tank.FluidTankBehaviour;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
 
 @Mixin(SmartBlockEntity.class)
 public abstract class SmartBlockEntityMixin extends CachedRenderBBBlockEntity {

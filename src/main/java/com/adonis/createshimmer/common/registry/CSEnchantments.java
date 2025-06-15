@@ -20,6 +20,7 @@ package com.adonis.createshimmer.common.registry;
 
 import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
 
+import com.adonis.createshimmer.common.CSCommon;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.EnchantmentTags;
@@ -27,9 +28,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.neoforged.bus.api.IEventBus;
 import plus.dragons.createdragonsplus.data.tag.TagRegistry;
-import com.adonis.createshimmer.common.CSCommon;
 
-public class CEIEnchantments {
+public class CSEnchantments {
     public static final ModTags MOD_TAGS = new ModTags();
 
     public static void register(IEventBus modBus) {

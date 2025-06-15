@@ -18,6 +18,10 @@
 
 package com.adonis.createshimmer.common.kinetics.grindstone;
 
+import com.adonis.createshimmer.common.registry.CSBlocks;
+import com.adonis.createshimmer.common.registry.CSRecipes;
+import com.adonis.createshimmer.integration.jei.category.assembly.AssemblyGrindingCategory;
+import com.adonis.createshimmer.util.CSLang;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.compat.jei.category.sequencedAssembly.SequencedAssemblySubCategory;
@@ -37,14 +41,10 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
-import com.adonis.createshimmer.common.registry.CEIRecipes;
-import com.adonis.createshimmer.integration.jei.category.assembly.AssemblyGrindingCategory;
-import com.adonis.createshimmer.util.CEILang;
 
 public class GrindingRecipe extends StandardProcessingRecipe<SingleRecipeInput> implements IAssemblyRecipe {
     public GrindingRecipe(ProcessingRecipeParams params) {
-        super(CEIRecipes.GRINDING, params);
+        super(CSRecipes.GRINDING, params);
         if (fluidIngredients.size() + fluidResults.size() > 1)
             throw new IllegalArgumentException("Grinding recipe can only have either 1 fluid input or 1 fluid result");
     }
@@ -94,20 +94,20 @@ public class GrindingRecipe extends StandardProcessingRecipe<SingleRecipeInput> 
     @Override
     public Component getDescriptionForAssembly() {
         if (fluidIngredients.isEmpty()) {
-            return CEILang.translate("recipe.assembly.grinding").component();
+            return CSLang.translate("recipe.assembly.grinding").component();
         } else {
             List<FluidStack> matchingFluidStacks = fluidIngredients.getFirst().getMatchingFluidStacks();
             if (matchingFluidStacks.isEmpty()) {
                 return Component.literal("Invalid");
             }
-            return CEILang.translate("recipe.assembly.grinding.needs_fluid",
+            return CSLang.translate("recipe.assembly.grinding.needs_fluid",
                     matchingFluidStacks.getFirst().getHoverName()).component();
         }
     }
 
     @Override
     public void addRequiredMachines(Set<ItemLike> required) {
-        required.add(CEIBlocks.MECHANICAL_GRINDSTONE);
+        required.add(CSBlocks.MECHANICAL_GRINDSTONE);
         required.add(AllBlocks.ITEM_DRAIN);
     }
 

@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.common.fluids.experience;
 
+import com.adonis.createshimmer.common.registry.CSFluids;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.tank.CreativeFluidTankBlockEntity.CreativeSmartFluidTank;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel;
@@ -55,7 +56,6 @@ import plus.dragons.createdragonsplus.common.fluids.tank.ConfigurableFluidTank;
 import plus.dragons.createdragonsplus.common.fluids.tank.FluidTankBehaviour;
 import plus.dragons.createdragonsplus.common.processing.blaze.BlazeBlockEntity;
 import plus.dragons.createdragonsplus.util.FieldsNullabilityUnknownByDefault;
-import com.adonis.createshimmer.common.registry.CEIFluids;
 
 @FieldsNullabilityUnknownByDefault
 public abstract class BlazeExperienceBlockEntity extends BlazeBlockEntity implements IHaveGoggleInformation {
@@ -135,7 +135,7 @@ public abstract class BlazeExperienceBlockEntity extends BlazeBlockEntity implem
     }
 
     public boolean consumeExperience(int amount, boolean special, boolean simulate) {
-        var fluid = new FluidStack(CEIFluids.EXPERIENCE, amount);
+        var fluid = new FluidStack(CSFluids.EXPERIENCE, amount);
         var tank = special ? getSpecialTank() : tanks.getCapability();
         var drained = tank.drain(fluid, FluidAction.SIMULATE);
         if (drained.getAmount() != amount)
@@ -155,10 +155,10 @@ public abstract class BlazeExperienceBlockEntity extends BlazeBlockEntity implem
             return false;
         }
         var fluid = configurableTank.getFluid();
-        if (!fluid.isEmpty() && !fluid.is(CEIFluids.EXPERIENCE))
+        if (!fluid.isEmpty() && !fluid.is(CSFluids.EXPERIENCE))
             return false;
         int experience = fuel.experience();
-        var experienceFluid = new FluidStack(CEIFluids.EXPERIENCE, experience);
+        var experienceFluid = new FluidStack(CSFluids.EXPERIENCE, experience);
         int fill = configurableTank.fill(experienceFluid, FluidAction.SIMULATE, true);
         if (fill == 0)
             return false;
@@ -203,12 +203,12 @@ public abstract class BlazeExperienceBlockEntity extends BlazeBlockEntity implem
             case KINDLED -> {
                 int capacity = getNormalTank().getCapacity();
                 tanks.setTank(0, callback -> new CreativeSmartFluidTank(capacity, callback));
-                getNormalTank().setFluid(new FluidStack(CEIFluids.EXPERIENCE, capacity));
+                getNormalTank().setFluid(new FluidStack(CSFluids.EXPERIENCE, capacity));
             }
             case SEETHING -> {
                 int capacity = getSpecialTank().getCapacity();
                 tanks.setTank(1, callback -> new CreativeSmartFluidTank(capacity, callback));
-                getSpecialTank().setFluid(new FluidStack(CEIFluids.EXPERIENCE, capacity));
+                getSpecialTank().setFluid(new FluidStack(CSFluids.EXPERIENCE, capacity));
             }
             default -> {
                 tanks.setTank(0, this::createNormalTank);
@@ -249,7 +249,7 @@ public abstract class BlazeExperienceBlockEntity extends BlazeBlockEntity implem
         LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
         CreateLang.translate("gui.goggles.fluid_container")
                 .forGoggles(tooltip);
-        CreateLang.builder().add(CEIFluids.EXPERIENCE.getType().getDescription())
+        CreateLang.builder().add(CSFluids.EXPERIENCE.getType().getDescription())
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip, 1);
         boolean speical = false;

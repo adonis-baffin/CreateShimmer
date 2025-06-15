@@ -18,12 +18,18 @@
 
 package com.adonis.createshimmer.util;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.util.ExtraCodecs;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 
-public record CEIIntIntPair(int level, int value) {
-    public static final Codec<CEIIntIntPair> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ExtraCodecs.POSITIVE_INT.fieldOf("level").forGetter(CEIIntIntPair::level),
-            ExtraCodecs.POSITIVE_INT.fieldOf("value").forGetter(CEIIntIntPair::value)).apply(instance, CEIIntIntPair::new));
+public class CSStreamCodecs {
+    public static final StreamCodec<RegistryFriendlyByteBuf, EnchantmentInstance> ENCHANTMENT_INSTANCE = StreamCodec
+            .composite(
+                    Enchantment.STREAM_CODEC,
+                    it -> it.enchantment,
+                    ByteBufCodecs.VAR_INT,
+                    it -> it.level,
+                    EnchantmentInstance::new);
 }

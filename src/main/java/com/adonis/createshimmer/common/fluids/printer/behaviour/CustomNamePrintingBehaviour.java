@@ -18,6 +18,10 @@
 
 package com.adonis.createshimmer.common.fluids.printer.behaviour;
 
+import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.config.CSConfig;
+import com.adonis.createshimmer.util.CSLang;
 import com.mojang.serialization.DataResult;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.utility.CreateLang;
@@ -32,10 +36,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.config.CEIConfig;
-import com.adonis.createshimmer.util.CEILang;
 
 public class CustomNamePrintingBehaviour implements PrintingBehaviour {
     private final SmartFluidTankBehaviour tank;
@@ -63,7 +63,7 @@ public class CustomNamePrintingBehaviour implements PrintingBehaviour {
 
     @Override
     public int getRequiredFluidAmount(Level level, ItemStack stack, FluidStack fluidStack) {
-        var amount = fluidStack.getFluidHolder().getData(CEIDataMaps.PRINTING_CUSTOM_NAME_INGREDIENT);
+        var amount = fluidStack.getFluidHolder().getData(CSDataMaps.PRINTING_CUSTOM_NAME_INGREDIENT);
         return amount == null ? 0 : amount;
     }
 
@@ -71,7 +71,7 @@ public class CustomNamePrintingBehaviour implements PrintingBehaviour {
     public ItemStack getResult(Level level, ItemStack stack, FluidStack fluidStack) {
         var result = stack.copy();
         var name = getCustomName(fluidStack);
-        if (CEIConfig.fluids().printingCustomNameAsItemName.get())
+        if (CSConfig.fluids().printingCustomNameAsItemName.get())
             result.set(DataComponents.ITEM_NAME, name);
         else
             result.set(DataComponents.CUSTOM_NAME, name);
@@ -88,28 +88,28 @@ public class CustomNamePrintingBehaviour implements PrintingBehaviour {
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         var fluidStack = this.tank.getPrimaryHandler().getFluid();
         var name = getCustomName(fluidStack);
-        if (!CEIConfig.fluids().printingCustomNameAsItemName.get())
+        if (!CSConfig.fluids().printingCustomNameAsItemName.get())
             name.withStyle(ChatFormatting.ITALIC);
-        CEILang.translate("gui.goggles.printing.custom_name").forGoggles(tooltip);
-        CEILang.builder().add(name).forGoggles(tooltip, 1);
-        var cost = tank.getPrimaryHandler().getFluid().getFluidHolder().getData(CEIDataMaps.PRINTING_PATTERN_INGREDIENT);
+        CSLang.translate("gui.goggles.printing.custom_name").forGoggles(tooltip);
+        CSLang.builder().add(name).forGoggles(tooltip, 1);
+        var cost = tank.getPrimaryHandler().getFluid().getFluidHolder().getData(CSDataMaps.PRINTING_PATTERN_INGREDIENT);
         if (cost != null)
-            CEILang.translate("gui.goggles.printing.cost",
-                    CEILang.number(cost)
+            CSLang.translate("gui.goggles.printing.cost",
+                    CSLang.number(cost)
                             .add(CreateLang.translate("generic.unit.millibuckets"))
-                            .style(cost <= CEIConfig.fluids().printerFluidCapacity.get()
+                            .style(cost <= CSConfig.fluids().printerFluidCapacity.get()
                                     ? ChatFormatting.GREEN
                                     : ChatFormatting.RED))
                     .forGoggles(tooltip, 1);
         else if (!tank.getPrimaryHandler().getFluid().isEmpty()) {
-            CEILang.translate("gui.goggles.printing.incorrect_liquid").style(ChatFormatting.RED).forGoggles(tooltip);
+            CSLang.translate("gui.goggles.printing.incorrect_liquid").style(ChatFormatting.RED).forGoggles(tooltip);
         }
         return true;
     }
 
     private MutableComponent getCustomName(FluidStack fluidStack) {
         var name = this.name.copy();
-        var style = fluidStack.getFluidHolder().getData(CEIDataMaps.PRINTING_CUSTOM_NAME_STYLE);
+        var style = fluidStack.getFluidHolder().getData(CSDataMaps.PRINTING_CUSTOM_NAME_STYLE);
         if (style != null)
             name.withStyle(style);
         return name;

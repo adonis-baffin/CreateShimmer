@@ -18,6 +18,14 @@
 
 package com.adonis.createshimmer.integration.jei.category;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.kinetics.grindstone.GrindingRecipe;
+import com.adonis.createshimmer.common.kinetics.grindstone.MechanicalGrindStoneItem;
+import com.adonis.createshimmer.common.registry.CSBlocks;
+import com.adonis.createshimmer.common.registry.CSRecipes;
+import com.adonis.createshimmer.config.CSConfig;
+import com.adonis.createshimmer.integration.jei.category.grinding.GrindingCategory;
+import com.adonis.createshimmer.integration.jei.category.printing.*;
 import com.google.common.base.Preconditions;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
@@ -40,19 +48,10 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLLoader;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import plus.dragons.createdragonsplus.util.ErrorMessages;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.fluids.printer.behaviour.*;
-import com.adonis.createshimmer.common.kinetics.grindstone.GrindingRecipe;
-import com.adonis.createshimmer.common.kinetics.grindstone.MechanicalGrindStoneItem;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
-import com.adonis.createshimmer.common.registry.CEIRecipes;
-import com.adonis.createshimmer.config.CEIConfig;
-import com.adonis.createshimmer.integration.jei.category.grinding.GrindingCategory;
-import com.adonis.createshimmer.integration.jei.category.printing.*;
 
 @JeiPlugin
-public class CEIJeiPlugin implements IModPlugin {
-    public static final ResourceLocation ID = CEICommon.asResource("jei");
+public class CSJeiPlugin implements IModPlugin {
+    public static final ResourceLocation ID = CSCommon.asResource("jei");
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -70,19 +69,19 @@ public class CEIJeiPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         var recipeManager = getRecipeManager();
         registration.addRecipes(PrintingCategory.TYPE, recipeManager
-                .getAllRecipesFor(CEIRecipes.PRINTING.getType())
+                .getAllRecipesFor(CSRecipes.PRINTING.getType())
                 .stream()
                 .map(StandardPrintingRecipeJEI::new)
                 .collect(Collectors.toList()));
         List<PrintingRecipeJEI> builtinPrinting = new ArrayList<>();
-        if (CEIConfig.fluids().enablePackageAddressPrinting.get()) builtinPrinting.add(AddressPrintingRecipeJEI.INSTANCE);
-        if (CEIConfig.fluids().enablePackagePatternPrinting.get()) builtinPrinting.add(PatternPrintingRecipeJEI.INSTANCE);
-        if (CEIConfig.fluids().enableCreateCopiableItemPrinting.get()) builtinPrinting.add(CopyPrintingRecipeJEI.INSTANCE);
-        if (CEIConfig.fluids().enableCustomNamePrinting.get()) builtinPrinting.add(CustomNamePrintingRecipeJEI.INSTANCE);
-        if (CEIConfig.fluids().enableWrittenBookPrinting.get()) builtinPrinting.add(WrittenBookPrintingRecipeJEI.INSTANCE);
+        if (CSConfig.fluids().enablePackageAddressPrinting.get()) builtinPrinting.add(AddressPrintingRecipeJEI.INSTANCE);
+        if (CSConfig.fluids().enablePackagePatternPrinting.get()) builtinPrinting.add(PatternPrintingRecipeJEI.INSTANCE);
+        if (CSConfig.fluids().enableCreateCopiableItemPrinting.get()) builtinPrinting.add(CopyPrintingRecipeJEI.INSTANCE);
+        if (CSConfig.fluids().enableCustomNamePrinting.get()) builtinPrinting.add(CustomNamePrintingRecipeJEI.INSTANCE);
+        if (CSConfig.fluids().enableWrittenBookPrinting.get()) builtinPrinting.add(WrittenBookPrintingRecipeJEI.INSTANCE);
         if (!builtinPrinting.isEmpty())
             registration.addRecipes(PrintingCategory.TYPE, builtinPrinting);
-        if (CEIConfig.fluids().enableEnchantedBookPrinting.get())
+        if (CSConfig.fluids().enableEnchantedBookPrinting.get())
             registration.addRecipes(PrintingCategory.TYPE, EnchantedBookPrintingRecipeJEI.listAll());
         var manualApplication = registration
                 .getJeiHelpers()
@@ -90,7 +89,7 @@ public class CEIJeiPlugin implements IModPlugin {
                 .orElseThrow();
         registration.addRecipes(manualApplication, List.of(MechanicalGrindStoneItem.createRecipe()));
         registration.addRecipes(GrindingCategory.TYPE, recipeManager
-                .getAllRecipesFor(CEIRecipes.GRINDING.getType()));
+                .getAllRecipesFor(CSRecipes.GRINDING.getType()));
         RecipeType<SandPaperPolishingRecipe> polishing = AllRecipeTypes.SANDPAPER_POLISHING.getType();
         registration.addRecipes(GrindingCategory.TYPE, recipeManager
                 .getAllRecipesFor(polishing)
@@ -102,8 +101,8 @@ public class CEIJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalysts(PrintingCategory.TYPE, CEIBlocks.PRINTER);
-        registration.addRecipeCatalysts(GrindingCategory.TYPE, CEIBlocks.MECHANICAL_GRINDSTONE);
+        registration.addRecipeCatalysts(PrintingCategory.TYPE, CSBlocks.PRINTER);
+        registration.addRecipeCatalysts(GrindingCategory.TYPE, CSBlocks.MECHANICAL_GRINDSTONE);
     }
 
     @Internal

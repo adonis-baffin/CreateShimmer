@@ -1,14 +1,14 @@
 {
-  "type": "create_enchantment_industry:grinding",
+  "type": "create_shimmer:grinding",
   "ingredients": [
     {
-      "item": "create_enchantment_industry:super_experience_block"
+      "item": "create_shimmer:super_experience_block"
     }
   ],
   "results": [
     {
       "amount": 27,
-      "id": "create_enchantment_industry:experience"
+      "id": "create_shimmer:experience"
     }
   ]
 }

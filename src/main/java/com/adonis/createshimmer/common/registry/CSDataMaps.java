@@ -18,10 +18,13 @@
 
 package com.adonis.createshimmer.common.registry;
 
+import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
 import static net.minecraft.world.item.enchantment.Enchantments.INFINITY;
 import static net.minecraft.world.item.enchantment.Enchantments.MENDING;
-import static com.adonis.createshimmer.common.CEICommon.REGISTRATE;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.fluids.experience.ExperienceFuel;
+import com.adonis.createshimmer.util.CSIntIntPair;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.simibubi.create.AllBlocks;
@@ -48,63 +51,60 @@ import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import plus.dragons.createdragonsplus.common.registry.CDPFluids;
 import plus.dragons.createdragonsplus.util.Pairs;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceFuel;
-import com.adonis.createshimmer.util.CEIIntIntPair;
 
-public class CEIDataMaps {
+public class CSDataMaps {
     public static final DataMapType<Item, ExperienceFuel> EXPERIENCE_FUEL = DataMapType
-            .builder(CEICommon.asResource("experience_fuel"), Registries.ITEM, ExperienceFuel.CODEC)
+            .builder(CSCommon.asResource("experience_fuel"), Registries.ITEM, ExperienceFuel.CODEC)
             .synced(ExperienceFuel.FULL_CODEC, true)
             .build();
     public static final DataMapType<Fluid, Integer> FLUID_UNIT_EXPERIENCE = DataMapType
-            .builder(CEICommon.asResource("unit/experience"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
+            .builder(CSCommon.asResource("unit/experience"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
             .synced(Codec.INT, true)
             .build();
     public static final DataMapType<Fluid, Integer> PRINTING_ADDRESS_INGREDIENT = DataMapType
-            .builder(CEICommon.asResource("printing/address/ingredient"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
+            .builder(CSCommon.asResource("printing/address/ingredient"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
             .synced(Codec.INT, true)
             .build();
     public static final DataMapType<Fluid, Integer> PRINTING_PATTERN_INGREDIENT = DataMapType
-            .builder(CEICommon.asResource("printing/pattern/ingredient"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
+            .builder(CSCommon.asResource("printing/pattern/ingredient"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
             .synced(Codec.INT, true)
             .build();
     public static final DataMapType<Fluid, Integer> PRINTING_COPY_INGREDIENT = DataMapType
-            .builder(CEICommon.asResource("printing/copy/ingredient"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
+            .builder(CSCommon.asResource("printing/copy/ingredient"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
             .synced(Codec.INT, true)
             .build();
     public static final DataMapType<Fluid, Integer> PRINTING_CUSTOM_NAME_INGREDIENT = DataMapType
-            .builder(CEICommon.asResource("printing/custom_name/ingredient"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
+            .builder(CSCommon.asResource("printing/custom_name/ingredient"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
             .synced(Codec.INT, true)
             .build();
     public static final DataMapType<Fluid, Style> PRINTING_CUSTOM_NAME_STYLE = DataMapType
-            .builder(CEICommon.asResource("printing/custom_name/style"), Registries.FLUID, Style.Serializer.CODEC)
+            .builder(CSCommon.asResource("printing/custom_name/style"), Registries.FLUID, Style.Serializer.CODEC)
             .synced(Style.Serializer.CODEC, true)
             .build();
     public static final DataMapType<Fluid, Integer> PRINTING_WRITTEN_BOOK_INGREDIENT = DataMapType
-            .builder(CEICommon.asResource("printing/written_book/ingredient"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
+            .builder(CSCommon.asResource("printing/written_book/ingredient"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
             .synced(Codec.INT, true)
             .build();
-    public static final DataMapType<Enchantment, List<CEIIntIntPair>> PRINTING_ENCHANTED_BOOK_COST = DataMapType
-            .builder(CEICommon.asResource("printing/enchanted_book/custom_cost"), Registries.ENCHANTMENT, Codec.list(CEIIntIntPair.CODEC))
-            .synced(Codec.list(CEIIntIntPair.CODEC), true)
+    public static final DataMapType<Enchantment, List<CSIntIntPair>> PRINTING_ENCHANTED_BOOK_COST = DataMapType
+            .builder(CSCommon.asResource("printing/enchanted_book/custom_cost"), Registries.ENCHANTMENT, Codec.list(CSIntIntPair.CODEC))
+            .synced(Codec.list(CSIntIntPair.CODEC), true)
             .build();
     public static final DataMapType<Enchantment, Float> FORGING_COST_MULTIPLIER = DataMapType
-            .builder(CEICommon.asResource("forging/cost_multiplier"), Registries.ENCHANTMENT, ExtraCodecs.POSITIVE_FLOAT)
+            .builder(CSCommon.asResource("forging/cost_multiplier"), Registries.ENCHANTMENT, ExtraCodecs.POSITIVE_FLOAT)
             .synced(ExtraCodecs.POSITIVE_FLOAT, true)
             .build();
     public static final DataMapType<Enchantment, Float> SPLITTING_COST_MULTIPLIER = DataMapType
-            .builder(CEICommon.asResource("forging/split_enchantment_cost_multiplier"), Registries.ENCHANTMENT, ExtraCodecs.POSITIVE_FLOAT)
+            .builder(CSCommon.asResource("forging/split_enchantment_cost_multiplier"), Registries.ENCHANTMENT, ExtraCodecs.POSITIVE_FLOAT)
             .synced(ExtraCodecs.POSITIVE_FLOAT, true)
             .build();
     public static final DataMapType<Enchantment, Integer> SUPER_ENCHANTING_LEVEL_EXTENSION = DataMapType
-            .builder(CEICommon.asResource("super_enchanting/custom_level_extension"), Registries.ENCHANTMENT, ExtraCodecs.NON_NEGATIVE_INT)
+            .builder(CSCommon.asResource("super_enchanting/custom_level_extension"), Registries.ENCHANTMENT, ExtraCodecs.NON_NEGATIVE_INT)
             .synced(Codec.INT, true)
             .build();
 
     public static void register(IEventBus modBus) {
-        modBus.register(CEIDataMaps.class);
-        REGISTRATE.addDataGenerator(ProviderType.DATA_MAP, CEIDataMaps::generate);
+        modBus.register(CSDataMaps.class);
+        REGISTRATE.addDataGenerator(ProviderType.DATA_MAP, CSDataMaps::generate);
     }
 
     @SubscribeEvent

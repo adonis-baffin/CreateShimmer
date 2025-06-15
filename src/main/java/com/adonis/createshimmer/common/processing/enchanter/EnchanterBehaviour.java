@@ -18,6 +18,9 @@
 
 package com.adonis.createshimmer.common.processing.enchanter;
 
+import com.adonis.createshimmer.common.processing.enchanter.behaviour.EnchantingBehaviour;
+import com.adonis.createshimmer.common.processing.enchanter.behaviour.TemplateEnchantingBehaviour;
+import com.adonis.createshimmer.util.CSLang;
 import com.google.common.collect.ImmutableList;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
@@ -45,9 +48,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.BlockHitResult;
-import com.adonis.createshimmer.common.processing.enchanter.behaviour.EnchantingBehaviour;
-import com.adonis.createshimmer.common.processing.enchanter.behaviour.TemplateEnchantingBehaviour;
-import com.adonis.createshimmer.util.CEILang;
 
 public class EnchanterBehaviour extends ScrollValueBehaviour implements IHaveGoggleInformation {
     public static final BehaviourType<EnchanterBehaviour> TYPE = new BehaviourType<>();
@@ -59,7 +59,7 @@ public class EnchanterBehaviour extends ScrollValueBehaviour implements IHaveGog
     ValueBoxTransform.Sided templateItemTransform;
 
     public EnchanterBehaviour(BlazeEnchanterBlockEntity enchanter, ValueBoxTransform transform, ValueBoxTransform.Sided templateItemTransform) {
-        super(CEILang.translate("gui.blaze_enchanter.level").component(), enchanter, transform);
+        super(CSLang.translate("gui.blaze_enchanter.level").component(), enchanter, transform);
         this.enchanter = enchanter;
         this.templateItemTransform = templateItemTransform;
     }
@@ -148,7 +148,7 @@ public class EnchanterBehaviour extends ScrollValueBehaviour implements IHaveGog
             return;
         }
         if (!setTemplate(stack.copyWithCount(1))) {
-            player.displayClientMessage(CEILang.translate("gui.blaze_enchanter.template.invalid").component(), true);
+            player.displayClientMessage(CSLang.translate("gui.blaze_enchanter.template.invalid").component(), true);
             AllSoundEvents.DENY.playOnServer(player.level(), player.blockPosition(), 1, 1);
             return;
         }
@@ -184,31 +184,31 @@ public class EnchanterBehaviour extends ScrollValueBehaviour implements IHaveGog
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         boolean added = false;
         if (!template.isEmpty()) {
-            CEILang.translate("gui.goggles.enchanting.template").forGoggles(tooltip);
-            CEILang.item(template).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
+            CSLang.translate("gui.goggles.enchanting.template").forGoggles(tooltip);
+            CSLang.item(template).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
             added = true;
         }
         var style = enchanter.special
                 ? (enchanter.cursed ? ChatFormatting.RED : ChatFormatting.BLUE)
                 : ChatFormatting.GOLD;
         if (value > 0) {
-            CEILang.translate("gui.goggles.enchanting.level", CEILang.number(value).style(style))
+            CSLang.translate("gui.goggles.enchanting.level", CSLang.number(value).style(style))
                     .forGoggles(tooltip);
             added = true;
         } else {
-            CEILang.translate("gui.goggles.enchanting.level.not_set").style(ChatFormatting.RED).forGoggles(tooltip);
+            CSLang.translate("gui.goggles.enchanting.level.not_set").style(ChatFormatting.RED).forGoggles(tooltip);
         }
         int cost = getExperienceCost();
         if (cost > 0) {
             LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
-            CEILang.translate("gui.goggles.enchanting.cost", CEILang.number(cost).add(mb).style(style))
+            CSLang.translate("gui.goggles.enchanting.cost", CSLang.number(cost).add(mb).style(style))
                     .forGoggles(tooltip);
             added = true;
         }
         if (!enchanter.heldItem.isEmpty() && enchanter.processingTime == -1) {
             if (!EnchantmentHelper.getEnchantmentsForCrafting(enchanter.heldItem).isEmpty())
-                CEILang.translate("gui.goggles.enchanting.completed").style(ChatFormatting.GREEN).forGoggles(tooltip);
-            else CEILang.translate("gui.goggles.enchanting.invalid_item").style(ChatFormatting.RED).forGoggles(tooltip);
+                CSLang.translate("gui.goggles.enchanting.completed").style(ChatFormatting.GREEN).forGoggles(tooltip);
+            else CSLang.translate("gui.goggles.enchanting.invalid_item").style(ChatFormatting.RED).forGoggles(tooltip);
         }
         return added;
     }

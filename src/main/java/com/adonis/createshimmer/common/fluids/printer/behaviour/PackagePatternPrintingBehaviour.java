@@ -18,6 +18,10 @@
 
 package com.adonis.createshimmer.common.fluids.printer.behaviour;
 
+import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.config.CSConfig;
+import com.adonis.createshimmer.util.CSLang;
 import com.mojang.serialization.DataResult;
 import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.content.logistics.box.PackageItem;
@@ -31,10 +35,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.config.CEIConfig;
-import com.adonis.createshimmer.util.CEILang;
 
 public class PackagePatternPrintingBehaviour implements PrintingBehaviour {
     private final ItemStack pattern;
@@ -63,7 +63,7 @@ public class PackagePatternPrintingBehaviour implements PrintingBehaviour {
 
     @Override
     public int getRequiredFluidAmount(Level level, ItemStack stack, FluidStack fluidStack) {
-        var amount = fluidStack.getFluidHolder().getData(CEIDataMaps.PRINTING_PATTERN_INGREDIENT);
+        var amount = fluidStack.getFluidHolder().getData(CSDataMaps.PRINTING_PATTERN_INGREDIENT);
         return amount == null ? 0 : amount;
     }
 
@@ -81,18 +81,18 @@ public class PackagePatternPrintingBehaviour implements PrintingBehaviour {
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        CEILang.translate("gui.goggles.printing.pattern").forGoggles(tooltip);
-        var amount = tank.getPrimaryHandler().getFluid().getFluidHolder().getData(CEIDataMaps.PRINTING_PATTERN_INGREDIENT);
+        CSLang.translate("gui.goggles.printing.pattern").forGoggles(tooltip);
+        var amount = tank.getPrimaryHandler().getFluid().getFluidHolder().getData(CSDataMaps.PRINTING_PATTERN_INGREDIENT);
         if (amount != null)
-            CEILang.translate("gui.goggles.printing.cost",
-                    CEILang.number(amount)
+            CSLang.translate("gui.goggles.printing.cost",
+                    CSLang.number(amount)
                             .add(CreateLang.translate("generic.unit.millibuckets"))
-                            .style(amount <= CEIConfig.fluids().printerFluidCapacity.get()
+                            .style(amount <= CSConfig.fluids().printerFluidCapacity.get()
                                     ? ChatFormatting.GREEN
                                     : ChatFormatting.RED))
                     .forGoggles(tooltip, 1);
         else if (!tank.getPrimaryHandler().getFluid().isEmpty()) {
-            CEILang.translate("gui.goggles.printing.incorrect_liquid").style(ChatFormatting.RED).forGoggles(tooltip);
+            CSLang.translate("gui.goggles.printing.incorrect_liquid").style(ChatFormatting.RED).forGoggles(tooltip);
         }
         return true;
     }

@@ -18,12 +18,12 @@
 
 package com.adonis.createshimmer.mixin;
 
+import com.adonis.createshimmer.common.processing.enchanter.EnchantingTemplateItem;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import com.adonis.createshimmer.common.processing.enchanter.EnchantingTemplateItem;
 
 @Mixin(EnchantmentHelper.class)
 public class EnchantmentHelperMixin {

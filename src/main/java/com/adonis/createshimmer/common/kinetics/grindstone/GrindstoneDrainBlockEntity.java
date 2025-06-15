@@ -18,6 +18,9 @@
 
 package com.adonis.createshimmer.common.kinetics.grindstone;
 
+import com.adonis.createshimmer.common.registry.CSFluids;
+import com.adonis.createshimmer.common.registry.CSRecipes;
+import com.adonis.createshimmer.common.registry.CSStats;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
@@ -60,10 +63,6 @@ import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createdragonsplus.common.advancements.AdvancementBehaviour;
 import plus.dragons.createdragonsplus.util.FieldsNullabilityUnknownByDefault;
-import com.adonis.createshimmer.common.registry.CEIAdvancements;
-import com.adonis.createshimmer.common.registry.CEIFluids;
-import com.adonis.createshimmer.common.registry.CEIRecipes;
-import com.adonis.createshimmer.common.registry.CEIStats;
 
 @FieldsNullabilityUnknownByDefault
 public class GrindstoneDrainBlockEntity extends KineticBlockEntity {
@@ -142,7 +141,7 @@ public class GrindstoneDrainBlockEntity extends KineticBlockEntity {
         var recipeManager = level.getRecipeManager();
         var input = new SingleRecipeInput(inputStack);
         var sizeModifier = Math.max(1, (inputStack.getCount() / 5));
-        var grinding = recipeManager.getRecipeFor(CEIRecipes.GRINDING.getType(), input, level);
+        var grinding = recipeManager.getRecipeFor(CSRecipes.GRINDING.getType(), input, level);
         if (grinding.isPresent()) {
             return grinding.get().value().getProcessingDuration() * sizeModifier;
         }
@@ -191,9 +190,9 @@ public class GrindstoneDrainBlockEntity extends KineticBlockEntity {
         var inputStack = inventory.getStackInSlot(0);
         var input = new SingleRecipeInput(inputStack);
         // Grinding
-        var grinding = SequencedAssemblyRecipe.getRecipe(level, input, CEIRecipes.GRINDING.getType(), GrindingRecipe.class);
+        var grinding = SequencedAssemblyRecipe.getRecipe(level, input, CSRecipes.GRINDING.getType(), GrindingRecipe.class);
         if (grinding.isEmpty())
-            grinding = recipeManager.getRecipeFor(CEIRecipes.GRINDING.getType(), input, level);
+            grinding = recipeManager.getRecipeFor(CSRecipes.GRINDING.getType(), input, level);
         if (grinding.isPresent()) {
             var recipe = grinding.get().value();
             var fluidIngredients = recipe.getFluidIngredients();
@@ -204,8 +203,8 @@ public class GrindstoneDrainBlockEntity extends KineticBlockEntity {
             else if (!fluidResults.isEmpty())
                 applicable = fill(fluidResults.getFirst());
             if (applicable) {
-                if (fluidResults.getFirst().is(CEIFluids.EXPERIENCE))
-                    advancement.awardStat(CEIStats.GRINDSTONE_EXPERIENCE.get(), fluidResults.getFirst().getAmount());
+                if (fluidResults.getFirst().is(CSFluids.EXPERIENCE))
+                    advancement.awardStat(CSStats.GRINDSTONE_EXPERIENCE.get(), fluidResults.getFirst().getAmount());
                 inventory.clear();
                 var grinded = recipe.rollResults();
                 for (int i = 0; i < grinded.size(); i++)
@@ -218,7 +217,7 @@ public class GrindstoneDrainBlockEntity extends KineticBlockEntity {
                 .getRecipeFor(AllRecipeTypes.SANDPAPER_POLISHING.getType(), input, level);
         if (polishing.isPresent() && AllRecipeTypes.CAN_BE_AUTOMATED.test(polishing.get())) {
             var polished = polishing.get().value().getResultItem(level.registryAccess());
-            advancement.trigger(CEIAdvancements.GRIND_TO_POLISH.builtinTrigger());
+//            advancement.trigger(CSAdvancements.GRIND_TO_POLISH.builtinTrigger());
             inventory.clear();
             inventory.setStackInSlot(1, polished);
             return;
@@ -227,10 +226,10 @@ public class GrindstoneDrainBlockEntity extends KineticBlockEntity {
         var grindstone = GrindstoneHelper.grindItem(level, inputStack, ItemStack.EMPTY);
         if (grindstone.isPresent()) {
             var result = grindstone.get();
-            var fluid = new FluidStack(CEIFluids.EXPERIENCE, result.experience());
+            var fluid = new FluidStack(CSFluids.EXPERIENCE, result.experience());
             if (fill(fluid)) {
-                advancement.trigger(CEIAdvancements.GONE_WITH_THE_FOIL.builtinTrigger());
-                advancement.awardStat(CEIStats.GRINDSTONE_EXPERIENCE.get(), fluid.getAmount());
+//                advancement.trigger(CSAdvancements.GONE_WITH_THE_FOIL.builtinTrigger());
+                advancement.awardStat(CSStats.GRINDSTONE_EXPERIENCE.get(), fluid.getAmount());
                 inventory.clear();
                 inventory.setStackInSlot(0, result.top());
                 inventory.setStackInSlot(1, result.bottom());

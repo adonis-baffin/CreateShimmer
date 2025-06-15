@@ -18,6 +18,13 @@
 
 package com.adonis.createshimmer.integration.jei.category.printing;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.processing.enchanter.CSEnchantmentHelper;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.common.registry.CSEnchantments;
+import com.adonis.createshimmer.common.registry.CSFluids;
+import com.adonis.createshimmer.config.CSConfig;
+import com.adonis.createshimmer.util.CSIntIntPair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -38,17 +45,10 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.neoforged.neoforge.common.CommonHooks;
 import plus.dragons.createdragonsplus.util.Pairs;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.processing.enchanter.CEIEnchantmentHelper;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.common.registry.CEIEnchantments;
-import com.adonis.createshimmer.common.registry.CEIFluids;
-import com.adonis.createshimmer.config.CEIConfig;
-import com.adonis.createshimmer.util.CEIIntIntPair;
 
 public class EnchantedBookPrintingRecipeJEI implements PrintingRecipeJEI {
     public static final PrintingRecipeJEI.Type TYPE = PrintingRecipeJEI
-            .register(CEICommon.asResource("enchanted_book"), EnchantedBookPrintingRecipeJEI::createCodec);
+            .register(CSCommon.asResource("enchanted_book"), EnchantedBookPrintingRecipeJEI::createCodec);
     private final ResourceLocation id;
     private final EnchantmentInstance enchantment;
     private final ItemStack enchantmentBook;
@@ -60,13 +60,12 @@ public class EnchantedBookPrintingRecipeJEI implements PrintingRecipeJEI {
                 enchantment.level);
         this.enchantment = enchantment;
         this.enchantmentBook = EnchantedBookItem.createForEnchantment(enchantment);
-        Optional<CEIIntIntPair> optional = Optional.empty();
-        var customCost = enchantment.enchantment.getData(CEIDataMaps.PRINTING_ENCHANTED_BOOK_COST);
+        Optional<CSIntIntPair> optional = Optional.empty();
+        var customCost = enchantment.enchantment.getData(CSDataMaps.PRINTING_ENCHANTED_BOOK_COST);
         if (customCost != null) {
             optional = customCost.stream().filter(pair -> pair.level() == enchantment.level).findFirst();
         }
-        this.cost = (int) (optional.map(CEIIntIntPair::value).orElseGet(() ->
-                        CEIEnchantmentHelper.getEnchantmentCost(enchantment.enchantment, enchantment.level)) * CEIConfig.fluids().printingEnchantedBookCostMultiplier.get());
+        this.cost = (int) (optional.map(CSIntIntPair::value).orElseGet(() -> CSEnchantmentHelper.getEnchantmentCost(enchantment.enchantment, enchantment.level)) * CSConfig.fluids().printingEnchantedBookCostMultiplier.get());
     }
 
     public static MapCodec<EnchantedBookPrintingRecipeJEI> createCodec(ICodecHelper codecHelper, IRecipeManager recipeManager) {
@@ -80,9 +79,9 @@ public class EnchantedBookPrintingRecipeJEI implements PrintingRecipeJEI {
     public static List<PrintingRecipeJEI> listAll() {
         return Objects.requireNonNull(CommonHooks.resolveLookup(Registries.ENCHANTMENT))
                 .listElements()
-                .filter(enchantment -> !enchantment.is(CEIEnchantments.MOD_TAGS.printingDeny))
+                .filter(enchantment -> !enchantment.is(CSEnchantments.MOD_TAGS.printingDeny))
                 .flatMap(enchantment -> IntStream
-                        .rangeClosed(enchantment.value().getMinLevel(), CEIEnchantmentHelper.maxLevel(enchantment))
+                        .rangeClosed(enchantment.value().getMinLevel(), CSEnchantmentHelper.maxLevel(enchantment))
                         .mapToObj(level -> new EnchantedBookPrintingRecipeJEI(new EnchantmentInstance(enchantment, level))))
                 .collect(Collectors.toList());
     }
@@ -99,8 +98,8 @@ public class EnchantedBookPrintingRecipeJEI implements PrintingRecipeJEI {
 
     @Override
     public void setFluid(IRecipeSlotBuilder slot) {
-        slot.addFluidStack(CEIFluids.EXPERIENCE.get(), cost);
-        CEIDataMaps.getSourceFluidEntries(CEIDataMaps.FLUID_UNIT_EXPERIENCE)
+        slot.addFluidStack(CSFluids.EXPERIENCE.get(), cost);
+        CSDataMaps.getSourceFluidEntries(CSDataMaps.FLUID_UNIT_EXPERIENCE)
                 .forEach(Pairs.accept((fluid, unit) -> slot.addFluidStack(fluid, (long) unit * cost)));
     }
 

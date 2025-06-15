@@ -18,11 +18,10 @@
 
 package com.adonis.createshimmer.common.kinetics.grindstone;
 
+import com.adonis.createshimmer.common.registry.CSBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.kinetics.deployer.ManualApplicationRecipe;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
-import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -30,7 +29,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
 
 public class MechanicalGrindStoneItem extends BlockItem {
     public MechanicalGrindStoneItem(Block block, Properties properties) {
@@ -38,10 +36,10 @@ public class MechanicalGrindStoneItem extends BlockItem {
     }
 
     public static ManualApplicationRecipe createRecipe() {
-        return new ManualApplicationRecipe.Builder<>(ManualApplicationRecipe::new, CEIBlocks.GRINDSTONE_DRAIN.getId())
+        return new ManualApplicationRecipe.Builder<>(ManualApplicationRecipe::new, CSBlocks.GRINDSTONE_DRAIN.getId())
                 .require(AllBlocks.ITEM_DRAIN)
-                .require(CEIBlocks.MECHANICAL_GRINDSTONE)
-                .output(CEIBlocks.GRINDSTONE_DRAIN)
+                .require(CSBlocks.MECHANICAL_GRINDSTONE)
+                .output(CSBlocks.GRINDSTONE_DRAIN)
                 .build();
     }
 
@@ -73,7 +71,7 @@ public class MechanicalGrindStoneItem extends BlockItem {
         public BlockState getPlacementState() {
             if (clickedDrain) {
                 var facing = getHorizontalDirection().getOpposite();
-                return CEIBlocks.GRINDSTONE_DRAIN.getDefaultState()
+                return CSBlocks.GRINDSTONE_DRAIN.getDefaultState()
                         .setValue(HorizontalKineticBlock.HORIZONTAL_FACING, facing);
             }
             return MechanicalGrindStoneItem.super.getPlacementState(this);

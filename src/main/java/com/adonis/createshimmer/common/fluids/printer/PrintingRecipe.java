@@ -18,6 +18,10 @@
 
 package com.adonis.createshimmer.common.fluids.printer;
 
+import com.adonis.createshimmer.common.registry.CSBlocks;
+import com.adonis.createshimmer.common.registry.CSRecipes;
+import com.adonis.createshimmer.integration.jei.category.assembly.AssemblyPrintingCategory;
+import com.adonis.createshimmer.util.CSLang;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.compat.jei.category.sequencedAssembly.SequencedAssemblySubCategory;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
@@ -44,14 +48,10 @@ import net.minecraft.world.item.enchantment.effects.PlaySoundEffect;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
-import com.adonis.createshimmer.common.registry.CEIRecipes;
-import com.adonis.createshimmer.integration.jei.category.assembly.AssemblyPrintingCategory;
-import com.adonis.createshimmer.util.CEILang;
 
 public class PrintingRecipe extends ProcessingRecipe<PrintingInput, PrintingRecipeParams> implements IAssemblyRecipe {
     public PrintingRecipe(PrintingRecipeParams params) {
-        super(CEIRecipes.PRINTING, params);
+        super(CSRecipes.PRINTING, params);
     }
 
     public static Builder builder(ResourceLocation id, PlaySoundEffect sound) {
@@ -104,14 +104,14 @@ public class PrintingRecipe extends ProcessingRecipe<PrintingInput, PrintingReci
         if (matchingStacks.length == 0 || matchingFluidStacks.isEmpty()) {
             return Component.literal("Invalid");
         }
-        return CEILang.translate("recipe.assembly.printing",
+        return CSLang.translate("recipe.assembly.printing",
                 matchingStacks[0].getHoverName(),
                 matchingFluidStacks.getFirst().getHoverName()).component();
     }
 
     @Override
     public void addRequiredMachines(Set<ItemLike> required) {
-        required.add(CEIBlocks.PRINTER);
+        required.add(CSBlocks.PRINTER);
     }
 
     @Override

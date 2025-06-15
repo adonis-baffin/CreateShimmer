@@ -12,12 +12,18 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have reCSved a copy of the GNU General Public License
+ * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.adonis.createshimmer.client.ponder.scene;
 
+import com.adonis.createshimmer.client.ponder.CSPonderScenes;
+import com.adonis.createshimmer.common.processing.enchanter.BlazeEnchanterBlockEntity;
+import com.adonis.createshimmer.common.processing.enchanter.EnchanterBehaviour;
+import com.adonis.createshimmer.common.registry.CSBlocks;
+import com.adonis.createshimmer.common.registry.CSFluids;
+import com.adonis.createshimmer.common.registry.CSItems;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmBlockEntity;
@@ -38,12 +44,6 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import plus.dragons.createdragonsplus.common.processing.blaze.BlazeBlock;
-import com.adonis.createshimmer.client.ponder.CSPonderScenes;
-import com.adonis.createshimmer.common.processing.enchanter.BlazeEnchanterBlockEntity;
-import com.adonis.createshimmer.common.processing.enchanter.EnchanterBehaviour;
-import com.adonis.createshimmer.common.registry.CSBlocks;
-import com.adonis.createshimmer.common.registry.CSFluids;
-import com.adonis.createshimmer.common.registry.CSItems;
 
 public class EnchanterScene {
     public static void basic(SceneBuilder builder, SceneBuildingUtil util) {

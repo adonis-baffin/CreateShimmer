@@ -18,6 +18,10 @@
 
 package com.adonis.createshimmer.client.ponder.scene;
 
+import com.adonis.createshimmer.client.ponder.CSPonderScenes;
+import com.adonis.createshimmer.common.fluids.printer.PrinterBehaviour;
+import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
+import com.adonis.createshimmer.common.registry.CSFluids;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import com.simibubi.create.content.logistics.depot.DepotBlockEntity;
@@ -43,10 +47,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import plus.dragons.createdragonsplus.common.registry.CDPFluids;
 import plus.dragons.createdragonsplus.common.registry.CDPItems;
-import com.adonis.createshimmer.client.ponder.CEIPonderScenes;
-import com.adonis.createshimmer.common.fluids.printer.PrinterBehaviour;
-import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
-import com.adonis.createshimmer.common.registry.CEIFluids;
 
 public class MiscScene {
     public static void experienceHatch(SceneBuilder builder, SceneBuildingUtil util) {
@@ -69,11 +69,11 @@ public class MiscScene {
         scene.overlay().showControls(frontVec, Pointing.UP, 50).rightClick();
         scene.idle(10);
         scene.world().modifyBlockEntity(util.grid().at(2, 3, 2), FluidTankBlockEntity.class,
-                be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CEIFluids.EXPERIENCE.get(), 10000), IFluidHandler.FluidAction.EXECUTE));
+                be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CSFluids.EXPERIENCE.get(), 10000), IFluidHandler.FluidAction.EXECUTE));
         scene.idle(50);
 
         scene.world().modifyBlockEntity(util.grid().at(3, 2, 1), BasinBlockEntity.class,
-                be -> be.inputTank.getPrimaryHandler().fill(new FluidStack(CEIFluids.EXPERIENCE.get(), 1000), IFluidHandler.FluidAction.EXECUTE));
+                be -> be.inputTank.getPrimaryHandler().fill(new FluidStack(CSFluids.EXPERIENCE.get(), 1000), IFluidHandler.FluidAction.EXECUTE));
         scene.idle(10);
         scene.world().showSection(util.select().fromTo(3, 2, 1, 2, 2, 1), Direction.UP);
         scene.idle(10);
@@ -86,7 +86,7 @@ public class MiscScene {
         scene.overlay().showControls(frontVec, Pointing.UP, 50).rightClick().whileSneaking();
         scene.idle(30);
         scene.world().modifyBlockEntity(util.grid().at(3, 2, 1), BasinBlockEntity.class,
-                be -> be.inputTank.getPrimaryHandler().drain(new FluidStack(CEIFluids.EXPERIENCE.get(), 1000), IFluidHandler.FluidAction.EXECUTE));
+                be -> be.inputTank.getPrimaryHandler().drain(new FluidStack(CSFluids.EXPERIENCE.get(), 1000), IFluidHandler.FluidAction.EXECUTE));
         scene.idle(40);
 
         scene.overlay().showText(80)
@@ -96,7 +96,7 @@ public class MiscScene {
                 .pointAt(util.vector().centerOf(1, 3, 2));
         for (int i = 0; i < 12; i++) {
             scene.world().modifyBlockEntity(util.grid().at(2, 3, 2), FluidTankBlockEntity.class,
-                    be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CEIFluids.EXPERIENCE.get(), 1000), IFluidHandler.FluidAction.EXECUTE));
+                    be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CSFluids.EXPERIENCE.get(), 1000), IFluidHandler.FluidAction.EXECUTE));
             scene.idle(5);
         }
         scene.idle(30);
@@ -221,14 +221,14 @@ public class MiscScene {
                 .attachKeyFrame()
                 .independent();
         var enchantedBook = Items.ENCHANTED_BOOK.getDefaultInstance();
-        CEIPonderScenes.enchant(scene, enchantedBook, Enchantments.CHANNELING, 1);
+        CSPonderScenes.enchant(scene, enchantedBook, Enchantments.CHANNELING, 1);
         scene.world().modifyBlockEntity(util.grid().at(2, 3, 2), PrinterBlockEntity.class, be -> {
             var printer = be.getBehaviour(PrinterBehaviour.TYPE);
             printer.setFilter(enchantedBook);
         });
         scene.world().modifyBlockEntity(util.grid().at(2, 3, 2), PrinterBlockEntity.class, be -> {
             be.getFluidHandler(null).drain(3000, IFluidHandler.FluidAction.EXECUTE);
-            be.getFluidHandler(null).fill(new FluidStack(CEIFluids.EXPERIENCE, 3000), IFluidHandler.FluidAction.EXECUTE);
+            be.getFluidHandler(null).fill(new FluidStack(CSFluids.EXPERIENCE, 3000), IFluidHandler.FluidAction.EXECUTE);
         });
         scene.idle(10);
         scene.world().modifyBlockEntity(util.grid().at(2, 1, 2), DepotBlockEntity.class,
@@ -281,10 +281,10 @@ public class MiscScene {
         scene.world().rotateSection(contraption, 0, -360, 0, 140);
         scene.idle(30);
         scene.world().modifyBlockEntity(util.grid().at(2, 1, 3), FluidTankBlockEntity.class,
-                be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CEIFluids.EXPERIENCE.get(), 2000), IFluidHandler.FluidAction.EXECUTE));
+                be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CSFluids.EXPERIENCE.get(), 2000), IFluidHandler.FluidAction.EXECUTE));
         scene.idle(40);
         scene.world().modifyBlockEntity(util.grid().at(2, 1, 3), FluidTankBlockEntity.class,
-                be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CEIFluids.EXPERIENCE.get(), 2000), IFluidHandler.FluidAction.EXECUTE));
+                be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CSFluids.EXPERIENCE.get(), 2000), IFluidHandler.FluidAction.EXECUTE));
         scene.idle(70);
         scene.world().setKineticSpeed(util.select().fromTo(2, 4, 2, 2, 5, 2), 0);
     }

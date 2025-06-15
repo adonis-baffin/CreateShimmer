@@ -18,6 +18,8 @@
 
 package com.adonis.createshimmer.common.fluids.lantern;
 
+import com.adonis.createshimmer.common.registry.CSBlockEntities;
+import com.adonis.createshimmer.common.registry.CSShapes;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.block.WrenchableDirectionalBlock;
 import net.minecraft.core.BlockPos;
@@ -31,8 +33,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import com.adonis.createshimmer.common.registry.CEIBlockEntities;
-import com.adonis.createshimmer.common.registry.CEIShapes;
 
 public class ExperienceLanternBlock extends WrenchableDirectionalBlock implements IBE<ExperienceLanternBlockEntity> {
     public static final IntegerProperty LIGHT = IntegerProperty.create("light", 0, 15);
@@ -65,7 +65,7 @@ public class ExperienceLanternBlock extends WrenchableDirectionalBlock implement
 
     @Override
     public BlockEntityType<? extends ExperienceLanternBlockEntity> getBlockEntityType() {
-        return CEIBlockEntities.EXPERIENCE_LANTERN.get();
+        return CSBlockEntities.EXPERIENCE_LANTERN.get();
     }
 
     @Override
@@ -75,7 +75,7 @@ public class ExperienceLanternBlock extends WrenchableDirectionalBlock implement
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return CEIShapes.LANTERN_SHAPE.get(pState.getValue(FACING));
+        return CSShapes.LANTERN_SHAPE.get(pState.getValue(FACING));
     }
 
     @Override

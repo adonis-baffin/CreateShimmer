@@ -18,6 +18,9 @@
 
 package com.adonis.createshimmer.common.fluids.experience;
 
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.common.registry.CSFluids;
+import com.adonis.createshimmer.util.CSLang;
 import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
@@ -37,9 +40,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.common.registry.CEIFluids;
-import com.adonis.createshimmer.util.CEILang;
 
 public class ExperienceHatchBehaviour extends FilteringBehaviour {
     public static final BehaviourType<ExperienceHatchBehaviour> TYPE = new BehaviourType<>();
@@ -56,7 +56,7 @@ public class ExperienceHatchBehaviour extends FilteringBehaviour {
         int unit;
         if (Fluids.EMPTY.isSame(fluid.value())) {
             unit = 1;
-            fluid = CEIFluids.EXPERIENCE;
+            fluid = CSFluids.EXPERIENCE;
         } else unit = ExperienceHelper.getExperienceFluidUnit(fluid);
         if (unit == 0)
             return FluidStack.EMPTY;
@@ -72,7 +72,7 @@ public class ExperienceHatchBehaviour extends FilteringBehaviour {
         int unit;
         if (Fluids.EMPTY.isSame(fluid.value())) {
             unit = 1;
-            fluid = CEIFluids.EXPERIENCE;
+            fluid = CSFluids.EXPERIENCE;
         } else unit = ExperienceHelper.getExperienceFluidUnit(fluid);
         if (unit == 0)
             return FluidStack.EMPTY;
@@ -116,10 +116,10 @@ public class ExperienceHatchBehaviour extends FilteringBehaviour {
     @Override
     public ValueSettingsBoard createBoard(Player player, BlockHitResult hitResult) {
         return new ValueSettingsBoard(
-                CEILang.translate("gui.experience_hatch.exchange").component(),
+                CSLang.translate("gui.experience_hatch.exchange").component(),
                 100,
                 10,
-                List.of(CEILang.translate("gui.experience_hatch.points").component()),
+                List.of(CSLang.translate("gui.experience_hatch.points").component()),
                 new ValueSettingsFormatter(this::formatValue));
     }
 
@@ -127,7 +127,7 @@ public class ExperienceHatchBehaviour extends FilteringBehaviour {
     public MutableComponent formatValue(ValueSettings value) {
         int count = value.value();
         if (count == 0)
-            return CEILang.translate("gui.experience_hatch.all").component();
+            return CSLang.translate("gui.experience_hatch.all").component();
         return Component.literal(String.valueOf(count * POINTS_PER_SCROLL));
     }
 
@@ -143,7 +143,7 @@ public class ExperienceHatchBehaviour extends FilteringBehaviour {
         FilterItemStack filter = FilterItemStack.of(stack.copy());
         if (!filter.isEmpty()) {
             FluidStack fluid = filter.fluid(getWorld());
-            if (!fluid.is(CEIFluids.EXPERIENCE) && fluid.getFluidHolder().getData(CEIDataMaps.FLUID_UNIT_EXPERIENCE) == null)
+            if (!fluid.is(CSFluids.EXPERIENCE) && fluid.getFluidHolder().getData(CSDataMaps.FLUID_UNIT_EXPERIENCE) == null)
                 return false;
         }
         this.filter = filter;

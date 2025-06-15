@@ -18,6 +18,10 @@
 
 package com.adonis.createshimmer.common.fluids.printer.behaviour;
 
+import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.config.CSConfig;
+import com.adonis.createshimmer.util.CSLang;
 import com.mojang.serialization.DataResult;
 import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.content.logistics.box.PackageItem;
@@ -31,10 +35,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.config.CEIConfig;
-import com.adonis.createshimmer.util.CEILang;
 
 public class AddressPrintingBehaviour implements PrintingBehaviour {
     private final String address;
@@ -63,7 +63,7 @@ public class AddressPrintingBehaviour implements PrintingBehaviour {
 
     @Override
     public int getRequiredFluidAmount(Level level, ItemStack stack, FluidStack fluidStack) {
-        var amount = fluidStack.getFluidHolder().getData(CEIDataMaps.PRINTING_ADDRESS_INGREDIENT);
+        var amount = fluidStack.getFluidHolder().getData(CSDataMaps.PRINTING_ADDRESS_INGREDIENT);
         return amount == null ? 0 : amount;
     }
 
@@ -83,19 +83,19 @@ public class AddressPrintingBehaviour implements PrintingBehaviour {
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         var address = Component.literal("→ " + this.address).withStyle(ChatFormatting.GOLD);
-        CEILang.translate("gui.goggles.printing.address").forGoggles(tooltip);
-        CEILang.builder().add(address).forGoggles(tooltip, 1);
-        var amount = tank.getPrimaryHandler().getFluid().getFluidHolder().getData(CEIDataMaps.PRINTING_ADDRESS_INGREDIENT);
+        CSLang.translate("gui.goggles.printing.address").forGoggles(tooltip);
+        CSLang.builder().add(address).forGoggles(tooltip, 1);
+        var amount = tank.getPrimaryHandler().getFluid().getFluidHolder().getData(CSDataMaps.PRINTING_ADDRESS_INGREDIENT);
         if (amount != null)
-            CEILang.translate("gui.goggles.printing.cost",
-                    CEILang.number(amount)
+            CSLang.translate("gui.goggles.printing.cost",
+                    CSLang.number(amount)
                             .add(CreateLang.translate("generic.unit.millibuckets"))
-                            .style(amount <= CEIConfig.fluids().printerFluidCapacity.get()
+                            .style(amount <= CSConfig.fluids().printerFluidCapacity.get()
                                     ? ChatFormatting.GREEN
                                     : ChatFormatting.RED))
                     .forGoggles(tooltip, 1);
         else if (!tank.getPrimaryHandler().getFluid().isEmpty()) {
-            CEILang.translate("gui.goggles.printing.incorrect_liquid").style(ChatFormatting.RED).forGoggles(tooltip);
+            CSLang.translate("gui.goggles.printing.incorrect_liquid").style(ChatFormatting.RED).forGoggles(tooltip);
         }
         return true;
     }

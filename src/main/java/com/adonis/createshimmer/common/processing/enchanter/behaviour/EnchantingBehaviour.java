@@ -18,6 +18,10 @@
 
 package com.adonis.createshimmer.common.processing.enchanter.behaviour;
 
+import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
+import com.adonis.createshimmer.common.processing.enchanter.CSEnchantmentHelper;
+import com.adonis.createshimmer.common.processing.enchanter.EnchantingTemplateItem;
+import com.adonis.createshimmer.common.registry.CSEnchantments;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.core.HolderSet;
@@ -30,18 +34,14 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.Level;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
-import com.adonis.createshimmer.common.processing.enchanter.CEIEnchantmentHelper;
-import com.adonis.createshimmer.common.processing.enchanter.EnchantingTemplateItem;
-import com.adonis.createshimmer.common.registry.CEIEnchantments;
 
 public class EnchantingBehaviour {
     protected int enchantingLevel;
-    protected TagKey<Enchantment> enchantmentTag = CEIEnchantments.MOD_TAGS.enchanting;
+    protected TagKey<Enchantment> enchantmentTag = CSEnchantments.MOD_TAGS.enchanting;
     protected List<EnchantmentInstance> enchantments = new ArrayList<>(0);
 
     protected List<EnchantmentInstance> getAvailableEnchantments(Level level, ItemStack stack, boolean special) {
-        int adjustedLevel = CEIEnchantmentHelper.getAdjustedLevel(stack, enchantingLevel);
+        int adjustedLevel = CSEnchantmentHelper.getAdjustedLevel(stack, enchantingLevel);
         if (adjustedLevel == 0)
             return new ArrayList<>(0);
         var possible = level.registryAccess().registryOrThrow(Registries.ENCHANTMENT)
@@ -49,11 +49,11 @@ public class EnchantingBehaviour {
                 .stream()
                 .flatMap(HolderSet::stream)
                 .filter(stack::isPrimaryItemFor);
-        return CEIEnchantmentHelper.getAvailableEnchantmentResults(adjustedLevel, possible, special);
+        return CSEnchantmentHelper.getAvailableEnchantmentResults(adjustedLevel, possible, special);
     }
 
     protected List<EnchantmentInstance> getAvailableCurses(Level level, ItemStack stack) {
-        int adjustedLevel = CEIEnchantmentHelper.getAdjustedLevel(stack, enchantingLevel);
+        int adjustedLevel = CSEnchantmentHelper.getAdjustedLevel(stack, enchantingLevel);
         if (adjustedLevel == 0)
             return new ArrayList<>(0);
         var possible = level.registryAccess().registryOrThrow(Registries.ENCHANTMENT)
@@ -61,7 +61,7 @@ public class EnchantingBehaviour {
                 .stream()
                 .flatMap(HolderSet::stream)
                 .filter(stack::isPrimaryItemFor);
-        return CEIEnchantmentHelper.getAvailableEnchantmentResults(adjustedLevel, possible, true);
+        return CSEnchantmentHelper.getAvailableEnchantmentResults(adjustedLevel, possible, true);
     }
 
     public boolean canProcess(Level level, ItemStack stack, boolean special) {
@@ -73,8 +73,8 @@ public class EnchantingBehaviour {
     public void update(Level level, ItemStack stack, int enchantingLevel, boolean special, boolean cursed) {
         this.enchantingLevel = enchantingLevel;
         enchantmentTag = special
-                ? CEIEnchantments.MOD_TAGS.superEnchanting
-                : CEIEnchantments.MOD_TAGS.enchanting;
+                ? CSEnchantments.MOD_TAGS.superEnchanting
+                : CSEnchantments.MOD_TAGS.enchanting;
         enchantments = getAvailableEnchantments(level, stack, special);
         if (!enchantments.isEmpty() && cursed) {
             enchantments.addAll(getAvailableCurses(level, stack));
@@ -82,8 +82,8 @@ public class EnchantingBehaviour {
     }
 
     public ItemStack getResult(Level level, ItemStack stack, RandomSource random, boolean special) {
-        int adjustedLevel = CEIEnchantmentHelper.getAdjustedLevel(stack, enchantingLevel);
-        var enchantments = CEIEnchantmentHelper.selectEnchantments(random, adjustedLevel, this.enchantments, special);
+        int adjustedLevel = CSEnchantmentHelper.getAdjustedLevel(stack, enchantingLevel);
+        var enchantments = CSEnchantmentHelper.selectEnchantments(random, adjustedLevel, this.enchantments, special);
         if (stack.is(Items.BOOK) && enchantments.size() > 1) {
             enchantments.remove(random.nextInt(enchantments.size()));
         }

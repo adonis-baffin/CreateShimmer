@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.common.fluids.experience;
 
+import com.adonis.createshimmer.common.registry.CSBlockEntities;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -50,8 +51,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import org.jetbrains.annotations.Nullable;
-import com.adonis.createshimmer.common.registry.CEIAdvancements;
-import com.adonis.createshimmer.common.registry.CEIBlockEntities;
 
 public class ExperienceHatchBlock extends HorizontalDirectionalBlock
         implements IBE<ExperienceHatchBlockEntity>, IWrenchable, ProperWaterloggedBlock {
@@ -119,7 +118,7 @@ public class ExperienceHatchBlock extends HorizontalDirectionalBlock
                 serverLevel.getChunkSource().blockChanged(blockEntity.getBlockPos());
             int experience = ExperienceHelper.getExperienceFromFluid(fluid);
             player.giveExperiencePoints(experience);
-            CEIAdvancements.SPIRITUAL_RETURN.awardTo(player);
+//            CSAdvancements.SPIRITUAL_RETURN.awardTo(player);
             return InteractionResult.SUCCESS;
         } else {
             int experience = ExperienceHelper.getExperienceForPlayer(player);
@@ -132,7 +131,7 @@ public class ExperienceHatchBlock extends HorizontalDirectionalBlock
                 serverLevel.getChunkSource().blockChanged(blockEntity.getBlockPos());
             experience = ExperienceHelper.getExperienceFromFluid(fluid.copyWithAmount(filled));
             player.giveExperiencePoints(-experience);
-            CEIAdvancements.SPIRIT_TAKING.awardTo(player);
+//            CSAdvancements.SPIRIT_TAKING.awardTo(player);
             return InteractionResult.SUCCESS;
         }
     }
@@ -154,7 +153,7 @@ public class ExperienceHatchBlock extends HorizontalDirectionalBlock
 
     @Override
     public BlockEntityType<? extends ExperienceHatchBlockEntity> getBlockEntityType() {
-        return CEIBlockEntities.EXPERIENCE_HATCH.get();
+        return CSBlockEntities.EXPERIENCE_HATCH.get();
     }
 
     @Override

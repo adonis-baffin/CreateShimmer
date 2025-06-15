@@ -1,15 +1,15 @@
 {
   "variants": {
     "axis=x": {
-      "model": "create_enchantment_industry:block/mechanical_grindstone",
+      "model": "create_shimmer:block/mechanical_grindstone",
       "x": 90,
       "y": 90
     },
     "axis=y": {
-      "model": "create_enchantment_industry:block/mechanical_grindstone"
+      "model": "create_shimmer:block/mechanical_grindstone"
     },
     "axis=z": {
-      "model": "create_enchantment_industry:block/mechanical_grindstone",
+      "model": "create_shimmer:block/mechanical_grindstone",
       "x": 90,
       "y": 180
     }

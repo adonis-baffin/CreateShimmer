@@ -1,12 +1,12 @@
 {
   "values": [
-    "create_enchantment_industry:mechanical_grindstone",
-    "create_enchantment_industry:grindstone_drain",
-    "create_enchantment_industry:experience_hatch",
-    "create_enchantment_industry:printer",
-    "create_enchantment_industry:blaze_enchanter",
-    "create_enchantment_industry:blaze_forger",
-    "create_enchantment_industry:super_experience_block",
-    "create_enchantment_industry:experience_lantern"
+    "create_shimmer:mechanical_grindstone",
+    "create_shimmer:grindstone_drain",
+    "create_shimmer:experience_hatch",
+    "create_shimmer:printer",
+    "create_shimmer:blaze_enchanter",
+    "create_shimmer:blaze_forger",
+    "create_shimmer:super_experience_block",
+    "create_shimmer:experience_lantern"
   ]
 }

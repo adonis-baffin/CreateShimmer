@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.integration.jei.category.assembly;
 
+import com.adonis.createshimmer.integration.jei.category.printing.AnimatedPrinter;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.compat.jei.category.sequencedAssembly.SequencedAssemblySubCategory;
@@ -27,7 +28,6 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
-import com.adonis.createshimmer.integration.jei.category.printing.AnimatedPrinter;
 
 public class AssemblyPrintingCategory extends SequencedAssemblySubCategory {
     private final AnimatedPrinter printer = new AnimatedPrinter();

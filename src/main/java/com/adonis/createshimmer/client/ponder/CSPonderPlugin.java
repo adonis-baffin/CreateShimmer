@@ -18,25 +18,25 @@
 
 package com.adonis.createshimmer.client.ponder;
 
+import com.adonis.createshimmer.common.CSCommon;
 import net.createmod.ponder.api.registration.PonderPlugin;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
-import com.adonis.createshimmer.common.CEICommon;
 
-public class CEIPonderPlugin implements PonderPlugin {
+public class CSPonderPlugin implements PonderPlugin {
     @Override
     public String getModId() {
-        return CEICommon.ID;
+        return CSCommon.ID;
     }
 
     @Override
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        CEIPonderScenes.register(helper);
+        CSPonderScenes.register(helper);
     }
 
     @Override
     public void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
-        CEIPonderTags.register(helper);
+        CSPonderTags.register(helper);
     }
 }

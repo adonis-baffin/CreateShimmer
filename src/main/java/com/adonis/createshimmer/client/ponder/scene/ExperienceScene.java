@@ -18,6 +18,9 @@
 
 package com.adonis.createshimmer.client.ponder.scene;
 
+import com.adonis.createshimmer.common.registry.CSBlocks;
+import com.adonis.createshimmer.common.registry.CSFluids;
+import com.adonis.createshimmer.common.registry.CSItems;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
@@ -47,9 +50,6 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import plus.dragons.createdragonsplus.common.processing.blaze.BlazeBlock;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
-import com.adonis.createshimmer.common.registry.CEIFluids;
-import com.adonis.createshimmer.common.registry.CEIItems;
 
 public class ExperienceScene {
     public static void basic(SceneBuilder builder, SceneBuildingUtil util) {
@@ -67,7 +67,7 @@ public class ExperienceScene {
                 .pointAt(util.vector().centerOf(9, 5, 9));
         for (int i = 0; i < 6; i++) {
             scene.world().modifyBlockEntity(util.grid().at(9, 4, 9), FluidTankBlockEntity.class,
-                    be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CEIFluids.EXPERIENCE.get(), 10000), IFluidHandler.FluidAction.EXECUTE));
+                    be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CSFluids.EXPERIENCE.get(), 10000), IFluidHandler.FluidAction.EXECUTE));
             scene.idle(10);
         }
         scene.idle(10);
@@ -313,7 +313,7 @@ public class ExperienceScene {
         scene.idle(20);
         scene.world().createItemOnBelt(util.grid().at(11, 1, 0), Direction.DOWN, new ItemStack(Items.BUCKET));
         scene.idle(20);
-        scene.world().createItemOnBelt(util.grid().at(11, 1, 0), Direction.DOWN, new ItemStack(CEIItems.EXPERIENCE_CAKE_BASE.get()));
+        scene.world().createItemOnBelt(util.grid().at(11, 1, 0), Direction.DOWN, new ItemStack(CSItems.EXPERIENCE_CAKE_BASE.get()));
         scene.idle(20);
 
         // leak
@@ -454,7 +454,7 @@ public class ExperienceScene {
             lightning.moveTo(Vec3.atBottomCenterOf(util.grid().at(1, 2, 1)));
             return lightning;
         });
-        scene.world().replaceBlocks(util.select().layer(1), CEIBlocks.SUPER_EXPERIENCE_BLOCK.getDefaultState(), false);
+        scene.world().replaceBlocks(util.select().layer(1), CSBlocks.SUPER_EXPERIENCE_BLOCK.getDefaultState(), false);
         scene.idle(10);
         scene.overlay().showText(45)
                 .text("Lighting Strike!")
@@ -474,7 +474,7 @@ public class ExperienceScene {
         scene.idle(20);
         scene.world().setBlock(util.grid().at(1, 1, 1), AllBlocks.DEPOT.getDefaultState(), false);
         scene.world().showSection(util.select().position(1, 1, 1), Direction.DOWN);
-        scene.world().modifyBlockEntity(util.grid().at(1, 1, 1), DepotBlockEntity.class, be -> be.setHeldItem(CEIItems.EXPERIENCE_CAKE.asStack()));
+        scene.world().modifyBlockEntity(util.grid().at(1, 1, 1), DepotBlockEntity.class, be -> be.setHeldItem(CSItems.EXPERIENCE_CAKE.asStack()));
         scene.idle(10);
         scene.overlay().showText(60)
                 .text("Second, obtain Cake o' Enchanting. It works as \"Super Experience\" and causes Blazes to enter Super Enchanting mode.")
@@ -489,7 +489,7 @@ public class ExperienceScene {
                 .placeNearTarget()
                 .pointAt(util.vector().topOf(1, 1, 1));
         scene.idle(65);
-        scene.world().modifyBlockEntity(util.grid().at(1, 1, 1), DepotBlockEntity.class, be -> be.setHeldItem(CEIItems.SUPER_ENCHANTING_TEMPLATE.asStack()));
+        scene.world().modifyBlockEntity(util.grid().at(1, 1, 1), DepotBlockEntity.class, be -> be.setHeldItem(CSItems.SUPER_ENCHANTING_TEMPLATE.asStack()));
         scene.idle(25);
         scene.overlay().showText(45)
                 .text("Answer: Crafting Super Enchanting Template")

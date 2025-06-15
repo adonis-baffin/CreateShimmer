@@ -18,6 +18,8 @@
 
 package com.adonis.createshimmer.client.ponder;
 
+import com.adonis.createshimmer.client.ponder.scene.*;
+import com.adonis.createshimmer.common.registry.CSBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
@@ -30,41 +32,39 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
-import com.adonis.createshimmer.client.ponder.scene.*;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
 
-public class CEIPonderScenes {
+public class CSPonderScenes {
     public static void register(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         PonderSceneRegistrationHelper<ItemProviderEntry<?, ?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
         HELPER.forComponents(AllItems.EXP_NUGGET)
-                .addStoryBoard("experience/basic", ExperienceScene::basic, CEIPonderTags.EXPERIENCE_APPLIANCES)
-                .addStoryBoard("experience/advance", ExperienceScene::advance, CEIPonderTags.SUPER_EXPERIENCE_APPLIANCES)
+                .addStoryBoard("experience/basic", ExperienceScene::basic, CSPonderTags.EXPERIENCE_APPLIANCES)
+                .addStoryBoard("experience/advance", ExperienceScene::advance, CSPonderTags.SUPER_EXPERIENCE_APPLIANCES)
                 .addStoryBoard("experience/prepare_for_super_enchant", ExperienceScene::prepare)
                 .addStoryBoard("experience/beacon_base", ExperienceScene::beaconBase);
 
-        HELPER.forComponents(CEIBlocks.EXPERIENCE_HATCH)
-                .addStoryBoard("experience_hatch", MiscScene::experienceHatch, CEIPonderTags.EXPERIENCE_APPLIANCES);
+        HELPER.forComponents(CSBlocks.EXPERIENCE_HATCH)
+                .addStoryBoard("experience_hatch", MiscScene::experienceHatch, CSPonderTags.EXPERIENCE_APPLIANCES);
 
-        HELPER.forComponents(CEIBlocks.MECHANICAL_GRINDSTONE)
-                .addStoryBoard("grindstone/basic", GrindstoneScene::basic, CEIPonderTags.EXPERIENCE_APPLIANCES)
+        HELPER.forComponents(CSBlocks.MECHANICAL_GRINDSTONE)
+                .addStoryBoard("grindstone/basic", GrindstoneScene::basic, CSPonderTags.EXPERIENCE_APPLIANCES)
                 .addStoryBoard("grindstone/extra", GrindstoneScene::extra);
 
-        HELPER.forComponents(CEIBlocks.BLAZE_ENCHANTER)
-                .addStoryBoard("enchanter", EnchanterScene::basic, CEIPonderTags.EXPERIENCE_APPLIANCES)
-                .addStoryBoard("enchanter", EnchanterScene::superEnchant, CEIPonderTags.SUPER_EXPERIENCE_APPLIANCES)
+        HELPER.forComponents(CSBlocks.BLAZE_ENCHANTER)
+                .addStoryBoard("enchanter", EnchanterScene::basic, CSPonderTags.EXPERIENCE_APPLIANCES)
+                .addStoryBoard("enchanter", EnchanterScene::superEnchant, CSPonderTags.SUPER_EXPERIENCE_APPLIANCES)
                 .addStoryBoard("automate_enchanter", EnchanterScene::automate, AllCreatePonderTags.ARM_TARGETS);
 
-        HELPER.forComponents(CEIBlocks.BLAZE_FORGER)
-                .addStoryBoard("forger", ForgerScene::basic, CEIPonderTags.EXPERIENCE_APPLIANCES)
-                .addStoryBoard("forger", ForgerScene::superEnchant, CEIPonderTags.SUPER_EXPERIENCE_APPLIANCES)
+        HELPER.forComponents(CSBlocks.BLAZE_FORGER)
+                .addStoryBoard("forger", ForgerScene::basic, CSPonderTags.EXPERIENCE_APPLIANCES)
+                .addStoryBoard("forger", ForgerScene::superEnchant, CSPonderTags.SUPER_EXPERIENCE_APPLIANCES)
                 .addStoryBoard("automate_forger", ForgerScene::automate, AllCreatePonderTags.ARM_TARGETS);
 
-        HELPER.forComponents(CEIBlocks.PRINTER)
-                .addStoryBoard("printer", MiscScene::printer, CEIPonderTags.EXPERIENCE_APPLIANCES);
+        HELPER.forComponents(CSBlocks.PRINTER)
+                .addStoryBoard("printer", MiscScene::printer, CSPonderTags.EXPERIENCE_APPLIANCES);
 
-        HELPER.forComponents(CEIBlocks.EXPERIENCE_LANTERN)
-                .addStoryBoard("experience_lantern", MiscScene::experienceLantern, CEIPonderTags.EXPERIENCE_APPLIANCES, AllCreatePonderTags.CONTRAPTION_ACTOR);
+        HELPER.forComponents(CSBlocks.EXPERIENCE_LANTERN)
+                .addStoryBoard("experience_lantern", MiscScene::experienceLantern, CSPonderTags.EXPERIENCE_APPLIANCES, AllCreatePonderTags.CONTRAPTION_ACTOR);
     }
 
     public static void enchant(CreateSceneBuilder scene, ItemStack item, ResourceKey<Enchantment> enchantment, int level) {

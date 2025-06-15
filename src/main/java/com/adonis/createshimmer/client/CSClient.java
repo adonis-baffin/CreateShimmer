@@ -18,13 +18,12 @@
 
 package com.adonis.createshimmer.client;
 
+import com.adonis.createshimmer.client.model.CSPartialModels;
+import com.adonis.createshimmer.common.CSCommon;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import com.adonis.createshimmer.client.model.CSPartialModels;
-//import plus.dragons.createenchantmentindustry.client.ponder.CEIPonderPlugin;
-import com.adonis.createshimmer.common.CSCommon;
 
 @Mod(value = CSCommon.ID, dist = Dist.CLIENT)
 public class CSClient {

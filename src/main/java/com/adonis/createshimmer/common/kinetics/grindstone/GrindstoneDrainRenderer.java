@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.common.kinetics.grindstone;
 
+import com.adonis.createshimmer.common.registry.CSBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
@@ -25,7 +26,6 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
-import com.simibubi.create.foundation.fluid.FluidRenderer;
 import dev.engine_room.flywheel.lib.transform.TransformStack;
 import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.minecraft.client.Minecraft;
@@ -39,7 +39,6 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
 
 public class GrindstoneDrainRenderer extends KineticBlockEntityRenderer<GrindstoneDrainBlockEntity> {
     public GrindstoneDrainRenderer(Context context) {
@@ -56,7 +55,7 @@ public class GrindstoneDrainRenderer extends KineticBlockEntityRenderer<Grindsto
     @Override
     protected BlockState getRenderedBlockState(GrindstoneDrainBlockEntity be) {
         var axis = getRotationAxisOf(be);
-        return CEIBlocks.MECHANICAL_GRINDSTONE.getDefaultState().setValue(RotatedPillarKineticBlock.AXIS, axis);
+        return CSBlocks.MECHANICAL_GRINDSTONE.getDefaultState().setValue(RotatedPillarKineticBlock.AXIS, axis);
     }
 
     protected void renderItems(GrindstoneDrainBlockEntity drain, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light, int overlay) {

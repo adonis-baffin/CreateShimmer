@@ -18,6 +18,8 @@
 
 package com.adonis.createshimmer.common.processing.enchanter;
 
+import com.adonis.createshimmer.common.fluids.experience.BlazeExperienceBlock;
+import com.adonis.createshimmer.common.registry.CSBlockEntities;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -33,8 +35,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createdragonsplus.common.advancements.AdvancementBehaviour;
-import com.adonis.createshimmer.common.fluids.experience.BlazeExperienceBlock;
-import com.adonis.createshimmer.common.registry.CEIBlockEntities;
 
 public class BlazeEnchanterBlock extends BlazeExperienceBlock<BlazeEnchanterBlockEntity> {
     public BlazeEnchanterBlock(Properties properties) {
@@ -94,6 +94,6 @@ public class BlazeEnchanterBlock extends BlazeExperienceBlock<BlazeEnchanterBloc
 
     @Override
     public BlockEntityType<? extends BlazeEnchanterBlockEntity> getBlockEntityType() {
-        return CEIBlockEntities.BLAZE_ENCHANTER.get();
+        return CSBlockEntities.BLAZE_ENCHANTER.get();
     }
 }

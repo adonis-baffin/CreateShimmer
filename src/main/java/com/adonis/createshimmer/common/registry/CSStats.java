@@ -20,14 +20,14 @@ package com.adonis.createshimmer.common.registry;
 
 import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
 
+import com.adonis.createshimmer.common.CSCommon;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import plus.dragons.createdragonsplus.common.CDPRegistrate;
 import plus.dragons.createdragonsplus.common.registrate.builder.CustomStatBuilder;
-import com.adonis.createshimmer.common.CSCommon;
 
-public class CEIStats {
+public class CSStats {
     public static final RegistryEntry<ResourceLocation, ResourceLocation> GRINDSTONE_EXPERIENCE = create("mechanical_grindstone_experience")
             .lang("Experience Produced (by Mechanical Grindstone)")
             .register();

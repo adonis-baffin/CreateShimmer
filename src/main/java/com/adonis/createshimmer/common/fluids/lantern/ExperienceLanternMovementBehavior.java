@@ -18,6 +18,9 @@
 
 package com.adonis.createshimmer.common.fluids.lantern;
 
+import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
+import com.adonis.createshimmer.common.registry.CSFluids;
+import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
 import com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageWrapper;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
@@ -31,9 +34,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
-import com.adonis.createshimmer.common.registry.CEIFluids;
-import com.adonis.createshimmer.config.CEIConfig;
 
 public class ExperienceLanternMovementBehavior implements MovementBehaviour {
     @Override
@@ -44,7 +44,7 @@ public class ExperienceLanternMovementBehavior implements MovementBehaviour {
                     effectiveAABB,
                     context.contraption.getStorage().getFluids());
         }
-        if (!context.world.isClientSide && CEIConfig.fluids().experienceLanternPullToggle.get()) {
+        if (!context.world.isClientSide && CSConfig.fluids().experienceLanternPullToggle.get()) {
             pullExp(context.world,
                     effectiveAABB,
                     context.position);
@@ -52,7 +52,7 @@ public class ExperienceLanternMovementBehavior implements MovementBehaviour {
     }
 
     protected void drainExp(Level level, AABB effectiveAABB, MountedFluidStorageWrapper tank) {
-        var rate = CEIConfig.fluids().experienceLanternDrainRate.get();
+        var rate = CSConfig.fluids().experienceLanternDrainRate.get();
         List<Player> players = level.getEntitiesOfClass(Player.class, effectiveAABB, player -> player.isAlive() && !player.isSpectator());
         if (!players.isEmpty()) {
             AtomicInteger sum = new AtomicInteger();
@@ -62,7 +62,7 @@ public class ExperienceLanternMovementBehavior implements MovementBehaviour {
                 else if (playerExp != 0) sum.addAndGet(playerExp);
             });
             if (sum.get() != 0) {
-                var inserted = tank.fill(new FluidStack(CEIFluids.EXPERIENCE, sum.get()), IFluidHandler.FluidAction.EXECUTE);
+                var inserted = tank.fill(new FluidStack(CSFluids.EXPERIENCE, sum.get()), IFluidHandler.FluidAction.EXECUTE);
                 if (inserted != 0) {
                     for (var player : players) {
                         var total = ExperienceHelper.getExperienceForPlayer(player);
@@ -93,7 +93,7 @@ public class ExperienceLanternMovementBehavior implements MovementBehaviour {
         if (!experienceOrbs.isEmpty()) {
             for (var orb : experienceOrbs) {
                 var amount = orb.value;
-                var fluidStack = new FluidStack(CEIFluids.EXPERIENCE.get(), amount);
+                var fluidStack = new FluidStack(CSFluids.EXPERIENCE.get(), amount);
                 var inserted = tank.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
                 if (inserted == amount) {
                     orb.remove(Entity.RemovalReason.DISCARDED);
@@ -108,11 +108,11 @@ public class ExperienceLanternMovementBehavior implements MovementBehaviour {
     }
 
     protected void pullExp(Level level, AABB effectiveAABB, Vec3 position) {
-        List<ExperienceOrb> experienceOrbs = level.getEntitiesOfClass(ExperienceOrb.class, effectiveAABB.inflate(CEIConfig.fluids().experienceLanternPullRadius.get()));
+        List<ExperienceOrb> experienceOrbs = level.getEntitiesOfClass(ExperienceOrb.class, effectiveAABB.inflate(CSConfig.fluids().experienceLanternPullRadius.get()));
         if (!experienceOrbs.isEmpty()) {
             for (var orb : experienceOrbs) {
                 if (orb.getDeltaMovement().length() <= .5) {
-                    var pushForce = CEIConfig.fluids().experienceLanternPullForceMultiplier.get() * 1 / orb.position().distanceTo(position);
+                    var pushForce = CSConfig.fluids().experienceLanternPullForceMultiplier.get() * 1 / orb.position().distanceTo(position);
                     var directionToLantern = position.subtract(orb.position()).normalize().multiply(pushForce, pushForce, pushForce);
                     orb.push(directionToLantern);
                 }

@@ -18,6 +18,8 @@
 
 package com.adonis.createshimmer.common.fluids.experience;
 
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.common.registry.CSFluids;
 import java.util.Optional;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -32,8 +34,6 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.common.registry.CEIFluids;
 
 public class ExperienceHelper {
     public static int getExperienceForNextLevel(int level) {
@@ -62,9 +62,9 @@ public class ExperienceHelper {
 
     public static int getExperienceFromFluid(FluidStack fluid) {
         if (fluid.isEmpty()) return 0;
-        if (fluid.is(CEIFluids.EXPERIENCE)) return fluid.getAmount();
+        if (fluid.is(CSFluids.EXPERIENCE)) return fluid.getAmount();
         int amount = fluid.getAmount();
-        Integer unit = fluid.getFluidHolder().getData(CEIDataMaps.FLUID_UNIT_EXPERIENCE);
+        Integer unit = fluid.getFluidHolder().getData(CSDataMaps.FLUID_UNIT_EXPERIENCE);
         if (unit == null)
             return 0;
         return amount / unit;
@@ -79,9 +79,9 @@ public class ExperienceHelper {
     }
 
     public static int getExperienceFluidUnit(Holder<Fluid> fluid) {
-        if (fluid.equals(CEIFluids.EXPERIENCE))
+        if (fluid.equals(CSFluids.EXPERIENCE))
             return 1;
-        Integer unit = fluid.getData(CEIDataMaps.FLUID_UNIT_EXPERIENCE);
+        Integer unit = fluid.getData(CSDataMaps.FLUID_UNIT_EXPERIENCE);
         return unit == null ? 0 : unit;
     }
 

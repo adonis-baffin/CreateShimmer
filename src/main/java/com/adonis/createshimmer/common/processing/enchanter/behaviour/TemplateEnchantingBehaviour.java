@@ -18,13 +18,13 @@
 
 package com.adonis.createshimmer.common.processing.enchanter.behaviour;
 
+import com.adonis.createshimmer.common.processing.enchanter.CSEnchantmentHelper;
+import com.adonis.createshimmer.common.processing.enchanter.EnchantingTemplateItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
-import com.adonis.createshimmer.common.processing.enchanter.CEIEnchantmentHelper;
-import com.adonis.createshimmer.common.processing.enchanter.EnchantingTemplateItem;
 
 public class TemplateEnchantingBehaviour extends EnchantingBehaviour {
     private final ItemStack target;
@@ -51,7 +51,7 @@ public class TemplateEnchantingBehaviour extends EnchantingBehaviour {
 
     @Override
     public ItemStack getResult(Level level, ItemStack stack, RandomSource random, boolean special) {
-        var enchantments = CEIEnchantmentHelper.selectEnchantments(random, enchantingLevel, this.enchantments, special);
+        var enchantments = CSEnchantmentHelper.selectEnchantments(random, enchantingLevel, this.enchantments, special);
         if (enchantments.size() > 1)
             enchantments.remove(random.nextInt(enchantments.size()));
         return stack.getItem().applyEnchantments(stack, enchantments);

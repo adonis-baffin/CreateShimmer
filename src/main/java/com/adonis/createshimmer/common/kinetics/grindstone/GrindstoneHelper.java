@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.common.kinetics.grindstone;
 
+import com.adonis.createshimmer.common.registry.CSRecipes;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
 import java.util.Optional;
@@ -35,7 +36,6 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.GrindstoneEvent;
-import com.adonis.createshimmer.common.registry.CEIRecipes;
 
 public class GrindstoneHelper {
     public static boolean canItemBeGrinded(Level level, ItemStack top, ItemStack bottom) {
@@ -95,9 +95,9 @@ public class GrindstoneHelper {
 
     public static int getExperienceFromGrindingRecipe(Level level, ItemStack stack) {
         var input = new SingleRecipeInput(stack);
-        var grinding = SequencedAssemblyRecipe.getRecipe(level, input, CEIRecipes.GRINDING.getType(), GrindingRecipe.class);
+        var grinding = SequencedAssemblyRecipe.getRecipe(level, input, CSRecipes.GRINDING.getType(), GrindingRecipe.class);
         if (grinding.isEmpty())
-            grinding = level.getRecipeManager().getRecipeFor(CEIRecipes.GRINDING.getType(), input, level);
+            grinding = level.getRecipeManager().getRecipeFor(CSRecipes.GRINDING.getType(), input, level);
         return grinding.map(grindingRecipeRecipeHolder -> grindingRecipeRecipeHolder.value().getFluidResults().getFirst().getAmount()).orElse(0);
     }
 

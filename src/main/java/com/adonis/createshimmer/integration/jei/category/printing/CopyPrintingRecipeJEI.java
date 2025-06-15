@@ -18,6 +18,9 @@
 
 package com.adonis.createshimmer.integration.jei.category.printing;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.util.CSLang;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.content.equipment.clipboard.ClipboardBlockItem;
 import com.simibubi.create.content.equipment.clipboard.ClipboardOverrides;
@@ -34,15 +37,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import plus.dragons.createdragonsplus.util.Pairs;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.util.CEILang;
 
 public enum CopyPrintingRecipeJEI implements PrintingRecipeJEI {
     INSTANCE;
 
     public static final PrintingRecipeJEI.Type TYPE = PrintingRecipeJEI
-            .register(CEICommon.asResource("copy"), MapCodec.unit(INSTANCE));
+            .register(CSCommon.asResource("copy"), MapCodec.unit(INSTANCE));
 
     @Override
     public void setBase(IRecipeSlotBuilder slot) {
@@ -64,7 +64,7 @@ public enum CopyPrintingRecipeJEI implements PrintingRecipeJEI {
                 slot.addItemLike(item);
             }
         }
-        slot.addRichTooltipCallback((view, tooltip) -> tooltip.add(CEILang
+        slot.addRichTooltipCallback((view, tooltip) -> tooltip.add(CSLang
                 .translate("recipe.printing.copy.template")
                 .style(ChatFormatting.GRAY)
                 .component()));
@@ -72,7 +72,7 @@ public enum CopyPrintingRecipeJEI implements PrintingRecipeJEI {
 
     @Override
     public void setFluid(IRecipeSlotBuilder slot) {
-        CEIDataMaps.getSourceFluidEntries(CEIDataMaps.PRINTING_COPY_INGREDIENT)
+        CSDataMaps.getSourceFluidEntries(CSDataMaps.PRINTING_COPY_INGREDIENT)
                 .forEach(Pairs.accept(slot::addFluidStack));
     }
 
@@ -83,7 +83,7 @@ public enum CopyPrintingRecipeJEI implements PrintingRecipeJEI {
                 slot.addItemLike(item);
             }
         }
-        slot.addRichTooltipCallback((view, tooltip) -> tooltip.add(CEILang
+        slot.addRichTooltipCallback((view, tooltip) -> tooltip.add(CSLang
                 .translate("recipe.printing.copy.template")
                 .style(ChatFormatting.GRAY)
                 .component()));

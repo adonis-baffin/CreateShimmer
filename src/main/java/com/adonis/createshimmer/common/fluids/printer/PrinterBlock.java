@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.common.fluids.printer;
 
+import com.adonis.createshimmer.common.registry.CSBlockEntities;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -42,7 +43,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createdragonsplus.common.advancements.AdvancementBehaviour;
-import com.adonis.createshimmer.common.registry.CEIBlockEntities;
 
 public class PrinterBlock extends HorizontalDirectionalBlock implements IWrenchable, IBE<PrinterBlockEntity> {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -102,6 +102,6 @@ public class PrinterBlock extends HorizontalDirectionalBlock implements IWrencha
 
     @Override
     public BlockEntityType<? extends PrinterBlockEntity> getBlockEntityType() {
-        return CEIBlockEntities.PRINTER.get();
+        return CSBlockEntities.PRINTER.get();
     }
 }

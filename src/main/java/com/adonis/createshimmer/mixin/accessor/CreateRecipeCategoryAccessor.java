@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createenchantmentindustry.mixin.accessor;
+package com.adonis.createshimmer.mixin.accessor;
 
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import java.util.List;

@@ -20,10 +20,10 @@ package com.adonis.createshimmer.common.fluids.printer;
 
 import static com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity.PROCESSING_TIME;
 
+import com.adonis.createshimmer.client.model.CSPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
-import com.simibubi.create.foundation.fluid.FluidRenderer;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.createmod.catnip.render.CachedBuffers;
@@ -33,13 +33,12 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Con
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.client.model.CEIPartialModels;
 
 public class PrinterRenderer extends SmartBlockEntityRenderer<PrinterBlockEntity> {
     private static final int PISTON_MOVING_TIME = 5;
     private static final PartialModel[] NOZZLE = {
-            CEIPartialModels.PRINTER_NOZZLE_TOP,
-            CEIPartialModels.PRINTER_NOZZLE_BOTTOM
+            CSPartialModels.PRINTER_NOZZLE_TOP,
+            CSPartialModels.PRINTER_NOZZLE_BOTTOM
     };
 
     public PrinterRenderer(Context context) {
@@ -78,7 +77,7 @@ public class PrinterRenderer extends SmartBlockEntityRenderer<PrinterBlockEntity
         }
         poseStack.popPose();
 
-        CachedBuffers.partial(CEIPartialModels.PRINTER_PISTON, state)
+        CachedBuffers.partial(CSPartialModels.PRINTER_PISTON, state)
                 .translate(0, -progress / 2f, 0)
                 .light(light)
                 .renderInto(poseStack, buffer.getBuffer(RenderType.solid()));

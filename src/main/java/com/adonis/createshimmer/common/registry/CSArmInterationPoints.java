@@ -18,15 +18,15 @@
 
 package com.adonis.createshimmer.common.registry;
 
-import static com.adonis.createshimmer.common.CEICommon.REGISTRATE;
+import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
 
+import com.adonis.createshimmer.common.processing.enchanter.BlazeEnchanterArmInteractionPoint;
+import com.adonis.createshimmer.common.processing.forger.BlazeForgerArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.neoforged.bus.api.IEventBus;
-import com.adonis.createshimmer.common.processing.enchanter.BlazeEnchanterArmInteractionPoint;
-import com.adonis.createshimmer.common.processing.forger.BlazeForgerArmInteractionPoint;
 
-public class CEIArmInterationPoints {
+public class CSArmInterationPoints {
     public static final RegistryEntry<ArmInteractionPointType, BlazeEnchanterArmInteractionPoint.Type> BLAZE_ENCHANTER = REGISTRATE
             .armInteractionPoint("blaze_enchanter", BlazeEnchanterArmInteractionPoint.Type::new)
             .register();

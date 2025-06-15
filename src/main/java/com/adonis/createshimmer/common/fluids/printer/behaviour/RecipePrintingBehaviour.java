@@ -18,6 +18,12 @@
 
 package com.adonis.createshimmer.common.fluids.printer.behaviour;
 
+import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
+import com.adonis.createshimmer.common.fluids.printer.PrintingInput;
+import com.adonis.createshimmer.common.fluids.printer.PrintingRecipe;
+import com.adonis.createshimmer.common.registry.CSRecipes;
+import com.adonis.createshimmer.config.CSConfig;
+import com.adonis.createshimmer.util.CSLang;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import com.simibubi.create.foundation.utility.CreateLang;
 import java.util.List;
@@ -31,12 +37,6 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
-import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
-import com.adonis.createshimmer.common.fluids.printer.PrintingInput;
-import com.adonis.createshimmer.common.fluids.printer.PrintingRecipe;
-import com.adonis.createshimmer.common.registry.CEIRecipes;
-import com.adonis.createshimmer.config.CEIConfig;
-import com.adonis.createshimmer.util.CEILang;
 
 public class RecipePrintingBehaviour implements PrintingBehaviour {
     public static final RecipePrintingBehaviour EMPTY = new RecipePrintingBehaviour(ItemStack.EMPTY);
@@ -49,12 +49,12 @@ public class RecipePrintingBehaviour implements PrintingBehaviour {
 
     private Optional<PrintingRecipe> findRecipe(Level level, ItemStack stack, FluidStack fluidStack) {
         var input = new PrintingInput(stack, template, fluidStack);
-        var holder = SequencedAssemblyRecipe.getRecipe(level, input, CEIRecipes.PRINTING.getType(), PrintingRecipe.class);
+        var holder = SequencedAssemblyRecipe.getRecipe(level, input, CSRecipes.PRINTING.getType(), PrintingRecipe.class);
         if (holder.isPresent()) {
             lastRecipe = holder.get();
             return holder.map(RecipeHolder::value);
         }
-        holder = level.getRecipeManager().getRecipeFor(CEIRecipes.PRINTING.getType(), input, level, lastRecipe);
+        holder = level.getRecipeManager().getRecipeFor(CSRecipes.PRINTING.getType(), input, level, lastRecipe);
         if (holder.isPresent()) {
             lastRecipe = holder.get();
             return holder.map(RecipeHolder::value);
@@ -97,14 +97,14 @@ public class RecipePrintingBehaviour implements PrintingBehaviour {
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         if (template.isEmpty())
             return false;
-        CEILang.translate("gui.goggles.printing.template").forGoggles(tooltip);
-        CEILang.item(template).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
+        CSLang.translate("gui.goggles.printing.template").forGoggles(tooltip);
+        CSLang.item(template).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
         if (lastRecipe != null) {
             var cost = lastRecipe.value().getFluidIngredients().size();
-            CEILang.translate("gui.goggles.printing.cost",
-                    CEILang.number(lastRecipe.value().getFluidIngredients().size())
+            CSLang.translate("gui.goggles.printing.cost",
+                    CSLang.number(lastRecipe.value().getFluidIngredients().size())
                             .add(CreateLang.translate("generic.unit.millibuckets"))
-                            .style(cost <= CEIConfig.fluids().printerFluidCapacity.get()
+                            .style(cost <= CSConfig.fluids().printerFluidCapacity.get()
                                     ? ChatFormatting.GREEN
                                     : ChatFormatting.RED))
                     .forGoggles(tooltip, 1);

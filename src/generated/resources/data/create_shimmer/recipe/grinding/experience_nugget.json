@@ -1,5 +1,5 @@
 {
-  "type": "create_enchantment_industry:grinding",
+  "type": "create_shimmer:grinding",
   "ingredients": [
     {
       "item": "create:experience_nugget"
@@ -8,7 +8,7 @@
   "results": [
     {
       "amount": 3,
-      "id": "create_enchantment_industry:experience"
+      "id": "create_shimmer:experience"
     }
   ]
 }

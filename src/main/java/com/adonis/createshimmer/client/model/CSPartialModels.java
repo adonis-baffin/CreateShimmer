@@ -12,14 +12,14 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have reCSved a copy of the GNU General Public License
+ * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.adonis.createshimmer.client.model;
 
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import com.adonis.createshimmer.common.CSCommon;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
 public class CSPartialModels {
     public static final PartialModel MECHANICAL_GRINDSTONE = block("mechanical_grindstone");

@@ -3,11 +3,11 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "create_enchantment_industry:super_experience_block"
+      "item": "create_shimmer:super_experience_block"
     }
   ],
   "result": {
     "count": 9,
-    "id": "create_enchantment_industry:super_experience_nugget"
+    "id": "create_shimmer:super_experience_nugget"
   }
 }

@@ -18,6 +18,8 @@
 
 package com.adonis.createshimmer.common;
 
+import com.adonis.createshimmer.common.registry.*;
+import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
@@ -32,9 +34,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import plus.dragons.createdragonsplus.common.CDPRegistrate;
-import com.adonis.createshimmer.common.registry.*;
-//import plus.dragons.createenchantmentindustry.common.registry.CEIAdvancements;
-import com.adonis.createshimmer.config.CSConfig;
 
 @Mod(CSCommon.ID)
 public class CSCommon {
@@ -51,11 +50,11 @@ public class CSCommon {
         CSItems.register(modBus);
         CSCreativeModeTabs.register(modBus);
         CSRecipes.register(modBus);
-//        CEIEnchantments.register(modBus);
-//        CEIArmInterationPoints.register(modBus);
-//        CEIDataMaps.register(modBus);
-//        CEIStats.register(modBus);
-//        CEIMountedStorageTypes.register(modBus);
+        CSEnchantments.register(modBus);
+        CSArmInterationPoints.register(modBus);
+        CSDataMaps.register(modBus);
+        CSStats.register(modBus);
+        CSMountedStorageTypes.register(modBus);
         modBus.register(this);
         modBus.register(new CSConfig(modContainer));
     }

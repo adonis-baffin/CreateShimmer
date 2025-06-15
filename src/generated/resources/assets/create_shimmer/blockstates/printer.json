@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "create_enchantment_industry:block/printer/block",
+      "model": "create_shimmer:block/printer/block",
       "y": 90
     },
     "facing=north": {
-      "model": "create_enchantment_industry:block/printer/block"
+      "model": "create_shimmer:block/printer/block"
     },
     "facing=south": {
-      "model": "create_enchantment_industry:block/printer/block",
+      "model": "create_shimmer:block/printer/block",
       "y": 180
     },
     "facing=west": {
-      "model": "create_enchantment_industry:block/printer/block",
+      "model": "create_shimmer:block/printer/block",
       "y": 270
     }
   }

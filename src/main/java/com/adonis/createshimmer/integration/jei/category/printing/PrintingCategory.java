@@ -20,6 +20,10 @@ package com.adonis.createshimmer.integration.jei.category.printing;
 
 import static com.simibubi.create.compat.jei.category.CreateRecipeCategory.getRenderedSlot;
 
+import com.adonis.createshimmer.common.registry.CSBlocks;
+import com.adonis.createshimmer.common.registry.CSRecipes;
+import com.adonis.createshimmer.mixin.accessor.CreateRecipeCategoryAccessor;
+import com.adonis.createshimmer.util.CSLang;
 import com.mojang.serialization.Codec;
 import com.simibubi.create.compat.jei.ItemIcon;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
@@ -40,15 +44,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
-import com.adonis.createshimmer.common.registry.CEIRecipes;
-import com.adonis.createshimmer.mixin.accessor.CreateRecipeCategoryAccessor;
-import com.adonis.createshimmer.util.CEILang;
 
 public class PrintingCategory implements IRecipeCategory<PrintingRecipeJEI> {
-    public static final RecipeType<PrintingRecipeJEI> TYPE = new RecipeType<>(CEIRecipes.PRINTING.getId(), PrintingRecipeJEI.class);
-    private final Component title = CEILang.translate("recipe.printing").component();
-    private final IDrawable icon = new ItemIcon(CEIBlocks.PRINTER::asStack);
+    public static final RecipeType<PrintingRecipeJEI> TYPE = new RecipeType<>(CSRecipes.PRINTING.getId(), PrintingRecipeJEI.class);
+    private final Component title = CSLang.translate("recipe.printing").component();
+    private final IDrawable icon = new ItemIcon(CSBlocks.PRINTER::asStack);
     private final AnimatedPrinter printer = new AnimatedPrinter();
 
     @Override

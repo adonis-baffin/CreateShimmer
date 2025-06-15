@@ -18,6 +18,11 @@
 
 package com.adonis.createshimmer.common.fluids.printer.behaviour;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.config.CSConfig;
+import com.adonis.createshimmer.util.CSLang;
 import com.mojang.serialization.DataResult;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.utility.CreateLang;
@@ -34,11 +39,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.WrittenBookContent;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.fluids.printer.PrinterBlockEntity;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.config.CEIConfig;
-import com.adonis.createshimmer.util.CEILang;
 
 public class WrittenBookPrintingBehaviour implements PrintingBehaviour {
     private final SmartFluidTankBehaviour tank;
@@ -54,12 +54,12 @@ public class WrittenBookPrintingBehaviour implements PrintingBehaviour {
             return Optional.empty();
         var content = stack.get(DataComponents.WRITTEN_BOOK_CONTENT);
         if (content == null || content.pages().isEmpty())
-            return Optional.of(DataResult.error(() -> CEICommon.asLocalization("gui.printer.written_book.invalid")));
+            return Optional.of(DataResult.error(() -> CSCommon.asLocalization("gui.printer.written_book.invalid")));
         int generation = content.generation();
-        int change = CEIConfig.fluids().printingGenerationChange.get();
+        int change = CSConfig.fluids().printingGenerationChange.get();
         int newGeneration = Math.max(0, generation + change);
         if (newGeneration > 2)
-            return Optional.of(DataResult.error(() -> CEICommon.asLocalization("gui.printer.written_book.invalid")));
+            return Optional.of(DataResult.error(() -> CSCommon.asLocalization("gui.printer.written_book.invalid")));
         content = new WrittenBookContent(
                 content.title(),
                 content.author(),
@@ -71,7 +71,7 @@ public class WrittenBookPrintingBehaviour implements PrintingBehaviour {
 
     private OptionalInt getCost(FluidStack fluid) {
         int cost = this.content.pages().size();
-        cost *= Objects.requireNonNullElse(fluid.getFluidHolder().getData(CEIDataMaps.PRINTING_WRITTEN_BOOK_INGREDIENT), 0);
+        cost *= Objects.requireNonNullElse(fluid.getFluidHolder().getData(CSDataMaps.PRINTING_WRITTEN_BOOK_INGREDIENT), 0);
         if (cost == 0)
             return OptionalInt.empty();
         return OptionalInt.of(cost);
@@ -83,7 +83,7 @@ public class WrittenBookPrintingBehaviour implements PrintingBehaviour {
         if (fluid.isEmpty())
             return true;
         var cost = getCost(fluid);
-        return cost.isPresent() && cost.getAsInt() <= CEIConfig.fluids().printerFluidCapacity.get();
+        return cost.isPresent() && cost.getAsInt() <= CSConfig.fluids().printerFluidCapacity.get();
     }
 
     @Override
@@ -118,17 +118,17 @@ public class WrittenBookPrintingBehaviour implements PrintingBehaviour {
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        CEILang.translate("gui.goggles.printing").forGoggles(tooltip);
-        CEILang.builder().add(Component.literal(content.title().raw()))
+        CSLang.translate("gui.goggles.printing").forGoggles(tooltip);
+        CSLang.builder().add(Component.literal(content.title().raw()))
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip, 1);
-        CEILang.builder().add(Component.translatable("book.byAuthor", content.author()))
+        CSLang.builder().add(Component.translatable("book.byAuthor", content.author()))
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
-        getCost(tank.getPrimaryHandler().getFluid()).ifPresent(cost -> CEILang.translate("gui.goggles.printing.cost",
-                CEILang.number(cost)
+        getCost(tank.getPrimaryHandler().getFluid()).ifPresent(cost -> CSLang.translate("gui.goggles.printing.cost",
+                CSLang.number(cost)
                         .add(CreateLang.translate("generic.unit.millibuckets"))
-                        .style(cost <= CEIConfig.fluids().printerFluidCapacity.get()
+                        .style(cost <= CSConfig.fluids().printerFluidCapacity.get()
                                 ? ChatFormatting.GREEN
                                 : ChatFormatting.RED))
                 .forGoggles(tooltip, 1));

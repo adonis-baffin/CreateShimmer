@@ -20,6 +20,10 @@ package com.adonis.createshimmer.integration.jei.category.grinding;
 
 import static com.simibubi.create.compat.jei.category.CreateRecipeCategory.*;
 
+import com.adonis.createshimmer.common.kinetics.grindstone.GrindingRecipe;
+import com.adonis.createshimmer.common.registry.CSBlocks;
+import com.adonis.createshimmer.common.registry.CSRecipes;
+import com.adonis.createshimmer.util.CSLang;
 import com.simibubi.create.compat.jei.ItemIcon;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
@@ -36,16 +40,12 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.Nullable;
-import com.adonis.createshimmer.common.kinetics.grindstone.GrindingRecipe;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
-import com.adonis.createshimmer.common.registry.CEIRecipes;
-import com.adonis.createshimmer.util.CEILang;
 
 public class GrindingCategory implements IRecipeCategory<RecipeHolder<GrindingRecipe>> {
     public static final RecipeType<RecipeHolder<GrindingRecipe>> TYPE = RecipeType
-            .createRecipeHolderType(CEIRecipes.GRINDING.getId());
-    private final Component title = CEILang.translate("recipe.grinding").component();
-    private final IDrawable icon = new ItemIcon(CEIBlocks.GRINDSTONE_DRAIN::asStack);
+            .createRecipeHolderType(CSRecipes.GRINDING.getId());
+    private final Component title = CSLang.translate("recipe.grinding").component();
+    private final IDrawable icon = new ItemIcon(CSBlocks.GRINDSTONE_DRAIN::asStack);
     private final AnimatedGrindstone grindstone = new AnimatedGrindstone();
 
     @Override

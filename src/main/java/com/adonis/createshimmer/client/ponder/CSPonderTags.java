@@ -21,17 +21,17 @@ package com.adonis.createshimmer.client.ponder;
 import static com.simibubi.create.infrastructure.ponder.AllCreatePonderTags.ARM_TARGETS;
 import static com.simibubi.create.infrastructure.ponder.AllCreatePonderTags.CONTRAPTION_ACTOR;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.registry.CSBlocks;
 import com.simibubi.create.AllBlocks;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createdragonsplus.common.registry.CDPBlockEntities;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
 
-public class CEIPonderTags {
-    public static final ResourceLocation EXPERIENCE_APPLIANCES = CEICommon.asResource("experience_appliances");
-    public static final ResourceLocation SUPER_EXPERIENCE_APPLIANCES = CEICommon.asResource("super_experience_related");
+public class CSPonderTags {
+    public static final ResourceLocation EXPERIENCE_APPLIANCES = CSCommon.asResource("experience_appliances");
+    public static final ResourceLocation SUPER_EXPERIENCE_APPLIANCES = CSCommon.asResource("super_experience_related");
 
     public static void register(PonderTagRegistrationHelper<ResourceLocation> helper) {
         PonderTagRegistrationHelper<RegistryEntry<?, ?>> entryHelper = helper.withKeyFunction(RegistryEntry::getId);
@@ -45,7 +45,7 @@ public class CEIPonderTags {
 
         helper.registerTag(SUPER_EXPERIENCE_APPLIANCES)
                 .addToIndex()
-                .item(CEIBlocks.SUPER_EXPERIENCE_BLOCK.get(), true, false)
+                .item(CSBlocks.SUPER_EXPERIENCE_BLOCK.get(), true, false)
                 .title("Super Experience Related")
                 .description("Components which will be used when processing and applying Super Experience")
                 .register();
@@ -53,23 +53,23 @@ public class CEIPonderTags {
         entryHelper.addToTag(EXPERIENCE_APPLIANCES)
                 .add(AllBlocks.ITEM_DRAIN)
                 .add(AllBlocks.SPOUT)
-                .add(CEIBlocks.MECHANICAL_GRINDSTONE)
+                .add(CSBlocks.MECHANICAL_GRINDSTONE)
                 .add(CDPBlockEntities.FLUID_HATCH)
-                .add(CEIBlocks.EXPERIENCE_HATCH)
-                .add(CEIBlocks.EXPERIENCE_LANTERN)
-                .add(CEIBlocks.BLAZE_ENCHANTER)
-                .add(CEIBlocks.BLAZE_FORGER)
-                .add(CEIBlocks.PRINTER);
+                .add(CSBlocks.EXPERIENCE_HATCH)
+                .add(CSBlocks.EXPERIENCE_LANTERN)
+                .add(CSBlocks.BLAZE_ENCHANTER)
+                .add(CSBlocks.BLAZE_FORGER)
+                .add(CSBlocks.PRINTER);
 
         entryHelper.addToTag(SUPER_EXPERIENCE_APPLIANCES)
-                .add(CEIBlocks.BLAZE_ENCHANTER)
-                .add(CEIBlocks.BLAZE_FORGER);
+                .add(CSBlocks.BLAZE_ENCHANTER)
+                .add(CSBlocks.BLAZE_FORGER);
 
         entryHelper.addToTag(ARM_TARGETS)
-                .add(CEIBlocks.BLAZE_ENCHANTER)
-                .add(CEIBlocks.BLAZE_FORGER);
+                .add(CSBlocks.BLAZE_ENCHANTER)
+                .add(CSBlocks.BLAZE_FORGER);
 
         entryHelper.addToTag(CONTRAPTION_ACTOR)
-                .add(CEIBlocks.EXPERIENCE_LANTERN);
+                .add(CSBlocks.EXPERIENCE_LANTERN);
     }
 }

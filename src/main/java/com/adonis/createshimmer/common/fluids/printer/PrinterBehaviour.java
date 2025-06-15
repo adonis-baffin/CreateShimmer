@@ -18,6 +18,8 @@
 
 package com.adonis.createshimmer.common.fluids.printer;
 
+import com.adonis.createshimmer.common.fluids.printer.behaviour.PrintingBehaviour;
+import com.adonis.createshimmer.common.fluids.printer.behaviour.RecipePrintingBehaviour;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.content.logistics.filter.FilterItemStack;
@@ -42,8 +44,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createdragonsplus.util.CodeReference;
-import com.adonis.createshimmer.common.fluids.printer.behaviour.PrintingBehaviour;
-import com.adonis.createshimmer.common.fluids.printer.behaviour.RecipePrintingBehaviour;
 
 public class PrinterBehaviour extends FilteringBehaviour {
     public static final BehaviourType<PrinterBehaviour> TYPE = new BehaviourType<>();

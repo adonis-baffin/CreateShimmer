@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.common.kinetics.grindstone;
 
+import com.adonis.createshimmer.common.registry.CSBlockEntities;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;
@@ -52,7 +53,6 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createdragonsplus.common.advancements.AdvancementBehaviour;
-import com.adonis.createshimmer.common.registry.CEIBlockEntities;
 
 public class GrindstoneDrainBlock extends HorizontalKineticBlock implements IBE<GrindstoneDrainBlockEntity>, SpecialBlockItemRequirement {
     protected static VoxelShape SHAPE = new AllShapes.Builder(AllShapes.CASING_13PX.get(Direction.UP))
@@ -156,7 +156,7 @@ public class GrindstoneDrainBlock extends HorizontalKineticBlock implements IBE<
 
     @Override
     public BlockEntityType<? extends GrindstoneDrainBlockEntity> getBlockEntityType() {
-        return CEIBlockEntities.GRINDSTONE_DRAIN.get();
+        return CSBlockEntities.GRINDSTONE_DRAIN.get();
     }
 
     @Override

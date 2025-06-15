@@ -18,6 +18,13 @@
 
 package com.adonis.createshimmer.common.processing.forger;
 
+import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
+import com.adonis.createshimmer.common.processing.enchanter.CSEnchantmentHelper;
+import com.adonis.createshimmer.common.processing.enchanter.EnchantingTemplateItem;
+import com.adonis.createshimmer.common.registry.CSDataMaps;
+import com.adonis.createshimmer.common.registry.CSItems;
+import com.adonis.createshimmer.common.registry.CSStats;
+import com.adonis.createshimmer.config.CSConfig;
 import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
 import java.util.Comparator;
 import java.util.Objects;
@@ -35,14 +42,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.enchantment.ItemEnchantments.Mutable;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
-import com.adonis.createshimmer.common.processing.enchanter.CEIEnchantmentHelper;
-import com.adonis.createshimmer.common.processing.enchanter.EnchantingTemplateItem;
-import com.adonis.createshimmer.common.registry.CEIAdvancements;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
-import com.adonis.createshimmer.common.registry.CEIItems;
-import com.adonis.createshimmer.common.registry.CEIStats;
-import com.adonis.createshimmer.config.CEIConfig;
 
 public class BlazeForgerInventory extends ItemStackHandler {
     private final BlazeForgerBlockEntity forger;
@@ -145,14 +144,14 @@ public class BlazeForgerInventory extends ItemStackHandler {
         stacks.set(3, stacks.get(5).copy());
         clearInput();
 
-        forger.advancement.awardStat(CEIStats.FORGE.get(), 1);
+        forger.advancement.awardStat(CSStats.FORGE.get(), 1);
         if (forger.special) {
-            forger.advancement.awardStat(CEIStats.SUPER_ENCHANT.get(), 1);
-            if (overCap) forger.advancement.trigger(CEIAdvancements.TRANSCENDENT_OVERCLOCK.builtinTrigger());
-            if (conflicting) forger.advancement.trigger(CEIAdvancements.PARADOX_FUSION.builtinTrigger());
+            forger.advancement.awardStat(CSStats.SUPER_ENCHANT.get(), 1);
+//            if (overCap) forger.advancement.trigger(CSAdvancements.TRANSCENDENT_OVERCLOCK.builtinTrigger());
+//            if (conflicting) forger.advancement.trigger(CSAdvancements.PARADOX_FUSION.builtinTrigger());
         }
-        forger.advancement.trigger(mode == 0 ? CEIAdvancements.BLAZING_FUSION.builtinTrigger() : mode == 1 ? CEIAdvancements.SIGIL_CASTING.builtinTrigger() : CEIAdvancements.MAGIC_UNBINDING.builtinTrigger());
-        forger.advancement.awardStat(CEIStats.FORGE.get(), 1);
+//        forger.advancement.trigger(mode == 0 ? CSAdvancements.BLAZING_FUSION.builtinTrigger() : mode == 1 ? CSAdvancements.SIGIL_CASTING.builtinTrigger() : CSAdvancements.MAGIC_UNBINDING.builtinTrigger());
+        forger.advancement.awardStat(CSStats.FORGE.get(), 1);
     }
 
     protected void updateResult() {
@@ -258,9 +257,9 @@ public class BlazeForgerInventory extends ItemStackHandler {
         EnchantmentHelper.setEnchantments(base, removedEnchantments.toImmutable());
         int level = baseEnchantments.getLevel(enchantment);
         if (!forger.special)
-            level = Math.min(level, CEIEnchantmentHelper.maxLevel(enchantment) + (CEIConfig.enchantments().splitEnchantmentRespectLevelExtension.get() ? CEIEnchantmentHelper.levelExtension(enchantment) : 0));
+            level = Math.min(level, CSEnchantmentHelper.maxLevel(enchantment) + (CSConfig.enchantments().splitEnchantmentRespectLevelExtension.get() ? CSEnchantmentHelper.levelExtension(enchantment) : 0));
         addition.enchant(enchantment, level);
-        var multiplier = enchantment.getData(CEIDataMaps.SPLITTING_COST_MULTIPLIER);
+        var multiplier = enchantment.getData(CSDataMaps.SPLITTING_COST_MULTIPLIER);
         cost += (int) (Math.max(1, enchantment.value().getAnvilCost() * 2) * level * (multiplier != null ? multiplier : 1));
         return true;
     }
@@ -279,7 +278,7 @@ public class BlazeForgerInventory extends ItemStackHandler {
             boolean applicable = base.supportsEnchantment(holder);
             for (Holder<Enchantment> holder1 : resultEnchantments.keySet()) {
                 if (!holder1.equals(holder) && !Enchantment.areCompatible(holder, holder1)) {
-                    applicable = forger.special && CEIConfig.enchantments().ignoreEnchantmentCompatibility.get();
+                    applicable = forger.special && CSConfig.enchantments().ignoreEnchantmentCompatibility.get();
                     conflicting = true;
                     cost++;
                 }
@@ -287,8 +286,8 @@ public class BlazeForgerInventory extends ItemStackHandler {
 
             if (applicable) {
                 applied = true;
-                int maxLevel = CEIEnchantmentHelper.maxLevel(holder);
-                int extendedMaxLevel = maxLevel + CEIEnchantmentHelper.levelExtension(holder);
+                int maxLevel = CSEnchantmentHelper.maxLevel(holder);
+                int extendedMaxLevel = maxLevel + CSEnchantmentHelper.levelExtension(holder);
 
                 if (resultLevel > extendedMaxLevel) {
                     resultLevel = extendedMaxLevel;
@@ -301,7 +300,7 @@ public class BlazeForgerInventory extends ItemStackHandler {
                 int anvilCost = enchantment.getAnvilCost();
                 anvilCost = Math.max(1, anvilCost / 2);
 
-                var multiplier = holder.getData(CEIDataMaps.FORGING_COST_MULTIPLIER);
+                var multiplier = holder.getData(CSDataMaps.FORGING_COST_MULTIPLIER);
                 cost += (int) (anvilCost * resultLevel * (multiplier != null ? multiplier : 1));
             }
         }
@@ -323,7 +322,7 @@ public class BlazeForgerInventory extends ItemStackHandler {
             boolean applicable = true;
             for (Holder<Enchantment> holder1 : resultEnchantments.keySet()) {
                 if (!holder1.equals(holder) && !Enchantment.areCompatible(holder, holder1)) {
-                    applicable = forger.special && CEIConfig.enchantments().ignoreEnchantmentCompatibility.get();
+                    applicable = forger.special && CSConfig.enchantments().ignoreEnchantmentCompatibility.get();
                     conflicting = applicable;
                     cost++;
                 }
@@ -333,7 +332,7 @@ public class BlazeForgerInventory extends ItemStackHandler {
                 resultEnchantments.set(holder, entry.getIntValue());
                 int anvilCost = enchantment.getAnvilCost();
                 anvilCost = Math.max(1, anvilCost / 2);
-                var multiplier = holder.getData(CEIDataMaps.FORGING_COST_MULTIPLIER);
+                var multiplier = holder.getData(CSDataMaps.FORGING_COST_MULTIPLIER);
                 cost += (int) (anvilCost * entry.getIntValue() * (multiplier != null ? multiplier : 1));
             }
         }
@@ -389,8 +388,8 @@ public class BlazeForgerInventory extends ItemStackHandler {
     boolean incompatibleEnchantingTemplateType() {
         var base = stacks.get(0);
         var addition = stacks.get(1);
-        if (!forger.special && (base.is(CEIItems.SUPER_ENCHANTING_TEMPLATE) || addition.is(CEIItems.SUPER_ENCHANTING_TEMPLATE)))
+        if (!forger.special && (base.is(CSItems.SUPER_ENCHANTING_TEMPLATE) || addition.is(CSItems.SUPER_ENCHANTING_TEMPLATE)))
             return true;
-        else return forger.special && (base.is(CEIItems.ENCHANTING_TEMPLATE) || addition.is(CEIItems.ENCHANTING_TEMPLATE));
+        else return forger.special && (base.is(CSItems.ENCHANTING_TEMPLATE) || addition.is(CSItems.ENCHANTING_TEMPLATE));
     }
 }

@@ -18,6 +18,9 @@
 
 package com.adonis.createshimmer.mixin;
 
+import com.adonis.createshimmer.common.fluids.experience.BlazeExperienceBlockEntity;
+import com.adonis.createshimmer.common.registry.CSBlocks;
+import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.AllBlocks;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
@@ -33,9 +36,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.adonis.createshimmer.common.fluids.experience.BlazeExperienceBlockEntity;
-import com.adonis.createshimmer.common.registry.CSBlocks;
-import com.adonis.createshimmer.config.CSConfig;
 
 @Mixin(LightningBolt.class)
 public abstract class LightningBoltMixin extends Entity {

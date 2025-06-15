@@ -18,6 +18,8 @@
 
 package com.adonis.createshimmer.integration.jei.category.printing;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.fluids.printer.PrintingRecipe;
 import com.mojang.serialization.MapCodec;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.helpers.ICodecHelper;
@@ -25,12 +27,10 @@ import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IRecipeManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.fluids.printer.PrintingRecipe;
 
 public class StandardPrintingRecipeJEI implements PrintingRecipeJEI {
     public static final PrintingRecipeJEI.Type TYPE = PrintingRecipeJEI
-            .register(CEICommon.asResource("standard"), StandardPrintingRecipeJEI::createCodec);
+            .register(CSCommon.asResource("standard"), StandardPrintingRecipeJEI::createCodec);
     private final RecipeHolder<PrintingRecipe> recipe;
 
     public StandardPrintingRecipeJEI(RecipeHolder<PrintingRecipe> recipe) {

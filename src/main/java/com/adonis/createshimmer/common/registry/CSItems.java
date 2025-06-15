@@ -20,16 +20,19 @@ package com.adonis.createshimmer.common.registry;
 
 import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
 
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.processing.enchanter.EnchantingTemplateItem;
 import com.simibubi.create.AllTags.AllItemTags;
 import com.simibubi.create.content.materials.ExperienceNuggetItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.Tags;
-import com.adonis.createshimmer.common.processing.enchanter.EnchantingTemplateItem;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 public class CSItems {
     public static final ItemEntry<ExperienceNuggetItem> SUPER_EXPERIENCE_NUGGET = REGISTRATE
@@ -70,8 +73,8 @@ public class CSItems {
                     .rarity(Rarity.RARE)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
             .register();
-//    public static final DeferredItem<BucketItem> EXPERIENCE_BUCKET = DeferredItem
-//            .createItem(CEICommon.asResource("experience_bucket"));
+    public static final DeferredItem<BucketItem> EXPERIENCE_BUCKET = DeferredItem
+            .createItem(CSCommon.asResource("experience_bucket"));
 
     public static void register(IEventBus modBus) {}
 }

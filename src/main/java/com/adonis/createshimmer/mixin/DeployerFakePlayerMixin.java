@@ -18,19 +18,19 @@
 
 package com.adonis.createshimmer.mixin;
 
+import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.content.kinetics.deployer.DeployerFakePlayer;
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.adonis.createshimmer.config.CEIConfig;
 
 @Mixin(value = DeployerFakePlayer.class)
 public class DeployerFakePlayerMixin {
     @Inject(method = "deployerKillsDoNotSpawnXP", at = @At("HEAD"), cancellable = true)
     private static void deployerKillsDoNotSpawnXP$lowerPriority(LivingExperienceDropEvent event, CallbackInfo ci) {
-        if (CEIConfig.kinetics().deployerKillDropXp.get())
+        if (CSConfig.kinetics().deployerKillDropXp.get())
             ci.cancel();
     }
 }

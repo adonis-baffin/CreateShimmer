@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.common.fluids.experience;
 
+import com.adonis.createshimmer.common.registry.CSDataMaps;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -28,7 +29,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.NeoForgeExtraCodecs;
 import org.jetbrains.annotations.Nullable;
-import com.adonis.createshimmer.common.registry.CEIDataMaps;
 
 public record ExperienceFuel(int experience, boolean special, Optional<ItemStack> usingConvertTo) {
 
@@ -59,7 +59,7 @@ public record ExperienceFuel(int experience, boolean special, Optional<ItemStack
     }
 
     public static @Nullable ExperienceFuel get(Level level, ItemStack stack) {
-        var fuel = stack.getItemHolder().getData(CEIDataMaps.EXPERIENCE_FUEL);
+        var fuel = stack.getItemHolder().getData(CSDataMaps.EXPERIENCE_FUEL);
         if (fuel != null)
             return fuel;
         if (!GenericItemEmptying.canItemBeEmptied(level, stack))

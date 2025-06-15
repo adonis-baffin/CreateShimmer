@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.integration.jei.category.assembly;
 
+import com.adonis.createshimmer.integration.jei.category.grinding.AnimatedGrindstone;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.compat.jei.category.sequencedAssembly.SequencedAssemblySubCategory;
@@ -27,7 +28,6 @@ import java.util.List;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.recipe.IFocusGroup;
 import net.minecraft.client.gui.GuiGraphics;
-import com.adonis.createshimmer.integration.jei.category.grinding.AnimatedGrindstone;
 
 public class AssemblyGrindingCategory extends SequencedAssemblySubCategory {
     private final AnimatedGrindstone grindstone = new AnimatedGrindstone();

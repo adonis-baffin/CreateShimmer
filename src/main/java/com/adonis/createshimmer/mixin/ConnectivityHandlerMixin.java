@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.mixin;
 
+import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.fluids.tank.CreativeFluidTankBlockEntity;
@@ -30,7 +31,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
 
 @Mixin(ConnectivityHandler.class)
 public class ConnectivityHandlerMixin {

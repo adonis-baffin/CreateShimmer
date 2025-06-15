@@ -7,7 +7,7 @@
     {
       "type": "fluid_stack",
       "amount": 10,
-      "fluid": "create_enchantment_industry:experience"
+      "fluid": "create_shimmer:experience"
     }
   ],
   "results": [

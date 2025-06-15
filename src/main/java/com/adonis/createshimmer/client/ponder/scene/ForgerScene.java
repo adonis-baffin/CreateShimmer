@@ -18,6 +18,11 @@
 
 package com.adonis.createshimmer.client.ponder.scene;
 
+import com.adonis.createshimmer.client.ponder.CSPonderScenes;
+import com.adonis.createshimmer.common.processing.forger.BlazeForgerBlockEntity;
+import com.adonis.createshimmer.common.registry.CSBlocks;
+import com.adonis.createshimmer.common.registry.CSFluids;
+import com.adonis.createshimmer.common.registry.CSItems;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmBlockEntity;
@@ -38,11 +43,6 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import plus.dragons.createdragonsplus.common.processing.blaze.BlazeBlock;
-import com.adonis.createshimmer.client.ponder.CEIPonderScenes;
-import com.adonis.createshimmer.common.processing.forger.BlazeForgerBlockEntity;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
-import com.adonis.createshimmer.common.registry.CEIFluids;
-import com.adonis.createshimmer.common.registry.CEIItems;
 
 public class ForgerScene {
     public static void basic(SceneBuilder builder, SceneBuildingUtil util) {
@@ -60,10 +60,10 @@ public class ForgerScene {
         scene.world().setKineticSpeed(util.select().position(3, 2, 3), -128);
         scene.idle(20);
         scene.world().modifyBlockEntity(util.grid().at(1, 1, 3), FluidTankBlockEntity.class,
-                be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CEIFluids.EXPERIENCE.get(), 8000), IFluidHandler.FluidAction.EXECUTE));
+                be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CSFluids.EXPERIENCE.get(), 8000), IFluidHandler.FluidAction.EXECUTE));
         scene.idle(20);
         scene.world().modifyBlockEntity(util.grid().at(1, 1, 3), FluidTankBlockEntity.class,
-                be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CEIFluids.EXPERIENCE.get(), 8000), IFluidHandler.FluidAction.EXECUTE));
+                be -> be.getControllerBE().getTankInventory().fill(new FluidStack(CSFluids.EXPERIENCE.get(), 8000), IFluidHandler.FluidAction.EXECUTE));
         scene.idle(30);
 
         scene.overlay().showText(60)
@@ -75,7 +75,7 @@ public class ForgerScene {
         scene.world().setKineticSpeed(util.select().position(1, 1, 2), 128);
         scene.idle(10);
         scene.world().modifyBlockEntity(util.grid().at(2, 2, 1), BlazeForgerBlockEntity.class,
-                be -> be.getNormalTank().fill(new FluidStack(CEIFluids.EXPERIENCE.get(), 4000), IFluidHandler.FluidAction.EXECUTE));
+                be -> be.getNormalTank().fill(new FluidStack(CSFluids.EXPERIENCE.get(), 4000), IFluidHandler.FluidAction.EXECUTE));
         scene.world().modifyBlock(util.grid().at(2, 2, 1), bs -> bs.setValue(BlazeBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.KINDLED), false);
         scene.idle(55);
 
@@ -87,8 +87,8 @@ public class ForgerScene {
         scene.idle(90);
         var sword1 = Items.DIAMOND_SWORD.getDefaultInstance();
         var sword2 = Items.DIAMOND_SWORD.getDefaultInstance();
-        CEIPonderScenes.enchant(scene, sword1, Enchantments.SWEEPING_EDGE, 1);
-        CEIPonderScenes.enchant(scene, sword2, Enchantments.SWEEPING_EDGE, 1);
+        CSPonderScenes.enchant(scene, sword1, Enchantments.SWEEPING_EDGE, 1);
+        CSPonderScenes.enchant(scene, sword2, Enchantments.SWEEPING_EDGE, 1);
         scene.world().modifyBlockEntity(util.grid().at(2, 2, 1), BlazeForgerBlockEntity.class,
                 be -> be.insertItem(sword1, false));
         scene.idle(40);
@@ -105,10 +105,10 @@ public class ForgerScene {
                 .placeNearTarget()
                 .pointAt(util.vector().topOf(2, 2, 1));
         scene.idle(70);
-        var template1 = CEIItems.ENCHANTING_TEMPLATE.asStack();
-        var template2 = CEIItems.ENCHANTING_TEMPLATE.asStack();
-        CEIPonderScenes.enchant(scene, template1, Enchantments.SWEEPING_EDGE, 1);
-        CEIPonderScenes.enchant(scene, template2, Enchantments.SWEEPING_EDGE, 1);
+        var template1 = CSItems.ENCHANTING_TEMPLATE.asStack();
+        var template2 = CSItems.ENCHANTING_TEMPLATE.asStack();
+        CSPonderScenes.enchant(scene, template1, Enchantments.SWEEPING_EDGE, 1);
+        CSPonderScenes.enchant(scene, template2, Enchantments.SWEEPING_EDGE, 1);
         scene.world().modifyBlockEntity(util.grid().at(2, 2, 1), BlazeForgerBlockEntity.class,
                 be -> be.insertItem(template1, false));
         scene.idle(40);
@@ -126,9 +126,9 @@ public class ForgerScene {
                 .pointAt(util.vector().topOf(2, 2, 1));
         scene.idle(70);
         var sword3 = Items.DIAMOND_SWORD.getDefaultInstance();
-        var template3 = CEIItems.ENCHANTING_TEMPLATE.asStack();
-        CEIPonderScenes.enchant(scene, sword3, Enchantments.SWEEPING_EDGE, 1);
-        CEIPonderScenes.enchant(scene, template3, Enchantments.SWEEPING_EDGE, 2);
+        var template3 = CSItems.ENCHANTING_TEMPLATE.asStack();
+        CSPonderScenes.enchant(scene, sword3, Enchantments.SWEEPING_EDGE, 1);
+        CSPonderScenes.enchant(scene, template3, Enchantments.SWEEPING_EDGE, 2);
         scene.world().modifyBlockEntity(util.grid().at(2, 2, 1), BlazeForgerBlockEntity.class,
                 be -> be.insertItem(sword3, false));
         scene.idle(40);
@@ -146,13 +146,13 @@ public class ForgerScene {
                 .pointAt(util.vector().topOf(2, 2, 1));
         scene.idle(90);
         var sword4 = Items.DIAMOND_SWORD.getDefaultInstance();
-        CEIPonderScenes.enchant(scene, sword4, Enchantments.SWEEPING_EDGE, 2);
-        CEIPonderScenes.enchant(scene, sword4, Enchantments.BANE_OF_ARTHROPODS, 2);
+        CSPonderScenes.enchant(scene, sword4, Enchantments.SWEEPING_EDGE, 2);
+        CSPonderScenes.enchant(scene, sword4, Enchantments.BANE_OF_ARTHROPODS, 2);
         scene.world().modifyBlockEntity(util.grid().at(2, 2, 1), BlazeForgerBlockEntity.class,
                 be -> be.insertItem(sword4, false));
         scene.idle(40);
         scene.world().modifyBlockEntity(util.grid().at(2, 2, 1), BlazeForgerBlockEntity.class,
-                be -> be.insertItem(CEIItems.ENCHANTING_TEMPLATE.asStack(), false));
+                be -> be.insertItem(CSItems.ENCHANTING_TEMPLATE.asStack(), false));
         scene.idle(90);
     }
 
@@ -169,10 +169,10 @@ public class ForgerScene {
                 .pointAt(util.vector().topOf(2, 2, 1));
 
         scene.idle(20);
-        scene.overlay().showControls(util.vector().centerOf(2, 3, 1), Pointing.DOWN, 20).rightClick().withItem(CEIItems.EXPERIENCE_CAKE.asStack());
+        scene.overlay().showControls(util.vector().centerOf(2, 3, 1), Pointing.DOWN, 20).rightClick().withItem(CSItems.EXPERIENCE_CAKE.asStack());
         scene.idle(30);
         scene.world().modifyBlockEntity(util.grid().at(2, 2, 1), BlazeForgerBlockEntity.class,
-                be -> be.getSpecialTank().setFluid(new FluidStack(CEIFluids.EXPERIENCE.get(), 4000)));
+                be -> be.getSpecialTank().setFluid(new FluidStack(CSFluids.EXPERIENCE.get(), 4000)));
         scene.world().modifyBlock(util.grid().at(2, 2, 1), bs -> bs.setValue(BlazeBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SEETHING), false);
         scene.idle(20);
 
@@ -210,9 +210,9 @@ public class ForgerScene {
                 .pointAt(util.vector().topOf(2, 2, 2));
         scene.idle(45);
         var sword = Items.DIAMOND_SWORD.getDefaultInstance();
-        var template = CEIItems.SUPER_ENCHANTING_TEMPLATE.asStack();
-        CEIPonderScenes.enchant(scene, sword, Enchantments.SWEEPING_EDGE, 3);
-        CEIPonderScenes.enchant(scene, template, Enchantments.SWEEPING_EDGE, 4);
+        var template = CSItems.SUPER_ENCHANTING_TEMPLATE.asStack();
+        CSPonderScenes.enchant(scene, sword, Enchantments.SWEEPING_EDGE, 3);
+        CSPonderScenes.enchant(scene, template, Enchantments.SWEEPING_EDGE, 4);
         scene.world().modifyBlockEntity(util.grid().at(2, 2, 1), BlazeForgerBlockEntity.class,
                 be -> be.insertItem(sword, false));
         scene.idle(40);
@@ -224,8 +224,8 @@ public class ForgerScene {
             lightning.moveTo(Vec3.atBottomCenterOf(util.grid().at(2, 2, 2)));
             return lightning;
         });
-        scene.world().setBlock(util.grid().at(3, 1, 1), CEIBlocks.SUPER_EXPERIENCE_BLOCK.getDefaultState(), false);
-        scene.world().setBlock(util.grid().at(2, 2, 3), CEIBlocks.SUPER_EXPERIENCE_BLOCK.getDefaultState(), false);
+        scene.world().setBlock(util.grid().at(3, 1, 1), CSBlocks.SUPER_EXPERIENCE_BLOCK.getDefaultState(), false);
+        scene.world().setBlock(util.grid().at(2, 2, 3), CSBlocks.SUPER_EXPERIENCE_BLOCK.getDefaultState(), false);
 
         scene.idle(20);
         scene.overlay().showText(40)
@@ -265,7 +265,7 @@ public class ForgerScene {
         scene.idle(5);
         scene.world().modifyBlockEntity(util.grid().at(2, 2, 1), BlazeForgerBlockEntity.class,
                 be -> {
-                    be.getSpecialTank().setFluid(new FluidStack(CEIFluids.EXPERIENCE.get(), 4000));
+                    be.getSpecialTank().setFluid(new FluidStack(CSFluids.EXPERIENCE.get(), 4000));
                     be.insertItem(sword, false);
                 });
         scene.idle(40);
@@ -300,8 +300,8 @@ public class ForgerScene {
         var enchanter = util.select().position(2, 1, 2);
         scene.world().modifyBlockEntity(input, DepotBlockEntity.class,
                 depot -> depot.setHeldItem(Items.DIAMOND_SWORD.getDefaultInstance()));
-        var template = CEIItems.ENCHANTING_TEMPLATE.asStack();
-        CEIPonderScenes.enchant(scene, template, Enchantments.SWEEPING_EDGE, 3);
+        var template = CSItems.ENCHANTING_TEMPLATE.asStack();
+        CSPonderScenes.enchant(scene, template, Enchantments.SWEEPING_EDGE, 3);
         scene.world().modifyBlockEntity(input2, DepotBlockEntity.class,
                 depot -> depot.setHeldItem(template));
 
@@ -345,17 +345,17 @@ public class ForgerScene {
                 .text("Mechanical Arm also can feed experience fuel")
                 .attachKeyFrame();
         scene.world().modifyBlockEntity(input, DepotBlockEntity.class,
-                depot -> depot.setHeldItem(CEIItems.EXPERIENCE_CAKE.asStack()));
+                depot -> depot.setHeldItem(CSItems.EXPERIENCE_CAKE.asStack()));
         scene.idle(10);
         scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
         scene.idle(20);
         scene.world().modifyBlockEntity(input, DepotBlockEntity.class, depot -> depot.setHeldItem(ItemStack.EMPTY));
-        scene.world().instructArm(armPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, CEIItems.EXPERIENCE_CAKE.asStack(), -1);
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, CSItems.EXPERIENCE_CAKE.asStack(), -1);
         scene.idle(20);
-        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, CEIItems.EXPERIENCE_CAKE.asStack(), 0);
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, CSItems.EXPERIENCE_CAKE.asStack(), 0);
         scene.idle(20);
         scene.world().modifyBlockEntity(util.grid().at(2, 1, 2), BlazeForgerBlockEntity.class,
-                be -> be.getSpecialTank().setFluid(new FluidStack(CEIFluids.EXPERIENCE.get(), 4000)));
+                be -> be.getSpecialTank().setFluid(new FluidStack(CSFluids.EXPERIENCE.get(), 4000)));
         scene.world().modifyBlock(util.grid().at(2, 1, 2), bs -> bs.setValue(BlazeBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SEETHING), false);
         scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, -1);
         scene.idle(20);
@@ -371,7 +371,7 @@ public class ForgerScene {
                 .text("Mechanical Arm can extract forged item")
                 .attachKeyFrame();
         var enchanted = Items.DIAMOND_SWORD.getDefaultInstance();
-        CEIPonderScenes.enchant(scene, enchanted, Enchantments.SWEEPING_EDGE, 3);
+        CSPonderScenes.enchant(scene, enchanted, Enchantments.SWEEPING_EDGE, 3);
         scene.overlay().showOutline(PonderPalette.INPUT, enchanter, enchanter, 40);
         scene.overlay().showOutline(PonderPalette.OUTPUT, outputPos, outputPos, 40);
         scene.idle(40);

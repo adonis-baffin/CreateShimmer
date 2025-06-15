@@ -18,6 +18,11 @@
 
 package com.adonis.createshimmer.common.processing.forger;
 
+import com.adonis.createshimmer.client.model.CSPartialModels;
+import com.adonis.createshimmer.common.fluids.experience.BlazeExperienceBlockEntity;
+import com.adonis.createshimmer.common.registry.CSFluids;
+import com.adonis.createshimmer.config.CSConfig;
+import com.adonis.createshimmer.util.CSLang;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -50,12 +55,6 @@ import org.jetbrains.annotations.Nullable;
 import plus.dragons.createdragonsplus.common.advancements.AdvancementBehaviour;
 import plus.dragons.createdragonsplus.common.fluids.tank.ConfigurableFluidTank;
 import plus.dragons.createdragonsplus.util.FieldsNullabilityUnknownByDefault;
-import com.adonis.createshimmer.client.model.CEIPartialModels;
-import com.adonis.createshimmer.common.fluids.experience.BlazeExperienceBlockEntity;
-import com.adonis.createshimmer.common.registry.CEIAdvancements;
-import com.adonis.createshimmer.common.registry.CEIFluids;
-import com.adonis.createshimmer.config.CEIConfig;
-import com.adonis.createshimmer.util.CEILang;
 
 @FieldsNullabilityUnknownByDefault
 public class BlazeForgerBlockEntity extends BlazeExperienceBlockEntity {
@@ -72,7 +71,7 @@ public class BlazeForgerBlockEntity extends BlazeExperienceBlockEntity {
     }
 
     public @Nullable IFluidHandler getFluidHandler(@Nullable Direction side) {
-        if ((side == Direction.DOWN || side == null ) && !isRemoved())
+        if ((side == Direction.DOWN || side == null) && !isRemoved())
             return tanks.getCapability();
         return null;
     }
@@ -86,13 +85,13 @@ public class BlazeForgerBlockEntity extends BlazeExperienceBlockEntity {
 
     @Override
     protected ConfigurableFluidTank createNormalTank(Consumer<FluidStack> fluidUpdateCallback) {
-        return new ConfigurableFluidTank(CEIConfig.fluids().blazeForgerFluidCapacity.get(), fluidUpdateCallback)
-                .allowInsertion(fluidStack -> fluidStack.is(CEIFluids.EXPERIENCE));
+        return new ConfigurableFluidTank(CSConfig.fluids().blazeForgerFluidCapacity.get(), fluidUpdateCallback)
+                .allowInsertion(fluidStack -> fluidStack.is(CSFluids.EXPERIENCE));
     }
 
     @Override
     protected ConfigurableFluidTank createSpecialTank(Consumer<FluidStack> fluidUpdateCallback) {
-        return new ConfigurableFluidTank(CEIConfig.fluids().blazeForgerFluidCapacity.get(), fluidUpdateCallback)
+        return new ConfigurableFluidTank(CSConfig.fluids().blazeForgerFluidCapacity.get(), fluidUpdateCallback)
                 .forbidInsertion();
     }
 
@@ -105,8 +104,8 @@ public class BlazeForgerBlockEntity extends BlazeExperienceBlockEntity {
     @OnlyIn(Dist.CLIENT)
     protected @Nullable PartialModel getHatModel(HeatLevel heatLevel) {
         return heatLevel.isAtLeast(HeatLevel.FADING)
-                ? CEIPartialModels.BLAZE_FORGER_HAT
-                : CEIPartialModels.BLAZE_FORGER_HAT_SMALL;
+                ? CSPartialModels.BLAZE_FORGER_HAT
+                : CSPartialModels.BLAZE_FORGER_HAT_SMALL;
     }
 
     @Override
@@ -191,7 +190,7 @@ public class BlazeForgerBlockEntity extends BlazeExperienceBlockEntity {
                 return;
             }
             if (special && !cursed && strikeLightning(serverLevel, strikePos)) {
-                advancement.trigger(CEIAdvancements.OSHA_VIOLATION.builtinTrigger());
+//                advancement.trigger(CSAdvancements.OSHA_VIOLATION.builtinTrigger());
                 serverLevel.destroyBlock(worldPosition, false);
                 serverLevel.setBlockAndUpdate(worldPosition, AllBlocks.LIT_BLAZE_BURNER.getDefaultState());
                 this.setRemoved();
@@ -236,28 +235,28 @@ public class BlazeForgerBlockEntity extends BlazeExperienceBlockEntity {
         if (cost > 0) {
             added = true;
             LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
-            CEILang.translate("gui.goggles.forging.cost", CEILang.number(cost).add(mb).style(style))
+            CSLang.translate("gui.goggles.forging.cost", CSLang.number(cost).add(mb).style(style))
                     .forGoggles(tooltip);
             for (int i = 0; i < 2; i++) {
                 var result = inventory.getResult(i);
                 if (result.isEmpty())
                     continue;
-                CEILang.translate("gui.goggles.forging.result").forGoggles(tooltip);
-                CEILang.item(result).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
+                CSLang.translate("gui.goggles.forging.result").forGoggles(tooltip);
+                CSLang.item(result).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
                 var enchantments = EnchantmentHelper.getEnchantmentsForCrafting(result);
                 if (!enchantments.isEmpty())
                     enchantments.addToTooltip(
                             TooltipContext.of(level),
-                            component -> CEILang.builder().add(component).forGoggles(tooltip, 2),
+                            component -> CSLang.builder().add(component).forGoggles(tooltip, 2),
                             TooltipFlag.NORMAL);
             }
         } else {
             if (inventory.forgingCompleted())
-                CEILang.translate("gui.goggles.forging.completed").style(ChatFormatting.GREEN).forGoggles(tooltip);
+                CSLang.translate("gui.goggles.forging.completed").style(ChatFormatting.GREEN).forGoggles(tooltip);
             else if (!inventory.notEnoughItemToForge()) {
                 if (inventory.incompatibleEnchantingTemplateType())
-                    CEILang.translate("gui.goggles.forging.invalid_template_type." + (special ? "normal" : "special")).style(ChatFormatting.RED).forGoggles(tooltip);
-                else CEILang.translate("gui.goggles.forging.invalid_items").style(ChatFormatting.RED).forGoggles(tooltip);
+                    CSLang.translate("gui.goggles.forging.invalid_template_type." + (special ? "normal" : "special")).style(ChatFormatting.RED).forGoggles(tooltip);
+                else CSLang.translate("gui.goggles.forging.invalid_items").style(ChatFormatting.RED).forGoggles(tooltip);
             }
         }
         return added;

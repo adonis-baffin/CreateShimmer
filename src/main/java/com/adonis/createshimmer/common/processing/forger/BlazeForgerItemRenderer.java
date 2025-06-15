@@ -18,6 +18,9 @@
 
 package com.adonis.createshimmer.common.processing.forger;
 
+import com.adonis.createshimmer.client.model.CSPartialModels;
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.common.registry.CSBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
@@ -31,17 +34,14 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import com.adonis.createshimmer.client.model.CEIPartialModels;
-import com.adonis.createshimmer.common.CEICommon;
-import com.adonis.createshimmer.common.registry.CEIBlocks;
 
-@EventBusSubscriber(value = Dist.CLIENT, bus = Bus.MOD, modid = CEICommon.ID)
+@EventBusSubscriber(value = Dist.CLIENT, bus = Bus.MOD, modid = CSCommon.ID)
 public class BlazeForgerItemRenderer extends CustomRenderedItemModelRenderer {
     @SubscribeEvent
     public static void register(RegisterClientExtensionsEvent event) {
         event.registerItem(
-                SimpleCustomRenderer.create(CEIBlocks.BLAZE_FORGER.asItem(), new BlazeForgerItemRenderer()),
-                CEIBlocks.BLAZE_FORGER.asItem());
+                SimpleCustomRenderer.create(CSBlocks.BLAZE_FORGER.asItem(), new BlazeForgerItemRenderer()),
+                CSBlocks.BLAZE_FORGER.asItem());
     }
 
     @Override
@@ -49,7 +49,7 @@ public class BlazeForgerItemRenderer extends CustomRenderedItemModelRenderer {
         renderer.render(model.getOriginalModel(), light);
         poseStack.pushPose();
         poseStack.translate(.5f, .75f, .5f);
-        renderer.render(CEIPartialModels.BLAZE_FORGER_HAT.get(), light);
+        renderer.render(CSPartialModels.BLAZE_FORGER_HAT.get(), light);
         poseStack.popPose();
     }
 }

@@ -18,6 +18,7 @@
 
 package com.adonis.createshimmer.mixin;
 
+import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
 import com.simibubi.create.content.fluids.spout.FillingBySpout;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +28,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceHelper;
 
 @Mixin(value = FillingBySpout.class, remap = false)
 public class FillingBySpoutMixin {

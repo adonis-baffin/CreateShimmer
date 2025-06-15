@@ -18,6 +18,8 @@
 
 package com.adonis.createshimmer.common.fluids.lantern;
 
+import com.adonis.createshimmer.common.registry.CSFluids;
+import com.adonis.createshimmer.common.registry.CSMountedStorageTypes;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType;
@@ -31,8 +33,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.adonis.createshimmer.common.registry.CEIFluids;
-import com.adonis.createshimmer.common.registry.CEIMountedStorageTypes;
 
 public class ExperienceLanternMountedStorage extends WrapperMountedFluidStorage<ExperienceLanternMountedStorage.Handler> {
     public static final MapCodec<ExperienceLanternMountedStorage> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
@@ -47,7 +47,7 @@ public class ExperienceLanternMountedStorage extends WrapperMountedFluidStorage<
     }
 
     protected ExperienceLanternMountedStorage(int capacity, FluidStack stack) {
-        this(CEIMountedStorageTypes.EXPERIENCE_LANTERN.get(), capacity, stack);
+        this(CSMountedStorageTypes.EXPERIENCE_LANTERN.get(), capacity, stack);
     }
 
     @Override
@@ -87,7 +87,7 @@ public class ExperienceLanternMountedStorage extends WrapperMountedFluidStorage<
 
         @Override
         public boolean isFluidValid(FluidStack stack) {
-            return stack.is(CEIFluids.EXPERIENCE);
+            return stack.is(CSFluids.EXPERIENCE);
         }
 
         @Override

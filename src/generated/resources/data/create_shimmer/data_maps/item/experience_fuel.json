@@ -20,25 +20,25 @@
     },
     "create:experience_block": 27,
     "create:experience_nugget": 3,
-    "create_enchantment_industry:experience_bucket": {
+    "create_shimmer:experience_bucket": {
       "experience": 1000,
       "using_convert_to": {
         "id": "minecraft:bucket"
       }
     },
-    "create_enchantment_industry:experience_cake": {
+    "create_shimmer:experience_cake": {
       "experience": 1000,
       "special": true
     },
-    "create_enchantment_industry:experience_cake_slice": {
+    "create_shimmer:experience_cake_slice": {
       "experience": 250,
       "special": true
     },
-    "create_enchantment_industry:super_experience_block": {
+    "create_shimmer:super_experience_block": {
       "experience": 27,
       "special": true
     },
-    "create_enchantment_industry:super_experience_nugget": {
+    "create_shimmer:super_experience_nugget": {
       "experience": 3,
       "special": true
     },

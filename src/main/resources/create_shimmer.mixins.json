@@ -5,6 +5,17 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "create_shimmer.refmap.json",
   "mixins": [
+    "ConnectivityHandlerMixin",
+    "CreateNBTProcessorsMixin",
+    "CrushingWheelControllerBlockEntityMixin",
+    "DeployerFakePlayerMixin",
+    "DeployerHandlerMixin",
+    "EnchantmentHelperMixin",
+    "FillingBySpoutMixin",
+    "LightningBoltMixin",
+    "PlayerMixin",
+    "SmartBlockEntityMixin",
+    "accessor.CreateRecipeCategoryAccessor"
   ],
   "client": [],
   "injectors": {
