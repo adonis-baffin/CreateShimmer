@@ -5,7 +5,7 @@
       "modid": "create_sa"
     }
   ],
-  "type": "create_enchantment_industry:grinding",
+  "type": "create_shimmer:grinding",
   "ingredients": [
     {
       "item": "create_sa:heap_of_experience"
@@ -14,7 +14,7 @@
   "results": [
     {
       "amount": 12,
-      "id": "create_enchantment_industry:experience"
+      "id": "create_shimmer:experience"
     }
   ]
 }

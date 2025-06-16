@@ -37,6 +37,7 @@ public class CSCreativeModeTabs {
 
     private static void buildBaseContents(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
         output.accept(MECHANICAL_GRINDSTONE);
+        output.accept(GRINDSTONE_DRAIN);
         output.accept(SHIMMER_REAGENT);
         output.accept(EXPERIENCE_HATCH);
         output.accept(EXPERIENCE_LANTERN);

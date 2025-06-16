@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "create_enchantment_industry:smithing/blaze_forger"
+        "recipe": "create_shimmer:smithing/blaze_forger"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "create_enchantment_industry:smithing/blaze_forger"
+      "create_shimmer:smithing/blaze_forger"
     ]
   }
 }

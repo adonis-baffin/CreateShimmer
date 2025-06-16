@@ -20,6 +20,15 @@
     },
     "create:experience_block": 27,
     "create:experience_nugget": 3,
+    "create_sa:heap_of_experience": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "create_sa"
+        }
+      ],
+      "neoforge:value": 12
+    },
     "create_shimmer:experience_bucket": {
       "experience": 1000,
       "using_convert_to": {
@@ -41,15 +50,6 @@
     "create_shimmer:super_experience_nugget": {
       "experience": 3,
       "special": true
-    },
-    "create_sa:heap_of_experience": {
-      "neoforge:conditions": [
-        {
-          "type": "neoforge:mod_loaded",
-          "modid": "create_sa"
-        }
-      ],
-      "neoforge:value": 12
     },
     "mysticalagriculture:experience_droplet": {
       "neoforge:conditions": [

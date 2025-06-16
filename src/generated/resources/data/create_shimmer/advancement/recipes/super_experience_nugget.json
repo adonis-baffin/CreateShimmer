@@ -2,7 +2,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "create_enchantment_industry:super_experience_nugget"
+        "recipe": "create_shimmer:super_experience_nugget"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -14,7 +14,7 @@
   ],
   "rewards": {
     "recipes": [
-      "create_enchantment_industry:super_experience_nugget"
+      "create_shimmer:super_experience_nugget"
     ]
   },
   "sends_telemetry_event": true

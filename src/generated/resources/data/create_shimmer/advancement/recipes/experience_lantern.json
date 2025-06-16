@@ -12,7 +12,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "create_enchantment_industry:experience_lantern"
+        "recipe": "create_shimmer:experience_lantern"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -25,7 +25,7 @@
   ],
   "rewards": {
     "recipes": [
-      "create_enchantment_industry:experience_lantern"
+      "create_shimmer:experience_lantern"
     ]
   },
   "sends_telemetry_event": true
