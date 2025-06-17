@@ -1,4 +1,3 @@
-
 package com.adonis.createshimmer.common;
 
 import com.adonis.createshimmer.common.registry.*;
@@ -38,12 +37,14 @@ public class CSCommon {
         CSDataMaps.register(modBus);
         CSStats.register(modBus);
         CSMountedStorageTypes.register(modBus);
+        CSFanProcessingTypes.register(modBus); // 注册鼓风机处理类型
         modBus.register(this);
         modBus.register(new CSConfig(modContainer));
     }
 
     @SubscribeEvent
-    public void setup(final FMLCommonSetupEvent event) {}
+    public void setup(final FMLCommonSetupEvent event) {
+    }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void register(final RegisterEvent event) {

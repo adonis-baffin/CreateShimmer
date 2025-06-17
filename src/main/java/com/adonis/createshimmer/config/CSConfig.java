@@ -68,6 +68,14 @@ public class CSConfig {
         return SERVER_CONFIG.processing;
     }
 
+    /**
+     * 获取配方配置
+     * @return CSRecipesConfig 配方配置实例
+     */
+    public static CSRecipesConfig recipes() {
+        return SERVER_CONFIG.recipes;
+    }
+
     @SubscribeEvent
     public void onLoad(ModConfigEvent.Loading event) {
         var spec = event.getConfig().getSpec();

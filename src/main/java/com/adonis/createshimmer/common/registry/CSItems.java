@@ -67,5 +67,8 @@ public class CSItems {
     public static final DeferredItem<BucketItem> EXPERIENCE_BUCKET = DeferredItem
             .createItem(CSCommon.asResource("experience_bucket"));
 
+    public static final DeferredItem<BucketItem> SHIMMER_BUCKET = DeferredItem
+            .createItem(CSCommon.asResource("shimmer_bucket"));
+
     public static void register(IEventBus modBus) {}
 }

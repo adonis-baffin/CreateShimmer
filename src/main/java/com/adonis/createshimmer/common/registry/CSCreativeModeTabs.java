@@ -55,5 +55,6 @@ public class CSCreativeModeTabs {
         output.accept(EXPERIENCE_CAKE);
         output.accept(EXPERIENCE_CAKE_SLICE);
         output.accept(EXPERIENCE_BUCKET);
+        output.accept(SHIMMER_BUCKET);
     }
 }

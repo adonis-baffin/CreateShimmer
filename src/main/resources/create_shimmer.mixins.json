@@ -15,7 +15,8 @@
     "LightningBoltMixin",
     "PlayerMixin",
     "SmartBlockEntityMixin",
-    "accessor.CreateRecipeCategoryAccessor"
+    "accessor.CreateRecipeCategoryAccessor",
+    "create.TransmutationFanProcessingMixin"
   ],
   "client": [],
   "injectors": {

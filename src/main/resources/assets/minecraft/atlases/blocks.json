@@ -7,6 +7,14 @@
     {
       "type": "single",
       "resource": "create_shimmer:fluid/experience_flow"
+    },
+    {
+      "type": "single",
+      "resource": "create_shimmer:fluid/shimmer_still"
+    },
+    {
+      "type": "single",
+      "resource": "create_shimmer:fluid/shimmer_flow"
     }
   ]
 }

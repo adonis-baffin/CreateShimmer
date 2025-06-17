@@ -1,0 +1,13 @@
+{
+  "type": "create_shimmer:transmutation",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_block"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:diamond_block"
+    }
+  ]
+}
