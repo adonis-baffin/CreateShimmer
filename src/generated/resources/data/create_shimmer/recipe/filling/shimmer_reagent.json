@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 50,
+      "fluid": "create_shimmer:shimmer"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_shimmer:shimmer_reagent"
+    }
+  ]
+}

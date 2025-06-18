@@ -1,0 +1,13 @@
+{
+  "type": "create_shimmer:transmutation",
+  "ingredients": [
+    {
+      "item": "minecraft:dead_brain_coral_fan"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:brain_coral_fan"
+    }
+  ]
+}

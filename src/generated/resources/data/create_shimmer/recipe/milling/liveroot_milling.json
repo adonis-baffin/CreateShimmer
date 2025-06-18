@@ -1,0 +1,13 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "twilightforest:liveroot_block"
+    }
+  ],
+  "results": [
+    {
+      "id": "twilightforest:liveroot"
+    }
+  ]
+}

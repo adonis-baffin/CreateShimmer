@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "twilightforest:carminite"
+    },
+    {
+      "item": "twilightforest:carminite"
+    },
+    {
+      "item": "twilightforest:carminite"
+    },
+    {
+      "item": "twilightforest:carminite"
+    },
+    {
+      "item": "twilightforest:carminite"
+    }
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "id": "create_shimmer:fiery_tear"
+    }
+  ]
+}

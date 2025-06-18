@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "twilightforest:carminite"
+    }
+  ],
+  "results": [
+    {
+      "amount": 25,
+      "id": "create_shimmer:carminite_solution"
+    }
+  ]
+}

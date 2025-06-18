@@ -1,10 +1,10 @@
-
 package com.adonis.createshimmer.common.registry;
 
 import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
 
 import com.adonis.createshimmer.common.CSCommon;
 import com.adonis.createshimmer.common.processing.enchanter.EnchantingTemplateItem;
+import com.adonis.createshimmer.common.item.ShimmerReagentItem;
 import com.simibubi.create.AllTags.AllItemTags;
 import com.simibubi.create.content.materials.ExperienceNuggetItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -56,12 +56,26 @@ public class CSItems {
                     .rarity(Rarity.RARE)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
             .register();
-    public static final ItemEntry<Item> SHIMMER_REAGENT = REGISTRATE
-            .item("shimmer_reagent", Item::new)
+    public static final ItemEntry<ShimmerReagentItem> SHIMMER_REAGENT = REGISTRATE
+            .item("shimmer_reagent", ShimmerReagentItem::new)
             .lang("Shimmer Reagent")
             .properties(prop -> prop
                     .rarity(Rarity.COMMON)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
+            .register();
+
+    public static final ItemEntry<Item> THORN_FLOUR = REGISTRATE
+            .item("thorn_flour", Item::new)
+            .lang("Thorn Flour")
+            .properties(prop -> prop
+                    .rarity(Rarity.COMMON))
+            .register();
+
+    public static final ItemEntry<Item> RAW_KNIGHTMETAL = REGISTRATE
+            .item("raw_knightmetal", Item::new)
+            .lang("Raw Knightmetal")
+            .properties(prop -> prop
+                    .rarity(Rarity.COMMON))
             .register();
 
     public static final DeferredItem<BucketItem> EXPERIENCE_BUCKET = DeferredItem
@@ -69,6 +83,12 @@ public class CSItems {
 
     public static final DeferredItem<BucketItem> SHIMMER_BUCKET = DeferredItem
             .createItem(CSCommon.asResource("shimmer_bucket"));
+
+    public static final DeferredItem<BucketItem> CARMINITE_SOLUTION_BUCKET = DeferredItem
+            .createItem(CSCommon.asResource("carminite_solution_bucket"));
+
+    public static final DeferredItem<BucketItem> FIERY_TEAR_BUCKET = DeferredItem
+            .createItem(CSCommon.asResource("fiery_tear_bucket"));
 
     public static void register(IEventBus modBus) {}
 }

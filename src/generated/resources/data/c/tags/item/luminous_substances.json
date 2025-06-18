@@ -1,0 +1,14 @@
+{
+  "values": [
+    "minecraft:glowstone_dust",
+    "minecraft:glow_ink_sac",
+    {
+      "id": "twilightforest:firefly",
+      "required": false
+    },
+    {
+      "id": "twilightforest:mushgloom",
+      "required": false
+    }
+  ]
+}

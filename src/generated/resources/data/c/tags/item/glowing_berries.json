@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:glow_berries",
+    {
+      "id": "twilightforest:torchberries",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 100,
+      "fluid": "create_shimmer:carminite_solution"
+    }
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "id": "create_shimmer:fiery_tear"
+    }
+  ]
+}

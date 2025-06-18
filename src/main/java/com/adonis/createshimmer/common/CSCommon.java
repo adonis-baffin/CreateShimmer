@@ -37,13 +37,14 @@ public class CSCommon {
         CSDataMaps.register(modBus);
         CSStats.register(modBus);
         CSMountedStorageTypes.register(modBus);
-        CSFanProcessingTypes.register(modBus); // 注册鼓风机处理类型
+        CSFanProcessingTypes.register(modBus);
         modBus.register(this);
         modBus.register(new CSConfig(modContainer));
     }
 
     @SubscribeEvent
     public void setup(final FMLCommonSetupEvent event) {
+        System.out.println("Create Shimmer setup complete!");
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -61,6 +62,8 @@ public class CSCommon {
     public static String asLocalization(String key) {
         return ID + "." + key;
     }
+
+    // 移除了 onGatherData 方法，因为已经在 CSData.java 中处理数据生成
 
     // TODO Add more Option to customize printer behavior
 }

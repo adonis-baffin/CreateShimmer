@@ -1,4 +1,3 @@
-
 package com.adonis.createshimmer.common.registry;
 
 import static com.adonis.createshimmer.common.registry.CSBlocks.*;
@@ -29,32 +28,19 @@ public class CSCreativeModeTabs {
     private static CreativeModeTab base(ResourceLocation id) {
         return CreativeModeTab.builder()
                 .title(CSLang.description("itemGroup", id).component())
-                .icon(SUPER_EXPERIENCE_NUGGET::asStack)
+                .icon(SHIMMER_REAGENT::asStack)
                 .displayItems(CSCreativeModeTabs::buildBaseContents)
-//                .withTabsBefore(ResourceLocation.fromNamespaceAndPath("create_dragons_plus", "base"))
+                .withTabsBefore(ResourceLocation.fromNamespaceAndPath("create_dragons_plus", "base"))
                 .build();
     }
 
     private static void buildBaseContents(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
-        output.accept(MECHANICAL_GRINDSTONE);
-        output.accept(GRINDSTONE_DRAIN);
+        output.accept(THORN_FLOUR);
+        output.accept(RAW_KNIGHTMETAL);
         output.accept(SHIMMER_REAGENT);
-        output.accept(EXPERIENCE_HATCH);
-        output.accept(EXPERIENCE_LANTERN);
-        output.accept(PRINTER);
-        output.accept(BLAZE_ENCHANTER);
-        output.accept(BLAZE_FORGER);
-        output.accept(EXPERIENCE_BLOCK);
-        output.accept(SUPER_EXPERIENCE_BLOCK);
-        output.accept(EXP_NUGGET);
-        output.accept(SUPER_EXPERIENCE_NUGGET);
-        output.accept(ENCHANTING_TEMPLATE);
-        output.accept(SUPER_ENCHANTING_TEMPLATE);
-        output.accept(BLAZE_UPGRADE_SMITHING_TEMPLATE);
-        output.accept(EXPERIENCE_CAKE_BASE, TabVisibility.SEARCH_TAB_ONLY);
-        output.accept(EXPERIENCE_CAKE);
-        output.accept(EXPERIENCE_CAKE_SLICE);
-        output.accept(EXPERIENCE_BUCKET);
+
         output.accept(SHIMMER_BUCKET);
+        output.accept(CARMINITE_SOLUTION_BUCKET);
+        output.accept(FIERY_TEAR_BUCKET);
     }
 }

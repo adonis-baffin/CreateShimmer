@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "twilightforest:liveroot"
+    },
+    {
+      "tag": "c:raw_materials/zinc"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 25,
+      "fluid": "create_shimmer:shimmer"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_shimmer:raw_knightmetal"
+    }
+  ]
+}

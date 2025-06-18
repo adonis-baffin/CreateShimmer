@@ -1,0 +1,13 @@
+{
+  "type": "create_shimmer:transmutation",
+  "ingredients": [
+    {
+      "item": "minecraft:dead_fire_coral_fan"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:fire_coral_fan"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "twilightforest:liveroot_block"
+    }
+  ],
+  "results": [
+    {
+      "id": "twilightforest:liveroot"
+    },
+    {
+      "chance": 0.5,
+      "id": "twilightforest:liveroot"
+    }
+  ]
+}

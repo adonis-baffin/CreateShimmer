@@ -1,0 +1,13 @@
+{
+  "type": "create_shimmer:grinding",
+  "ingredients": [
+    {
+      "item": "twilightforest:liveroot_block"
+    }
+  ],
+  "results": [
+    {
+      "id": "twilightforest:liveroot"
+    }
+  ]
+}

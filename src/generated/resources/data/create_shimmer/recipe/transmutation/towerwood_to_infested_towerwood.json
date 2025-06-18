@@ -1,0 +1,13 @@
+{
+  "type": "create_shimmer:transmutation",
+  "ingredients": [
+    {
+      "item": "twilightforest:towerwood"
+    }
+  ],
+  "results": [
+    {
+      "id": "twilightforest:infested_towerwood"
+    }
+  ]
+}

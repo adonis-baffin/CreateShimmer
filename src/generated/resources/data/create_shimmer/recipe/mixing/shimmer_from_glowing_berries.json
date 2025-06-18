@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "tag": "c:glowing_berries"
+    },
+    {
+      "tag": "c:luminous_substances"
+    },
+    {
+      "tag": "minecraft:small_flowers"
+    }
+  ],
+  "results": [
+    {
+      "amount": 50,
+      "id": "create_shimmer:shimmer"
+    }
+  ]
+}

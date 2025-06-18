@@ -1,0 +1,14 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "twilightforest:transformation_leaves"
+    }
+  ],
+  "results": [
+    {
+      "chance": 0.2,
+      "id": "twilightforest:transformation_powder"
+    }
+  ]
+}

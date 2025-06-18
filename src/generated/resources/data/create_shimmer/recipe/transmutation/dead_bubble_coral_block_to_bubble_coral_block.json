@@ -2,12 +2,12 @@
   "type": "create_shimmer:transmutation",
   "ingredients": [
     {
-      "item": "minecraft:gold_block"
+      "item": "minecraft:dead_bubble_coral_block"
     }
   ],
   "results": [
     {
-      "id": "minecraft:diamond_block"
+      "id": "minecraft:bubble_coral_block"
     }
   ]
 }

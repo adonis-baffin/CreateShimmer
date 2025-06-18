@@ -15,6 +15,22 @@
     {
       "type": "single",
       "resource": "create_shimmer:fluid/shimmer_flow"
+    },
+    {
+      "type": "single",
+      "resource": "create_shimmer:fluid/fiery_tear_still"
+    },
+    {
+      "type": "single",
+      "resource": "create_shimmer:fluid/fiery_tear_flow"
+    },
+    {
+      "type": "single",
+      "resource": "create_shimmer:fluid/carminite_solution_still"
+    },
+    {
+      "type": "single",
+      "resource": "create_shimmer:fluid/carminite_solution_flow"
     }
   ]
 }

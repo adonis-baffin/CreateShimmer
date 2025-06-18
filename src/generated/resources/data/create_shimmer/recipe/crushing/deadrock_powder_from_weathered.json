@@ -1,0 +1,17 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "twilightforest:weathered_deadrock"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_shimmer:thorn_flour"
+    },
+    {
+      "chance": 0.5,
+      "id": "create_shimmer:thorn_flour"
+    }
+  ]
+}

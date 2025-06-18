@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "create_shimmer:raw_knightmetal"
+  },
+  "result": {
+    "count": 1,
+    "id": "twilightforest:knightmetal_ingot"
+  }
+}

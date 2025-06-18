@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 25,
+      "fluid": "create_shimmer:fiery_tear"
+    }
+  ],
+  "results": [
+    {
+      "id": "twilightforest:fiery_tears"
+    }
+  ]
+}

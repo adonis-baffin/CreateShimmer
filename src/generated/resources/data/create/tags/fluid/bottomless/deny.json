@@ -1,6 +1,12 @@
 {
   "values": [
     "create_shimmer:flowing_experience",
-    "create_shimmer:experience"
+    "create_shimmer:experience",
+    "create_shimmer:flowing_shimmer",
+    "create_shimmer:shimmer",
+    "create_shimmer:flowing_carminite_solution",
+    "create_shimmer:carminite_solution",
+    "create_shimmer:flowing_fiery_tear",
+    "create_shimmer:fiery_tear"
   ]
 }
