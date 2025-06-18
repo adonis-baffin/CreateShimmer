@@ -6,23 +6,12 @@
 package com.adonis.createshimmer.integration.jei.category;
 
 import com.adonis.createshimmer.common.CSCommon;
-import com.adonis.createshimmer.common.kinetics.grindstone.GrindingRecipe;
-import com.adonis.createshimmer.common.kinetics.grindstone.MechanicalGrindStoneItem;
-import com.adonis.createshimmer.common.registry.CSBlocks;
 import com.adonis.createshimmer.common.registry.CSRecipes;
 import com.adonis.createshimmer.config.CSConfig;
-import com.adonis.createshimmer.integration.jei.category.grinding.GrindingCategory;
-import com.adonis.createshimmer.integration.jei.category.printing.*;
 import com.google.common.base.Preconditions;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
-import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
 import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipe;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
@@ -31,7 +20,6 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLLoader;
 import org.jetbrains.annotations.ApiStatus.Internal;
@@ -48,12 +36,12 @@ public class CSJeiPlugin implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        PrintingCategory printingCategory = new PrintingCategory();
-        registration.addRecipeCategories(printingCategory);
-
-        // 注册 Grinding 类别
-        GrindingCategory grindingCategory = new GrindingCategory();
-        registration.addRecipeCategories(grindingCategory);
+//        PrintingCategory printingCategory = new PrintingCategory();
+//        registration.addRecipeCategories(printingCategory);
+//
+//        // 注册 Grinding 类别
+//        GrindingCategory grindingCategory = new GrindingCategory();
+//        registration.addRecipeCategories(grindingCategory);
 
         // 注册 Transmutation 类别
         if (CSConfig.recipes().enableBulkTransmutation.get()) {
@@ -66,53 +54,53 @@ public class CSJeiPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         var recipeManager = getRecipeManager();
 
-        // 注册 Printing 配方
-        var printingRecipes = recipeManager
-                .getAllRecipesFor(CSRecipes.PRINTING.getType())
-                .stream()
-                .map(StandardPrintingRecipeJEI::new)
-                .collect(Collectors.toList());
-        registration.addRecipes(PrintingCategory.TYPE, (List<PrintingRecipeJEI>)(List<?>) printingRecipes);
-
-        // 注册内置 Printing 配方
-        List<PrintingRecipeJEI> builtinPrinting = new ArrayList<>();
-        if (CSConfig.fluids().enablePackageAddressPrinting.get()) builtinPrinting.add(AddressPrintingRecipeJEI.INSTANCE);
-        if (CSConfig.fluids().enablePackagePatternPrinting.get()) builtinPrinting.add(PatternPrintingRecipeJEI.INSTANCE);
-        if (CSConfig.fluids().enableCreateCopiableItemPrinting.get()) builtinPrinting.add(CopyPrintingRecipeJEI.INSTANCE);
-        if (CSConfig.fluids().enableCustomNamePrinting.get()) builtinPrinting.add(CustomNamePrintingRecipeJEI.INSTANCE);
-        if (CSConfig.fluids().enableWrittenBookPrinting.get()) builtinPrinting.add(WrittenBookPrintingRecipeJEI.INSTANCE);
-        if (!builtinPrinting.isEmpty())
-            registration.addRecipes(PrintingCategory.TYPE, (List<PrintingRecipeJEI>)(List<?>) builtinPrinting);
-
-        if (CSConfig.fluids().enableEnchantedBookPrinting.get()) {
-            var enchantedBookRecipes = EnchantedBookPrintingRecipeJEI.listAll();
-            registration.addRecipes(PrintingCategory.TYPE, (List<PrintingRecipeJEI>)(List<?>) enchantedBookRecipes);
-        }
+//        // 注册 Printing 配方
+//        var printingRecipes = recipeManager
+//                .getAllRecipesFor(CSRecipes.PRINTING.getType())
+//                .stream()
+//                .map(StandardPrintingRecipeJEI::new)
+//                .collect(Collectors.toList());
+//        registration.addRecipes(PrintingCategory.TYPE, (List<PrintingRecipeJEI>)(List<?>) printingRecipes);
+//
+//        // 注册内置 Printing 配方
+//        List<PrintingRecipeJEI> builtinPrinting = new ArrayList<>();
+//        if (CSConfig.fluids().enablePackageAddressPrinting.get()) builtinPrinting.add(AddressPrintingRecipeJEI.INSTANCE);
+//        if (CSConfig.fluids().enablePackagePatternPrinting.get()) builtinPrinting.add(PatternPrintingRecipeJEI.INSTANCE);
+//        if (CSConfig.fluids().enableCreateCopiableItemPrinting.get()) builtinPrinting.add(CopyPrintingRecipeJEI.INSTANCE);
+//        if (CSConfig.fluids().enableCustomNamePrinting.get()) builtinPrinting.add(CustomNamePrintingRecipeJEI.INSTANCE);
+//        if (CSConfig.fluids().enableWrittenBookPrinting.get()) builtinPrinting.add(WrittenBookPrintingRecipeJEI.INSTANCE);
+//        if (!builtinPrinting.isEmpty())
+//            registration.addRecipes(PrintingCategory.TYPE, (List<PrintingRecipeJEI>)(List<?>) builtinPrinting);
+//
+//        if (CSConfig.fluids().enableEnchantedBookPrinting.get()) {
+//            var enchantedBookRecipes = EnchantedBookPrintingRecipeJEI.listAll();
+//            registration.addRecipes(PrintingCategory.TYPE, (List<PrintingRecipeJEI>)(List<?>) enchantedBookRecipes);
+//        }
 
         // 注册手动应用配方
         var manualApplication = registration
                 .getJeiHelpers()
                 .getRecipeType(Create.asResource("item_application"), ItemApplicationRecipe.class);
 
-        if (manualApplication.isPresent()) {
-            registration.addRecipes(manualApplication.get(), List.of(MechanicalGrindStoneItem.createRecipe()));
-        }
+//        if (manualApplication.isPresent()) {
+//            registration.addRecipes(manualApplication.get(), List.of(MechanicalGrindStoneItem.createRecipe()));
+//        }
 
-        // 注册 Grinding 配方
-        var grindingRecipes = recipeManager.getAllRecipesFor(CSRecipes.GRINDING.getType());
-        registration.addRecipes(GrindingCategory.TYPE, grindingRecipes);
+//        // 注册 Grinding 配方
+//        var grindingRecipes = recipeManager.getAllRecipesFor(CSRecipes.GRINDING.getType());
+//        registration.addRecipes(GrindingCategory.TYPE, grindingRecipes);
 
-        // 获取砂纸抛光配方并转换
-        RecipeType<SandPaperPolishingRecipe> polishing = AllRecipeTypes.SANDPAPER_POLISHING.getType();
-        var polishingRecipes = recipeManager.getAllRecipesFor(polishing);
-        var convertedPolishingRecipes = polishingRecipes
-                .stream()
-                .map(GrindingRecipe::fromPolishing)
-                .flatMap(Optional::stream)
-                .collect(Collectors.toList());
-        if (!convertedPolishingRecipes.isEmpty()) {
-            registration.addRecipes(GrindingCategory.TYPE, convertedPolishingRecipes);
-        }
+//        // 获取砂纸抛光配方并转换
+//        RecipeType<SandPaperPolishingRecipe> polishing = AllRecipeTypes.SANDPAPER_POLISHING.getType();
+//        var polishingRecipes = recipeManager.getAllRecipesFor(polishing);
+//        var convertedPolishingRecipes = polishingRecipes
+//                .stream()
+//                .map(GrindingRecipe::fromPolishing)
+//                .flatMap(Optional::stream)
+//                .collect(Collectors.toList());
+//        if (!convertedPolishingRecipes.isEmpty()) {
+//            registration.addRecipes(GrindingCategory.TYPE, convertedPolishingRecipes);
+//        }
 
         // 注册 Transmutation 配方
         if (CSConfig.recipes().enableBulkTransmutation.get()) {
@@ -123,8 +111,8 @@ public class CSJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalysts(PrintingCategory.TYPE, CSBlocks.PRINTER);
-        registration.addRecipeCatalysts(GrindingCategory.TYPE, CSBlocks.MECHANICAL_GRINDSTONE);
+//        registration.addRecipeCatalysts(PrintingCategory.TYPE, CSBlocks.PRINTER);
+//        registration.addRecipeCatalysts(GrindingCategory.TYPE, CSBlocks.MECHANICAL_GRINDSTONE);
 
         // 注册 Transmutation 催化剂
         if (CSConfig.recipes().enableBulkTransmutation.get()) {

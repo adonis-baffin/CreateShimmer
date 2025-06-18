@@ -28,7 +28,7 @@ public class CSCommon {
         REGISTRATE.registerEventListeners(modBus);
         CSFluids.register(modBus);
         CSBlocks.register(modBus);
-        CSBlockEntities.register(modBus);
+//        CSBlockEntities.register(modBus);
         CSItems.register(modBus);
         CSCreativeModeTabs.register(modBus);
         CSRecipes.register(modBus);

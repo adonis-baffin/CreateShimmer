@@ -2,16 +2,14 @@ package com.adonis.createshimmer.data;
 
 import com.adonis.createshimmer.common.CSCommon;
 import com.adonis.createshimmer.common.registry.CSFluids;
+import java.util.concurrent.CompletableFuture;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.FluidTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.concurrent.CompletableFuture;
-
 public class CSFluidTagProvider extends FluidTagsProvider {
-
     public CSFluidTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, CSCommon.ID, existingFileHelper);
     }

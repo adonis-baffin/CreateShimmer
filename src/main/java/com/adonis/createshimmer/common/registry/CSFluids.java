@@ -3,17 +3,15 @@ package com.adonis.createshimmer.common.registry;
 import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
 
 import com.adonis.createshimmer.common.CSCommon;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceEffectHandler;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceFluidType;
-import com.adonis.createshimmer.common.fluids.shimmer.ShimmerFluidType;
-import com.adonis.createshimmer.common.fluids.shimmer.ShimmerLiquidBlock;
-import com.adonis.createshimmer.common.fluids.shimmer.ShimmerOpenPipeEffect;
 import com.adonis.createshimmer.common.fluids.carminite.CarminiteFluidType;
 import com.adonis.createshimmer.common.fluids.carminite.CarminiteLiquidBlock;
 import com.adonis.createshimmer.common.fluids.carminite.CarminiteOpenPipeEffect;
 import com.adonis.createshimmer.common.fluids.fierytear.FieryTearFluidType;
 import com.adonis.createshimmer.common.fluids.fierytear.FieryTearLiquidBlock;
 import com.adonis.createshimmer.common.fluids.fierytear.FieryTearOpenPipeEffect;
+import com.adonis.createshimmer.common.fluids.shimmer.ShimmerFluidType;
+import com.adonis.createshimmer.common.fluids.shimmer.ShimmerLiquidBlock;
+import com.adonis.createshimmer.common.fluids.shimmer.ShimmerOpenPipeEffect;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.api.effect.OpenPipeEffectHandler;
 import com.tterrag.registrate.util.entry.FluidEntry;
@@ -30,39 +28,37 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
-import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class CSFluids {
-    public static final FluidEntry<BaseFlowingFluid.Source> EXPERIENCE = new FluidEntry<>(REGISTRATE,
-            DeferredHolder.create(Registries.FLUID, REGISTRATE.asResource("experience")));
-
-    public static final FluidEntry<BaseFlowingFluid.Flowing> EXPERIENCE_FLOWING = REGISTRATE
-            .fluid("experience", ExperienceFluidType.create())
-            .lang("Liquid Experience")
-            .properties(builder -> builder
-                    .rarity(Rarity.UNCOMMON)
-                    .lightLevel(15)
-                    .fallDistanceModifier(0f)
-                    .canPushEntity(false)
-                    .canSwim(false)
-                    .canDrown(false)
-                    .pathType(PathType.BLOCKED)
-                    .adjacentPathType(PathType.BLOCKED))
-            .fluidProperties(p -> p.explosionResistance(100f))
-            .tag(AllTags.AllFluidTags.BOTTOMLESS_DENY.tag)
-            .source(BaseFlowingFluid.Source::new)
-            .block()
-            .lang("Liquid Experience")
-            .build()
-            .bucket()
-            .lang("Bucket o' Enchanting")
-            .properties(properties -> properties
-                    .rarity(Rarity.UNCOMMON)
-                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
-            .tag(Tags.Items.BUCKETS)
-            .build()
-            .register();
-
+//    public static final FluidEntry<BaseFlowingFluid.Source> EXPERIENCE = new FluidEntry<>(REGISTRATE,
+//            DeferredHolder.create(Registries.FLUID, REGISTRATE.asResource("experience")));
+//
+//    public static final FluidEntry<BaseFlowingFluid.Flowing> EXPERIENCE_FLOWING = REGISTRATE
+//            .fluid("experience", ExperienceFluidType.create())
+//            .lang("Liquid Experience")
+//            .properties(builder -> builder
+//                    .rarity(Rarity.UNCOMMON)
+//                    .lightLevel(15)
+//                    .fallDistanceModifier(0f)
+//                    .canPushEntity(false)
+//                    .canSwim(false)
+//                    .canDrown(false)
+//                    .pathType(PathType.BLOCKED)
+//                    .adjacentPathType(PathType.BLOCKED))
+//            .fluidProperties(p -> p.explosionResistance(100f))
+//            .tag(AllTags.AllFluidTags.BOTTOMLESS_DENY.tag)
+//            .source(BaseFlowingFluid.Source::new)
+//            .block()
+//            .lang("Liquid Experience")
+//            .build()
+//            .bucket()
+//            .lang("Bucket o' Enchanting")
+//            .properties(properties -> properties
+//                    .rarity(Rarity.UNCOMMON)
+//                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
+//            .tag(Tags.Items.BUCKETS)
+//            .build()
+//            .register();
     public static final FluidEntry<BaseFlowingFluid.Flowing> SHIMMER = REGISTRATE
             .fluid("shimmer",
                     REGISTRATE.asResource("fluid/shimmer_still"),
@@ -186,8 +182,7 @@ public class CSFluids {
         /**
          * 鼓风机复生催化剂流体标签
          */
-        public static final TagKey<Fluid> fanTransmutationCatalysts =
-                TagKey.create(Registries.FLUID, CSCommon.asResource("fan_transmutation_catalysts"));
+        public static final TagKey<Fluid> fanTransmutationCatalysts = TagKey.create(Registries.FLUID, CSCommon.asResource("fan_transmutation_catalysts"));
     }
 
     public static void register(IEventBus modBus) {
@@ -197,7 +192,7 @@ public class CSFluids {
     @SubscribeEvent
     public static void setup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            OpenPipeEffectHandler.REGISTRY.register(EXPERIENCE.get(), new ExperienceEffectHandler());
+//            OpenPipeEffectHandler.REGISTRY.register(EXPERIENCE.get(), new ExperienceEffectHandler());
             OpenPipeEffectHandler.REGISTRY.register(SHIMMER.getSource(), new ShimmerOpenPipeEffect());
             OpenPipeEffectHandler.REGISTRY.register(CARMINITE_SOLUTION.getSource(), new CarminiteOpenPipeEffect());
             OpenPipeEffectHandler.REGISTRY.register(FIERY_TEAR.getSource(), new FieryTearOpenPipeEffect());

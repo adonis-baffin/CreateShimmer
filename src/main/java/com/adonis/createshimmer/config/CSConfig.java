@@ -70,6 +70,7 @@ public class CSConfig {
 
     /**
      * 获取配方配置
+     * 
      * @return CSRecipesConfig 配方配置实例
      */
     public static CSRecipesConfig recipes() {

@@ -1,8 +1,6 @@
 package com.adonis.createshimmer.common.registry;
 
 import com.adonis.createshimmer.common.CSCommon;
-import com.adonis.createshimmer.common.fluids.printer.PrintingRecipe;
-import com.adonis.createshimmer.common.kinetics.grindstone.GrindingRecipe;
 import com.adonis.createshimmer.common.kinetics.fan.transmutation.TransmutationRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import java.util.function.Supplier;
@@ -18,8 +16,8 @@ public class CSRecipes {
     private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE, CSCommon.ID);
     private static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, CSCommon.ID);
 
-    public static final RecipeTypeInfo<PrintingRecipe> PRINTING = register("printing", () -> new PrintingRecipe.Serializer<>(PrintingRecipe::new));
-    public static final RecipeTypeInfo<GrindingRecipe> GRINDING = register("grinding", () -> new StandardProcessingRecipe.Serializer<>(GrindingRecipe::new));
+//    public static final RecipeTypeInfo<PrintingRecipe> PRINTING = register("printing", () -> new PrintingRecipe.Serializer<>(PrintingRecipe::new));
+//    public static final RecipeTypeInfo<GrindingRecipe> GRINDING = register("grinding", () -> new StandardProcessingRecipe.Serializer<>(GrindingRecipe::new));
     public static final RecipeTypeInfo<TransmutationRecipe> TRANSMUTATION = register("transmutation", () -> new StandardProcessingRecipe.Serializer<>(TransmutationRecipe::new));
 
     public static void register(IEventBus modBus) {

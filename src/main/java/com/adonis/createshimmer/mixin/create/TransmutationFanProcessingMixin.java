@@ -19,16 +19,11 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(AirCurrent.class)
 public class TransmutationFanProcessingMixin {
-
-    @ModifyExpressionValue(
-            method = "rebuild",
-            at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/fan/processing/FanProcessingType;getAt(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Lcom/simibubi/create/content/kinetics/fan/processing/FanProcessingType;")
-    )
+    @ModifyExpressionValue(method = "rebuild", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/fan/processing/FanProcessingType;getAt(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Lcom/simibubi/create/content/kinetics/fan/processing/FanProcessingType;"))
     private @Nullable FanProcessingType rebuild$checkShimmerFluid(
             @Nullable FanProcessingType original,
             @Local(name = "world") Level world,
-            @Local(name = "currentPos") BlockPos currentPos
-    ) {
+            @Local(name = "currentPos") BlockPos currentPos) {
         // 如果已经找到了其他处理类型，不覆盖
         if (original != null) {
             return original;

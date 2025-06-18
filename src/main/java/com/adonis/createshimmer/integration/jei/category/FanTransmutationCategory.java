@@ -9,7 +9,6 @@ import com.adonis.createshimmer.common.CSCommon;
 import com.adonis.createshimmer.common.kinetics.fan.transmutation.TransmutationRecipe;
 import com.adonis.createshimmer.common.registry.CSFluids;
 import com.adonis.createshimmer.common.registry.CSRecipes;
-import com.adonis.createshimmer.integration.jei.category.CSJeiPlugin;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.compat.jei.DoubleItemIcon;
@@ -22,13 +21,11 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.material.Fluid;
 
 public class FanTransmutationCategory extends ProcessingViaFanCategory<TransmutationRecipe> {
-    public static final mezz.jei.api.recipe.RecipeType<RecipeHolder<TransmutationRecipe>> TYPE =
-            mezz.jei.api.recipe.RecipeType.createRecipeHolderType(CSRecipes.TRANSMUTATION.getId());
+    public static final mezz.jei.api.recipe.RecipeType<RecipeHolder<TransmutationRecipe>> TYPE = mezz.jei.api.recipe.RecipeType.createRecipeHolderType(CSRecipes.TRANSMUTATION.getId());
 
     private FanTransmutationCategory(Info<TransmutationRecipe> info) {
         super(info);
@@ -38,8 +35,7 @@ public class FanTransmutationCategory extends ProcessingViaFanCategory<Transmuta
         var id = CSCommon.asResource("fan_transmutation");
         var title = Component.translatable("createshimmer.recipe.fan_transmutation");
         var background = new EmptyBackground(178, 72);
-        var icon = new DoubleItemIcon(AllItems.PROPELLER::asStack, () ->
-                CSFluids.SHIMMER.getBucket().stream().map(ItemStack::new).findFirst().orElse(ItemStack.EMPTY));
+        var icon = new DoubleItemIcon(AllItems.PROPELLER::asStack, () -> CSFluids.SHIMMER.getBucket().stream().map(ItemStack::new).findFirst().orElse(ItemStack.EMPTY));
         var catalyst = AllBlocks.ENCASED_FAN.asStack();
         catalyst.set(DataComponents.CUSTOM_NAME,
                 Component.translatable("createshimmer.recipe.fan_transmutation.fan")

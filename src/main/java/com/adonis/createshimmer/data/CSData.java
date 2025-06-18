@@ -17,7 +17,6 @@ package com.adonis.createshimmer.data;
 
 import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
 
-import com.adonis.createshimmer.client.ponder.CSPonderPlugin;
 import com.adonis.createshimmer.common.CSCommon;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -32,7 +31,7 @@ public class CSData {
             return;
         REGISTRATE.registerBuiltinLocalization("interface");
         REGISTRATE.registerForeignLocalization();
-        REGISTRATE.registerPonderLocalization(CSPonderPlugin::new);
+//        REGISTRATE.registerPonderLocalization(CSPonderPlugin::new);
         modBus.register(this);
     }
 

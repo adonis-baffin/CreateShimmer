@@ -3,7 +3,7 @@
   "heat_requirement": "superheated",
   "ingredients": [
     {
-      "item": "twilightforest:carminite"
+      "item": "minecraft:blaze_powder"
     },
     {
       "item": "twilightforest:carminite"

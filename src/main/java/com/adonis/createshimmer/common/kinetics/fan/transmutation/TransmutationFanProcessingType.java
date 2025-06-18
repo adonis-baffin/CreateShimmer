@@ -27,7 +27,6 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public class TransmutationFanProcessingType implements FanProcessingType {
-
     @Override
     public boolean isValidAt(Level level, BlockPos pos) {
         boolean configEnabled = CSConfig.recipes().enableBulkTransmutation.get();

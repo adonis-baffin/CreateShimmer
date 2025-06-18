@@ -6,12 +6,9 @@ import static net.minecraft.world.item.enchantment.Enchantments.INFINITY;
 import static net.minecraft.world.item.enchantment.Enchantments.MENDING;
 
 import com.adonis.createshimmer.common.CSCommon;
-import com.adonis.createshimmer.common.fluids.experience.ExperienceFuel;
 import com.adonis.createshimmer.util.CSIntIntPair;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateDataMapProvider;
@@ -23,8 +20,6 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.bus.api.IEventBus;
@@ -36,10 +31,10 @@ import plus.dragons.createdragonsplus.common.registry.CDPFluids;
 import plus.dragons.createdragonsplus.util.Pairs;
 
 public class CSDataMaps {
-    public static final DataMapType<Item, ExperienceFuel> EXPERIENCE_FUEL = DataMapType
-            .builder(CSCommon.asResource("experience_fuel"), Registries.ITEM, ExperienceFuel.CODEC)
-            .synced(ExperienceFuel.FULL_CODEC, true)
-            .build();
+//    public static final DataMapType<Item, ExperienceFuel> EXPERIENCE_FUEL = DataMapType
+//            .builder(CSCommon.asResource("experience_fuel"), Registries.ITEM, ExperienceFuel.CODEC)
+//            .synced(ExperienceFuel.FULL_CODEC, true)
+//            .build();
     public static final DataMapType<Fluid, Integer> FLUID_UNIT_EXPERIENCE = DataMapType
             .builder(CSCommon.asResource("unit/experience"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
             .synced(Codec.INT, true)
@@ -92,7 +87,7 @@ public class CSDataMaps {
 
     @SubscribeEvent
     public static void register(final RegisterDataMapTypesEvent event) {
-        event.register(EXPERIENCE_FUEL);
+//        event.register(EXPERIENCE_FUEL);
         event.register(FLUID_UNIT_EXPERIENCE);
         event.register(PRINTING_ADDRESS_INGREDIENT);
         event.register(PRINTING_PATTERN_INGREDIENT);
@@ -115,26 +110,26 @@ public class CSDataMaps {
     }
 
     public static void generate(RegistrateDataMapProvider provider) {
-        provider.builder(EXPERIENCE_FUEL)
-                .add(CSItems.EXPERIENCE_BUCKET, ExperienceFuel.normal(1000, Items.BUCKET.getDefaultInstance()), false) // TODO Temporary solution for Create's bug, See https://github.com/Creators-of-Create/Create/pull/8304
-                .add(CSItems.EXPERIENCE_CAKE, ExperienceFuel.special(1000), false)
-                .add(CSItems.EXPERIENCE_CAKE_SLICE, ExperienceFuel.special(250), false)
-                .add(CSBlocks.SUPER_EXPERIENCE_BLOCK.getId(), ExperienceFuel.special(27), false)
-                .add(CSItems.SUPER_EXPERIENCE_NUGGET, ExperienceFuel.special(3), false)
-                .add(AllBlocks.EXPERIENCE_BLOCK.getId(), ExperienceFuel.normal(27), false)
-                .add(AllItems.EXP_NUGGET, ExperienceFuel.normal(3), false)
-                .add(ResourceLocation.fromNamespaceAndPath("create_sa", "heap_of_experience"),
-                        ExperienceFuel.normal(12), false,
-                        new ModLoadedCondition("create_sa"))
-                .add(ResourceLocation.fromNamespaceAndPath("ars_nouveau", "experience_gem"),
-                        ExperienceFuel.normal(3), false,
-                        new ModLoadedCondition("ars_nouveau"))
-                .add(ResourceLocation.fromNamespaceAndPath("ars_nouveau", "greater_experience_gem"),
-                        ExperienceFuel.normal(12), false,
-                        new ModLoadedCondition("ars_nouveau"))
-                .add(ResourceLocation.fromNamespaceAndPath("mysticalagriculture", "experience_droplet"),
-                        ExperienceFuel.normal(10), false,
-                        new ModLoadedCondition("mysticalagriculture"));
+//        provider.builder(EXPERIENCE_FUEL)
+//                .add(CSItems.EXPERIENCE_BUCKET, ExperienceFuel.normal(1000, Items.BUCKET.getDefaultInstance()), false) // TODO Temporary solution for Create's bug, See https://github.com/Creators-of-Create/Create/pull/8304
+//                .add(CSItems.EXPERIENCE_CAKE, ExperienceFuel.special(1000), false)
+//                .add(CSItems.EXPERIENCE_CAKE_SLICE, ExperienceFuel.special(250), false)
+//                .add(CSBlocks.SUPER_EXPERIENCE_BLOCK.getId(), ExperienceFuel.special(27), false)
+//                .add(CSItems.SUPER_EXPERIENCE_NUGGET, ExperienceFuel.special(3), false)
+//                .add(AllBlocks.EXPERIENCE_BLOCK.getId(), ExperienceFuel.normal(27), false)
+//                .add(AllItems.EXP_NUGGET, ExperienceFuel.normal(3), false)
+//                .add(ResourceLocation.fromNamespaceAndPath("create_sa", "heap_of_experience"),
+//                        ExperienceFuel.normal(12), false,
+//                        new ModLoadedCondition("create_sa"))
+//                .add(ResourceLocation.fromNamespaceAndPath("ars_nouveau", "experience_gem"),
+//                        ExperienceFuel.normal(3), false,
+//                        new ModLoadedCondition("ars_nouveau"))
+//                .add(ResourceLocation.fromNamespaceAndPath("ars_nouveau", "greater_experience_gem"),
+//                        ExperienceFuel.normal(12), false,
+//                        new ModLoadedCondition("ars_nouveau"))
+//                .add(ResourceLocation.fromNamespaceAndPath("mysticalagriculture", "experience_droplet"),
+//                        ExperienceFuel.normal(10), false,
+//                        new ModLoadedCondition("mysticalagriculture"));
         provider.builder(FLUID_UNIT_EXPERIENCE)
                 .add(ResourceLocation.fromNamespaceAndPath("cofh_core", "experience"),
                         25, false,
@@ -170,9 +165,9 @@ public class CSDataMaps {
                 .add(blackDye, 100, false);
         provider.builder(PRINTING_COPY_INGREDIENT)
                 .add(blackDye, 10, false);
-        provider.builder(PRINTING_CUSTOM_NAME_INGREDIENT)
-                .add(CSFluids.EXPERIENCE, 10, false)
-                .add(CDPFluids.COMMON_TAGS.dyes, 250, false);
+//        provider.builder(PRINTING_CUSTOM_NAME_INGREDIENT)
+//                .add(CSFluids.EXPERIENCE, 10, false)
+//                .add(CDPFluids.COMMON_TAGS.dyes, 250, false);
         provider.builder(PRINTING_WRITTEN_BOOK_INGREDIENT)
                 .add(blackDye, 10, false);
         var customNameStyles = provider.builder(PRINTING_CUSTOM_NAME_STYLE);

@@ -12,12 +12,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class CSFanProcessingTypes {
     public static final ResourceKey<Registry<FanProcessingType>> REGISTRY_KEY = CreateRegistries.FAN_PROCESSING_TYPE;
-    
-    private static final DeferredRegister<FanProcessingType> TYPES = 
-        DeferredRegister.create(REGISTRY_KEY, CSCommon.ID);
 
-    public static final DeferredHolder<FanProcessingType, TransmutationFanProcessingType> TRANSMUTATION = 
-        TYPES.register("transmutation", TransmutationFanProcessingType::new);
+    private static final DeferredRegister<FanProcessingType> TYPES = DeferredRegister.create(REGISTRY_KEY, CSCommon.ID);
+
+    public static final DeferredHolder<FanProcessingType, TransmutationFanProcessingType> TRANSMUTATION = TYPES.register("transmutation", TransmutationFanProcessingType::new);
 
     public static void register(IEventBus modBus) {
         TYPES.register(modBus);

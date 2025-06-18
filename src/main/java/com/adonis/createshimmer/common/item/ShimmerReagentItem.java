@@ -18,7 +18,6 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
 public class ShimmerReagentItem extends Item {
-    
     public ShimmerReagentItem(Properties properties) {
         super(properties);
     }
@@ -33,7 +32,7 @@ public class ShimmerReagentItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         super.finishUsingItem(stack, level, entity);
-        
+
         if (entity instanceof ServerPlayer serverPlayer) {
             // 触发饮用药水的成就
             CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);

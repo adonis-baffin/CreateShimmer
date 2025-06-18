@@ -2,9 +2,6 @@ package com.adonis.createshimmer.common.registry;
 
 import static com.adonis.createshimmer.common.registry.CSBlocks.*;
 import static com.adonis.createshimmer.common.registry.CSItems.*;
-import static com.simibubi.create.AllBlocks.EXPERIENCE_BLOCK;
-import static com.simibubi.create.AllItems.EXP_NUGGET;
-import static plus.dragons.createdragonsplus.common.registry.CDPItems.BLAZE_UPGRADE_SMITHING_TEMPLATE;
 
 import com.adonis.createshimmer.common.CSCommon;
 import com.adonis.createshimmer.util.CSLang;
@@ -12,7 +9,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTab.TabVisibility;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
