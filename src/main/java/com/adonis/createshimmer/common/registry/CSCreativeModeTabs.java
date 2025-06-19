@@ -31,6 +31,7 @@ public class CSCreativeModeTabs {
     }
 
     private static void buildBaseContents(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+        output.accept(MAGIC_SOIL);
         output.accept(THORN_FLOUR);
         output.accept(RAW_KNIGHTMETAL);
         output.accept(SHIMMER_REAGENT);

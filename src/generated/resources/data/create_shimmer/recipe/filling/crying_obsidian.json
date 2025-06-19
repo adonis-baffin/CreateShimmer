@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:obsidian"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 250,
+      "fluid": "create_shimmer:shimmer"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:crying_obsidian"
+    }
+  ]
+}
