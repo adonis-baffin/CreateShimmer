@@ -1,0 +1,38 @@
+{
+  "variants": {
+    "shimmer_enhanced=false": [
+      {
+        "model": "create_shimmer:block/magic_soil"
+      },
+      {
+        "model": "create_shimmer:block/magic_soil",
+        "y": 90
+      },
+      {
+        "model": "create_shimmer:block/magic_soil",
+        "y": 180
+      },
+      {
+        "model": "create_shimmer:block/magic_soil",
+        "y": 270
+      }
+    ],
+    "shimmer_enhanced=true": [
+      {
+        "model": "create_shimmer:block/magic_soil_enhanced"
+      },
+      {
+        "model": "create_shimmer:block/magic_soil_enhanced",
+        "y": 90
+      },
+      {
+        "model": "create_shimmer:block/magic_soil_enhanced",
+        "y": 180
+      },
+      {
+        "model": "create_shimmer:block/magic_soil_enhanced",
+        "y": 270
+      }
+    ]
+  }
+}

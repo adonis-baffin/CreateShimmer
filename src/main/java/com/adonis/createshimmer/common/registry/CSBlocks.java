@@ -10,10 +10,37 @@ package com.adonis.createshimmer.common.registry;
 // import com.adonis.createshimmer.common.kinetics.grindstone.MechanicalGrindstoneBlock;
 // import com.adonis.createshimmer.common.processing.enchanter.BlazeEnchanterBlock;
 // import com.adonis.createshimmer.common.processing.forger.BlazeForgerBlock;
+import com.adonis.createshimmer.common.block.MagicSoilBlock;
+import com.simibubi.create.Create;
+import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.SharedProperties;
+import com.tterrag.registrate.util.entry.BlockEntry;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.util.DeferredSoundType;
+
+import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
 @SuppressWarnings("removal")
 public class CSBlocks {
+    public static final BlockEntry<MagicSoilBlock> MAGIC_SOIL = REGISTRATE
+            .block("magic_soil", MagicSoilBlock::new)
+            .initialProperties(() -> Blocks.DIRT)
+            .properties(p -> p.mapColor(MapColor.COLOR_BROWN))
+            .transform(pickaxeOnly())
+            // 省略 .blockstate() 调用，让它使用你的JSON文件
+            .simpleItem()
+            .lang("Magic Soil")
+//            .lang("zh_cn", "复生泥土")
+            .register();
 //    public static final BlockEntry<MechanicalGrindstoneBlock> MECHANICAL_GRINDSTONE = REGISTRATE
 //            .block("mechanical_grindstone", MechanicalGrindstoneBlock::new)
 //            .initialProperties(SharedProperties::stone)

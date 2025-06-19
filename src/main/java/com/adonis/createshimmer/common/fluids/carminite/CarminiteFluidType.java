@@ -1,5 +1,6 @@
 package com.adonis.createshimmer.common.fluids.carminite;
 
+import com.adonis.createshimmer.common.fluids.fierytear.FieryTearFluidType;
 import com.tterrag.registrate.builders.FluidBuilder.FluidTypeFactory;
 import java.util.function.Supplier;
 import net.createmod.catnip.theme.Color;
@@ -10,6 +11,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
@@ -85,11 +88,11 @@ public final class CarminiteFluidType extends SolidRenderFluidType {
 
         AreaEffectCloud aoe = new AreaEffectCloud(level, pos.getX(), pos.getY(), pos.getZ());
         aoe.setOwner(player);
-        aoe.setParticle(ParticleTypes.END_ROD); // Use end rod particles for carminite effect
+        aoe.setParticle(ParticleTypes.FLAME); // Use flame particles for fiery tear effect
         aoe.setRadius(stack.getAmount() / 500F);
         aoe.setDuration(stack.getAmount() / 5);
         aoe.setRadiusPerTick(-0.01F);
-        // 砷铅铁溶液气化时不给予任何效果
+        aoe.addEffect(new MobEffectInstance(MobEffects.HARM, 1, 0)); // 瞬间伤害效果
         aoe.getPersistentData().putBoolean("Carminite", true);
         level.levelEvent(2006, pos, -1);
         level.addFreshEntity(aoe);

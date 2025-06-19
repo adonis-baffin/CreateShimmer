@@ -14,6 +14,8 @@ public class CarminiteLiquidBlock extends LiquidBlock {
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        // 砷铅铁溶液不给予任何效果
+        if (entity.tickCount % 5 == 0 && !entity.fireImmune()) {
+            entity.igniteForSeconds(3);
+        }
     }
 }
