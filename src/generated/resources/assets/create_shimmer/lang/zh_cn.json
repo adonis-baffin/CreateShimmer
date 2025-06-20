@@ -15,6 +15,9 @@
   "item.create_shimmer.shimmer_bucket": "微光桶",
   "item.create_shimmer.shimmer_reagent": "微光试剂",
   "item.create_shimmer.thorn_flour": "荆棘面粉",
+  "item.create_shimmer.charm_of_shimmer_1": "微光符咒I",
+  "item.create_shimmer.charm_of_shimmer_2": "微光符咒II",
+  "item.create_shimmer.charm_of_shimmer_base": "微光符咒胚",
   "itemGroup.create_shimmer.base": "机械动力：微光",
   "recipe.create_dragons_plus.fan_ending": "批量复生",
   "createshimmer.recipe.fan_transmutation": "批量复生"

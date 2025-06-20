@@ -15,6 +15,9 @@
   "item.create_shimmer.shimmer_bucket": "Shimmer Bucket",
   "item.create_shimmer.shimmer_reagent": "Shimmer Reagent",
   "item.create_shimmer.thorn_flour": "Thorn Flour",
+  "item.create_shimmer.charm_of_shimmer_1": "Charm of Shimmer I",
+  "item.create_shimmer.charm_of_shimmer_2": "Charm of Shimmer II",
+  "item.create_shimmer.charm_of_shimmer_base": "Charm of Shimmer Base",
   "itemGroup.create_shimmer.base": "Create: Shimmer",
   "recipe.create_dragons_plus.fan_ending": "Bulk Transmutation",
   "createshimmer.recipe.fan_transmutation": "Bulk Transmutation"
