@@ -32,6 +32,7 @@ public class CSCreativeModeTabs {
 
     private static void buildBaseContents(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
         output.accept(MAGIC_SOIL);
+        output.accept(CASTLE_DOOR);
         output.accept(CHARM_OF_SHIMMER_1);
         output.accept(CHARM_OF_SHIMMER_2);
         output.accept(CHARM_OF_SHIMMER_BASE);

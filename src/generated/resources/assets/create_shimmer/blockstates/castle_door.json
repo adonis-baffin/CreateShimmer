@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "active=false,vanish=false": {
+      "model": "create_shimmer:block/castle_door"
+    },
+    "active=false,vanish=true": {
+      "model": "create_shimmer:block/castle_door_vanished"
+    },
+    "active=true,vanish=false": {
+      "model": "create_shimmer:block/castle_door"
+    },
+    "active=true,vanish=true": {
+      "model": "create_shimmer:block/castle_door_vanished"
+    }
+  }
+}
