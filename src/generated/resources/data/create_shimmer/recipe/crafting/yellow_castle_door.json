@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:yellow_dye"
+    },
+    {
+      "item": "create_shimmer:castle_door"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "twilightforest:yellow_castle_door"
+  }
+}

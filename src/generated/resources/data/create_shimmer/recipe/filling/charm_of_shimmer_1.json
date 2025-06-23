@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "create_shimmer:charm_of_shimmer_base"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 250,
+      "fluid": "create_shimmer:shimmer"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_shimmer:charm_of_shimmer_1"
+    }
+  ]
+}

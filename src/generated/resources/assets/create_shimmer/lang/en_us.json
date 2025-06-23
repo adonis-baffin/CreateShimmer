@@ -3,6 +3,7 @@
   "block.create_shimmer.fiery_tear": "Fiery Tear",
   "block.create_shimmer.magic_soil": "Magic Soil",
   "block.create_shimmer.castle_door": "Castle Door",
+  "block.create_shimmer.shimmer_block": "Block of Shimmer",
   "block.create_shimmer.shimmer": "Shimmer",
   "fluid.create_shimmer.carminite_solution": "Carminite Solution",
   "fluid.create_shimmer.fiery_tear": "Fiery Tear",
@@ -19,6 +20,7 @@
   "item.create_shimmer.charm_of_shimmer_1": "Charm of Shimmer I",
   "item.create_shimmer.charm_of_shimmer_2": "Charm of Shimmer II",
   "item.create_shimmer.charm_of_shimmer_base": "Charm of Shimmer Base",
+  "item.create_shimmer.uncrafting_template": "Uncrafting Template",
   "itemGroup.create_shimmer.base": "Create: Shimmer",
   "recipe.create_dragons_plus.fan_ending": "Bulk Transmutation",
   "createshimmer.recipe.fan_transmutation": "Bulk Transmutation"

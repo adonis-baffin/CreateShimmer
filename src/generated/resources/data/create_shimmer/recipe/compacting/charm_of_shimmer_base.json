@@ -1,0 +1,19 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "twilightforest:liveroot"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "create_shimmer:thorn_flour"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_shimmer:charm_of_shimmer_base"
+    }
+  ]
+}

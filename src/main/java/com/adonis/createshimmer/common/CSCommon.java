@@ -50,8 +50,8 @@ public class CSCommon {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void register(final RegisterEvent event) {
         if (event.getRegistry() == BuiltInRegistries.TRIGGER_TYPES) {
-//            CEIAdvancements.register();
-//            CEIAdvancements.BuiltinTriggersQuickDeploy.register();
+//            CSAdvancements.register();
+//            CSAdvancements.BuiltinTriggersQuickDeploy.register();
         }
     }
 
@@ -62,8 +62,4 @@ public class CSCommon {
     public static String asLocalization(String key) {
         return ID + "." + key;
     }
-
-    // 移除了 onGatherData 方法，因为已经在 CSData.java 中处理数据生成
-
-    // TODO Add more Option to customize printer behavior
 }

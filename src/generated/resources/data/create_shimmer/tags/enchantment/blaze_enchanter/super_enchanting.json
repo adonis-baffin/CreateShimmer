@@ -1,9 +1,0 @@
-{
-  "remove": [
-    "#create_shimmer:blaze_enchanter/enchanting_exclusive"
-  ],
-  "values": [
-    "#create_shimmer:blaze_enchanter/enchanting",
-    "#create_shimmer:blaze_enchanter/super_enchanting_exclusive"
-  ]
-}

@@ -24,6 +24,7 @@ public class CSServerConfig extends ConfigBase {
     public final CSEnchantmentsConfig enchantments = nested(0, CSEnchantmentsConfig::new, Comments.enchantments);
     public final CSProcessingConfig processing = nested(0, CSProcessingConfig::new, Comments.processing);
     public final CSRecipesConfig recipes = nested(0, CSRecipesConfig::new, Comments.recipes);
+    public final CSRepairConfig repair = nested(0, CSRepairConfig::new, Comments.repair);
 
     @Override
     public void registerAll(ModConfigSpec.Builder builder) {
@@ -41,5 +42,6 @@ public class CSServerConfig extends ConfigBase {
         static final String enchantments = "Parameters and abilities of enchantment operating components";
         static final String processing = "Parameters and abilities of processing mechanisms and appliances";
         static final String recipes = "Parameters and abilities of recipe processing and fan-based bulk operations";
+        static final String repair = "Parameters for shimmer-based scepter repair functionality";
     }
 }

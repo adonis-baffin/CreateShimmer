@@ -1,0 +1,17 @@
+{
+  "type": "create:emptying",
+  "ingredients": [
+    {
+      "item": "twilightforest:fiery_tears"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:glass_bottle"
+    },
+    {
+      "amount": 25,
+      "id": "create_shimmer:fiery_tear"
+    }
+  ]
+}

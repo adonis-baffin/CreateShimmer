@@ -1,0 +1,7 @@
+{
+  "parent": "create:block/experience_block",
+  "textures": {
+    "all": "create_shimmer:block/shimmer_block",
+    "particle": "create_shimmer:block/shimmer_block"
+  }
+}

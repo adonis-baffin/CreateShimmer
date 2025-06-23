@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "create_shimmer:thorn_flour"
+    },
+    "s": {
+      "item": "twilightforest:reappearing_block"
+    }
+  },
+  "pattern": [
+    "aaa",
+    "asa",
+    "aaa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_shimmer:castle_door"
+  }
+}

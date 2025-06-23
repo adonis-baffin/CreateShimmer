@@ -1,0 +1,14 @@
+{
+  "type": "create_dragons_plus:coloring",
+  "color": "purple",
+  "ingredients": [
+    {
+      "item": "create_shimmer:castle_door"
+    }
+  ],
+  "results": [
+    {
+      "item": "twilightforest:violet_castle_door"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:purple_dye"
+    },
+    {
+      "item": "create_shimmer:castle_door"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "twilightforest:violet_castle_door"
+  }
+}

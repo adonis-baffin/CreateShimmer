@@ -1,12 +1,6 @@
 {
   "values": [
-    "create_shimmer:mechanical_grindstone",
-    "create_shimmer:grindstone_drain",
-    "create_shimmer:experience_hatch",
-    "create_shimmer:printer",
-    "create_shimmer:blaze_enchanter",
-    "create_shimmer:blaze_forger",
-    "create_shimmer:super_experience_block",
-    "create_shimmer:experience_lantern"
+    "create_shimmer:shimmer_block",
+    "create_shimmer:castle_door"
   ]
 }

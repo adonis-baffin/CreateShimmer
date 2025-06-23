@@ -3,6 +3,7 @@
   "block.create_shimmer.fiery_tear": "炽热的泪",
   "block.create_shimmer.magic_soil": "复生泥土",
   "block.create_shimmer.castle_door": "城堡门",
+  "block.create_shimmer.shimmer_block": "微光块",
   "block.create_shimmer.shimmer": "微光",
   "fluid.create_shimmer.carminite_solution": "砷铅铁溶液",
   "fluid.create_shimmer.fiery_tear": "炽热的泪",
@@ -19,6 +20,7 @@
   "item.create_shimmer.charm_of_shimmer_1": "微光符咒I",
   "item.create_shimmer.charm_of_shimmer_2": "微光符咒II",
   "item.create_shimmer.charm_of_shimmer_base": "微光符咒胚",
+  "item.create_shimmer.uncrafting_template": "拆解模板",
   "itemGroup.create_shimmer.base": "机械动力：微光",
   "recipe.create_dragons_plus.fan_ending": "批量复生",
   "createshimmer.recipe.fan_transmutation": "批量复生"

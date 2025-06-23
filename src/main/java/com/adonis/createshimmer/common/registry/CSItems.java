@@ -13,44 +13,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public class CSItems {
-//    public static final ItemEntry<ExperienceNuggetItem> SUPER_EXPERIENCE_NUGGET = REGISTRATE
-//            .item("super_experience_nugget", ExperienceNuggetItem::new)
-//            .tag(Tags.Items.NUGGETS)
-//            .properties(p -> p.rarity(Rarity.RARE))
-//            .lang("Nugget of Super Experience")
-//            .register();
-//    public static final ItemEntry<EnchantingTemplateItem> ENCHANTING_TEMPLATE = REGISTRATE
-//            .item("enchanting_template", EnchantingTemplateItem::normal)
-//            .properties(prop -> prop
-//                    .rarity(Rarity.UNCOMMON)
-//                    .component(DataComponents.STORED_ENCHANTMENTS, ItemEnchantments.EMPTY))
-//            .register();
-//    public static final ItemEntry<EnchantingTemplateItem> SUPER_ENCHANTING_TEMPLATE = REGISTRATE
-//            .item("super_enchanting_template", EnchantingTemplateItem::special)
-//            .properties(prop -> prop
-//                    .rarity(Rarity.RARE)
-//                    .component(DataComponents.STORED_ENCHANTMENTS, ItemEnchantments.EMPTY))
-//            .register();
-//    public static final ItemEntry<Item> EXPERIENCE_CAKE_BASE = REGISTRATE
-//            .item("experience_cake_base", Item::new)
-//            .lang("Cake Base o' Enchanting")
-//            .tag(AllItemTags.UPRIGHT_ON_BELT.tag)
-//            .register();
-//    public static final ItemEntry<Item> EXPERIENCE_CAKE = REGISTRATE
-//            .item("experience_cake", Item::new)
-//            .lang("Cake o' Enchanting")
-//            .properties(prop -> prop
-//                    .rarity(Rarity.RARE)
-//                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
-//            .tag(AllItemTags.UPRIGHT_ON_BELT.tag)
-//            .register();
-//    public static final ItemEntry<Item> EXPERIENCE_CAKE_SLICE = REGISTRATE
-//            .item("experience_cake_slice", Item::new)
-//            .lang("Cake Slice o' Enchanting")
-//            .properties(prop -> prop
-//                    .rarity(Rarity.RARE)
-//                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
-//            .register();
     public static final ItemEntry<ShimmerReagentItem> SHIMMER_REAGENT = REGISTRATE
             .item("shimmer_reagent", ShimmerReagentItem::new)
             .lang("Shimmer Reagent")
@@ -92,6 +54,13 @@ public class CSItems {
             .lang("Charm of Shimmer Base")
             .properties(prop -> prop
                     .rarity(Rarity.COMMON))
+            .register();
+
+    public static final ItemEntry<Item> UNCRAFTING_TEMPLATE = REGISTRATE
+            .item("uncrafting_template", Item::new)
+            .lang("Uncrafting Template")
+            .properties(prop -> prop
+                    .rarity(Rarity.UNCOMMON))
             .register();
 
     public static final DeferredItem<BucketItem> EXPERIENCE_BUCKET = DeferredItem

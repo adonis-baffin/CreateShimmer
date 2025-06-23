@@ -1,0 +1,15 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 200,
+      "fluid": "create_shimmer:shimmer"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_shimmer:shimmer_block"
+    }
+  ]
+}

@@ -6,7 +6,10 @@
   "refmap": "create_shimmer.refmap.json",
   "mixins": [
     "accessor.CreateRecipeCategoryAccessor",
-    "create.TransmutationFanProcessingMixin"
+    "create.TransmutationFanProcessingMixin",
+    "FillingBySpoutMixin",
+    "FillingRecipeMixin",
+    "ProcessingRecipeMixin"
   ],
   "client": [],
   "injectors": {

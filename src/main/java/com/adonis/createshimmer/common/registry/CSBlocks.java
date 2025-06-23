@@ -2,6 +2,7 @@ package com.adonis.createshimmer.common.registry;
 
 import com.adonis.createshimmer.common.block.MagicSoilBlock;
 import com.simibubi.create.Create;
+import com.simibubi.create.content.materials.ExperienceBlock;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -49,6 +50,29 @@ public class CSBlocks {
             .transform(pickaxeOnly())
             .simpleItem()
             .lang("Castle Door")
+            .register();
+
+    public static final BlockEntry<ExperienceBlock> SHIMMER_BLOCK = REGISTRATE
+            .block("shimmer_block", ExperienceBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .properties(p -> p.mapColor(MapColor.DIAMOND)
+                    .sound(new DeferredSoundType(1, .5f, () -> SoundEvents.AMETHYST_BLOCK_BREAK,
+                            () -> SoundEvents.AMETHYST_BLOCK_STEP, () -> SoundEvents.AMETHYST_BLOCK_PLACE,
+                            () -> SoundEvents.AMETHYST_BLOCK_HIT, () -> SoundEvents.AMETHYST_BLOCK_FALL))
+                    .requiresCorrectToolForDrops()
+                    .lightLevel(state -> 15))
+            .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(), prov.models()
+                    .withExistingParent(ctx.getName(), Create.asResource("block/shimmer_block"))
+                    .texture("all", ctx.getId().withPrefix("block/"))
+                    .texture("particle", ctx.getId().withPrefix("block/"))))
+            .transform(pickaxeOnly())
+            .lang("Block of Shimmer")
+            .tag(Tags.Blocks.STORAGE_BLOCKS)
+            .tag(BlockTags.BEACON_BASE_BLOCKS)
+            .item()
+            .properties(p -> p.rarity(Rarity.RARE))
+            .tag(Tags.Items.STORAGE_BLOCKS)
+            .build()
             .register();
 
     public static void register(IEventBus modBus) {}

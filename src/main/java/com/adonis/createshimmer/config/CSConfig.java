@@ -87,6 +87,10 @@ public class CSConfig {
         }
     }
 
+    public static CSRepairConfig repair() {
+        return server().repair;
+    }
+
     @SubscribeEvent
     public void onReload(ModConfigEvent.Reloading event) {
         var spec = event.getConfig().getSpec();

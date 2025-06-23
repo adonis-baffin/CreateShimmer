@@ -1,6 +1,7 @@
 {
   "values": [
-    "create_shimmer:experience_cake_base",
-    "create_shimmer:experience_cake"
+    "create_shimmer:charm_of_shimmer_base",
+    "create_shimmer:charm_of_shimmer_base_1",
+    "create_shimmer:charm_of_shimmer_base_2"
   ]
 }

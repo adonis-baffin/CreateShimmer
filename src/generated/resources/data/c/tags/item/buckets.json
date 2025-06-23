@@ -1,6 +1,5 @@
 {
   "values": [
-    "create_shimmer:experience_bucket",
     "create_shimmer:shimmer_bucket",
     "create_shimmer:carminite_solution_bucket",
     "create_shimmer:fiery_tear_bucket"
