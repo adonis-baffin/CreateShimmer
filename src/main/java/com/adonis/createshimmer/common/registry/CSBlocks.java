@@ -1,9 +1,11 @@
 package com.adonis.createshimmer.common.registry;
 
+import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
+
 import com.adonis.createshimmer.common.block.MagicSoilBlock;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.materials.ExperienceBlock;
-import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.sounds.SoundEvents;
@@ -15,13 +17,9 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.DeferredSoundType;
 import twilightforest.block.CastleDoorBlock;
-
-import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
-import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
 @SuppressWarnings("removal")
 public class CSBlocks {

@@ -36,7 +36,6 @@ public class CSJeiPlugin implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-
         // 注册 Transmutation 类别
         if (CSConfig.recipes().enableBulkTransmutation.get()) {
             FanTransmutationCategory transmutationCategory = FanTransmutationCategory.create();
@@ -53,7 +52,6 @@ public class CSJeiPlugin implements IModPlugin {
                 .getJeiHelpers()
                 .getRecipeType(Create.asResource("item_application"), ItemApplicationRecipe.class);
 
-
         // 注册 Transmutation 配方
         if (CSConfig.recipes().enableBulkTransmutation.get()) {
             var transmutationRecipes = recipeManager.getAllRecipesFor(CSRecipes.TRANSMUTATION.getType());
@@ -63,7 +61,6 @@ public class CSJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-
         // 注册 Transmutation 催化剂
         if (CSConfig.recipes().enableBulkTransmutation.get()) {
             registration.addRecipeCatalysts(FanTransmutationCategory.TYPE, AllBlocks.ENCASED_FAN);

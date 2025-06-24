@@ -1,10 +1,10 @@
 package com.adonis.createshimmer.util;
 
 import com.adonis.createshimmer.config.CSConfig;
+import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import java.util.Set;
 
 public class ScepterRepairHelper {
 
@@ -13,8 +13,7 @@ public class ScepterRepairHelper {
             "twilightforest:lifedrain_scepter",
             "twilightforest:zombie_scepter",
             "twilightforest:fortification_scepter",
-            "twilightforest:twilight_scepter"
-    );
+            "twilightforest:twilight_scepter");
 
     /**
      * 检查物品是否是可修复的权杖

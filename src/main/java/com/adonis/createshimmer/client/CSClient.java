@@ -6,14 +6,13 @@ import com.adonis.createshimmer.client.model.CSPartialModels;
 import com.adonis.createshimmer.common.CSCommon;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber; // <--- 关键的 import
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
 // 使用独立的 @EventBusSubscriber 注解，而不是 @Mod.EventBusSubscriber
 @EventBusSubscriber(modid = CSCommon.ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class CSClient {
-
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         // 这个方法会在客户端加载时被自动调用

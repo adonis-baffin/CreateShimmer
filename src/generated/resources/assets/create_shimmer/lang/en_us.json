@@ -26,6 +26,11 @@
   "createshimmer.recipe.fan_transmutation": "Bulk Transmutation",
   "effect.create_shimmer.shimmer": "Shimmer",
   "effect.create_shimmer.shimmer.description": "Enhances combat abilities but distorts vision and causes occasional extra damage",
+  "block.create_shimmer.magic_soil.tooltip.summary": "Soil infused with magical energy, capable of granting special properties to certain plants.",
+  "block.create_shimmer.magic_soil.tooltip.condition1": "When Glow Berries or Torchflower Seeds are planted below:",
+  "block.create_shimmer.magic_soil.tooltip.behaviour1": "The plants gain a restorative ability, allowing them to regrow after being harvested.",
+  "block.create_shimmer.magic_soil.tooltip.condition2": "When moistened by Shimmer Fluid:",
+  "block.create_shimmer.magic_soil.tooltip.behaviour2": "The soil emits a faint light and significantly accelerates the growth of any crop planted on it.",
 
   "item_group.create_shimmer.main": "Create Shimmer",
 

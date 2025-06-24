@@ -3,7 +3,6 @@ package com.adonis.createshimmer.common.fluids.shimmer;
 import com.adonis.createshimmer.common.registry.CSEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;

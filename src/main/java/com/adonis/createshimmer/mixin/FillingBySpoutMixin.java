@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = FillingBySpout.class, remap = false)
 public class FillingBySpoutMixin {
-
     @Inject(method = "getRequiredAmountForItem", at = @At("HEAD"), cancellable = true)
     private static void onGetRequiredAmountForItem(Level level, ItemStack stack, FluidStack availableFluid, CallbackInfoReturnable<Integer> cir) {
         // 对于权杖修复，返回所需的微光量
@@ -36,13 +35,13 @@ public class FillingBySpoutMixin {
                 !ScepterRepairHelper.needsRepair(stack) &&
                 isShimmerFluid(availableFluid)) {
 
-            if (ScepterRepairHelper.isDebugMode()) {
-                System.out.println("Spout - Scepter is full durability, cannot repair");
-            }
+                    if (ScepterRepairHelper.isDebugMode()) {
+                        System.out.println("Spout - Scepter is full durability, cannot repair");
+                    }
 
-            cir.setReturnValue(-1); // 返回 -1 表示无法处理
-            return;
-        }
+                    cir.setReturnValue(-1); // 返回 -1 表示无法处理
+                    return;
+                }
     }
 
     // 移除原有的 fillItem 注入，让配方系统处理

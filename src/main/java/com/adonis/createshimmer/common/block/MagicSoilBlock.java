@@ -26,7 +26,6 @@ import twilightforest.block.TorchberryPlantBlock;
  * 当附近有微光流体时会增强效果并改变外观
  */
 public class MagicSoilBlock extends Block {
-
     public static final BooleanProperty SHIMMER_ENHANCED = BooleanProperty.create("shimmer_enhanced");
 
     public MagicSoilBlock(Properties properties) {
@@ -139,13 +138,13 @@ public class MagicSoilBlock extends Block {
 
                 // 简化遮挡检测，让更多粒子能够生成
                 if (!blockstate.isSolid() || !blockstate.isFaceSturdy(level, blockpos, direction.getOpposite())) {
-                    double d0 = direction.getStepX() == 0 ? random.nextDouble() : 0.5 + (double)direction.getStepX() * 0.6;
-                    double d1 = direction.getStepY() == 0 ? random.nextDouble() : 0.5 + (double)direction.getStepY() * 0.6;
-                    double d2 = direction.getStepZ() == 0 ? random.nextDouble() : 0.5 + (double)direction.getStepZ() * 0.6;
+                    double d0 = direction.getStepX() == 0 ? random.nextDouble() : 0.5 + (double) direction.getStepX() * 0.6;
+                    double d1 = direction.getStepY() == 0 ? random.nextDouble() : 0.5 + (double) direction.getStepY() * 0.6;
+                    double d2 = direction.getStepZ() == 0 ? random.nextDouble() : 0.5 + (double) direction.getStepZ() * 0.6;
                     level.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR,
-                            (double)pos.getX() + d0,
-                            (double)pos.getY() + d1,
-                            (double)pos.getZ() + d2,
+                            (double) pos.getX() + d0,
+                            (double) pos.getY() + d1,
+                            (double) pos.getZ() + d2,
                             0.0, 0.0, 0.0);
                 }
             }
@@ -154,7 +153,7 @@ public class MagicSoilBlock extends Block {
         // 添加额外的粒子从所有侧面生成，确保更均匀的分布
         if (random.nextInt(8) == 0) {
             // 随机选择一个侧面（排除上下）
-            Direction[] horizontalDirections = {Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST, Direction.DOWN};
+            Direction[] horizontalDirections = { Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST, Direction.DOWN };
             Direction dir = horizontalDirections[random.nextInt(horizontalDirections.length)];
 
             double x = pos.getX() + 0.5 + dir.getStepX() * 0.6 + (random.nextDouble() - 0.5) * 0.2;
@@ -248,7 +247,7 @@ public class MagicSoilBlock extends Block {
      */
     private void regenerateTorchberries(ServerLevel level, BlockPos pos, RandomSource random) {
         // 检查上方和下方的火炬浆果植株
-        BlockPos[] checkPositions = {pos.above(), pos.below()};
+        BlockPos[] checkPositions = { pos.above(), pos.below() };
 
         for (BlockPos checkPos : checkPositions) {
             BlockState checkState = level.getBlockState(checkPos);
@@ -271,7 +270,7 @@ public class MagicSoilBlock extends Block {
      */
     private void acceleratePlantGrowth(ServerLevel level, BlockPos pos, RandomSource random) {
         // 只检查直接上方和下方的方块
-        BlockPos[] checkPositions = {pos.above(), pos.below()};
+        BlockPos[] checkPositions = { pos.above(), pos.below() };
 
         for (BlockPos checkPos : checkPositions) {
             BlockState checkState = level.getBlockState(checkPos);
@@ -301,7 +300,7 @@ public class MagicSoilBlock extends Block {
      * 尝试骨粉生长效果
      */
     private void tryBonemealGrowth(ServerLevel level, BlockPos pos, BlockState state,
-                                   BonemealableBlock bonemealable, RandomSource random) {
+            BonemealableBlock bonemealable, RandomSource random) {
         try {
             if (bonemealable.isValidBonemealTarget(level, pos, state) &&
                     bonemealable.isBonemealSuccess(level, random, pos, state)) {
@@ -319,7 +318,7 @@ public class MagicSoilBlock extends Block {
      * 处理特殊的原版植物
      */
     private void handleSpecialVanillaPlants(ServerLevel level, BlockPos pos, BlockState state,
-                                            Block block, RandomSource random) {
+            Block block, RandomSource random) {
         // 甘蔗特殊处理
         if (block == Blocks.SUGAR_CANE) {
             if (random.nextInt(5) == 0) {

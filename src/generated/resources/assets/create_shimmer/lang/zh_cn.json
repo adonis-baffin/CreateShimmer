@@ -25,7 +25,8 @@
   "recipe.create_dragons_plus.fan_ending": "批量复生",
   "createshimmer.recipe.fan_transmutation": "批量复生",
   "effect.create_shimmer.shimmer": "微光",
-  "effect.create_shimmer.shimmer.description": "增强战斗能力，但会扭曲视野并偶尔造成额外伤害",
+  "effect.create_shimmer.shimmer.description": "增强战斗能力，但会扭曲视野并变得更脆弱",
+  "block.create_shimmer.magic_soil.tooltip.summary": "蕴含魔法能量的泥土，可以使得种植于其下方的发光浆果和火炬浆果拥有复生的能力。在被微光流体滋润后，它还能够发出光芒并加速其上方作物的生长。",
 
   "item_group.create_shimmer.main": "机械动力：微光",
 

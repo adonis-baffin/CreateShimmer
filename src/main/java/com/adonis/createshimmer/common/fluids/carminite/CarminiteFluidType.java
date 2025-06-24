@@ -1,6 +1,5 @@
 package com.adonis.createshimmer.common.fluids.carminite;
 
-import com.adonis.createshimmer.common.fluids.fierytear.FieryTearFluidType;
 import com.tterrag.registrate.builders.FluidBuilder.FluidTypeFactory;
 import java.util.function.Supplier;
 import net.createmod.catnip.theme.Color;

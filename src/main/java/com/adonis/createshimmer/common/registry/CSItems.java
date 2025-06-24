@@ -63,9 +63,6 @@ public class CSItems {
                     .rarity(Rarity.UNCOMMON))
             .register();
 
-    public static final DeferredItem<BucketItem> EXPERIENCE_BUCKET = DeferredItem
-            .createItem(CSCommon.asResource("experience_bucket"));
-
     public static final DeferredItem<BucketItem> SHIMMER_BUCKET = DeferredItem
             .createItem(CSCommon.asResource("shimmer_bucket"));
 

@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = FillingRecipe.class, remap = false)
 public class FillingRecipeMixin {
-
     @Inject(method = "matches", at = @At("HEAD"), cancellable = true)
     private void onMatches(SingleRecipeInput inv, Level level, CallbackInfoReturnable<Boolean> cir) {
         ItemStack stack = inv.getItem(0);

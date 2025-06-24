@@ -4,7 +4,6 @@ import com.adonis.createshimmer.common.CSCommon;
 import com.adonis.createshimmer.common.registry.CSEffects;
 import com.adonis.createshimmer.common.registry.CSItems;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -28,7 +27,6 @@ import twilightforest.util.TFItemStackUtils;
 // 我们将 modid 设置为我们自己的模组ID
 @EventBusSubscriber(modid = CSCommon.ID)
 public class CSCharmEvents {
-
     /**
      * 监听玩家死亡事件，并尝试使用微光符咒来拯救玩家。
      * 优先级设置为 HIGHEST，确保我们的符咒效果在其他死亡处理逻辑（如暮色森林的守护符咒）之前执行。
@@ -50,6 +48,7 @@ public class CSCharmEvents {
 
     /**
      * 核心逻辑：检查并消耗玩家身上的微光符咒，然后应用效果。
+     * 
      * @param player 目标玩家
      * @return 如果成功消耗符咒并应用了效果，则返回 true
      */
@@ -93,7 +92,7 @@ public class CSCharmEvents {
             // 这会在玩家身上产生和生命符咒一样的华丽视觉和声音效果
             PacketDistributor.sendToPlayer(serverPlayer, new SpawnCharmPacket(consumedStack, TFSounds.CHARM_LIFE.getKey()));
         }
-        
+
         // 告诉调用者，我们成功了
         return true;
     }

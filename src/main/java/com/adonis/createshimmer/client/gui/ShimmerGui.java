@@ -35,7 +35,7 @@ public class ShimmerGui {
             // 获取玩家的游戏模式
             // 使用 minecraft.gameMode 来获取 ClientGameMode
             if (player != null && minecraft.gameMode != null &&
-                    // 确保玩家有效果 并且 不是创造模式或观察者模式
+            // 确保玩家有效果 并且 不是创造模式或观察者模式
                     player.hasEffect(CSEffects.SHIMMER_EFFECT) &&
                     !player.isCreative() && !player.isSpectator()) {
 

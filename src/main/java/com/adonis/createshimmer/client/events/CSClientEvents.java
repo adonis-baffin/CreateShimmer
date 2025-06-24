@@ -11,7 +11,6 @@ import net.neoforged.neoforge.client.event.ViewportEvent;
 
 @OnlyIn(Dist.CLIENT)
 public class CSClientEvents {
-
     @SubscribeEvent
     public void onComputeFogColor(ViewportEvent.ComputeFogColor event) { // 移除了 static
         Minecraft minecraft = Minecraft.getInstance();

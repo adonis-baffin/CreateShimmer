@@ -2,6 +2,8 @@ package com.adonis.createshimmer.common.effects;
 
 import com.adonis.createshimmer.common.registry.CSDamageTypes;
 import com.adonis.createshimmer.common.registry.CSEffects;
+import java.util.Collections;
+import java.util.List;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -12,14 +14,10 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
-import java.util.Collections;
-import java.util.List;
-
 public class ShimmerEffect extends MobEffect {
-
-    public static final double MOVEMENT_SPEED_MODIFIER = 0.2;
-    public static final double BLOCK_BREAK_SPEED_MODIFIER = 0.2;
-    public static final double ATTACK_SPEED_MODIFIER = 0.2;
+//    public static final double MOVEMENT_SPEED_MODIFIER = 1.0;
+//    public static final double BLOCK_BREAK_SPEED_MODIFIER = 2.0;
+    public static final double ATTACK_SPEED_MODIFIER = 1.0;
     public static final double ATTACK_DAMAGE_MODIFIER = 2.0;
 
     public ShimmerEffect() {
@@ -68,8 +66,7 @@ public class ShimmerEffect extends MobEffect {
                 if (player.level().random.nextDouble() < ADDITIONAL_DAMAGE_CHANCE) {
                     // 3. 如果概率命中，则造成自定义伤害
                     DamageSource customSource = new DamageSource(
-                            player.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(CSDamageTypes.SHIMMER_MAGIC)
-                    );
+                            player.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(CSDamageTypes.SHIMMER_MAGIC));
                     player.hurt(customSource, ADDITIONAL_MAGIC_DAMAGE);
                 }
             }

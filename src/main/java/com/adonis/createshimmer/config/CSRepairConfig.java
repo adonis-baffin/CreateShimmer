@@ -18,7 +18,6 @@ package com.adonis.createshimmer.config;
 import net.createmod.catnip.config.ConfigBase;
 
 public class CSRepairConfig extends ConfigBase {
-
     public final ConfigBool enableScepterRepair = b(true, "enableScepterRepair", Comments.enableScepterRepair);
     public final ConfigInt scepterRepairCost = i(50, 1, 1000, "scepterRepairCost", Comments.scepterRepairCost);
     public final ConfigInt scepterRepairAmount = i(9, 1, 100, "scepterRepairAmount", Comments.scepterRepairAmount);

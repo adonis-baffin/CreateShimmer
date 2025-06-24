@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = ProcessingRecipe.class, remap = false)
 public class ProcessingRecipeMixin {
-
     @Inject(method = "getResultItem", at = @At("HEAD"), cancellable = true)
     private void onGetResultItem(net.minecraft.core.HolderLookup.Provider registryAccess, CallbackInfoReturnable<ItemStack> cir) {
         // 获取实际的 ProcessingRecipe 实例 - 使用通配符避免泛型问题
