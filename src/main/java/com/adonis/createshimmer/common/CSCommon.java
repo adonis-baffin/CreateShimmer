@@ -1,5 +1,6 @@
 package com.adonis.createshimmer.common;
 
+import com.adonis.createshimmer.common.effects.ShimmerEffect;
 import com.adonis.createshimmer.common.registry.*;
 import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.foundation.item.ItemDescription;
@@ -14,6 +15,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import plus.dragons.createdragonsplus.common.CDPRegistrate;
 
@@ -38,6 +40,13 @@ public class CSCommon {
         CSStats.register(modBus);
         CSMountedStorageTypes.register(modBus);
         CSFanProcessingTypes.register(modBus);
+        CSEffects.register(modBus);
+        CSDamageTypes.register(modBus); // <-- 在这里添加这一行
+
+        // --- 注册通用事件处理器 (服务端和客户端都运行) ---
+        // ShimmerEventHandler 包含游戏逻辑（如伤害计算），必须在两端都注册。
+        NeoForge.EVENT_BUS.register(ShimmerEffect.ShimmerEventHandler.class);
+
         modBus.register(this);
         modBus.register(new CSConfig(modContainer));
     }

@@ -70,7 +70,7 @@ public class CSBlocks {
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .tag(BlockTags.BEACON_BASE_BLOCKS)
             .item()
-            .properties(p -> p.rarity(Rarity.RARE))
+            .properties(p -> p.rarity(Rarity.UNCOMMON))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .build()
             .register();

@@ -1,5 +1,6 @@
 package com.adonis.createshimmer.common.item;
 
+import com.adonis.createshimmer.common.registry.CSEffects;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -46,8 +47,8 @@ public class ShimmerReagentItem extends Item {
         }
 
         if (!level.isClientSide) {
-            // 给予15秒发光效果
-            entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 300, 0)); // 300 ticks = 15秒
+            // 给予15秒微光效果
+            entity.addEffect(new MobEffectInstance(CSEffects.SHIMMER_EFFECT, 300, 0)); // 300 ticks = 15秒
         }
 
         // 如果是玩家且不是创造模式，给予空瓶

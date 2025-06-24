@@ -39,14 +39,14 @@ public class CSItems {
             .item("charm_of_shimmer_1", Item::new)
             .lang("Charm of Shimmer I")
             .properties(prop -> prop
-                    .rarity(Rarity.COMMON))
+                    .rarity(Rarity.UNCOMMON))
             .register();
 
     public static final ItemEntry<Item> CHARM_OF_SHIMMER_2 = REGISTRATE
             .item("charm_of_shimmer_2", Item::new)
             .lang("Charm of Shimmer II")
             .properties(prop -> prop
-                    .rarity(Rarity.COMMON))
+                    .rarity(Rarity.UNCOMMON))
             .register();
 
     public static final ItemEntry<Item> CHARM_OF_SHIMMER_BASE = REGISTRATE

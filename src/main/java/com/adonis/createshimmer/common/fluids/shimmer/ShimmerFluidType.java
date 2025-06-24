@@ -1,5 +1,6 @@
 package com.adonis.createshimmer.common.fluids.shimmer;
 
+import com.adonis.createshimmer.common.registry.CSEffects;
 import com.tterrag.registrate.builders.FluidBuilder.FluidTypeFactory;
 import java.util.function.Supplier;
 import net.createmod.catnip.theme.Color;
@@ -91,7 +92,7 @@ public final class ShimmerFluidType extends SolidRenderFluidType {
         aoe.setRadius(stack.getAmount() / 500F);
         aoe.setDuration(stack.getAmount() / 5);
         aoe.setRadiusPerTick(-0.01F);
-        aoe.addEffect(new MobEffectInstance(MobEffects.GLOWING, 20, 0)); // 20 ticks duration
+        aoe.addEffect(new MobEffectInstance(CSEffects.SHIMMER_EFFECT, 20, 0)); // 20 ticks duration
         aoe.getPersistentData().putBoolean("Shimmer", true);
         level.levelEvent(2006, pos, -1);
         level.addFreshEntity(aoe);

@@ -23,5 +23,12 @@
   "item.create_shimmer.uncrafting_template": "Uncrafting Template",
   "itemGroup.create_shimmer.base": "Create: Shimmer",
   "recipe.create_dragons_plus.fan_ending": "Bulk Transmutation",
-  "createshimmer.recipe.fan_transmutation": "Bulk Transmutation"
+  "createshimmer.recipe.fan_transmutation": "Bulk Transmutation",
+  "effect.create_shimmer.shimmer": "Shimmer",
+  "effect.create_shimmer.shimmer.description": "Enhances combat abilities but distorts vision and causes occasional extra damage",
+
+  "item_group.create_shimmer.main": "Create Shimmer",
+
+  "tooltip.create_shimmer.shimmer_effect": "Grants increased attack speed, movement speed, and damage",
+  "tooltip.create_shimmer.shimmer_warning": "Caution: May cause vision impairment and vulnerability"
 }

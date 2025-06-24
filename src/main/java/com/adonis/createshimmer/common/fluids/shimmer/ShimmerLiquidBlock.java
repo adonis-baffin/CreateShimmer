@@ -1,5 +1,6 @@
 package com.adonis.createshimmer.common.fluids.shimmer;
 
+import com.adonis.createshimmer.common.registry.CSEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -18,7 +19,7 @@ public class ShimmerLiquidBlock extends LiquidBlock {
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity livingEntity && livingEntity.isAffectedByPotions() && entity.tickCount % 5 == 0) {
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 20, 0, false, false, false));
+            livingEntity.addEffect(new MobEffectInstance(CSEffects.SHIMMER_EFFECT, 20, 0, false, false, false));
         }
     }
 }

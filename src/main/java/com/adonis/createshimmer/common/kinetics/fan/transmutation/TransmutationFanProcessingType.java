@@ -5,6 +5,7 @@
 
 package com.adonis.createshimmer.common.kinetics.fan.transmutation;
 
+import com.adonis.createshimmer.common.registry.CSEffects;
 import com.adonis.createshimmer.common.registry.CSFluids;
 import com.adonis.createshimmer.common.registry.CSRecipes;
 import com.adonis.createshimmer.config.CSConfig;
@@ -107,7 +108,7 @@ public class TransmutationFanProcessingType implements FanProcessingType {
             return;
         if (entity instanceof LivingEntity livingEntity && livingEntity.isAffectedByPotions() && entity.tickCount % 20 == 0) {
             // 给予发光效果，体现"复生"的主题
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 60, 0));
+            livingEntity.addEffect(new MobEffectInstance(CSEffects.SHIMMER_EFFECT, 60, 0));
         }
     }
 }

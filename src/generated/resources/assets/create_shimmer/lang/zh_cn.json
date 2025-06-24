@@ -23,5 +23,12 @@
   "item.create_shimmer.uncrafting_template": "拆解模板",
   "itemGroup.create_shimmer.base": "机械动力：微光",
   "recipe.create_dragons_plus.fan_ending": "批量复生",
-  "createshimmer.recipe.fan_transmutation": "批量复生"
+  "createshimmer.recipe.fan_transmutation": "批量复生",
+  "effect.create_shimmer.shimmer": "微光",
+  "effect.create_shimmer.shimmer.description": "增强战斗能力，但会扭曲视野并偶尔造成额外伤害",
+
+  "item_group.create_shimmer.main": "机械动力：微光",
+
+  "tooltip.create_shimmer.shimmer_effect": "提供攻击速度、移动速度和攻击伤害加成",
+  "tooltip.create_shimmer.shimmer_warning": "警告：可能导致视野受损和易受伤害"
 }
