@@ -3,7 +3,6 @@ package com.adonis.createshimmer.common.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EntityTypeTags;
@@ -12,6 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -27,7 +27,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.level.BlockGetter;
 import twilightforest.init.TFDamageTypes;
 import twilightforest.init.TFParticleType;
 
@@ -50,8 +49,7 @@ public class OminousCampfireBlock extends HorizontalDirectionalBlock implements 
                 this.stateDefinition.any()
                         .setValue(LIT, Boolean.valueOf(true))
                         .setValue(WATERLOGGED, Boolean.valueOf(false))
-                        .setValue(FACING, Direction.NORTH)
-        );
+                        .setValue(FACING, Direction.NORTH));
     }
 
     @Override
@@ -95,15 +93,14 @@ public class OminousCampfireBlock extends HorizontalDirectionalBlock implements 
             // 营火声音效果
             if (random.nextInt(10) == 0) {
                 level.playLocalSound(
-                        (double)pos.getX() + 0.5,
-                        (double)pos.getY() + 0.5,
-                        (double)pos.getZ() + 0.5,
+                        (double) pos.getX() + 0.5,
+                        (double) pos.getY() + 0.5,
+                        (double) pos.getZ() + 0.5,
                         SoundEvents.CAMPFIRE_CRACKLE,
                         SoundSource.BLOCKS,
                         0.5F + random.nextFloat(),
                         random.nextFloat() * 0.7F + 0.6F,
-                        false
-                );
+                        false);
             }
 
             // 使用冥火粒子效果
@@ -111,13 +108,12 @@ public class OminousCampfireBlock extends HorizontalDirectionalBlock implements 
                 for (int i = 0; i < random.nextInt(2) + 1; i++) {
                     level.addParticle(
                             TFParticleType.OMINOUS_FLAME.get(),
-                            (double)pos.getX() + 0.25 + random.nextDouble() * 0.5,
-                            (double)pos.getY() + 0.4,
-                            (double)pos.getZ() + 0.25 + random.nextDouble() * 0.5,
-                            (double)(random.nextFloat() / 4.0F),
+                            (double) pos.getX() + 0.25 + random.nextDouble() * 0.5,
+                            (double) pos.getY() + 0.4,
+                            (double) pos.getZ() + 0.25 + random.nextDouble() * 0.5,
+                            (double) (random.nextFloat() / 4.0F),
                             0.02,
-                            (double)(random.nextFloat() / 4.0F)
-                    );
+                            (double) (random.nextFloat() / 4.0F));
                 }
             }
 
@@ -134,38 +130,35 @@ public class OminousCampfireBlock extends HorizontalDirectionalBlock implements 
         level.addAlwaysVisibleParticle(
                 net.minecraft.core.particles.ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, // 使用信号烟雾，更浓郁
                 true,
-                (double)pos.getX() + 0.5 + random.nextDouble() / 3.0 * (double)(random.nextBoolean() ? 1 : -1),
-                (double)pos.getY() + random.nextDouble() + random.nextDouble(),
-                (double)pos.getZ() + 0.5 + random.nextDouble() / 3.0 * (double)(random.nextBoolean() ? 1 : -1),
+                (double) pos.getX() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1),
+                (double) pos.getY() + random.nextDouble() + random.nextDouble(),
+                (double) pos.getZ() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1),
                 0.0,
                 0.07,
-                0.0
-        );
+                0.0);
 
         // 额外的普通烟雾
         if (random.nextInt(2) == 0) {
             level.addParticle(
                     net.minecraft.core.particles.ParticleTypes.SMOKE,
-                    (double)pos.getX() + 0.5 + random.nextDouble() / 4.0 * (double)(random.nextBoolean() ? 1 : -1),
-                    (double)pos.getY() + 0.4,
-                    (double)pos.getZ() + 0.5 + random.nextDouble() / 4.0 * (double)(random.nextBoolean() ? 1 : -1),
+                    (double) pos.getX() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1),
+                    (double) pos.getY() + 0.4,
+                    (double) pos.getZ() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1),
                     0.0,
                     0.005,
-                    0.0
-            );
+                    0.0);
         }
 
         // 偶尔添加一些紫色魔法粒子，增加神秘感
         if (random.nextInt(20) == 0) {
             level.addParticle(
                     net.minecraft.core.particles.ParticleTypes.WITCH,
-                    (double)pos.getX() + 0.3 + random.nextDouble() * 0.4,
-                    (double)pos.getY() + 0.6,
-                    (double)pos.getZ() + 0.3 + random.nextDouble() * 0.4,
-                    (double)(random.nextFloat() / 6.0F),
+                    (double) pos.getX() + 0.3 + random.nextDouble() * 0.4,
+                    (double) pos.getY() + 0.6,
+                    (double) pos.getZ() + 0.3 + random.nextDouble() * 0.4,
+                    (double) (random.nextFloat() / 6.0F),
                     0.01,
-                    (double)(random.nextFloat() / 6.0F)
-            );
+                    (double) (random.nextFloat() / 6.0F));
         }
     }
 
@@ -209,8 +202,7 @@ public class OminousCampfireBlock extends HorizontalDirectionalBlock implements 
             boolean flag = net.minecraft.world.phys.shapes.Shapes.joinIsNotEmpty(
                     VIRTUAL_FENCE_POST,
                     blockstate.getCollisionShape(level, blockpos, net.minecraft.world.phys.shapes.CollisionContext.empty()),
-                    net.minecraft.world.phys.shapes.BooleanOp.AND
-            );
+                    net.minecraft.world.phys.shapes.BooleanOp.AND);
             if (flag) {
                 BlockState blockstate1 = level.getBlockState(blockpos.below());
                 return isLitOminousCampfire(blockstate1);
@@ -225,6 +217,5 @@ public class OminousCampfireBlock extends HorizontalDirectionalBlock implements 
     }
 
     // 添加虚拟栅栏柱形状常量（用于烟雾检测）
-    private static final net.minecraft.world.phys.shapes.VoxelShape VIRTUAL_FENCE_POST =
-            Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
+    private static final net.minecraft.world.phys.shapes.VoxelShape VIRTUAL_FENCE_POST = Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
 }

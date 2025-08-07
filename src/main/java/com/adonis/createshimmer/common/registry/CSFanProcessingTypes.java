@@ -1,8 +1,8 @@
 package com.adonis.createshimmer.common.registry;
 
 import com.adonis.createshimmer.common.CSCommon;
-import com.adonis.createshimmer.common.kinetics.fan.transmutation.TransmutationFanProcessingType;
 import com.adonis.createshimmer.common.kinetics.fan.glooming.GloomingFanProcessingType;
+import com.adonis.createshimmer.common.kinetics.fan.transmutation.TransmutationFanProcessingType;
 import com.simibubi.create.api.registry.CreateRegistries;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
 import net.minecraft.core.Registry;

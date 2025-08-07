@@ -1,8 +1,8 @@
 package com.adonis.createshimmer.common.registry;
 
 import com.adonis.createshimmer.common.CSCommon;
-import com.adonis.createshimmer.common.kinetics.fan.transmutation.TransmutationRecipe;
 import com.adonis.createshimmer.common.kinetics.fan.glooming.GloomingRecipe;
+import com.adonis.createshimmer.common.kinetics.fan.transmutation.TransmutationRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.BuiltInRegistries;

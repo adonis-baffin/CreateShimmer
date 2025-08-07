@@ -19,7 +19,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.block.Block;
 
 public class FanGloomingCategory extends ProcessingViaFanCategory<GloomingRecipe> {
     public static final mezz.jei.api.recipe.RecipeType<RecipeHolder<GloomingRecipe>> TYPE = mezz.jei.api.recipe.RecipeType.createRecipeHolderType(CSRecipes.GLOOMING.getId());

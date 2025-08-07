@@ -6,7 +6,6 @@ import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 import com.adonis.createshimmer.common.CSCommon;
 import com.adonis.createshimmer.common.block.MagicSoilBlock;
 import com.adonis.createshimmer.common.block.OminousCampfireBlock;
-import com.adonis.createshimmer.common.block.OminousCampfireBlock;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.materials.ExperienceBlock;
 import com.simibubi.create.foundation.data.SharedProperties;
@@ -18,7 +17,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
@@ -107,8 +105,7 @@ public class CSBlocks {
     // 方块标签类
     public static class MOD_TAGS {
         // 通冥催化剂方块标签
-        public static final TagKey<Block> fanGloomingCatalysts =
-                tag("fan_glooming_catalysts");
+        public static final TagKey<Block> fanGloomingCatalysts = tag("fan_glooming_catalysts");
 
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, CSCommon.asResource(name));
