@@ -1,8 +1,3 @@
-/*
- * Copyright (C) 2025 DragonsPlus
- * SPDX-License-Identifier: LGPL-3.0-or-later
- */
-
 package com.adonis.createshimmer.mixin.create;
 
 import com.adonis.createshimmer.common.registry.CSFanProcessingTypes;

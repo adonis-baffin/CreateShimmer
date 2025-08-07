@@ -1,8 +1,3 @@
-/*
- * Copyright (C) 2025 DragonsPlus
- * SPDX-License-Identifier: LGPL-3.0-or-later
- */
-
 package com.adonis.createshimmer.integration.jei.category;
 
 import com.adonis.createshimmer.common.CSCommon;
@@ -41,6 +36,12 @@ public class CSJeiPlugin implements IModPlugin {
             FanTransmutationCategory transmutationCategory = FanTransmutationCategory.create();
             registration.addRecipeCategories(transmutationCategory);
         }
+
+        // 注册 Glooming 类别
+        if (CSConfig.recipes().enableBulkGlooming.get()) {
+            FanGloomingCategory gloomingCategory = FanGloomingCategory.create();
+            registration.addRecipeCategories(gloomingCategory);
+        }
     }
 
     @Override
@@ -57,6 +58,12 @@ public class CSJeiPlugin implements IModPlugin {
             var transmutationRecipes = recipeManager.getAllRecipesFor(CSRecipes.TRANSMUTATION.getType());
             registration.addRecipes(FanTransmutationCategory.TYPE, transmutationRecipes);
         }
+
+        // 注册 Glooming 配方
+        if (CSConfig.recipes().enableBulkGlooming.get()) {
+            var gloomingRecipes = recipeManager.getAllRecipesFor(CSRecipes.GLOOMING.getType());
+            registration.addRecipes(FanGloomingCategory.TYPE, gloomingRecipes);
+        }
     }
 
     @Override
@@ -64,6 +71,11 @@ public class CSJeiPlugin implements IModPlugin {
         // 注册 Transmutation 催化剂
         if (CSConfig.recipes().enableBulkTransmutation.get()) {
             registration.addRecipeCatalysts(FanTransmutationCategory.TYPE, AllBlocks.ENCASED_FAN);
+        }
+
+        // 注册 Glooming 催化剂
+        if (CSConfig.recipes().enableBulkGlooming.get()) {
+            registration.addRecipeCatalysts(FanGloomingCategory.TYPE, AllBlocks.ENCASED_FAN);
         }
     }
 

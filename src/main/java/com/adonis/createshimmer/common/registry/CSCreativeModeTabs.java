@@ -31,15 +31,17 @@ public class CSCreativeModeTabs {
     }
 
     private static void buildBaseContents(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
-        output.accept(MAGIC_SOIL);
-        output.accept(SHIMMER_BLOCK);
-        output.accept(CASTLE_DOOR);
+
         output.accept(CHARM_OF_SHIMMER_1);
         output.accept(CHARM_OF_SHIMMER_2);
         output.accept(CHARM_OF_SHIMMER_BASE);
         output.accept(THORN_FLOUR);
         output.accept(RAW_KNIGHTMETAL);
         output.accept(SHIMMER_REAGENT);
+        output.accept(MAGIC_SOIL);
+        output.accept(SHIMMER_BLOCK);
+        output.accept(CASTLE_DOOR);
+        output.accept(OMINOUS_CAMPFIRE);
 
         output.accept(SHIMMER_BUCKET);
         output.accept(CARMINITE_SOLUTION_BUCKET);

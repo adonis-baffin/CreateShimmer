@@ -1,8 +1,3 @@
-/*
- * Copyright (C) 2025 DragonsPlus
- * SPDX-License-Identifier: LGPL-3.0-or-later
- */
-
 package com.adonis.createshimmer.integration.jei.category;
 
 import com.adonis.createshimmer.common.CSCommon;

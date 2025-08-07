@@ -1,4 +1,3 @@
-
 package com.adonis.createshimmer.common.registry;
 
 import com.simibubi.create.AllShapes;

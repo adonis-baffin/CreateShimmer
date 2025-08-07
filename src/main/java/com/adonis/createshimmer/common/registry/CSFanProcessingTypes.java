@@ -2,6 +2,7 @@ package com.adonis.createshimmer.common.registry;
 
 import com.adonis.createshimmer.common.CSCommon;
 import com.adonis.createshimmer.common.kinetics.fan.transmutation.TransmutationFanProcessingType;
+import com.adonis.createshimmer.common.kinetics.fan.glooming.GloomingFanProcessingType;
 import com.simibubi.create.api.registry.CreateRegistries;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
 import net.minecraft.core.Registry;
@@ -16,6 +17,7 @@ public class CSFanProcessingTypes {
     private static final DeferredRegister<FanProcessingType> TYPES = DeferredRegister.create(REGISTRY_KEY, CSCommon.ID);
 
     public static final DeferredHolder<FanProcessingType, TransmutationFanProcessingType> TRANSMUTATION = TYPES.register("transmutation", TransmutationFanProcessingType::new);
+    public static final DeferredHolder<FanProcessingType, GloomingFanProcessingType> GLOOMING = TYPES.register("glooming", GloomingFanProcessingType::new);
 
     public static void register(IEventBus modBus) {
         TYPES.register(modBus);

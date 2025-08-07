@@ -1,4 +1,3 @@
-
 package com.adonis.createshimmer.common.registry;
 
 import static com.adonis.createshimmer.common.CSCommon.REGISTRATE;
@@ -31,10 +30,6 @@ import plus.dragons.createdragonsplus.common.registry.CDPFluids;
 import plus.dragons.createdragonsplus.util.Pairs;
 
 public class CSDataMaps {
-//    public static final DataMapType<Item, ExperienceFuel> EXPERIENCE_FUEL = DataMapType
-//            .builder(CSCommon.asResource("experience_fuel"), Registries.ITEM, ExperienceFuel.CODEC)
-//            .synced(ExperienceFuel.FULL_CODEC, true)
-//            .build();
     public static final DataMapType<Fluid, Integer> FLUID_UNIT_EXPERIENCE = DataMapType
             .builder(CSCommon.asResource("unit/experience"), Registries.FLUID, ExtraCodecs.POSITIVE_INT)
             .synced(Codec.INT, true)
@@ -110,26 +105,6 @@ public class CSDataMaps {
     }
 
     public static void generate(RegistrateDataMapProvider provider) {
-//        provider.builder(EXPERIENCE_FUEL)
-//                .add(CSItems.EXPERIENCE_BUCKET, ExperienceFuel.normal(1000, Items.BUCKET.getDefaultInstance()), false) // TODO Temporary solution for Create's bug, See https://github.com/Creators-of-Create/Create/pull/8304
-//                .add(CSItems.EXPERIENCE_CAKE, ExperienceFuel.special(1000), false)
-//                .add(CSItems.EXPERIENCE_CAKE_SLICE, ExperienceFuel.special(250), false)
-//                .add(CSBlocks.SUPER_EXPERIENCE_BLOCK.getId(), ExperienceFuel.special(27), false)
-//                .add(CSItems.SUPER_EXPERIENCE_NUGGET, ExperienceFuel.special(3), false)
-//                .add(AllBlocks.EXPERIENCE_BLOCK.getId(), ExperienceFuel.normal(27), false)
-//                .add(AllItems.EXP_NUGGET, ExperienceFuel.normal(3), false)
-//                .add(ResourceLocation.fromNamespaceAndPath("create_sa", "heap_of_experience"),
-//                        ExperienceFuel.normal(12), false,
-//                        new ModLoadedCondition("create_sa"))
-//                .add(ResourceLocation.fromNamespaceAndPath("ars_nouveau", "experience_gem"),
-//                        ExperienceFuel.normal(3), false,
-//                        new ModLoadedCondition("ars_nouveau"))
-//                .add(ResourceLocation.fromNamespaceAndPath("ars_nouveau", "greater_experience_gem"),
-//                        ExperienceFuel.normal(12), false,
-//                        new ModLoadedCondition("ars_nouveau"))
-//                .add(ResourceLocation.fromNamespaceAndPath("mysticalagriculture", "experience_droplet"),
-//                        ExperienceFuel.normal(10), false,
-//                        new ModLoadedCondition("mysticalagriculture"));
         provider.builder(FLUID_UNIT_EXPERIENCE)
                 .add(ResourceLocation.fromNamespaceAndPath("cofh_core", "experience"),
                         25, false,
@@ -165,9 +140,6 @@ public class CSDataMaps {
                 .add(blackDye, 100, false);
         provider.builder(PRINTING_COPY_INGREDIENT)
                 .add(blackDye, 10, false);
-//        provider.builder(PRINTING_CUSTOM_NAME_INGREDIENT)
-//                .add(CSFluids.EXPERIENCE, 10, false)
-//                .add(CDPFluids.COMMON_TAGS.dyes, 250, false);
         provider.builder(PRINTING_WRITTEN_BOOK_INGREDIENT)
                 .add(blackDye, 10, false);
         var customNameStyles = provider.builder(PRINTING_CUSTOM_NAME_STYLE);

@@ -15,8 +15,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 public class ShimmerEffect extends MobEffect {
-//    public static final double MOVEMENT_SPEED_MODIFIER = 1.0;
-//    public static final double BLOCK_BREAK_SPEED_MODIFIER = 2.0;
     public static final double ATTACK_SPEED_MODIFIER = 1.0;
     public static final double ATTACK_DAMAGE_MODIFIER = 2.0;
 

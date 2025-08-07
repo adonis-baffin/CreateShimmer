@@ -1,0 +1,13 @@
+{
+  "type": "create_shimmer:glooming",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "twilightforest:wrought_iron_bar"
+    }
+  ]
+}

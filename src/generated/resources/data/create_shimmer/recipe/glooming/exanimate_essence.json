@@ -1,0 +1,13 @@
+{
+  "type": "create_shimmer:glooming",
+  "ingredients": [
+    {
+      "item": "minecraft:gunpowder"
+    }
+  ],
+  "results": [
+    {
+      "id": "twilightforest:exanimate_essence"
+    }
+  ]
+}

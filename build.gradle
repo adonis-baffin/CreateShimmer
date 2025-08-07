@@ -85,6 +85,16 @@ repositories {
         dirs 'libs'
     }
     mavenLocal()
+    mavenCentral()
+    maven { url 'https://maven.neoforged.net/releases' }
+    mavenLocal()
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+    maven { url 'https://maven.aliyun.com/repository/central' }
+    maven { url 'https://repo1.maven.org/maven2/' }
+    maven { url 'https://maven.neoforged.net/releases' }
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+    maven { url 'https://maven.aliyun.com/repository/central' }
+    maven { url 'https://maven.parchmentmc.org' } // Parchment 官方仓库
     maven { url "https://maven.dragons.plus/releases" } // Create: Dragons Plus
     maven { url "https://maven.createmod.net" } // Ponder, Flywheel
     maven { url "https://mvn.devos.one/snapshots" } // Registrate
@@ -95,6 +105,7 @@ repositories {
     maven { url "https://api.modrinth.com/maven" }
     maven { url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // NeoForge config api port, needed by ponder
     maven { url "https://maven.tamaized.com/releases" } // Twilight Forest
+    maven { url "https://api.modrinth.com/maven" }
 }
 
 dependencies {
@@ -109,6 +120,7 @@ dependencies {
 
     // Twilight Forest dependency using CurseMaven
     implementation("curse.maven:the-twilight-forest-${twilight_forest_project_id}:${twilight_forest_file_id}")
+//    implementation("maven.modrinth:create-connected:${create_connected_version}")
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

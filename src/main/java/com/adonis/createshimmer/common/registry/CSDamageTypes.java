@@ -1,4 +1,3 @@
-// CSDamageTypes.java
 package com.adonis.createshimmer.common.registry;
 
 import com.adonis.createshimmer.common.CSCommon;

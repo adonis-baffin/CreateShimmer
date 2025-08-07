@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:stick"
+    },
+    "b": {
+      "item": "twilightforest:exanimate_essence"
+    },
+    "c": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    " a ",
+    "aba",
+    "ccc"
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_shimmer:ominous_campfire"
+  }
+}

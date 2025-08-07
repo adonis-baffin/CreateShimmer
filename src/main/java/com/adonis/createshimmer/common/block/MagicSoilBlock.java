@@ -345,7 +345,7 @@ public class MagicSoilBlock extends Block {
             height++;
         }
         // 如果高度小于3，尝试生长
-        if (height < 3) {
+        if (height < 8) {
             BlockPos growPos = pos.above(height);
             if (level.isEmptyBlock(growPos)) {
                 level.setBlockAndUpdate(growPos, Blocks.SUGAR_CANE.defaultBlockState());
@@ -363,7 +363,7 @@ public class MagicSoilBlock extends Block {
             height++;
         }
         // 如果高度小于3，尝试生长
-        if (height < 3) {
+        if (height < 8) {
             BlockPos growPos = pos.above(height);
             if (level.isEmptyBlock(growPos)) {
                 level.setBlockAndUpdate(growPos, Blocks.CACTUS.defaultBlockState());

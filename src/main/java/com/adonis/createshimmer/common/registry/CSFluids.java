@@ -30,35 +30,6 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
 public class CSFluids {
-//    public static final FluidEntry<BaseFlowingFluid.Source> EXPERIENCE = new FluidEntry<>(REGISTRATE,
-//            DeferredHolder.create(Registries.FLUID, REGISTRATE.asResource("experience")));
-//
-//    public static final FluidEntry<BaseFlowingFluid.Flowing> EXPERIENCE_FLOWING = REGISTRATE
-//            .fluid("experience", ExperienceFluidType.create())
-//            .lang("Liquid Experience")
-//            .properties(builder -> builder
-//                    .rarity(Rarity.UNCOMMON)
-//                    .lightLevel(15)
-//                    .fallDistanceModifier(0f)
-//                    .canPushEntity(false)
-//                    .canSwim(false)
-//                    .canDrown(false)
-//                    .pathType(PathType.BLOCKED)
-//                    .adjacentPathType(PathType.BLOCKED))
-//            .fluidProperties(p -> p.explosionResistance(100f))
-//            .tag(AllTags.AllFluidTags.BOTTOMLESS_DENY.tag)
-//            .source(BaseFlowingFluid.Source::new)
-//            .block()
-//            .lang("Liquid Experience")
-//            .build()
-//            .bucket()
-//            .lang("Bucket o' Enchanting")
-//            .properties(properties -> properties
-//                    .rarity(Rarity.UNCOMMON)
-//                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
-//            .tag(Tags.Items.BUCKETS)
-//            .build()
-//            .register();
     public static final FluidEntry<BaseFlowingFluid.Flowing> SHIMMER = REGISTRATE
             .fluid("shimmer",
                     REGISTRATE.asResource("fluid/shimmer_still"),
