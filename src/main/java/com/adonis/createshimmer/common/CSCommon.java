@@ -26,8 +26,6 @@ public class CSCommon {
             .setTooltipModifier(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
                     .andThen(TooltipModifier.mapNull(KineticStats.create(item))));
 
-// 在 CSCommon.java 构造函数中的修正：
-
     public CSCommon(IEventBus modBus, ModContainer modContainer) {
         REGISTRATE.registerEventListeners(modBus);
         CSFluids.register(modBus);
@@ -45,15 +43,12 @@ public class CSCommon {
         CSEffects.register(modBus);
         CSDamageTypes.register(modBus);
 
-        // --- 注册通用事件处理器 (服务端和客户端都运行) ---
-        // ShimmerEventHandler 包含游戏逻辑（如伤害计算），必须在两端都注册。
         NeoForge.EVENT_BUS.register(ShimmerEffect.ShimmerEventHandler.class);
 
-        // 注册配置系统
         CSConfig config = new CSConfig(modContainer);
 
         modBus.register(this);
-        modBus.register(config); // 注册配置事件监听器
+        modBus.register(config);
     }
 
     @SubscribeEvent
@@ -63,10 +58,7 @@ public class CSCommon {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void register(final RegisterEvent event) {
-        if (event.getRegistry() == BuiltInRegistries.TRIGGER_TYPES) {
-//            CSAdvancements.register();
-//            CSAdvancements.BuiltinTriggersQuickDeploy.register();
-        }
+        if (event.getRegistry() == BuiltInRegistries.TRIGGER_TYPES) {}
     }
 
     public static ResourceLocation asResource(String name) {

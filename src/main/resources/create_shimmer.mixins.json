@@ -9,7 +9,8 @@
     "create.TransmutationFanProcessingMixin",
     "FillingBySpoutMixin",
     "FillingRecipeMixin",
-    "ProcessingRecipeMixin"
+    "ProcessingRecipeMixin",
+    "SugarCaneBlockMixin"
   ],
   "client": [],
   "injectors": {

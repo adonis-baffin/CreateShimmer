@@ -1,0 +1,71 @@
+{
+  "values": [
+    "minecraft:bamboo",
+    "minecraft:short_grass",
+    "minecraft:tall_grass",
+    "minecraft:fern",
+    "minecraft:large_fern",
+    "minecraft:dead_bush",
+    "minecraft:sugar_cane",
+    "minecraft:chorus_fruit",
+    "minecraft:chorus_flower",
+    "minecraft:sweet_berries",
+    "minecraft:nether_wart",
+    "minecraft:cocoa_beans",
+    "minecraft:vine",
+    "minecraft:glow_lichen",
+    "minecraft:red_mushroom",
+    "minecraft:brown_mushroom",
+    "minecraft:warped_fungus",
+    "minecraft:crimson_fungus",
+    "minecraft:melon_seeds",
+    "minecraft:pumpkin_seeds",
+    "minecraft:moss_carpet",
+    "minecraft:pink_petals",
+    "minecraft:big_dripleaf",
+    "minecraft:small_dripleaf",
+    "minecraft:wheat_seeds",
+    "minecraft:beetroot_seeds",
+    "minecraft:torchflower_seeds",
+    "minecraft:pitcher_pod",
+    "minecraft:wheat",
+    "minecraft:carrot",
+    "minecraft:potato",
+    "minecraft:beetroot",
+    "#minecraft:flowers",
+    "#minecraft:leaves",
+    "#minecraft:saplings",
+    {
+      "id": "twilightforest:fiddlehead",
+      "required": false
+    },
+    {
+      "id": "twilightforest:moss_patch",
+      "required": false
+    },
+    {
+      "id": "twilightforest:mayapple",
+      "required": false
+    },
+    {
+      "id": "twilightforest:clover_patch",
+      "required": false
+    },
+    {
+      "id": "twilightforest:fallen_leaves",
+      "required": false
+    },
+    {
+      "id": "twilightforest:giant_leaves",
+      "required": false
+    },
+    {
+      "id": "twilightforest:steeleaf_block",
+      "required": false
+    },
+    {
+      "id": "twilightforest:hardened_dark_leaves",
+      "required": false
+    }
+  ]
+}

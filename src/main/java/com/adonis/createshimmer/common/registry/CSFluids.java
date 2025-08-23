@@ -12,6 +12,7 @@ import com.adonis.createshimmer.common.fluids.fierytear.FieryTearOpenPipeEffect;
 import com.adonis.createshimmer.common.fluids.shimmer.ShimmerFluidType;
 import com.adonis.createshimmer.common.fluids.shimmer.ShimmerLiquidBlock;
 import com.adonis.createshimmer.common.fluids.shimmer.ShimmerOpenPipeEffect;
+import com.adonis.createshimmer.common.item.ShimmerBucketItem;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.api.effect.OpenPipeEffectHandler;
 import com.tterrag.registrate.util.entry.FluidEntry;
@@ -59,7 +60,7 @@ public class CSFluids {
             .block(ShimmerLiquidBlock::new)
             .lang("Shimmer")
             .build()
-            .bucket()
+            .bucket(ShimmerBucketItem::new)  // 使用自定义桶类
             .properties(properties -> properties
                     .rarity(Rarity.RARE)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
