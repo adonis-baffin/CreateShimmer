@@ -21,7 +21,5 @@ public class CSClient {
         // 注册所有只在客户端运行的事件处理器
         NeoForge.EVENT_BUS.register(new CSClientEvents());
         NeoForge.EVENT_BUS.register(new ShimmerGui());
-
-        // 注意：ShimmerEffect.ShimmerEventHandler 已在 CSCommon 中注册，此处不再需要注册。
     }
 }

@@ -16,21 +16,37 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class CSEffects {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, CSCommon.ID);
 
+    // 属性持有者
     private static final Holder<Attribute> ATTACK_SPEED_ATTRIBUTE = getAttributeHolder("generic.attack_speed");
     private static final Holder<Attribute> ATTACK_DAMAGE_ATTRIBUTE = getAttributeHolder("generic.attack_damage");
+    private static final Holder<Attribute> BLOCK_BREAK_SPEED_ATTRIBUTE = getAttributeHolder("player.block_break_speed");
+    private static final Holder<Attribute> MOVEMENT_SPEED_ATTRIBUTE = getAttributeHolder("generic.movement_speed");
 
     public static final DeferredHolder<MobEffect, MobEffect> SHIMMER_EFFECT = EFFECTS.register("shimmer", () -> new ShimmerEffect()
-
+            // 攻击速度加成：+100%
             .addAttributeModifier(
                     ATTACK_SPEED_ATTRIBUTE,
                     CSCommon.asResource("effect.shimmer_attack_speed"),
                     ShimmerEffect.ATTACK_SPEED_MODIFIER,
                     AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+            // 攻击伤害加成：+3
             .addAttributeModifier(
                     ATTACK_DAMAGE_ATTRIBUTE,
                     CSCommon.asResource("effect.shimmer_attack_damage"),
                     ShimmerEffect.ATTACK_DAMAGE_MODIFIER,
-                    AttributeModifier.Operation.ADD_VALUE));
+                    AttributeModifier.Operation.ADD_VALUE)
+            // 挖掘速度加成：+100%
+            .addAttributeModifier(
+                    BLOCK_BREAK_SPEED_ATTRIBUTE,
+                    CSCommon.asResource("effect.shimmer_dig_speed"),
+                    ShimmerEffect.DIG_SPEED_MODIFIER,
+                    AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+            // 移动速度加成：+20%
+            .addAttributeModifier(
+                    MOVEMENT_SPEED_ATTRIBUTE,
+                    CSCommon.asResource("effect.shimmer_movement_speed"),
+                    ShimmerEffect.MOVEMENT_SPEED_MODIFIER,
+                    AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
     public static void register(IEventBus bus) {
         EFFECTS.register(bus);
