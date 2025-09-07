@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "create_shimmer:shimmer_axe"
+    }
+  },
+  "pattern": [
+    "   ",
+    " a ",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_shimmer:shimmer_block"
+  }
+}

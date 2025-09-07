@@ -38,6 +38,10 @@ public class CSCreativeModeTabs {
         output.accept(RAW_KNIGHTMETAL);
         output.accept(SHIMMER_REAGENT);
         output.accept(MAGIC_SOIL);
+        output.accept(SHIMMER_SWORD);
+        output.accept(SHIMMER_AXE);
+        output.accept(SHIMMER_PICKAXE);
+        output.accept(SHIMMER_SHOVEL);
         output.accept(SHIMMER_BLOCK);
         output.accept(CASTLE_DOOR);
         output.accept(OMINOUS_CAMPFIRE);

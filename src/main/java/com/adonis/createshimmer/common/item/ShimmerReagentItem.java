@@ -88,4 +88,17 @@ public class ShimmerReagentItem extends Item {
         // 同样使用饮用音效
         return SoundEvents.GENERIC_DRINK;
     }
+
+    @Override
+    public ItemStack getCraftingRemainingItem(ItemStack stack) {
+        return new ItemStack(Items.GLASS_BOTTLE);
+    }
+
+    /**
+     * 表示此物品在合成后有剩余物品
+     */
+    @Override
+    public boolean hasCraftingRemainingItem(ItemStack stack) {
+        return true;
+    }
 }

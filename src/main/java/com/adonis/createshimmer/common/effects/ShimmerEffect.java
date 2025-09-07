@@ -1,11 +1,9 @@
 package com.adonis.createshimmer.common.effects;
 
-import com.adonis.createshimmer.common.registry.CSDamageTypes;
 import com.adonis.createshimmer.common.registry.CSEffects;
 import java.util.Collections;
 import java.util.List;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -19,10 +17,10 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 public class ShimmerEffect extends MobEffect {
     // 属性修改器数值
-    public static final double ATTACK_SPEED_MODIFIER = 1.0;      // +100% 攻击速度
+    public static final double ATTACK_SPEED_MODIFIER = 0.35;      // +35% 攻击速度
     public static final double ATTACK_DAMAGE_MODIFIER = 3.0;      // +3 攻击伤害
-    public static final double DIG_SPEED_MODIFIER = 1.0;          // +100% 挖掘速度
-    public static final double MOVEMENT_SPEED_MODIFIER = 2.0;     // +20% 移动速度
+    public static final double DIG_SPEED_MODIFIER = 0.35;          // +35% 挖掘速度
+    public static final double MOVEMENT_SPEED_MODIFIER = 0.35;     // +35% 移动速度
 
     // 饥饿消耗配置
     private static final float HUNGER_EXHAUSTION_PER_TICK = 0.005f;  // 每tick消耗的饥饿值
@@ -59,7 +57,7 @@ public class ShimmerEffect extends MobEffect {
     public static class ShimmerEventHandler {
 
         // 统一的伤害配置（所有生物都一样）
-        private static final float ADDITIONAL_MAGIC_DAMAGE = 9.0f;
+        private static final float ADDITIONAL_MAGIC_DAMAGE = 8.0f;
         private static final double ADDITIONAL_DAMAGE_CHANCE = 0.4;
 
         @SubscribeEvent
@@ -67,8 +65,8 @@ public class ShimmerEffect extends MobEffect {
             LivingEntity entity = event.getEntity();
             DamageSource source = event.getSource();
 
-            // 避免无限循环：如果伤害源已经是微光魔法伤害，直接返回
-            if (source.is(CSDamageTypes.SHIMMER_MAGIC)) {
+            // 避免无限循环：如果伤害源已经是魔法伤害，直接返回
+            if (source.is(net.minecraft.world.damagesource.DamageTypes.MAGIC)) {
                 return;
             }
 
@@ -89,17 +87,29 @@ public class ShimmerEffect extends MobEffect {
                 }
             }
 
+            // 检查实际造成的伤害值
+            // 只有造成至少0.5伤害才触发微光额外伤害
+            float actualDamage = event.getNewDamage();
+            if (actualDamage < 0.5f) {
+                return;  // 伤害太小或被完全格挡，不触发微光伤害
+            }
+
             // 根据概率决定是否造成额外伤害（所有生物统一概率）
             if (entity.level().random.nextDouble() < ADDITIONAL_DAMAGE_CHANCE) {
-                // 创建微光魔法伤害源
-                DamageSource shimmerDamage = new DamageSource(
-                        entity.level().registryAccess()
-                                .registryOrThrow(Registries.DAMAGE_TYPE)
-                                .getHolderOrThrow(CSDamageTypes.SHIMMER_MAGIC)
-                );
+                // 临时存储当前的无敌时间
+                int originalInvulnerableTime = entity.invulnerableTime;
 
-                // 造成额外伤害（所有生物统一伤害）
-                entity.hurt(shimmerDamage, ADDITIONAL_MAGIC_DAMAGE);
+                // 重置无敌时间，允许立即造成伤害
+                entity.invulnerableTime = 0;
+
+                // 应用魔法伤害
+                DamageSource magicDamage = entity.damageSources().magic();
+                boolean damaged = entity.hurt(magicDamage, ADDITIONAL_MAGIC_DAMAGE);
+
+                // 如果伤害没有成功应用，恢复无敌时间
+                if (!damaged) {
+                    entity.invulnerableTime = originalInvulnerableTime;
+                }
 
                 // 添加视觉反馈（粒子效果）
                 if (entity.level() instanceof ServerLevel serverLevel) {
@@ -120,28 +130,23 @@ public class ShimmerEffect extends MobEffect {
                                 z + offsetZ,
                                 1,
                                 0, 0, 0,
-                                0.05
-                        );
+                                0.05);
                     }
                 }
             }
         }
 
         /**
-         * 可选：攻击事件处理，让有微光效果的生物造成更多伤害
+         * 可选：攻击事件处理，仅用于视觉效果
          */
         @SubscribeEvent
         public static void onLivingAttack(LivingDamageEvent.Pre event) {
             DamageSource source = event.getSource();
 
-            // 检查攻击者是否有微光效果
+            // 仅用于视觉效果，不修改伤害
             if (source.getEntity() instanceof LivingEntity attacker) {
                 if (attacker.hasEffect(CSEffects.SHIMMER_EFFECT)) {
-                    // 增加10%的伤害（这个会与属性修改器叠加）
-                    float originalDamage = event.getOriginalDamage();
-                    event.setNewDamage(originalDamage * 1.1f);
-
-                    // 为攻击添加视觉效果
+                    // 只添加视觉效果，不修改伤害
                     if (attacker.level() instanceof ServerLevel serverLevel && event.getEntity() != null) {
                         serverLevel.sendParticles(
                                 ParticleTypes.DRAGON_BREATH,
@@ -150,27 +155,8 @@ public class ShimmerEffect extends MobEffect {
                                 event.getEntity().getZ(),
                                 3,
                                 0.1, 0.1, 0.1,
-                                0.02
-                        );
+                                0.02);
                     }
-                }
-            }
-        }
-
-        /**
-         * 额外的挖掘消耗处理
-         * 当玩家挖掘方块时增加额外的饥饿消耗
-         */
-        @SubscribeEvent
-        public static void onBlockBreak(net.neoforged.neoforge.event.entity.player.PlayerEvent.BreakSpeed event) {
-            Player player = event.getEntity();
-
-            // 检查玩家是否有微光效果
-            if (player.hasEffect(CSEffects.SHIMMER_EFFECT)) {
-                // 不对创造模式玩家生效
-                if (!player.isCreative() && !player.isSpectator()) {
-                    // 挖掘时增加额外的饥饿消耗
-                    player.getFoodData().addExhaustion(0.025f);  // 挖掘时的额外消耗
                 }
             }
         }
