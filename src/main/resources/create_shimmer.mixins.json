@@ -1,6 +1,6 @@
 {
   "required": true,
-  "priority": 1100,
+  "priority": 1200,
   "package": "com.adonis.createshimmer.mixin",
   "compatibilityLevel": "JAVA_21",
   "refmap": "create_shimmer.refmap.json",

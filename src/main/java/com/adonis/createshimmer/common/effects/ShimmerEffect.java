@@ -1,7 +1,7 @@
 package com.adonis.createshimmer.common.effects;
 
+import com.adonis.createshimmer.common.item.tool.ShimmerSwordItem;
 import com.adonis.createshimmer.common.registry.CSEffects;
-import com.adonis.createshimmer.common.item.tool.ShimmerSwordItem;  // 添加导入
 import java.util.Collections;
 import java.util.List;
 import net.minecraft.core.particles.ParticleTypes;
@@ -9,7 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffectInstance;  // 添加导入
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
@@ -86,8 +86,7 @@ public class ShimmerEffect extends MobEffect {
                                 0,   // 效果等级
                                 false,
                                 true,
-                                true
-                        ));
+                                true));
 
                         // 生成较少的粒子效果（避免横扫时粒子过多）
                         if (target.level() instanceof ServerLevel serverLevel) {
@@ -98,8 +97,7 @@ public class ShimmerEffect extends MobEffect {
                                     target.getZ(),
                                     3,  // 较少的粒子数量
                                     0.1, 0.1, 0.1,
-                                    0.02
-                            );
+                                    0.02);
                         }
                     }
                 }
