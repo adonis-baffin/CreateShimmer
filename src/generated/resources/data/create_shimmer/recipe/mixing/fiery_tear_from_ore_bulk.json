@@ -7,20 +7,11 @@
     },
     {
       "item": "twilightforest:carminite"
-    },
-    {
-      "item": "twilightforest:carminite"
-    },
-    {
-      "item": "twilightforest:carminite"
-    },
-    {
-      "item": "twilightforest:carminite"
     }
   ],
   "results": [
     {
-      "amount": 100,
+      "amount": 250,
       "id": "create_shimmer:fiery_tear"
     }
   ]

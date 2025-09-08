@@ -7,13 +7,13 @@
     },
     {
       "type": "fluid_stack",
-      "amount": 100,
+      "amount": 250,
       "fluid": "create_shimmer:carminite_solution"
     }
   ],
   "results": [
     {
-      "amount": 100,
+      "amount": 250,
       "id": "create_shimmer:fiery_tear"
     }
   ]

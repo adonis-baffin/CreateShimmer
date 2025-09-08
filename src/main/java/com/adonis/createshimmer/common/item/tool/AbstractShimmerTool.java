@@ -20,7 +20,8 @@ public abstract class AbstractShimmerTool {
     // ========== 配置常量 ==========
     // 效果配置
     protected static final int EFFECT_DURATION = 140;  // 7秒 (20 ticks/秒)
-    protected static final float EFFECT_CHANCE = 0.4f; // 40%概率
+    protected static final float SELF_EFFECT_CHANCE = 0.4f; // 给自己40%概率
+    protected static final float TARGET_EFFECT_CHANCE = 1.0f; // 给目标100%概率
     protected static final int EFFECT_AMPLIFIER = 0;   // 效果等级
 
     // 粒子效果配置
@@ -31,21 +32,22 @@ public abstract class AbstractShimmerTool {
     // ========== 核心方法 ==========
 
     /**
-     * 处理微光效果的应用
+     * 处理微光效果的应用（带概率控制）
      *
      * @param entity 要应用效果的实体
      * @param level  世界
+     * @param chance 触发概率
      * @return 是否成功应用了效果
      */
-    protected boolean applyShimmerEffect(LivingEntity entity, Level level) {
+    protected boolean applyShimmerEffectWithChance(LivingEntity entity, Level level, float chance) {
         if (level.isClientSide()) {
             return false;
         }
 
-        // 移除概率检查，100%触发
-        // if (level.random.nextFloat() >= EFFECT_CHANCE) {
-        //     return false;
-        // }
+        // 根据概率触发
+        if (level.random.nextFloat() >= chance) {
+            return false;
+        }
 
         // 应用或刷新微光效果
         entity.addEffect(new MobEffectInstance(
@@ -61,8 +63,30 @@ public abstract class AbstractShimmerTool {
     }
 
     /**
+     * 处理微光效果的应用（给自己，40%概率）
+     *
+     * @param entity 要应用效果的实体
+     * @param level  世界
+     * @return 是否成功应用了效果
+     */
+    protected boolean applyShimmerEffectToSelf(LivingEntity entity, Level level) {
+        return applyShimmerEffectWithChance(entity, level, SELF_EFFECT_CHANCE);
+    }
+
+    /**
+     * 处理微光效果的应用（给目标，100%概率）
+     *
+     * @param entity 要应用效果的实体
+     * @param level  世界
+     * @return 是否成功应用了效果
+     */
+    protected boolean applyShimmerEffectToTarget(LivingEntity entity, Level level) {
+        return applyShimmerEffectWithChance(entity, level, TARGET_EFFECT_CHANCE);
+    }
+
+    /**
      * 在方块位置生成挖掘粒子效果
-     * 
+     *
      * @param level         世界
      * @param pos           方块位置
      * @param particleCount 粒子数量
@@ -88,7 +112,7 @@ public abstract class AbstractShimmerTool {
 
     /**
      * 在实体位置生成攻击粒子效果
-     * 
+     *
      * @param level         世界
      * @param target        目标实体
      * @param particleCount 粒子数量
@@ -111,7 +135,7 @@ public abstract class AbstractShimmerTool {
 
     /**
      * 处理方块挖掘时的效果
-     * 
+     *
      * @param stack         物品堆
      * @param level         世界
      * @param state         方块状态
@@ -123,8 +147,8 @@ public abstract class AbstractShimmerTool {
     protected boolean handleBlockMine(ItemStack stack, Level level, BlockState state, BlockPos pos,
             LivingEntity entity, int particleCount) {
         if (!level.isClientSide()) {
-            // 应用微光效果
-            boolean effectApplied = applyShimmerEffect(entity, level);
+            // 应用微光效果（给自己，40%概率）
+            boolean effectApplied = applyShimmerEffectToSelf(entity, level);
 
             // 生成粒子效果（可选：仅在效果触发时生成）
             if (effectApplied) {
@@ -137,7 +161,7 @@ public abstract class AbstractShimmerTool {
 
     /**
      * 处理攻击敌人时的效果
-     * 
+     *
      * @param stack          物品堆
      * @param target         目标
      * @param attacker       攻击者
@@ -148,11 +172,11 @@ public abstract class AbstractShimmerTool {
     protected boolean handleHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker,
             int particleCount, double particleSpread) {
         if (!attacker.level().isClientSide()) {
-            // 给攻击者应用效果
-            boolean attackerEffected = applyShimmerEffect(attacker, attacker.level());
+            // 给攻击者应用效果（40%概率）
+            boolean attackerEffected = applyShimmerEffectToSelf(attacker, attacker.level());
 
-            // 给目标应用效果（独立判定）
-            boolean targetEffected = applyShimmerEffect(target, target.level());
+            // 给目标应用效果（100%概率）
+            boolean targetEffected = applyShimmerEffectToTarget(target, target.level());
 
             // 如果任一效果触发，生成粒子
             if (attackerEffected || targetEffected) {

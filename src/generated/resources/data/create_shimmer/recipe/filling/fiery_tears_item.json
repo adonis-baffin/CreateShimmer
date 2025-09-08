@@ -6,7 +6,7 @@
     },
     {
       "type": "fluid_stack",
-      "amount": 25,
+      "amount": 250,
       "fluid": "create_shimmer:fiery_tear"
     }
   ],

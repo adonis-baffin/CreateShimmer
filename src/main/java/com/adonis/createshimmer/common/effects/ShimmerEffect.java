@@ -1,6 +1,7 @@
 package com.adonis.createshimmer.common.effects;
 
 import com.adonis.createshimmer.common.registry.CSEffects;
+import com.adonis.createshimmer.common.item.tool.ShimmerSwordItem;  // 添加导入
 import java.util.Collections;
 import java.util.List;
 import net.minecraft.core.particles.ParticleTypes;
@@ -8,6 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;  // 添加导入
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
@@ -59,6 +61,50 @@ public class ShimmerEffect extends MobEffect {
         // 统一的伤害配置（所有生物都一样）
         private static final float ADDITIONAL_MAGIC_DAMAGE = 8.0f;
         private static final double ADDITIONAL_DAMAGE_CHANCE = 0.4;
+
+        /**
+         * 处理微光剑的横扫攻击效果
+         * 这个方法会在所有伤害事件（包括横扫）触发时调用
+         */
+        @SubscribeEvent
+        public static void onLivingDamagePreForSweep(LivingDamageEvent.Pre event) {
+            DamageSource source = event.getSource();
+            LivingEntity target = event.getEntity();
+
+            // 检查攻击者是否存在并使用微光剑
+            if (source.getEntity() instanceof LivingEntity attacker) {
+                ItemStack weapon = attacker.getMainHandItem();
+
+                // 检查是否使用微光剑
+                if (weapon.getItem() instanceof ShimmerSwordItem) {
+                    // 给被攻击的目标施加微光效果（包括横扫的目标）
+                    if (!target.level().isClientSide()) {
+                        // 100%给目标施加微光效果
+                        target.addEffect(new MobEffectInstance(
+                                CSEffects.SHIMMER_EFFECT,
+                                140, // 7秒
+                                0,   // 效果等级
+                                false,
+                                true,
+                                true
+                        ));
+
+                        // 生成较少的粒子效果（避免横扫时粒子过多）
+                        if (target.level() instanceof ServerLevel serverLevel) {
+                            serverLevel.sendParticles(
+                                    ParticleTypes.DRAGON_BREATH,
+                                    target.getX(),
+                                    target.getY() + target.getBbHeight() / 2,
+                                    target.getZ(),
+                                    3,  // 较少的粒子数量
+                                    0.1, 0.1, 0.1,
+                                    0.02
+                            );
+                        }
+                    }
+                }
+            }
+        }
 
         @SubscribeEvent
         public static void onLivingDamaged(LivingDamageEvent.Post event) {
@@ -137,7 +183,7 @@ public class ShimmerEffect extends MobEffect {
         }
 
         /**
-         * 可选：攻击事件处理，仅用于视觉效果
+         * 攻击事件处理，仅用于视觉效果
          */
         @SubscribeEvent
         public static void onLivingAttack(LivingDamageEvent.Pre event) {

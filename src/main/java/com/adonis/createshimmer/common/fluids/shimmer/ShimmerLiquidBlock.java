@@ -47,10 +47,10 @@ public class ShimmerLiquidBlock extends LiquidBlock {
         // 添加效果，增加持续时间到200 tick（10秒）
         // 并且检查现有效果，如果剩余时间少于100 tick则刷新
         MobEffectInstance currentEffect = livingEntity.getEffect(CSEffects.SHIMMER_EFFECT);
-        if (currentEffect == null || currentEffect.getDuration() < 100) {
+        if (currentEffect == null || currentEffect.getDuration() < 40) {
             livingEntity.addEffect(new MobEffectInstance(
                     CSEffects.SHIMMER_EFFECT,
-                    200,  // 持续时间：10秒
+                    80,  // 持续时间：10秒
                     0,    // 等级
                     false, // 环境效果
                     true,  // 显示粒子

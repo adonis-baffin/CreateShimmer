@@ -37,10 +37,10 @@ public class ShimmerOpenPipeEffect implements OpenPipeEffectHandler {
         for (LivingEntity entity : entities) {
             // 检查现有效果，避免频繁覆盖
             MobEffectInstance currentEffect = entity.getEffect(CSEffects.SHIMMER_EFFECT);
-            if (currentEffect == null || currentEffect.getDuration() < 100) {
+            if (currentEffect == null || currentEffect.getDuration() < 40) {
                 entity.addEffect(new MobEffectInstance(
                         CSEffects.SHIMMER_EFFECT,
-                        200,   // 持续10秒
+                        80,   // 持续10秒
                         0,     // 等级0
                         false, // 不是环境效果
                         true,  // 显示粒子
