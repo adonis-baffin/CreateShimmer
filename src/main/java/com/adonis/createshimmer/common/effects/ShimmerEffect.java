@@ -1,6 +1,9 @@
 package com.adonis.createshimmer.common.effects;
 
 import com.adonis.createshimmer.common.item.tool.ShimmerSwordItem;
+import com.adonis.createshimmer.common.item.tool.ShimmerAxeItem;
+import com.adonis.createshimmer.common.item.tool.ShimmerPickaxeItem;
+import com.adonis.createshimmer.common.item.tool.ShimmerShovelItem;
 import com.adonis.createshimmer.common.registry.CSEffects;
 import java.util.Collections;
 import java.util.List;
@@ -16,11 +19,12 @@ import net.minecraft.world.food.FoodData;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class ShimmerEffect extends MobEffect {
     // 属性修改器数值
     public static final double ATTACK_SPEED_MODIFIER = 0.35;      // +35% 攻击速度
-    public static final double ATTACK_DAMAGE_MODIFIER = 3.0;      // +3 攻击伤害
+    public static final double ATTACK_DAMAGE_MODIFIER = 0;      // +0 攻击伤害
     public static final double DIG_SPEED_MODIFIER = 0.35;          // +35% 挖掘速度
     public static final double MOVEMENT_SPEED_MODIFIER = 0.35;     // +35% 移动速度
 
@@ -51,16 +55,70 @@ public class ShimmerEffect extends MobEffect {
         return duration % HUNGER_TICK_INTERVAL == 0;
     }
 
-    public List<ItemStack> getCurativeItems() {
-        // 返回空列表，表示不能通过牛奶等物品清除
-        return Collections.emptyList();
-    }
+//    public List<ItemStack> getCurativeItems() {
+//        // 返回空列表，表示不能通过牛奶等物品清除
+//        return Collections.emptyList();
+//    }
 
     public static class ShimmerEventHandler {
 
         // 统一的伤害配置（所有生物都一样）
         private static final float ADDITIONAL_MAGIC_DAMAGE = 8.0f;
         private static final double ADDITIONAL_DAMAGE_CHANCE = 0.4;
+
+        /**
+         * 处理微光工具的挖掘速度加成
+         */
+        @SubscribeEvent
+        public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+            Player player = event.getEntity();
+            ItemStack heldItem = player.getMainHandItem();
+
+            // 检查是否持有微光工具
+            if (heldItem.getItem() instanceof ShimmerPickaxeItem ||
+                    heldItem.getItem() instanceof ShimmerAxeItem ||
+                    heldItem.getItem() instanceof ShimmerShovelItem) {
+
+                // 检查玩家是否有微光效果
+                if (player.hasEffect(CSEffects.SHIMMER_EFFECT)) {
+                    // 从木制速度(2.0)提升到钻石速度(8.0)，所以乘以4
+                    event.setNewSpeed(event.getNewSpeed() * 4.0f);
+                }
+            }
+        }
+
+        /**
+         * 处理微光工具在微光状态下的额外伤害
+         */
+        @SubscribeEvent
+        public static void onLivingDamagePreForShimmerTools(LivingDamageEvent.Pre event) {
+            DamageSource source = event.getSource();
+
+            // 检查是否是玩家造成的伤害
+            if (source.getEntity() instanceof Player player) {
+                ItemStack weapon = player.getMainHandItem();
+
+                // 检查玩家是否有微光效果并使用微光工具
+                if (player.hasEffect(CSEffects.SHIMMER_EFFECT)) {
+                    float extraDamage = 0;
+
+                    if (weapon.getItem() instanceof ShimmerSwordItem) {
+                        extraDamage = 3.0f;  // 剑+3伤害
+                    } else if (weapon.getItem() instanceof ShimmerAxeItem) {
+                        extraDamage = 2.0f;  // 斧+2伤害
+                    } else if (weapon.getItem() instanceof ShimmerPickaxeItem) {
+                        extraDamage = 3.0f;  // 镐+3伤害
+                    } else if (weapon.getItem() instanceof ShimmerShovelItem) {
+                        extraDamage = 3.0f;  // 锹+3伤害
+                    }
+
+                    if (extraDamage > 0) {
+                        // 增加额外伤害
+                        event.setNewDamage(event.getNewDamage() + extraDamage);
+                    }
+                }
+            }
+        }
 
         /**
          * 处理微光剑的横扫攻击效果

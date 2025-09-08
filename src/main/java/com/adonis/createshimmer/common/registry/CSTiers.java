@@ -10,11 +10,11 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 
 public enum CSTiers implements Tier {
-    SHIMMER(BlockTags.INCORRECT_FOR_IRON_TOOL,  // 铁级
-            Integer.MAX_VALUE,                    // 无限耐久
-            6.0F,                                 // 铁速度
-            3.0F,                                 // 基础伤害
-            15,                                   // 附魔
+    SHIMMER(BlockTags.INCORRECT_FOR_DIAMOND_TOOL,  // 钻石级挖掘等级
+            Integer.MAX_VALUE,                       // 无限耐久
+            2.0F,                                   // 木制速度
+            0.0F,                                   // 基础伤害（工具会自己设置）
+            5,                                      // 低附魔（木制水平）
             () -> Ingredient.EMPTY);
 
     private final TagKey<Block> incorrectBlocksForDrops;
