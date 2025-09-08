@@ -9,7 +9,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
@@ -77,7 +76,9 @@ public class ShimmerSwordItem extends SwordItem {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        return toolHelper.handleHurtEnemy(stack, target, attacker, 10, 0.3);
+        // 使用基类方法处理效果，剑的粒子效果较多
+        toolHelper.handleHurtEnemy(stack, target, attacker, 10, 0.3);
+        return true; // 返回true表示工具正常使用
     }
 
     // 耐久相关方法保持不变...

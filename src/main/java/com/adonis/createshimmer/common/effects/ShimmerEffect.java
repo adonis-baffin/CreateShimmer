@@ -1,9 +1,9 @@
 package com.adonis.createshimmer.common.effects;
 
-import com.adonis.createshimmer.common.item.tool.ShimmerSwordItem;
 import com.adonis.createshimmer.common.item.tool.ShimmerAxeItem;
 import com.adonis.createshimmer.common.item.tool.ShimmerPickaxeItem;
 import com.adonis.createshimmer.common.item.tool.ShimmerShovelItem;
+import com.adonis.createshimmer.common.item.tool.ShimmerSwordItem;
 import com.adonis.createshimmer.common.registry.CSEffects;
 import java.util.Collections;
 import java.util.List;
@@ -55,10 +55,10 @@ public class ShimmerEffect extends MobEffect {
         return duration % HUNGER_TICK_INTERVAL == 0;
     }
 
-//    public List<ItemStack> getCurativeItems() {
-//        // 返回空列表，表示不能通过牛奶等物品清除
-//        return Collections.emptyList();
-//    }
+    public List<ItemStack> getCurativeItems() {
+        // 返回空列表，表示不能通过牛奶等物品清除
+        return Collections.emptyList();
+    }
 
     public static class ShimmerEventHandler {
 
@@ -68,22 +68,48 @@ public class ShimmerEffect extends MobEffect {
 
         /**
          * 处理微光工具的挖掘速度加成
+         * 修复：添加安全检查，防止挖掘速度变为0或负数
          */
         @SubscribeEvent
         public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
-            Player player = event.getEntity();
-            ItemStack heldItem = player.getMainHandItem();
+            try {
+                Player player = event.getEntity();
+                if (player == null) return;
 
-            // 检查是否持有微光工具
-            if (heldItem.getItem() instanceof ShimmerPickaxeItem ||
-                    heldItem.getItem() instanceof ShimmerAxeItem ||
-                    heldItem.getItem() instanceof ShimmerShovelItem) {
+                ItemStack heldItem = player.getMainHandItem();
+                if (heldItem == null || heldItem.isEmpty()) return;
+
+                // 检查是否持有微光工具
+                boolean isShimmerTool = (heldItem.getItem() instanceof ShimmerPickaxeItem ||
+                        heldItem.getItem() instanceof ShimmerAxeItem ||
+                        heldItem.getItem() instanceof ShimmerShovelItem);
+
+                if (!isShimmerTool) return;
 
                 // 检查玩家是否有微光效果
                 if (player.hasEffect(CSEffects.SHIMMER_EFFECT)) {
-                    // 从木制速度(2.0)提升到钻石速度(8.0)，所以乘以4
-                    event.setNewSpeed(event.getNewSpeed() * 4.0f);
+                    float currentSpeed = event.getNewSpeed();
+
+                    // 安全检查：确保当前速度是有效值
+                    if (currentSpeed <= 0) {
+                        currentSpeed = event.getOriginalSpeed();
+                    }
+                    if (currentSpeed <= 0) {
+                        currentSpeed = 1.0f; // 默认最小速度
+                    }
+
+                    // 应用4倍速度加成
+                    float newSpeed = currentSpeed * 4.0f;
+
+                    // 确保新速度不会太小或太大
+                    newSpeed = Math.max(0.1f, Math.min(newSpeed, 100.0f));
+
+                    event.setNewSpeed(newSpeed);
                 }
+            } catch (Exception e) {
+                // 捕获所有异常，防止破坏挖掘系统
+                e.printStackTrace();
+                // 不修改速度，让游戏使用默认值
             }
         }
 
@@ -92,31 +118,39 @@ public class ShimmerEffect extends MobEffect {
          */
         @SubscribeEvent
         public static void onLivingDamagePreForShimmerTools(LivingDamageEvent.Pre event) {
-            DamageSource source = event.getSource();
+            try {
+                DamageSource source = event.getSource();
+                if (source == null) return;
 
-            // 检查是否是玩家造成的伤害
-            if (source.getEntity() instanceof Player player) {
-                ItemStack weapon = player.getMainHandItem();
+                // 检查是否是玩家造成的伤害
+                if (source.getEntity() instanceof Player player) {
+                    ItemStack weapon = player.getMainHandItem();
+                    if (weapon == null || weapon.isEmpty()) return;
 
-                // 检查玩家是否有微光效果并使用微光工具
-                if (player.hasEffect(CSEffects.SHIMMER_EFFECT)) {
-                    float extraDamage = 0;
+                    // 检查玩家是否有微光效果并使用微光工具
+                    if (player.hasEffect(CSEffects.SHIMMER_EFFECT)) {
+                        float extraDamage = 0;
 
-                    if (weapon.getItem() instanceof ShimmerSwordItem) {
-                        extraDamage = 3.0f;  // 剑+3伤害
-                    } else if (weapon.getItem() instanceof ShimmerAxeItem) {
-                        extraDamage = 2.0f;  // 斧+2伤害
-                    } else if (weapon.getItem() instanceof ShimmerPickaxeItem) {
-                        extraDamage = 3.0f;  // 镐+3伤害
-                    } else if (weapon.getItem() instanceof ShimmerShovelItem) {
-                        extraDamage = 3.0f;  // 锹+3伤害
-                    }
+                        if (weapon.getItem() instanceof ShimmerSwordItem) {
+                            extraDamage = 3.0f;  // 剑+3伤害
+                        } else if (weapon.getItem() instanceof ShimmerAxeItem) {
+                            extraDamage = 2.0f;  // 斧+2伤害
+                        } else if (weapon.getItem() instanceof ShimmerPickaxeItem) {
+                            extraDamage = 3.0f;  // 镐+3伤害
+                        } else if (weapon.getItem() instanceof ShimmerShovelItem) {
+                            extraDamage = 3.0f;  // 锹+3伤害
+                        }
 
-                    if (extraDamage > 0) {
-                        // 增加额外伤害
-                        event.setNewDamage(event.getNewDamage() + extraDamage);
+                        if (extraDamage > 0) {
+                            // 增加额外伤害
+                            float originalDamage = event.getNewDamage();
+                            event.setNewDamage(originalDamage + extraDamage);
+                        }
                     }
                 }
+            } catch (Exception e) {
+                // 捕获异常，防止影响战斗系统
+                e.printStackTrace();
             }
         }
 
@@ -126,39 +160,43 @@ public class ShimmerEffect extends MobEffect {
          */
         @SubscribeEvent
         public static void onLivingDamagePreForSweep(LivingDamageEvent.Pre event) {
-            DamageSource source = event.getSource();
-            LivingEntity target = event.getEntity();
+            try {
+                DamageSource source = event.getSource();
+                LivingEntity target = event.getEntity();
 
-            // 检查攻击者是否存在并使用微光剑
-            if (source.getEntity() instanceof LivingEntity attacker) {
-                ItemStack weapon = attacker.getMainHandItem();
+                // 检查攻击者是否存在并使用微光剑
+                if (source.getEntity() instanceof LivingEntity attacker) {
+                    ItemStack weapon = attacker.getMainHandItem();
 
-                // 检查是否使用微光剑
-                if (weapon.getItem() instanceof ShimmerSwordItem) {
-                    // 给被攻击的目标施加微光效果（包括横扫的目标）
-                    if (!target.level().isClientSide()) {
-                        // 100%给目标施加微光效果
-                        target.addEffect(new MobEffectInstance(
-                                CSEffects.SHIMMER_EFFECT,
-                                140, // 7秒
-                                0,   // 效果等级
-                                false,
-                                true,
-                                true));
+                    // 检查是否使用微光剑
+                    if (weapon.getItem() instanceof ShimmerSwordItem) {
+                        // 给被攻击的目标施加微光效果（包括横扫的目标）
+                        if (!target.level().isClientSide()) {
+                            // 100%给目标施加微光效果
+                            target.addEffect(new MobEffectInstance(
+                                    CSEffects.SHIMMER_EFFECT,
+                                    140, // 7秒
+                                    0,   // 效果等级
+                                    false,
+                                    true,
+                                    true));
 
-                        // 生成较少的粒子效果（避免横扫时粒子过多）
-                        if (target.level() instanceof ServerLevel serverLevel) {
-                            serverLevel.sendParticles(
-                                    ParticleTypes.DRAGON_BREATH,
-                                    target.getX(),
-                                    target.getY() + target.getBbHeight() / 2,
-                                    target.getZ(),
-                                    3,  // 较少的粒子数量
-                                    0.1, 0.1, 0.1,
-                                    0.02);
+                            // 生成较少的粒子效果（避免横扫时粒子过多）
+                            if (target.level() instanceof ServerLevel serverLevel) {
+                                serverLevel.sendParticles(
+                                        ParticleTypes.DRAGON_BREATH,
+                                        target.getX(),
+                                        target.getY() + target.getBbHeight() / 2,
+                                        target.getZ(),
+                                        3,  // 较少的粒子数量
+                                        0.1, 0.1, 0.1,
+                                        0.02);
+                            }
                         }
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 

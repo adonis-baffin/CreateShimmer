@@ -1,6 +1,5 @@
 package com.adonis.createshimmer.common.item.tool;
 
-import com.adonis.createshimmer.common.registry.CSEffects;
 import com.adonis.createshimmer.common.registry.CSTiers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,7 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 微光锹 - 无限耐久，2.5点伤害（微光状态下5.5点），钻石级挖掘
+ * 微光锹 - 无限耐久，2.5点伤害（微光状态下5.5点）
  */
 public class ShimmerShovelItem extends ShovelItem {
     private final AbstractShimmerTool toolHelper = new AbstractShimmerTool() {};
@@ -24,7 +23,7 @@ public class ShimmerShovelItem extends ShovelItem {
 
     @Override
     public ItemAttributeModifiers getDefaultAttributeModifiers() {
-        // 基础伤害为2.5（显示值保持不变）
+        // 基础伤害为2.5
         return ItemAttributeModifiers.builder()
                 .add(Attributes.ATTACK_DAMAGE,
                         new AttributeModifier(
@@ -41,27 +40,18 @@ public class ShimmerShovelItem extends ShovelItem {
                 .build();
     }
 
-    public float getAttackDamage() {
-        // 重写此方法以在实际战斗中提供动态伤害
-        return 1.5f; // 基础显示值保持为2.5
+    @Override
+    public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
+        // 使用基类方法处理，锹的粒子数量较少
+        toolHelper.handleBlockMine(stack, level, state, pos, entity, 8);
+        return true; // 返回true允许破坏方块
     }
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        // 在实际攻击时检查并应用额外伤害
-        if (attacker.hasEffect(CSEffects.SHIMMER_EFFECT)) {
-            // 微光状态下造成额外3点伤害（总计5.5点）
-            target.hurt(attacker.damageSources().mobAttack(attacker), 3.0f);
-        }
-
-        // 使用基类方法处理效果
-        return toolHelper.handleHurtEnemy(stack, target, attacker, 6, 0.2);
-    }
-
-    @Override
-    public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
-        // 使用基类方法处理，锹的粒子数量较少
-        return toolHelper.handleBlockMine(stack, level, state, pos, entity, 8);
+        // 使用基类方法处理效果，锹的攻击粒子较少
+        toolHelper.handleHurtEnemy(stack, target, attacker, 6, 0.2);
+        return true; // 返回true表示工具正常使用
     }
 
     // 耐久相关方法
