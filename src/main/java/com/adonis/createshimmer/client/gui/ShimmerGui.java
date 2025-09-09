@@ -69,21 +69,21 @@ public class ShimmerGui {
 
         // 获取玩家血量数据
         int currentHealth = Mth.ceil(player.getHealth());
-        float maxHealth = Math.max((float)player.getAttributeValue(Attributes.MAX_HEALTH),
+        float maxHealth = Math.max((float) player.getAttributeValue(Attributes.MAX_HEALTH),
                 Math.max(displayHealth, currentHealth));
         int absorptionAmount = Mth.ceil(player.getAbsorptionAmount());
 
         // 更新闪烁时间（完全复制原版逻辑）
-        boolean shouldBlink = healthBlinkTime > (long)tickCount &&
-                (healthBlinkTime - (long)tickCount) / 3L % 2L == 1L;
+        boolean shouldBlink = healthBlinkTime > (long) tickCount &&
+                (healthBlinkTime - (long) tickCount) / 3L % 2L == 1L;
 
         long currentTime = System.currentTimeMillis(); // 使用System.currentTimeMillis()替代Util.getMillis()
         if (currentHealth < lastHealth && player.invulnerableTime > 0) {
             lastHealthTime = currentTime;
-            healthBlinkTime = (long)(tickCount + 20);
+            healthBlinkTime = (long) (tickCount + 20);
         } else if (currentHealth > lastHealth && player.invulnerableTime > 0) {
             lastHealthTime = currentTime;
-            healthBlinkTime = (long)(tickCount + 10);
+            healthBlinkTime = (long) (tickCount + 10);
         }
 
         if (currentTime - lastHealthTime > 1000L) {
@@ -95,14 +95,14 @@ public class ShimmerGui {
         lastHealth = currentHealth;
 
         // 设置随机数种子（与原版完全相同）
-        random.setSeed((long)(tickCount * 312871));
+        random.setSeed((long) (tickCount * 312871));
 
         // 计算基础位置
         int left = guiGraphics.guiWidth() / 2 - 91;
         int top = guiGraphics.guiHeight() - 39;
 
         // 计算心的行数和间距
-        int totalHearts = Mth.ceil((maxHealth + (float)absorptionAmount) / 2.0F);
+        int totalHearts = Mth.ceil((maxHealth + (float) absorptionAmount) / 2.0F);
         int heartRows = Mth.ceil(totalHearts / 10.0F);
         int rowHeight = Math.max(10 - (heartRows - 2), 3);
 

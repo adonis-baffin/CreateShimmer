@@ -53,8 +53,7 @@ public class CSCommon {
     }
 
     @SubscribeEvent
-    public void setup(final FMLCommonSetupEvent event) {
-    }
+    public void setup(final FMLCommonSetupEvent event) {}
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void register(final RegisterEvent event) {
