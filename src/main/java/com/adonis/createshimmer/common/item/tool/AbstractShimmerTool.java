@@ -49,7 +49,7 @@ public abstract class AbstractShimmerTool {
             return false;
         }
 
-        // 应用或刷新微光效果
+        // 应用微光效果（对所有实体使用相同的效果）
         entity.addEffect(new MobEffectInstance(
                 CSEffects.SHIMMER_EFFECT,
                 EFFECT_DURATION,
@@ -167,7 +167,7 @@ public abstract class AbstractShimmerTool {
      * @param attacker       攻击者
      * @param particleCount  粒子数量
      * @param particleSpread 粒子扩散范围
-     * @return 是否消耗耐久（始终返回false）
+     * @return 是否消耗耐久（始终返回true表示工具正常使用）
      */
     protected boolean handleHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker,
             int particleCount, double particleSpread) {
@@ -184,7 +184,7 @@ public abstract class AbstractShimmerTool {
             }
         }
 
-        return false; // 不消耗耐久
+        return true; // 返回true表示工具正常使用
     }
 
     // ========== 通用工具方法 ==========
