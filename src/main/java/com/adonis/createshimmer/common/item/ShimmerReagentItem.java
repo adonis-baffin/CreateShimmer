@@ -68,7 +68,7 @@ public class ShimmerReagentItem extends Item {
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return 16;
+        return 12;
     }
 
     @Override

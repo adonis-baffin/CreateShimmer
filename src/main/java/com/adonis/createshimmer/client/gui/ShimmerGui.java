@@ -55,11 +55,43 @@ public class ShimmerGui {
             return;
         }
 
+        // 检查是否应该渲染血条（创造模式和观察者模式不渲染）
+        if (!shouldRenderHealth(minecraft)) {
+            // 如果原版不渲染血条，我们也不应该渲染微光血条
+            return;
+        }
+
         // 取消原版血条渲染
         event.setCanceled(true);
 
         // 渲染微光血条
         renderShimmerHealth(event.getGuiGraphics(), minecraft, player);
+    }
+
+    /**
+     * 检查是否应该渲染血条（与原版逻辑保持一致）
+     */
+    private boolean shouldRenderHealth(Minecraft minecraft) {
+        // 检查玩家是否存在
+        if (minecraft.player == null) {
+            return false;
+        }
+
+        // 检查是否隐藏GUI
+        if (minecraft.options.hideGui) {
+            return false;
+        }
+
+        // 检查游戏模式
+        // 创造模式和观察者模式不显示血条
+        if (minecraft.gameMode != null) {
+            var gameType = minecraft.gameMode.getPlayerMode();
+            if (gameType.isCreative() || gameType == net.minecraft.world.level.GameType.SPECTATOR) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private void renderShimmerHealth(GuiGraphics guiGraphics, Minecraft minecraft, Player player) {
