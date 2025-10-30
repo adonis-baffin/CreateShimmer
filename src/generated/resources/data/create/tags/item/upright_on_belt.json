@@ -1,7 +1,7 @@
 {
   "values": [
     "create_shimmer:charm_of_shimmer_base",
-    "create_shimmer:charm_of_shimmer_base_1",
-    "create_shimmer:charm_of_shimmer_base_2"
+    "create_shimmer:charm_of_shimmer_1",
+    "create_shimmer:charm_of_shimmer_2"
   ]
 }

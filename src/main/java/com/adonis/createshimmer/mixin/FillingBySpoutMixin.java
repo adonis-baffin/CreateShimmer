@@ -35,13 +35,13 @@ public class FillingBySpoutMixin {
                 !ScepterRepairHelper.needsRepair(stack) &&
                 isShimmerFluid(availableFluid)) {
 
-            if (ScepterRepairHelper.isDebugMode()) {
-                System.out.println("Spout - Scepter is full durability, cannot repair");
-            }
+                    if (ScepterRepairHelper.isDebugMode()) {
+                        System.out.println("Spout - Scepter is full durability, cannot repair");
+                    }
 
-            cir.setReturnValue(-1); // 返回 -1 表示无法处理
-            return;
-        }
+                    cir.setReturnValue(-1); // 返回 -1 表示无法处理
+                    return;
+                }
     }
 
     // 移除原有的 fillItem 注入，让配方系统处理

@@ -3,12 +3,14 @@
   "color": "yellow",
   "ingredients": [
     {
-      "item": "create_shimmer:castle_door"
+      "item": "create_shimmer:castle_door",
+      "count": 1
     }
   ],
   "results": [
     {
-      "item": "twilightforest:yellow_castle_door"
+      "item": "twilightforest:yellow_castle_door",
+      "count": 1
     }
   ]
 }

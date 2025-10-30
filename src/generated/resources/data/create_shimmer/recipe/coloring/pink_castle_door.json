@@ -3,12 +3,14 @@
   "color": "pink",
   "ingredients": [
     {
-      "item": "create_shimmer:castle_door"
+      "item": "create_shimmer:castle_door",
+      "count": 1
     }
   ],
   "results": [
     {
-      "item": "twilightforest:pink_castle_door"
+      "item": "twilightforest:pink_castle_door",
+      "count": 1
     }
   ]
 }
