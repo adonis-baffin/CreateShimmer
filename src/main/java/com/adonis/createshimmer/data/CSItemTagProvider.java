@@ -1,10 +1,9 @@
 package com.adonis.createshimmer.data;
 
-import static com.simibubi.create.AllTags.commonItemTag;
-
 import com.adonis.createshimmer.common.CSCommon;
 import java.util.concurrent.CompletableFuture;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -18,11 +17,11 @@ import org.jetbrains.annotations.Nullable;
 public class CSItemTagProvider extends ItemTagsProvider {
 
     // 自定义标签
-    public static final TagKey<Item> GLOWING_BERRIES = commonItemTag("glowing_berries");
-    public static final TagKey<Item> LUMINOUS_SUBSTANCES = commonItemTag("luminous_substances");
+    public static final TagKey<Item> GLOWING_BERRIES = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "glowing_berries"));
+    public static final TagKey<Item> LUMINOUS_SUBSTANCES = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "luminous_substances"));
 
     public CSItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-            CompletableFuture<TagLookup<Block>> blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
+                             CompletableFuture<TagLookup<Block>> blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, blockTagProvider, CSCommon.ID, existingFileHelper);
     }
 

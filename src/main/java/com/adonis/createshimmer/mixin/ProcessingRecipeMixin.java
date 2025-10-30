@@ -3,9 +3,14 @@ package com.adonis.createshimmer.mixin;
 import com.adonis.createshimmer.util.ScepterRepairHelper;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -84,19 +89,8 @@ public class ProcessingRecipeMixin {
 
     private boolean isShimmerRepairRecipe(FillingRecipe recipe) {
         try {
-            // 检查是否有流体成分
-            if (!recipe.getFluidIngredients().isEmpty()) {
-                var fluidIngredient = recipe.getFluidIngredients().get(0);
-                var matchingFluids = fluidIngredient.getMatchingFluidStacks();
-
-                for (var fluidStack : matchingFluids) {
-                    if (fluidStack.getFluid().toString().contains("shimmer")) {
-                        return true;
-                    }
-                }
-            }
-
-            // 检查配方的输入是否是权杖
+            boolean hasScepterInput = false;
+            // 先检查输入是否是权杖
             var ingredients = recipe.getIngredients();
             if (!ingredients.isEmpty()) {
                 var ingredient = ingredients.get(0);
@@ -104,10 +98,33 @@ public class ProcessingRecipeMixin {
 
                 for (ItemStack item : items) {
                     if (ScepterRepairHelper.isRepairableScepter(item)) {
+                        hasScepterInput = true;
+                        break;
+                    }
+                }
+            }
+
+            // 如果输入不是权杖，直接返回 false（不是 repair 配方）
+            if (!hasScepterInput) {
+                return false;
+            }
+
+            // 再检查流体是否是微光
+            if (!recipe.getFluidIngredients().isEmpty()) {
+                SizedFluidIngredient sizedFluidIngredient = recipe.getFluidIngredients().get(0);
+                FluidIngredient fluidIngredient = sizedFluidIngredient.ingredient();
+                FluidStack[] matchingFluids = fluidIngredient.getStacks();
+
+                for (var fluidStack : matchingFluids) {
+                    ResourceLocation fluidName = BuiltInRegistries.FLUID.getKey(fluidStack.getFluid());
+                    if (fluidName != null && fluidName.toString().contains("shimmer")) {
                         return true;
                     }
                 }
             }
+
+            // 如果没有流体成分，但输入是权杖，也认为是 repair（根据你的原逻辑）
+            return true;
         } catch (Exception e) {
             if (ScepterRepairHelper.isDebugMode()) {
                 System.err.println("Error checking shimmer repair recipe: " + e.getMessage());

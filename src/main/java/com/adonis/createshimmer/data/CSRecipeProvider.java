@@ -4,7 +4,6 @@ import static com.adonis.createshimmer.common.registry.CSBlocks.*;
 import static com.adonis.createshimmer.common.registry.CSItems.*;
 import static com.simibubi.create.AllBlocks.*;
 import static com.simibubi.create.AllItems.*;
-import static com.simibubi.create.AllTags.commonItemTag;
 import static net.minecraft.world.item.Items.*;
 import static plus.dragons.createdragonsplus.data.recipe.CreateRecipeBuilders.*;
 
@@ -15,11 +14,14 @@ import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import java.util.concurrent.CompletableFuture;
 import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public class CSRecipeProvider extends RecipeProvider {
@@ -34,146 +36,8 @@ public class CSRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput output) {
-//        buildMachineRecipes(output);
-//        buildMaterialRecipes(output);
-//        buildExperienceRecipes(output);
         buildTwilightForestRecipes(output);
     }
-
-//    private void buildMachineRecipes(RecipeOutput output) {
-//        shaped().define('a', ANDESITE_ALLOY)
-//                .define('s', SHAFT)
-//                .pattern("aaa")
-//                .pattern("asa")
-//                .pattern("aaa")
-//                .output(MECHANICAL_GRINDSTONE)
-//                .unlockedBy(ANDESITE, has(ANDESITE_ALLOY))
-//                .accept(output);
-//
-//        manualApplication(EXPERIENCE_HATCH.getId())
-//                .require(FLUID_HATCH)
-//                .require(EXPERIENCE_BLOCK)
-//                .output(EXPERIENCE_HATCH)
-//                .build(output);
-//
-//        shaped().define('-', commonItemTag("plates/brass"))
-//                .define('o', SPOUT)
-//                .define('=', STORAGE_BLOCKS_IRON)
-//                .pattern("-")
-//                .pattern("o")
-//                .pattern("=")
-//                .output(PRINTER)
-//                .unlockedBy(BRASS, has(BRASS_INGOT))
-//                .accept(output);
-//
-//        shaped().define('a', EXPERIENCE_BLOCK)
-//                .define('s', SPONGE)
-//                .define('c', COPPER_CASING)
-//                .pattern("a")
-//                .pattern("s")
-//                .pattern("c")
-//                .output(EXPERIENCE_LANTERN)
-//                .unlockedBy(COPPER, has(COPPER_CASING))
-//                .accept(output);
-//
-//        SmithingTransformRecipeBuilder.smithing(
-//                        Ingredient.of(BLAZE_UPGRADE_SMITHING_TEMPLATE),
-//                        Ingredient.of(BLAZE_BURNER),
-//                        Ingredient.of(ENCHANTING_TABLE),
-//                        RecipeCategory.MISC,
-//                        BLAZE_ENCHANTER.asItem())
-//                .unlocks("has_blaze_burner", has(BLAZE_BURNER))
-//                .save(output, BLAZE_ENCHANTER.getId().withPrefix("smithing/"));
-//
-//        SmithingTransformRecipeBuilder.smithing(
-//                        Ingredient.of(BLAZE_UPGRADE_SMITHING_TEMPLATE),
-//                        Ingredient.of(BLAZE_BURNER),
-//                        Ingredient.of(ANVIL),
-//                        RecipeCategory.MISC,
-//                        BLAZE_FORGER.asItem())
-//                .unlocks("has_blaze_burner", has(BLAZE_BURNER))
-//                .save(output, BLAZE_FORGER.getId().withPrefix("smithing/"));
-//    }
-//
-//    private void buildMaterialRecipes(RecipeOutput output) {
-//        shapeless().output(SUPER_EXPERIENCE_NUGGET, 9)
-//                .require(SUPER_EXPERIENCE_BLOCK)
-//                .accept(output);
-//
-//        shaped().output(SUPER_EXPERIENCE_BLOCK)
-//                .define('n', SUPER_EXPERIENCE_NUGGET)
-//                .pattern("nnn")
-//                .pattern("nnn")
-//                .pattern("nnn")
-//                .accept(output);
-//
-//        pressing(ENCHANTING_TEMPLATE.getId())
-//                .require(EXPERIENCE_BLOCK)
-//                .output(ENCHANTING_TEMPLATE)
-//                .build(output);
-//
-//        pressing(SUPER_ENCHANTING_TEMPLATE.getId())
-//                .require(SUPER_EXPERIENCE_BLOCK)
-//                .output(SUPER_ENCHANTING_TEMPLATE)
-//                .build(output);
-//
-//        compacting(EXPERIENCE_CAKE_BASE.getId())
-//                .require(EGGS)
-//                .require(SUGAR)
-//                .require(LAPIS_LAZULI)
-//                .output(EXPERIENCE_CAKE_BASE)
-//                .build(output);
-//
-//        filling(EXPERIENCE_CAKE.getId())
-//                .require(EXPERIENCE_CAKE_BASE)
-//                .require(EXPERIENCE.get(), 1000)
-//                .output(EXPERIENCE_CAKE)
-//                .build(output);
-//
-//        cutting(EXPERIENCE_CAKE_SLICE.getId())
-//                .require(EXPERIENCE_CAKE)
-//                .output(EXPERIENCE_CAKE_SLICE, 4)
-//                .build(output);
-//    }
-//
-//    private void buildExperienceRecipes(RecipeOutput output) {
-//        compacting(CSCommon.asResource("experience_block"))
-//                .require(EXPERIENCE.get(), 27)
-//                .output(EXPERIENCE_BLOCK)
-//                .build(output);
-//
-//        filling(CSCommon.asResource("experience_bottle"))
-//                .require(EXPERIENCE.get(), 10)
-//                .require(GLASS_BOTTLE)
-//                .output(EXPERIENCE_BOTTLE)
-//                .build(output);
-//
-//        emptying(CSCommon.asResource("experience_bottle"))
-//                .require(EXPERIENCE_BOTTLE)
-//                .output(EXPERIENCE.get(), 10)
-//                .output(GLASS_BOTTLE)
-//                .build(output);
-//
-//        GrindingRecipe.builder(CSCommon.asResource("experience_nugget"))
-//                .require(EXP_NUGGET)
-//                .output(EXPERIENCE.get(), 3)
-//                .build(output);
-//
-//        GrindingRecipe.builder(CSCommon.asResource("experience_block"))
-//                .require(EXPERIENCE_BLOCK)
-//                .output(EXPERIENCE.get(), 27)
-//                .build(output);
-//
-//        GrindingRecipe.builder(SUPER_EXPERIENCE_NUGGET.getId())
-//                .require(SUPER_EXPERIENCE_NUGGET)
-//                .output(EXPERIENCE.get(), 3)
-//                .build(output);
-//
-//        GrindingRecipe.builder(SUPER_EXPERIENCE_BLOCK.getId())
-//                .require(SUPER_EXPERIENCE_BLOCK)
-//                .output(EXPERIENCE.get(), 27)
-//                .build(output);
-//    }
 
     private void buildTwilightForestRecipes(RecipeOutput output) {
         buildShimmerRecipes(output);
@@ -227,7 +91,7 @@ public class CSRecipeProvider extends RecipeProvider {
         // 混合搅拌：活根+粗锌+金粒+25mb微光=粗骑士金属
         mixing(RAW_KNIGHTMETAL.getId())
                 .require(createTwilightItem("liveroot"))
-                .require(commonItemTag("raw_materials/zinc"))
+                .require(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/zinc")))  // 替换为手动创建标签
                 .require(GOLD_NUGGET)
                 .require(CSFluids.SHIMMER.get(), 25)
                 .output(RAW_KNIGHTMETAL)
@@ -292,12 +156,6 @@ public class CSRecipeProvider extends RecipeProvider {
                 .output(0.5f, ResourceLocation.fromNamespaceAndPath("twilightforest", "liveroot"), 1)
                 .build(output);
 
-//        // 研磨：活根（方块）=活根（物品）*1
-//        GrindingRecipe.builder(CSCommon.asResource("liveroot_grinding"))
-//                .require(createTwilightItem("liveroot_block"))
-//                .output(new ProcessingOutput(ResourceLocation.fromNamespaceAndPath("twilightforest", "liveroot"), 1, 1.0f))
-//                .build(output);
-
         // 粉碎：死岩系列
         crushing(CSCommon.asResource("deadrock_powder_from_deadrock"))
                 .require(createTwilightItem("deadrock"))
@@ -328,46 +186,9 @@ public class CSRecipeProvider extends RecipeProvider {
                 .require(QUARTZ)
                 .output(new ProcessingOutput(ResourceLocation.fromNamespaceAndPath("twilightforest", "castle_brick"), 1, 1.0f))
                 .build(output);
-
-//        // 熔炼：粗骑士金属=骑士金属锭
-//        smelting()
-//                .require(RAW_KNIGHTMETAL.get())
-//                .output(new ProcessingOutput(ResourceLocation.fromNamespaceAndPath("twilightforest", "knightmetal_ingot"), 1, 1.0f))
-//                .experience(0.7f)
-//                .cookingTime(200)
-//                .unlockedBy("has_raw_knightmetal", has(RAW_KNIGHTMETAL))
-//                .accept(output, CSCommon.asResource("knightmetal_ingot_smelting"));
-//
-//        blasting()
-//                .require(RAW_KNIGHTMETAL.get())
-//                .output(new ProcessingOutput(ResourceLocation.fromNamespaceAndPath("twilightforest", "knightmetal_ingot"), 1, 1.0f))
-//                .experience(0.7f)
-//                .cookingTime(100)
-//                .unlockedBy("has_raw_knightmetal", has(RAW_KNIGHTMETAL))
-//                .accept(output, CSCommon.asResource("knightmetal_ingot_blasting"));
     }
 
     private void buildTwilightCraftingRecipes(RecipeOutput output) {
-//        // 合成：红色染料+线*8=红线*8
-//        shaped().define('d', RED_DYE)
-//                .define('s', STRING)
-//                .pattern("sss")
-//                .pattern("sds")
-//                .pattern("sss")
-//                .output(new ProcessingOutput(ResourceLocation.fromNamespaceAndPath("twilightforest", "red_thread"), 8, 1.0f))
-//                .unlockedBy("has_red_dye", has(RED_DYE))
-//                .accept(output);
-//
-//        // 合成：封装塔木木板*4+红石粉*4+恶魂之泪*1=恶魂陷阱
-//        shaped().define('w', createTwilightItem("encased_towerwood"))
-//                .define('r', REDSTONE)
-//                .define('t', GHAST_TEAR)
-//                .pattern("wrw")
-//                .pattern("rtr")
-//                .pattern("wrw")
-//                .output(new ProcessingOutput(ResourceLocation.fromNamespaceAndPath("twilightforest", "ghast_trap"), 1, 1.0f))
-//                .unlockedBy("has_ghast_tear", has(GHAST_TEAR))
-//                .accept(output);
     }
 
     private void buildShimmerFanProcessingRecipes(RecipeOutput output) {

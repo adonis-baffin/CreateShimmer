@@ -62,7 +62,7 @@ public class GloomingFanProcessingType implements FanProcessingType {
         var input = new SingleRecipeInput(stack);
         return recipeManager
                 .getRecipeFor(CSRecipes.GLOOMING.getType(), input, level)
-                .map(recipe -> RecipeApplier.applyRecipeOn(level, stack, recipe))
+                .map(recipe -> recipe.value().rollResults(level.random))  // 滚动配方输出，支持随机/多个物品
                 .orElse(null);
     }
 
