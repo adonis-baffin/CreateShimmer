@@ -14,10 +14,14 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import plus.dragons.createdragonsplus.common.CDPRegistrate;
+import com.adonis.createshimmer.compat.curios.CuriosCompat;
 
 @Mod(CSCommon.ID)
 public class CSCommon {
@@ -50,6 +54,11 @@ public class CSCommon {
 
         modBus.register(this);
         modBus.register(config);
+
+        // 添加 Curios 兼容事件监听
+        modBus.addListener(RegisterCapabilitiesEvent.class, CuriosCompat::registerCapabilities);
+        modBus.addListener(EntityRenderersEvent.RegisterLayerDefinitions.class, CuriosCompat::registerLayers);
+        modBus.addListener(FMLClientSetupEvent.class, CuriosCompat::registerRenderers);
     }
 
     @SubscribeEvent
