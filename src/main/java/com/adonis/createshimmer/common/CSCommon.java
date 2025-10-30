@@ -2,6 +2,7 @@ package com.adonis.createshimmer.common;
 
 import com.adonis.createshimmer.common.effects.ShimmerEffect;
 import com.adonis.createshimmer.common.registry.*;
+import com.adonis.createshimmer.compat.curios.CuriosCompat;
 import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
@@ -13,7 +14,7 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModList;  // 新导入：用于检查 mod 是否加载
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -22,7 +23,6 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import plus.dragons.createdragonsplus.common.CDPRegistrate;
-import com.adonis.createshimmer.compat.curios.CuriosCompat;  // 保持导入，但条件调用
 
 @Mod(CSCommon.ID)
 public class CSCommon {

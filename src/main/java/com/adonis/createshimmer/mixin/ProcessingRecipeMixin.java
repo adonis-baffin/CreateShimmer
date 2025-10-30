@@ -31,10 +31,6 @@ public class ProcessingRecipeMixin {
                 if (!fillingRecipe.getRollableResults().isEmpty()) {
                     ItemStack result = fillingRecipe.getRollableResults().get(0).getStack().copy();
 
-                    if (ScepterRepairHelper.isDebugMode()) {
-                        System.out.println("ProcessingRecipe - Returning recipe result for JEI: " + result.getItem());
-                    }
-
                     cir.setReturnValue(result);
                     return;
                 }
@@ -67,19 +63,11 @@ public class ProcessingRecipeMixin {
 
                 // 确保结果物品类型与输入物品类型一致
                 if (baseResult.getItem() != inputStack.getItem()) {
-                    if (ScepterRepairHelper.isDebugMode()) {
-                        System.out.println("ProcessingRecipe - Recipe result type mismatch! Input: " + inputStack.getItem() + ", Recipe result: " + baseResult.getItem());
-                    }
                     baseResult = inputStack.copy();
                 }
 
                 // 应用修复逻辑
                 ItemStack repairedScepter = ScepterRepairHelper.repairScepter(baseResult);
-
-                if (ScepterRepairHelper.isDebugMode()) {
-                    System.out.println("ProcessingRecipe - Assembling repaired scepter: " +
-                            inputStack.getItem() + " (" + inputStack.getDamageValue() + " -> " + repairedScepter.getDamageValue() + ")");
-                }
 
                 cir.setReturnValue(repairedScepter);
                 return;
@@ -126,9 +114,6 @@ public class ProcessingRecipeMixin {
             // 如果没有流体成分，但输入是权杖，也认为是 repair（根据你的原逻辑）
             return true;
         } catch (Exception e) {
-            if (ScepterRepairHelper.isDebugMode()) {
-                System.err.println("Error checking shimmer repair recipe: " + e.getMessage());
-            }
         }
         return false;
     }

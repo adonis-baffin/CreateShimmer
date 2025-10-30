@@ -32,20 +32,10 @@ public class FillingRecipeMixin {
                 boolean needsRepair = ScepterRepairHelper.needsRepair(stack);
                 boolean matches = exactMatch && needsRepair;
 
-                if (ScepterRepairHelper.isDebugMode()) {
-                    System.out.println("Scepter repair recipe match check: " + matches +
-                            " (exactMatch: " + exactMatch + ", needsRepair: " + needsRepair +
-                            ", damage: " + stack.getDamageValue() +
-                            ", item: " + stack.getItem() + ")");
-                }
-
                 cir.setReturnValue(matches);
                 return;
             } else {
                 // 这不是权杖修复配方，但输入是权杖，拒绝匹配
-                if (ScepterRepairHelper.isDebugMode()) {
-                    System.out.println("Preventing non-scepter recipe from matching scepter: " + stack.getItem());
-                }
                 cir.setReturnValue(false);
                 return;
             }
@@ -54,9 +44,6 @@ public class FillingRecipeMixin {
         // 对于非权杖的情况，检查是否是权杖修复配方
         if (isShimmerRepairRecipe(self)) {
             // 这是权杖修复配方，但输入不是权杖，拒绝匹配
-            if (ScepterRepairHelper.isDebugMode()) {
-                System.out.println("Preventing scepter repair recipe from matching non-scepter: " + stack.getItem());
-            }
             cir.setReturnValue(false);
             return;
         }
@@ -80,17 +67,10 @@ public class FillingRecipeMixin {
 
                     SizedFluidIngredient shimmerIngredient = SizedFluidIngredient.of(shimmerStack);
 
-                    if (ScepterRepairHelper.isDebugMode()) {
-                        System.out.println("Created shimmer fluid ingredient for recipe: " + ScepterRepairHelper.getRepairCost(exampleScepter) + "mB");
-                    }
-
                     cir.setReturnValue(shimmerIngredient);
                     return;
                 }
             } catch (Exception e) {
-                if (ScepterRepairHelper.isDebugMode()) {
-                    System.err.println("Error creating shimmer fluid ingredient: " + e.getMessage());
-                }
             }
         }
     }
@@ -109,22 +89,12 @@ public class FillingRecipeMixin {
                 // 检查是否有完全匹配的物品类型
                 for (ItemStack recipeItem : items) {
                     if (recipeItem.getItem() == inputStack.getItem()) {
-                        if (ScepterRepairHelper.isDebugMode()) {
-                            System.out.println("Exact scepter match found: " + inputStack.getItem() + " matches recipe item: " + recipeItem.getItem());
-                        }
                         return true;
                     }
                 }
 
-                if (ScepterRepairHelper.isDebugMode()) {
-                    System.out.println("No exact match for " + inputStack.getItem() + " in recipe with items: " +
-                            java.util.Arrays.toString(items));
-                }
             }
         } catch (Exception e) {
-            if (ScepterRepairHelper.isDebugMode()) {
-                System.err.println("Error checking exact scepter match: " + e.getMessage());
-            }
         }
         return false;
     }
@@ -168,9 +138,6 @@ public class FillingRecipeMixin {
             // 如果没有流体成分，但输入是权杖，也认为是 repair（根据你的原逻辑）
             return true;
         } catch (Exception e) {
-            if (ScepterRepairHelper.isDebugMode()) {
-                System.err.println("Error checking shimmer repair recipe: " + e.getMessage());
-            }
         }
         return false;
     }
@@ -190,9 +157,6 @@ public class FillingRecipeMixin {
                 }
             }
         } catch (Exception e) {
-            if (ScepterRepairHelper.isDebugMode()) {
-                System.err.println("Error checking shimmer repair recipe by items: " + e.getMessage());
-            }
         }
         return false;
     }
@@ -205,9 +169,6 @@ public class FillingRecipeMixin {
             return net.minecraft.core.registries.BuiltInRegistries.FLUID
                     .get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("create_shimmer", "shimmer"));
         } catch (Exception e) {
-            if (ScepterRepairHelper.isDebugMode()) {
-                System.err.println("Error getting shimmer fluid: " + e.getMessage());
-            }
             return null;
         }
     }

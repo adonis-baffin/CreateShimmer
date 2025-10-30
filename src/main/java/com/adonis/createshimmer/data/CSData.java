@@ -43,7 +43,5 @@ public class CSData {
         // 添加流体标签提供器
         generator.addProvider(server,
                 new CSFluidTagProvider(output, lookupProvider, existingFileHelper));
-
-        System.out.println("Create Shimmer: Data generators registered successfully!");
     }
 }
