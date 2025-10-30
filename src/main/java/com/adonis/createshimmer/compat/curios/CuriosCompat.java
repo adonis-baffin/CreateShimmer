@@ -42,10 +42,8 @@ public class CuriosCompat {
 
     public static void registerRenderers(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            CuriosRendererRegistry.register(CSItems.CHARM_OF_SHIMMER_1.get(), () ->
-                    new ShimmerCharmNecklaceRenderer(FastColor.ARGB32.colorFromFloat(0.65F, 0.50F, 0.30F, 0.70F)));  // 稍深紫色 for I
-            CuriosRendererRegistry.register(CSItems.CHARM_OF_SHIMMER_2.get(), () ->
-                    new ShimmerCharmNecklaceRenderer(FastColor.ARGB32.colorFromFloat(0.65F, 0.50F, 0.30F, 0.70F)));  // 稍深紫色 for II（或根据需要调整）
+            CuriosRendererRegistry.register(CSItems.CHARM_OF_SHIMMER_1.get(), () -> new ShimmerCharmNecklaceRenderer(FastColor.ARGB32.colorFromFloat(0.65F, 0.50F, 0.30F, 0.70F)));  // 稍深紫色 for I
+            CuriosRendererRegistry.register(CSItems.CHARM_OF_SHIMMER_2.get(), () -> new ShimmerCharmNecklaceRenderer(FastColor.ARGB32.colorFromFloat(0.65F, 0.50F, 0.30F, 0.70F)));  // 稍深紫色 for II（或根据需要调整）
         });
     }
 
