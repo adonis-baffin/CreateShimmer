@@ -4,7 +4,6 @@ import com.adonis.createshimmer.common.registry.CSBlocks;
 import com.adonis.createshimmer.common.registry.CSRecipes;
 import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
-import com.simibubi.create.foundation.recipe.RecipeApplier;
 import java.util.List;
 import net.createmod.catnip.theme.Color;
 import net.minecraft.core.BlockPos;

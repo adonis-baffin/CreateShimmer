@@ -60,12 +60,31 @@ public class ScepterRepairHelper {
     }
 
     /**
-     * 获取修复成本（从配置读取，默认50mB）
+     * 获取修复成本（根据权杖类型从配置读取）
      */
-    public static int getRepairCost() {
-        int cost = CSConfig.repair().scepterRepairCost.get();
+    public static int getRepairCost(ItemStack stack) {  // 添加 ItemStack 参数
+        if (!isRepairableScepter(stack)) {
+            return 0;  // 不是权杖，返回0
+        }
+
+        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        String scepterId = itemId.toString();
+        int cost;
+
+        if (scepterId.equals("twilightforest:twilight_scepter")) {
+            cost = CSConfig.repair().twilightScepterRepairCost.get();
+        } else if (scepterId.equals("twilightforest:lifedrain_scepter")) {
+            cost = CSConfig.repair().lifedrainScepterRepairCost.get();
+        } else if (scepterId.equals("twilightforest:zombie_scepter")) {
+            cost = CSConfig.repair().zombieScepterRepairCost.get();
+        } else if (scepterId.equals("twilightforest:fortification_scepter")) {
+            cost = CSConfig.repair().fortificationScepterRepairCost.get();
+        } else {
+            cost = 0;  // 未知权杖
+        }
+
         if (isDebugMode()) {
-            System.out.println("Repair cost: " + cost + "mB");
+            System.out.println("Repair cost for " + scepterId + ": " + cost + "mB");
         }
         return cost;
     }
@@ -98,7 +117,7 @@ public class ScepterRepairHelper {
         int newDamage = Math.max(0, currentDamage - repairAmount);
 
         if (isDebugMode()) {
-            System.out.println("Repairing scepter: " + currentDamage + " -> " + newDamage +
+            System.out.println("Processing scepter repair: " + currentDamage + " -> " + newDamage +
                     " (repaired " + repairAmount + " points)");
         }
 

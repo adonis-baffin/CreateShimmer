@@ -4,12 +4,12 @@ import com.adonis.createshimmer.util.ScepterRepairHelper;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -74,11 +74,14 @@ public class FillingRecipeMixin {
                 // 创建微光流体需求
                 net.minecraft.world.level.material.Fluid shimmerFluid = getShimmerFluid();
                 if (shimmerFluid != null) {
-                    FluidStack shimmerStack = new FluidStack(shimmerFluid, ScepterRepairHelper.getRepairCost());
+                    // 从配方输入取一个示例 ItemStack（假设第一个是权杖）
+                    ItemStack exampleScepter = self.getIngredients().get(0).getItems()[0];
+                    FluidStack shimmerStack = new FluidStack(shimmerFluid, ScepterRepairHelper.getRepairCost(exampleScepter));  // 传入 exampleScepter
+
                     SizedFluidIngredient shimmerIngredient = SizedFluidIngredient.of(shimmerStack);
 
                     if (ScepterRepairHelper.isDebugMode()) {
-                        System.out.println("Created shimmer fluid ingredient for recipe: " + ScepterRepairHelper.getRepairCost() + "mB");
+                        System.out.println("Created shimmer fluid ingredient for recipe: " + ScepterRepairHelper.getRepairCost(exampleScepter) + "mB");
                     }
 
                     cir.setReturnValue(shimmerIngredient);

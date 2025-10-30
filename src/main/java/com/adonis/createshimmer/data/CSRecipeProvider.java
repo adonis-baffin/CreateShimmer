@@ -21,7 +21,6 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public class CSRecipeProvider extends RecipeProvider {
@@ -188,8 +187,7 @@ public class CSRecipeProvider extends RecipeProvider {
                 .build(output);
     }
 
-    private void buildTwilightCraftingRecipes(RecipeOutput output) {
-    }
+    private void buildTwilightCraftingRecipes(RecipeOutput output) {}
 
     private void buildShimmerFanProcessingRecipes(RecipeOutput output) {
         // 微光批量复生配方

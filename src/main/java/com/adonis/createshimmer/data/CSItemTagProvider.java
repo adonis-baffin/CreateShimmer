@@ -21,7 +21,7 @@ public class CSItemTagProvider extends ItemTagsProvider {
     public static final TagKey<Item> LUMINOUS_SUBSTANCES = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "luminous_substances"));
 
     public CSItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-                             CompletableFuture<TagLookup<Block>> blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
+            CompletableFuture<TagLookup<Block>> blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, blockTagProvider, CSCommon.ID, existingFileHelper);
     }
 
