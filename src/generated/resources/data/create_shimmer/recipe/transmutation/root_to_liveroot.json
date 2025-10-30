@@ -2,7 +2,7 @@
   "type": "create_shimmer:transmutation",
   "ingredients": [
     {
-      "item": "twilightforest:root_block"
+      "item": "twilightforest:root"
     }
   ],
   "results": [

@@ -1,14 +1,14 @@
 package com.adonis.createshimmer.compat.curios;
 
 import com.adonis.createshimmer.client.model.CSModelLayers;
-import com.adonis.createshimmer.common.CSCommon;
 import com.adonis.createshimmer.common.registry.CSItems;
 import com.adonis.createshimmer.compat.curios.model.ShimmerCharmNecklaceModel;
 import com.adonis.createshimmer.compat.curios.renderer.ShimmerCharmNecklaceRenderer;
+import java.util.function.Predicate;
+import javax.annotation.Nonnull;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
@@ -17,9 +17,6 @@ import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import top.theillusivec4.curios.api.type.capability.ICurio;
-
-import javax.annotation.Nonnull;
-import java.util.function.Predicate;
 
 public class CuriosCompat {
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
@@ -46,9 +43,9 @@ public class CuriosCompat {
     public static void registerRenderers(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             CuriosRendererRegistry.register(CSItems.CHARM_OF_SHIMMER_1.get(), () ->
-                    new ShimmerCharmNecklaceRenderer(FastColor.ARGB32.color(255, 255, 128, 128)));  // 粉红 for I
+                    new ShimmerCharmNecklaceRenderer(FastColor.ARGB32.colorFromFloat(0.65F, 0.50F, 0.30F, 0.70F)));  // 稍深紫色 for I
             CuriosRendererRegistry.register(CSItems.CHARM_OF_SHIMMER_2.get(), () ->
-                    new ShimmerCharmNecklaceRenderer(FastColor.ARGB32.color(255, 255, 230, 0)));  // 金黄 for II
+                    new ShimmerCharmNecklaceRenderer(FastColor.ARGB32.colorFromFloat(0.65F, 0.50F, 0.30F, 0.70F)));  // 稍深紫色 for II（或根据需要调整）
         });
     }
 

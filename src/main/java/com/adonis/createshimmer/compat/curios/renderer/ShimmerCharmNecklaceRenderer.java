@@ -1,5 +1,8 @@
 package com.adonis.createshimmer.compat.curios.renderer;
 
+import com.adonis.createshimmer.client.model.CSModelLayers;
+import com.adonis.createshimmer.common.CSCommon;
+import com.adonis.createshimmer.compat.curios.model.ShimmerCharmNecklaceModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -16,9 +19,6 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
-import com.adonis.createshimmer.common.CSCommon;
-import com.adonis.createshimmer.client.model.CSModelLayers;
-import com.adonis.createshimmer.compat.curios.model.ShimmerCharmNecklaceModel;
 
 public class ShimmerCharmNecklaceRenderer implements ICurioRenderer {
     private final ShimmerCharmNecklaceModel model;

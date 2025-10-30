@@ -2,6 +2,7 @@ package com.adonis.createshimmer.common;
 
 import com.adonis.createshimmer.common.effects.ShimmerEffect;
 import com.adonis.createshimmer.common.registry.*;
+import com.adonis.createshimmer.compat.curios.CuriosCompat;
 import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
@@ -21,7 +22,6 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import plus.dragons.createdragonsplus.common.CDPRegistrate;
-import com.adonis.createshimmer.compat.curios.CuriosCompat;
 
 @Mod(CSCommon.ID)
 public class CSCommon {
