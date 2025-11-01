@@ -42,8 +42,8 @@ public class ShimmerGui {
     private long healthBlinkTime = 0;
 
     @SubscribeEvent
-    public void onRenderHealthLayer(RenderGuiLayerEvent.Pre event) {
-        // 在渲染原版血条之前拦截
+    public void onRenderHealthLayer(RenderGuiLayerEvent.Post event) {
+        // 在渲染原版血条之后覆盖
         if (event.getName() != VanillaGuiLayers.PLAYER_HEALTH) {
             return;
         }
@@ -61,10 +61,7 @@ public class ShimmerGui {
             return;
         }
 
-        // 取消原版血条渲染
-        event.setCanceled(true);
-
-        // 渲染微光血条
+        // 渲染微光血条（覆盖原版）
         renderShimmerHealth(event.getGuiGraphics(), minecraft, player);
     }
 
@@ -168,6 +165,15 @@ public class ShimmerGui {
                 heartY -= 2;
             }
 
+            // 计算心的值
+            int heartValue = heartIndex * 2;
+            boolean isAbsorption = heartIndex >= Mth.ceil(maxHealth / 2.0F);
+
+            // 只覆盖正常血条，不覆盖吸收心
+            if (isAbsorption) {
+                continue;
+            }
+
             // 选择容器贴图
             ResourceLocation containerTexture;
             if (isHardcore) {
@@ -179,33 +185,18 @@ public class ShimmerGui {
             // 渲染容器
             guiGraphics.blit(containerTexture, heartX, heartY, 0, 0, 9, 9, 9, 9);
 
-            // 计算心的值
-            int heartValue = heartIndex * 2;
-            boolean isAbsorption = heartIndex >= Mth.ceil(maxHealth / 2.0F);
-
             // 渲染高亮心（闪烁效果）
-            if (shouldBlink && heartValue < displayHealth && !isAbsorption) {
+            if (shouldBlink && heartValue < displayHealth) {
                 boolean isHalf = heartValue + 1 == displayHealth;
                 ResourceLocation blinkTexture = getHeartTexture(isHardcore, true, isHalf);
                 guiGraphics.blit(blinkTexture, heartX, heartY, 0, 0, 9, 9, 9, 9);
             }
 
             // 渲染实际的心
-            if (heartValue < currentHealth && !isAbsorption) {
+            if (heartValue < currentHealth) {
                 boolean isHalf = heartValue + 1 == currentHealth;
                 ResourceLocation heartTexture = getHeartTexture(isHardcore, false, isHalf);
                 guiGraphics.blit(heartTexture, heartX, heartY, 0, 0, 9, 9, 9, 9);
-            }
-
-            // 渲染吸收心
-            if (isAbsorption) {
-                int absorbValue = heartValue - Mth.ceil(maxHealth);
-                if (absorbValue < absorptionAmount * 2) {
-                    boolean isHalf = absorbValue + 1 == absorptionAmount * 2;
-                    // 吸收心使用相同的微光贴图（你可以创建专门的吸收心贴图）
-                    ResourceLocation absorbTexture = getHeartTexture(isHardcore, false, isHalf);
-                    guiGraphics.blit(absorbTexture, heartX, heartY, 0, 0, 9, 9, 9, 9);
-                }
             }
         }
 

@@ -113,8 +113,7 @@ public class ProcessingRecipeMixin {
 
             // 如果没有流体成分，但输入是权杖，也认为是 repair（根据你的原逻辑）
             return true;
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
         return false;
     }
 }
