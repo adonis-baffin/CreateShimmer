@@ -4,6 +4,8 @@ import com.adonis.createshimmer.common.effects.ShimmerEffect;
 import com.adonis.createshimmer.common.registry.*;
 import com.adonis.createshimmer.compat.curios.CuriosCompat;
 import com.adonis.createshimmer.config.CSConfig;
+import com.adonis.createshimmer.network.ShimmerKillEffectPacket;
+import com.adonis.createshimmer.network.ShimmerParticleLinePacket;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
@@ -21,6 +23,8 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import plus.dragons.createdragonsplus.common.CDPRegistrate;
 
@@ -71,6 +75,20 @@ public class CSCommon {
             if (ModList.get().isLoaded("curios")) {
                 CuriosCompat.registerRenderers(event);
             }
+        });
+
+        modBus.addListener(RegisterPayloadHandlersEvent.class, event -> {
+            final PayloadRegistrar registrar = event.registrar("1").optional();
+
+            registrar.playToClient(
+                    ShimmerParticleLinePacket.TYPE,
+                    ShimmerParticleLinePacket.STREAM_CODEC,
+                    ShimmerParticleLinePacket::handle);
+
+            registrar.playToClient(
+                    ShimmerKillEffectPacket.TYPE,
+                    ShimmerKillEffectPacket.STREAM_CODEC,
+                    ShimmerKillEffectPacket::handle);
         });
     }
 

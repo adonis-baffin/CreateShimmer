@@ -1,5 +1,6 @@
 package com.adonis.createshimmer.common.kinetics.fan.transmutation;
 
+import com.adonis.createshimmer.common.registry.CSBlocks;
 import com.adonis.createshimmer.common.registry.CSEffects;
 import com.adonis.createshimmer.common.registry.CSFluids;
 import com.adonis.createshimmer.common.registry.CSRecipes;
@@ -10,7 +11,6 @@ import java.util.List;
 import net.createmod.catnip.theme.Color;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -25,21 +25,21 @@ public class TransmutationFanProcessingType implements FanProcessingType {
     @Override
     public boolean isValidAt(Level level, BlockPos pos) {
         boolean configEnabled = CSConfig.recipes().enableBulkTransmutation.get();
-
         if (!configEnabled) {
             return false;
         }
 
-        var fluidState = level.getFluidState(pos);
-        var catalystTag = CSFluids.MOD_TAGS.fanTransmutationCatalysts;
-
-        // 检查标签内容
-        var registry = level.registryAccess().registryOrThrow(BuiltInRegistries.FLUID.key());
-        if (!registry.getTag(catalystTag).isPresent()) {
-            return false;
+        var blockState = level.getBlockState(pos);
+        if (blockState.is(CSBlocks.MOD_TAGS.fanTransmutationCatalysts)) {
+            return true;
         }
 
-        return fluidState.is(catalystTag);
+        var fluidState = level.getFluidState(pos);
+        if (fluidState.is(CSFluids.MOD_TAGS.fanTransmutationCatalysts)) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override

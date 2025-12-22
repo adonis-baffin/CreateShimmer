@@ -5,12 +5,15 @@ import com.adonis.createshimmer.common.item.tool.ShimmerPickaxeItem;
 import com.adonis.createshimmer.common.item.tool.ShimmerShovelItem;
 import com.adonis.createshimmer.common.item.tool.ShimmerSwordItem;
 import com.adonis.createshimmer.common.registry.CSEffects;
+import com.adonis.createshimmer.network.ShimmerKillEffectPacket;
+import com.adonis.createshimmer.network.ShimmerParticleLinePacket;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -21,9 +24,11 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ShimmerEffect extends MobEffect {
     // 属性修改器数值
@@ -95,7 +100,7 @@ public class ShimmerEffect extends MobEffect {
 
     public static class ShimmerEventHandler {
         private static final float ADDITIONAL_MAGIC_DAMAGE = 8.0f;
-        private static final double ADDITIONAL_DAMAGE_CHANCE = 0.4;
+        private static final double ADDITIONAL_DAMAGE_CHANCE = 0.25;
 
         /**
          * 处理微光工具的挖掘速度加成
@@ -169,6 +174,66 @@ public class ShimmerEffect extends MobEffect {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        }
+
+        /**
+         * 攻击时发送粒子线数据包（服务端 → 客户端）
+         */
+        @SubscribeEvent
+        public static void onLivingDamage(LivingDamageEvent.Post event) {
+            if (event.getEntity().level().isClientSide()) return;
+
+            Entity sourceEntity = event.getSource().getEntity(); // 最终责任实体（如玩家）
+            if (!(sourceEntity instanceof Player player)) return;
+
+            ItemStack weapon = player.getMainHandItem();
+            boolean isShimmerTool = weapon.getItem() instanceof ShimmerSwordItem ||
+                    weapon.getItem() instanceof ShimmerAxeItem ||
+                    weapon.getItem() instanceof ShimmerPickaxeItem ||
+                    weapon.getItem() instanceof ShimmerShovelItem;
+
+            LivingEntity target = event.getEntity();
+            if (isShimmerTool && target.isAlive()) {
+                if (player instanceof ServerPlayer serverPlayer) {
+                    PacketDistributor.sendToPlayer(serverPlayer,
+                            new ShimmerParticleLinePacket(target.getUUID(), System.currentTimeMillis()));
+                }
+            }
+        }
+
+        // 2. 击杀时刷新效果 + 发送击杀特效包
+        @SubscribeEvent
+        public static void onLivingDeath(net.neoforged.neoforge.event.entity.living.LivingDeathEvent event) {
+            if (event.getEntity().level().isClientSide()) return;
+
+            var source = event.getSource().getEntity();
+            if (!(source instanceof Player player)) return;
+
+            ItemStack weapon = player.getMainHandItem();
+            boolean isShimmerTool = weapon.getItem() instanceof ShimmerSwordItem ||
+                    weapon.getItem() instanceof ShimmerAxeItem ||
+                    weapon.getItem() instanceof ShimmerPickaxeItem ||
+                    weapon.getItem() instanceof ShimmerShovelItem;
+
+            if (isShimmerTool) {
+                LivingEntity killed = event.getEntity();
+
+                // 刷新/延长微光效果（取更长持续时间）
+                int newDuration = 200; // 10秒刷新
+                player.addEffect(new MobEffectInstance(
+                        CSEffects.SHIMMER_EFFECT,
+                        newDuration,
+                        0,
+                        false,
+                        true,
+                        true));
+
+                // 发送客户端击杀特效包（仅本地玩家）
+                if (player instanceof ServerPlayer sp) {
+                    Vec3 pos = killed.position().add(0, killed.getBbHeight() / 2, 0);
+                    PacketDistributor.sendToPlayer(sp, new ShimmerKillEffectPacket(pos));
+                }
             }
         }
 

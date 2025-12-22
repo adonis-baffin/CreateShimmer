@@ -20,8 +20,8 @@ public abstract class AbstractShimmerTool {
     // ========== 配置常量 ==========
     // 效果配置
     protected static final int EFFECT_DURATION = 140;  // 7秒 (20 ticks/秒)
-    protected static final float SELF_EFFECT_CHANCE = 0.4f; // 给自己40%概率
-    protected static final float TARGET_EFFECT_CHANCE = 1.0f; // 给目标100%概率
+    protected static final float SELF_EFFECT_CHANCE = 0.25f; // 给自己25%概率
+    protected static final float TARGET_EFFECT_CHANCE = 0.75f; // 给目标75%概率
     protected static final int EFFECT_AMPLIFIER = 0;   // 效果等级
 
     // 粒子效果配置

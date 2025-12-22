@@ -104,8 +104,8 @@ public class CSBlocks {
 
     // 方块标签类
     public static class MOD_TAGS {
-        // 通冥催化剂方块标签
         public static final TagKey<Block> fanGloomingCatalysts = tag("fan_glooming_catalysts");
+        public static final TagKey<Block> fanTransmutationCatalysts = tag("fan_transmutation_catalysts");
 
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, CSCommon.asResource(name));

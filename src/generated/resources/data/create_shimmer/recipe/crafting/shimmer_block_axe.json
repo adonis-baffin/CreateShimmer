@@ -2,17 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "create_shimmer:shimmer_axe"
+    "B": {
+      "item": "create_shimmer:shimmer_block"
+    },
+    "N": {
+      "item": "create_shimmer:shimmer_nugget"
     }
   },
   "pattern": [
-    "   ",
-    " a ",
-    "   "
+    "BB ",
+    "BN ",
+    " N "
   ],
   "result": {
-    "count": 3,
-    "id": "create_shimmer:shimmer_block"
+    "count": 1,
+    "id": "create_shimmer:shimmer_axe"
   }
 }

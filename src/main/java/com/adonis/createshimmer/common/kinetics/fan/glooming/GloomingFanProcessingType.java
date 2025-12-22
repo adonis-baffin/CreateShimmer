@@ -1,13 +1,14 @@
 package com.adonis.createshimmer.common.kinetics.fan.glooming;
 
 import com.adonis.createshimmer.common.registry.CSBlocks;
+import com.adonis.createshimmer.common.registry.CSFluids;
 import com.adonis.createshimmer.common.registry.CSRecipes;
 import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
+import com.simibubi.create.foundation.recipe.RecipeApplier;
 import java.util.List;
 import net.createmod.catnip.theme.Color;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -24,21 +25,21 @@ public class GloomingFanProcessingType implements FanProcessingType {
     @Override
     public boolean isValidAt(Level level, BlockPos pos) {
         boolean configEnabled = CSConfig.recipes().enableBulkGlooming.get();
-
         if (!configEnabled) {
             return false;
         }
 
         var blockState = level.getBlockState(pos);
-        var catalystTag = CSBlocks.MOD_TAGS.fanGloomingCatalysts;
-
-        // 检查标签内容
-        var registry = level.registryAccess().registryOrThrow(BuiltInRegistries.BLOCK.key());
-        if (!registry.getTag(catalystTag).isPresent()) {
-            return false;
+        if (blockState.is(CSBlocks.MOD_TAGS.fanGloomingCatalysts)) {
+            return true;
         }
 
-        return blockState.is(catalystTag);
+        var fluidState = level.getFluidState(pos);
+        if (fluidState.is(CSFluids.MOD_TAGS.fanGloomingCatalysts)) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override

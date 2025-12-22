@@ -23,8 +23,6 @@ import twilightforest.init.TFSounds;
 import twilightforest.network.SpawnCharmPacket;
 import twilightforest.util.TFItemStackUtils;
 
-// 【关键】使用 @EventBusSubscriber 注解，Forge会自动注册这个类中的事件监听器
-// 我们将 modid 设置为我们自己的模组ID
 @EventBusSubscriber(modid = CSCommon.ID)
 public class CSCharmEvents {
     /**

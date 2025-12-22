@@ -112,6 +112,15 @@ public class CSItems {
             .tag(net.minecraft.tags.ItemTags.SHOVELS)
             .register();
 
+    public static final ItemEntry<Item> SHIMMER_NUGGET = REGISTRATE
+            .item("shimmer_nugget", Item::new)
+            .lang("Shimmer Nugget")
+            .properties(prop -> prop
+                    .rarity(Rarity.UNCOMMON)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
+            .tag(net.minecraft.tags.ItemTags.create(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "nuggets")))
+            .register();
+
     // 原有桶物品
     public static final DeferredItem<BucketItem> SHIMMER_BUCKET = DeferredItem
             .createItem(CSCommon.asResource("shimmer_bucket"));

@@ -155,6 +155,7 @@ public class CSFluids {
          * 鼓风机复生催化剂流体标签
          */
         public static final TagKey<Fluid> fanTransmutationCatalysts = TagKey.create(Registries.FLUID, CSCommon.asResource("fan_transmutation_catalysts"));
+        public static final TagKey<Fluid> fanGloomingCatalysts = TagKey.create(Registries.FLUID, CSCommon.asResource("fan_glooming_catalysts"));
     }
 
     public static void register(IEventBus modBus) {
