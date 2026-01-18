@@ -62,7 +62,7 @@ public class TransmutationFanProcessingType implements FanProcessingType {
         var input = new SingleRecipeInput(stack);
         return recipeManager
                 .getRecipeFor(CSRecipes.TRANSMUTATION.getType(), input, level)
-                .map(recipe -> RecipeApplier.applyRecipeOn(level, stack, recipe.value(), false))  // 解包 .value() 并添加 false
+                .map(recipe -> RecipeApplier.applyRecipeOn(level, stack, recipe.value(), false))
                 .orElse(null);
     }
 

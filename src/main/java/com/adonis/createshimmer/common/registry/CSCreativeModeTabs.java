@@ -42,6 +42,7 @@ public class CSCreativeModeTabs {
         output.accept(SHIMMER_AXE);
         output.accept(SHIMMER_PICKAXE);
         output.accept(SHIMMER_SHOVEL);
+        output.accept(SHIMMER_NUGGET);
         output.accept(SHIMMER_BLOCK);
         output.accept(CASTLE_DOOR);
         output.accept(OMINOUS_CAMPFIRE);

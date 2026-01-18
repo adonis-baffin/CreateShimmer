@@ -5,8 +5,9 @@ import com.adonis.createshimmer.common.registry.CSFluids;
 import com.adonis.createshimmer.common.registry.CSRecipes;
 import com.adonis.createshimmer.config.CSConfig;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
-import com.simibubi.create.foundation.recipe.RecipeApplier;
 import java.util.List;
+
+import com.simibubi.create.foundation.recipe.RecipeApplier;
 import net.createmod.catnip.theme.Color;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.EntityTypeTags;
@@ -62,7 +63,7 @@ public class GloomingFanProcessingType implements FanProcessingType {
         var input = new SingleRecipeInput(stack);
         return recipeManager
                 .getRecipeFor(CSRecipes.GLOOMING.getType(), input, level)
-                .map(recipe -> recipe.value().rollResults(level.random))  // 滚动配方输出，支持随机/多个物品
+                .map(recipe -> RecipeApplier.applyRecipeOn(level, stack, recipe.value(), false))
                 .orElse(null);
     }
 
